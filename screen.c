@@ -100,7 +100,7 @@ draw_background (void)
     draw_border ();
     /* Draw main area */
     Fgl_fillbox (0, 0, pixmap_width, pixmap_height, TEXT_BG_COLOUR);
-#else /* SVGALIB */
+#else /* SDL */
     Fgl_fillbox (0, 0, display.winW, display.winH, TEXT_BG_COLOUR);
 #endif
 }

@@ -23,6 +23,10 @@
 #include <vgamouse.h>
 #include "lcsvga.h"
 
+#elif defined LC_SDL
+#include <SDL.h>
+#include "lcsdl.h"
+
 #endif
 
 #endif	/* __common_h__ */

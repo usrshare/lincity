@@ -36,6 +36,9 @@
 
 #include <ctype.h>
 #include "common.h"
+#ifdef LC_SDL
+#include "lcsdl.h"
+#endif
 #ifdef LC_X11
 #include <X11/cursorfont.h>
 #include "lcx11.h"
@@ -217,8 +220,8 @@ lincity_main (int argc, char *argv[])
     ProcessPendingEvents ();
 #else
     parse_args (argc, argv);
-    q = vga_setmode (G640x480x256);
-    gl_setcontextvga (G640x480x256);
+    //q = vga_setmode (G640x480x256);
+    //gl_setcontextvga (G640x480x256);
 #endif
 
 #if defined (WIN32) || defined (LC_X11)
@@ -698,7 +701,6 @@ do_error (char *s)
 #if defined (LC_X11) || defined (WIN32)
     HandleError (s, FATAL);
 #else
-    vga_setmode (TEXT);
     printf ("%s\n", s);
     exit (1);
 #endif

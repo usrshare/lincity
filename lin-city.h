@@ -1462,38 +1462,23 @@ extern void init_pixmaps (void);
 extern void init_icon_pixmap (short);
 extern void update_pixmap (int, int, int, int, int, int, int, char *);
 
-#else
-/* ----- SVGALIB functions ----- */
+#elif defined(LC_SDL)
+/* ----- SDL functions ----- */
 /* profiling */
-#ifdef CS_PROFILE
-#define Fgl_write(a,b,c) FPgl_write(a,b,c)
-#define Fgl_getbox(a,b,c,d,e) FPgl_getbox(a,b,c,d,e)
-#define Fgl_putbox(a,b,c,d,e) FPgl_putbox(a,b,c,d,e)
-#define Fgl_fillbox(a,b,c,d,e) FPgl_fillbox(a,b,c,d,e)
-#define Fgl_hline(a,b,c,d) FPgl_hline(a,b,c,d)
-#define Fgl_line(a,b,c,d,e) FPgl_line(a,b,c,d,e)
-#define Fgl_setpixel(a,b,c) FPgl_setpixel(a,b,c)
-#define Fgl_setfontcolors(a,b) gl_setfontcolors(a,b)
-#define Fgl_setfont(a,b,c) gl_setfont(a,b,c)
-#define Fgl_enableclipping()   gl_enableclipping()
-#define Fgl_setclippingwindow(a,b,c,d)   gl_setclippingwindow(a,b,c,d)
-#define Fgl_disableclipping()   gl_disableclipping()
-#else
-#define Fgl_write(a,b,c) gl_write(a,b,c)
-#define Fgl_getbox(a,b,c,d,e) gl_getbox(a,b,c,d,e)
-#define Fgl_putbox(a,b,c,d,e) gl_putbox(a,b,c,d,e)
-#define Fgl_fillbox(a,b,c,d,e) gl_fillbox(a,b,c,d,e)
-#define Fgl_hline(a,b,c,d) gl_hline(a,b,c,d)
-#define Fgl_line(a,b,c,d,e) gl_line(a,b,c,d,e)
-#define Fgl_setpixel(a,b,c) gl_setpixel(a,b,c)
-#define Fgl_setfontcolors(a,b) gl_setfontcolors(a,b)
-#define Fgl_setfont(a,b,c) gl_setfont(a,b,c)
-#define Fgl_enableclipping()   gl_enableclipping()
-#define Fgl_setclippingwindow(a,b,c,d)   gl_setclippingwindow(a,b,c,d)
-#define Fgl_disableclipping()   gl_disableclipping()
+#define Fgl_write(a,b,c) Sgl_write(a,b,c)
+#define Fgl_getbox(a,b,c,d,e) Sgl_getbox(a,b,c,d,e)
+#define Fgl_putbox(a,b,c,d,e) Sgl_putbox(a,b,c,d,e)
+#define Fgl_fillbox(a,b,c,d,e) Sgl_fillbox(a,b,c,d,e)
+#define Fgl_hline(a,b,c,d) Sgl_hline(a,b,c,d)
+#define Fgl_line(a,b,c,d,e) Sgl_line(a,b,c,d,e)
+#define Fgl_setpixel(a,b,c) Sgl_setpixel(a,b,c)
+#define Fgl_setfontcolors(a,b) Sgl_setfontcolors(a,b)
+#define Fgl_setfont(a,b,c) Sgl_setfont(a,b,c)
+#define Fgl_enableclipping() Sgl_enableclipping()
+#define Fgl_setclippingwindow(a,b,c,d) Sgl_setclippingwindow(a,b,c,d)
+#define Fgl_disableclipping() Sgl_disableclipping()
 #endif
 
-#endif
 /*
   *******   end of lin-city.h   ***********
   *****************************************

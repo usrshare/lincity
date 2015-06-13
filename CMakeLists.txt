@@ -60,6 +60,17 @@ if (HAVE_DIRENT_H)
 	add_definitions(-DHAVE_UNISTD_H=1)
 endif()
 
+find_program(HAVE_GZIP gzip)
+if (HAVE_GZIP)
+	add_definitions(-DHAVE_GZIP=1)
+endif()
+
+include(CheckFunctionExists)
+check_function_exists(popen HAVE_POPEN)
+if (HAVE_POPEN)
+	add_definitions(-DHAVE_POPEN=1)
+endif()
+
 SET(CMAKE_C_FLAGS "--std=gnu99 -Wall -g")
 SET(CMAKE_CXX_FLAGS "--std=gnu99 -Wall -g")
 
@@ -67,25 +78,16 @@ Find_Package(X11)
 Find_Package(SDL)
 
 #if (SDL_FOUND) 
-#
+
 #include_directories(${SDL_INCLUDE_DIR})
-#
+
 #add_definitions(-DLC_SDL=1)
 #link_libraries(${SDL_LIBRARY} png z m)
-#
-#elseif (X11_FOUND)
-#
+
 #set (GUI_SOURCES
 #	${GUI_SOURCES}
-#	lcx11.c
+#	lcsdl.c
 #)
-#add_definitions(-DLC_X11=1)
-#link_libraries(Xext X11 png z m)
-#
-#else()
-#	message (FATAL_ERROR "Neither SDL nor libX11 were found. Unable to compile.")
-#
-#endif()
 
 if (X11_FOUND)
 
@@ -97,7 +99,7 @@ add_definitions(-DLC_X11=1)
 link_libraries(Xext X11 png z m)
 
 else()
-	message (FATAL_ERROR "libX11 not found. Unable to compile.")
+	message (FATAL_ERROR "LibX11 not found. Unable to compile.")
 
 endif()
 
