@@ -77,16 +77,15 @@ endif()
 SET(CMAKE_C_FLAGS "--std=gnu99 -Wall -g")
 SET(CMAKE_CXX_FLAGS "--std=gnu99 -Wall -g")
 
+option (USE_SDL "USE_SDL" ON)
+
 Find_Package(X11)
+
+if (USE_SDL)
 Find_Package(SDL)
+endif()
 
 if (SDL_FOUND) 
-
-option (use_sdl "use_sdl" OFF)
-
-endif(SDL_FOUND)
-
-if (use_sdl)
 
 include_directories(${SDL_INCLUDE_DIR})
 
@@ -108,7 +107,7 @@ add_definitions(-DLC_X11=1)
 link_libraries(Xext X11 png z m)
 
 else()
-	message (FATAL_ERROR "LibX11 not found. Unable to compile.")
+	message (FATAL_ERROR "Unable to find either libX11 or SDL.")
 
 endif()
 
