@@ -24,8 +24,6 @@ char *module_graphic[NUMOF_MODULES];
 int module_tflag[NUMOF_MODULES];
 char module_help[NUMOF_MODULES][20];
 
-int module_help_flag[NUMOF_MODULES];
-
 int sbut[NUMOF_MODULES];
 
 int selected_module = 0;
@@ -115,7 +113,6 @@ init_modules (void)
     module_type[sbut[6]] = CST_MARKET_EMPTY;
     strcpy (module_help[sbut[6]], "market.hlp");
 
-    module_help_flag[sbut[7]] = 1;        /* No help for track */
     module_graphic[sbut[7]] = load_graphic ("track-button.csi");
     module_type[sbut[7]] = CST_TRACK_LR;
     strcpy (module_help[sbut[7]], "track.hlp");
@@ -388,15 +385,10 @@ select_module (int module, int mbutton)
 	ok_dial_box ("not_enough_tech.mes", BAD, 0L);
 	return;
     }
-    if (mbutton == LC_MOUSE_RIGHTBUTTON 
-	|| (module_help_flag[module] == 0 
-	    && !suppress_firsttime_module_help))
+    if (mbutton == LC_MOUSE_RIGHTBUTTON)
     {
 	activate_help (module_help[module]);
-	if (mbutton != LC_MOUSE_RIGHTBUTTON)
-	    module_help_flag[module] = 1;
-	if (mbutton == LC_MOUSE_RIGHTBUTTON)
-	    return;
+	return;
     }
 
     unhighlight_module_button (selected_module);

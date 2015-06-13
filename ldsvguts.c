@@ -267,7 +267,7 @@ save_city_raw (char *cname)
     fprintf (ofile, "%d\n", total_evacuated);
     fprintf (ofile, "%d\n", total_births);
     for (x = 0; x < NUMOF_MODULES; x++)
-	fprintf (ofile, "%d\n", module_help_flag[x]);
+	fprintf (ofile, "%d\n", 0); /* module_help_flag is a stupid idea, OK? */
     fprintf (ofile, "%d\n", 0);	/* dummy values */
 
     fprintf (ofile, "%d\n", 0);	/* backward compatibility */
@@ -568,8 +568,8 @@ load_city (char *cname)
     fscanf (ofile, "%d", &max_pop_ever);
     fscanf (ofile, "%d", &total_evacuated);
     fscanf (ofile, "%d", &total_births);
-    for (x = 0; x < NUMOF_MODULES; x++)
-	fscanf (ofile, "%d", &(module_help_flag[x]));
+    /*for (x = 0; x < NUMOF_MODULES; x++)
+	fscanf (ofile, "%d", &(module_help_flag[x])); // did I mention module_help_flag is a stupid idea? */
     fscanf (ofile, "%d", &x);	/* just dummy reads */
     fscanf (ofile, "%d", &x);	/* for backwards compatibility. */
 
@@ -766,7 +766,7 @@ check_endian (void)
 		eswap32 ((int *) &(MP_INFO(x,y).coal_reserve));
 		eswap32 ((int *) &(MP_INFO(x,y).ore_reserve));
 	    } else {
-		printf ("Strange size (%d) for short, please mail me.\n",
+		printf ("Strange size (%lu) for short, please mail me.\n",
 			sizeof (short));
 	    }
 	    eswap32 (&(MP_INFO(x,y).int_1));
