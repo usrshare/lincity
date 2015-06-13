@@ -13,7 +13,7 @@
 #include <transport.h>
 #include <lcintl.h>
 #include <mps.h>
-#include <road.h>
+#include "road.h"
 
 /* ---------------------------------------------------------------------
    For track, road and rail:

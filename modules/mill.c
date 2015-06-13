@@ -13,7 +13,7 @@
 #include <cliglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <mill.h>
+#include "mill.h"
 
 
 void

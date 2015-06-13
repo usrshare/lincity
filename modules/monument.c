@@ -12,7 +12,7 @@
 #include <engglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <monument.h>
+#include "monument.h"
 
 void
 do_monument (int x, int y)

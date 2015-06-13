@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <engglobs.h>
 #include <mps.h>
-#include <organic_farm.h>
+#include "organic_farm.h"
 
 
 void

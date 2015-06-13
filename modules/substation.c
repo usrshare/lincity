@@ -13,7 +13,7 @@
 #include <engglobs.h>
 #include <cliglobs.h>
 #include <stats.h>
-#include <substation.h>
+#include "substation.h"
 #include <lclib.h>
 #include <mps.h>
 #include <power.h>

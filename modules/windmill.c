@@ -15,7 +15,7 @@
 #include <mps.h>
 #include <lclib.h>
 #include <power.h>
-#include <windmill.h>
+#include "windmill.h"
 
 
 /*** Windmills ***/

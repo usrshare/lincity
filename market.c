@@ -9,11 +9,11 @@
 #include "lctypes.h"
 #include "lin-city.h"
 #include "stats.h"
-#include <mps.h>
-#include <lcintl.h>
-#include <lcconfig.h>
+#include "mps.h"
+#include "lcintl.h"
+#include "lcconfig.h"
 
-#include <market.h>
+#include "market.h"
 
 
 

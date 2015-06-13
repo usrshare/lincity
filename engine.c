@@ -22,7 +22,7 @@
 #include "screen.h"
 #include "dialbox.h"
 #include "modules.h"
-#include <mps.h>
+#include "mps.h"
 
 extern int selected_type_cost;
 

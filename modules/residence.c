@@ -12,7 +12,7 @@
 #include <engglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <residence.h>
+#include "residence.h"
 
 void
 do_residence (int x, int y)

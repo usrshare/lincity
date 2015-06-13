@@ -13,7 +13,7 @@
 #include <stats.h>
 #include <engine.h>
 #include <mps.h>
-#include <fire.h>
+#include "fire.h"
 
 void
 do_fire (int x, int y)

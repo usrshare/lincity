@@ -13,7 +13,7 @@
 #include <cliglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <recycle.h>
+#include "recycle.h"
 
 void
 do_recycle (int x, int y)

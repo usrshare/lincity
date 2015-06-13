@@ -14,7 +14,7 @@
 #include <stats.h>
 #include <engine.h>
 #include <mps.h>
-#include <commune.h>
+#include "commune.h"
 
 
 void

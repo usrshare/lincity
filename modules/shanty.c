@@ -13,7 +13,7 @@
 #include <stats.h>
 #include <mouse.h> /* XXX: fire_area! */
 #include <mps.h>
-#include <shanty.h>
+#include "shanty.h"
 
 void
 add_a_shanty (void)

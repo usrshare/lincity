@@ -13,7 +13,7 @@
 #include <cliglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <university.h>
+#include "university.h"
 
 void
 do_university (int x, int y)

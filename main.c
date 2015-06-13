@@ -11,7 +11,7 @@
 #include "cliglobs.h"
 #include "lchelp.h"
 #include "dialbox.h"
-#include <mps.h>
+#include "mps.h"
 
 /* this is for OS/2 - RVI */
 #ifdef __EMX__
@@ -38,7 +38,7 @@
 #include "common.h"
 #ifdef LC_X11
 #include <X11/cursorfont.h>
-#include <lcx11.h>
+#include "lcx11.h"
 #endif
 
 #include "lctypes.h"

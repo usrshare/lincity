@@ -10,7 +10,7 @@
 #include <engglobs.h>
 #include <cliglobs.h>
 #include <stats.h>
-#include <parkland.h>
+#include "parkland.h"
 
 void
 do_parkland (int x, int y)

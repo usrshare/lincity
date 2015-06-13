@@ -13,7 +13,7 @@
 #include <cliglobs.h>
 #include <stats.h>
 #include <mps.h>
-#include <light_industry.h>
+#include "light_industry.h"
 
 
 void
