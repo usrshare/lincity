@@ -205,9 +205,7 @@ update_main_screen_normal (int full_refresh)
     Rect* mw = &scr.main_win;
     int x, y, xm, ym;
     short typ, grp;
-#ifdef USE_PIXMAPS
     int sx, sy, dx, dy, x1, y1;
-#endif
     /*  main_screen_origin[x|y] contain the mappoint of the top left of win */
 #ifdef DEBUG_MAIN_SCREEN
     printf ("Updating main screen\n");
@@ -224,10 +222,8 @@ update_main_screen_normal (int full_refresh)
     ym = main_screen_originy;
     if (ym > 3)
 	ym = 3;
-#if !defined (WIN32)		/* For speed */
     if (mouse_type == MOUSE_TYPE_SQUARE)
 	hide_mouse ();
-#endif
     clip_main_window ();
     for (y = main_screen_originy - ym; y < main_screen_originy
 		 + (mw->h / 16); y++)
@@ -242,7 +238,27 @@ update_main_screen_normal (int full_refresh)
 		    continue;
 		}
 		grp = get_group_of_type(typ);
-#ifdef USE_PIXMAPS
+#ifdef LC_SDL
+		if (icon_surface[typ] != 0) {
+		    
+		x1 = y1 = 0;
+		    if (x < main_screen_originx)
+			x1 = (main_screen_originx - x) * 16;
+		    if (y < main_screen_originy)
+			y1 = (main_screen_originy - y) * 16;
+		    sx = sy = main_groups[grp].size;
+		    if ((sx + x) > (main_screen_originx + (mw->w / 16)))
+			sx = (main_screen_originx + (mw->w / 16)) - x;
+		    if ((sy + y) > (main_screen_originy + (mw->h / 16)))
+			sy = (main_screen_originy + (mw->h / 16)) - y;
+		    sx = (sx << 4) - x1;
+		    sy = (sy << 4) - y1;
+		    dx = mw->x + (x - main_screen_originx) * 16 + x1;
+		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
+		    if (sx > 0 && sy > 0)
+			    Fgl_blit(display.dpy,dx,dy,0,0,mw->w,mw->h,icon_surface[typ],mw->w,sx,sy);
+		}
+#elif defined USE_PIXMAPS
 		if (icon_pixmap[typ] != 0)
 		{
 		    x1 = y1 = 0;
@@ -262,25 +278,13 @@ update_main_screen_normal (int full_refresh)
 		    if (sx > 0 && sy > 0)
 		    {
 #if defined (LC_X11)
-#ifdef ALLOW_PIX_DOUBLING
-			if (pix_double)
-			    XCopyArea (display.dpy
-				       ,icon_pixmap[typ]
-				       ,display.win
-				       ,display.pixcolour_gc[0]
-				       ,x1 * 2, y1 * 2, sx * 2, sy * 2
-				       ,dx * 2, dy * 2);
-			else
-#endif /* ALLOW_PIX_DOUBLING */
 			    XCopyArea (display.dpy
 				       ,icon_pixmap[typ]
 				       ,display.win
 				       ,display.pixcolour_gc[0]
 				       ,x1, y1, sx, sy
 				       ,dx + borderx, dy + bordery);
-#elif defined (WIN32)
-			CopyPixmapToScreen (typ, x1, y1, sx, sy, dx, dy);
-#endif /* LC_X11 or WIN32 */
+#endif /* LC_X11*/
 			update_pixmap (x1, y1, sx, sy, dx, dy,
 				       main_groups[grp].size,
 				       main_types[typ].graphic);
@@ -293,7 +297,7 @@ update_main_screen_normal (int full_refresh)
 				mw->y + (y - main_screen_originy) * 16,
 				16 * main_groups[grp].size,
 				16 * main_groups[grp].size,
-				main_types[typ].graphic); 
+				main_types[typ].graphic);
 	    }
 	}
     unclip_main_window ();
@@ -2558,24 +2562,8 @@ draw_sustline (int yoffset, int count, int max, int col)
 		 SUST_BAR_H, 0);
 }
 
-void
-dump_screen (void)
+void dump_screen (void)
 {
-#if !defined (LC_X11) && !defined (WIN32)
-    int x, y, r, g, b;
-    FILE *outf;
-    if ((outf = fopen ("screendump.raw", "wb")) == NULL)
-	do_error ("Can't open screendump.raw");
-    for (y = 0; y < 480; y++)
-	for (x = 0; x < 640; x++)
-	{
-	    gl_getpixelrgb (x, y, &r, &g, &b);
-	    fputc (r, outf);
-	    fputc (g, outf);
-	    fputc (b, outf);
-	}
-    fclose (outf);
-#endif
 }
 
 void

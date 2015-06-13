@@ -307,9 +307,6 @@ resize_geometry (int new_width, int new_height)
     /* Expand pixmap if necessary */
     scr.client_w = new_width - 2*borderx;
     scr.client_h = new_height - 2*bordery;
-#if !defined (SVGALIB)
-    resize_pixmap (scr.client_w, scr.client_h);
-#endif
 
     /* Adjust items that need adjusting */
 

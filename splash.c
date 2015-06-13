@@ -76,7 +76,7 @@ load_start_image (void)
       pal[x].blue = b;
       pal[x].flags = DoRed | DoGreen | DoBlue;
 #else
-      gl_setpalettecolor (x, r, g, b);
+      lc_setpalettecolor (x, r*4, g*4, b*4);
 #endif
     }
   /* use last 4 colours for text */
@@ -108,10 +108,10 @@ load_start_image (void)
   while (xev.type != MapNotify);
 
 #else
-  gl_setpalettecolor (SI_BLACK, 0, 0, 0);
-  gl_setpalettecolor (SI_RED, 60, 0, 0);
-  gl_setpalettecolor (SI_GREEN, 0, 60, 0);
-  gl_setpalettecolor (SI_YELLOW, 60, 60, 0);
+  lc_setpalettecolor (SI_BLACK, 0, 0, 0);
+  lc_setpalettecolor (SI_RED, 240, 0, 0);
+  lc_setpalettecolor (SI_GREEN, 0, 240, 0);
+  lc_setpalettecolor (SI_YELLOW, 240, 240, 0);
 #endif
 #if defined (WIN32)
   UpdatePalette ();
@@ -202,10 +202,8 @@ si_scroll_text (void)
 	}
 
       c = x_key_value;
-#elif defined (WIN32)
-      c = GetKeystroke ();
 #else
-      c = vga_getkey ();
+      c = lc_get_keystroke ();
 #endif
       if (l1c >= 8)
 	{

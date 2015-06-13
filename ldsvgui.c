@@ -572,7 +572,7 @@ edit_string (char* s, unsigned int maxlen, int xpos, int ypos)
 #elif defined (WIN32)
 	    while ((c = GetKeystroke ()) == 0)
 #else
-		while ((c = vga_getkey ()) == 0)
+		while ((c = lc_get_keystroke()) == 0)
 #endif
 		{
 #ifdef LC_X11

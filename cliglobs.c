@@ -34,6 +34,7 @@ float gamma_correct_red = 0.0, gamma_correct_green = 0.0, gamma_correct_blue = 0
 
 int mouse_initialized = 0;
 int cs_mouse_x, cs_mouse_y, cs_mouse_button;	/* current mouse status */
+int cs_shift_held = 0, cs_ctrl_held=0;
 int cs_mouse_shifted = 0;	/* shift key pressed with mouse. */
 int cs_mouse_xmax, cs_mouse_ymax, omx, omy, mox = 10, moy = 10;
 
@@ -146,24 +147,23 @@ char icon_pixmap_flag[NUM_OF_TYPES];
 #endif
 #endif
 
-#ifdef WIN32
-int mouse_button;
+#ifdef LC_SDL
+int winX, winY, mouse_button;
+
 char *bg_color = NULL;
-char dummy1[1024];
-char dummy2[1024];
 int verbose = FALSE;		/* display settings if TRUE */
 int stay_in_front = FALSE;	/* Try to stay in clear area of the screen. */
 int text_bg = 0;
 int text_fg = 255;
-int x_key_value = 0;		/* GCS: Add initialization value */
-BOOL x_key_shifted = FALSE;	/* Is the key shifted? */
+int x_key_value;
+int x_key_shifted = 0;	/* Is the key shifted? */
 int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
-long unsigned int colour_table[256];
+//long unsigned int colour_table[256];
 unsigned char *open_font;
 int open_font_height, suppress_next_expose = 0;
 
-#if defined (USE_PIXMAPS)
-HBITMAP icon_pixmap[NUM_OF_TYPES];
-char icon_pixmap_flag[NUM_OF_TYPES];
+SDL_Surface* icon_surface[NUM_OF_TYPES];
+char icon_surface_flag[NUM_OF_TYPES];
+
 #endif
-#endif /* WIN32 */
+

@@ -253,8 +253,8 @@ dialog_box(int arg_color, int argc, ...)
       HandleMouse ();
       key = GetKeystroke ();
 #else
-      mouse_update ();
-      key = vga_getkey ();
+      call_wait_event ();
+      key = lc_get_keystroke ();
 #endif
       if (key == 0) continue;
 

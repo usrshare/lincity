@@ -77,19 +77,25 @@ SET(CMAKE_CXX_FLAGS "--std=gnu99 -Wall -g")
 Find_Package(X11)
 Find_Package(SDL)
 
-#if (SDL_FOUND) 
+if (SDL_FOUND) 
 
-#include_directories(${SDL_INCLUDE_DIR})
+option (use_sdl "use_sdl" OFF)
 
-#add_definitions(-DLC_SDL=1)
-#link_libraries(${SDL_LIBRARY} png z m)
+endif(SDL_FOUND)
 
-#set (GUI_SOURCES
-#	${GUI_SOURCES}
-#	lcsdl.c
-#)
+if (use_sdl)
 
-if (X11_FOUND)
+include_directories(${SDL_INCLUDE_DIR})
+
+add_definitions(-DLC_SDL=1)
+link_libraries(${SDL_LIBRARY} png z m)
+
+set (GUI_SOURCES
+	${GUI_SOURCES}
+	lcsdl.c
+)
+
+elseif (X11_FOUND)
 
 set (GUI_SOURCES
 	${GUI_SOURCES}

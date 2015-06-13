@@ -124,31 +124,14 @@ lincity_set_locale (void)
 {
     char* locale = NULL;
     char* localem = NULL;
-#if defined (WIN32)
-#define MAX_LANG_BUF 1024
-    char* language = NULL;
-    char language_buf[MAX_LANG_BUF];
-#endif
 
 #if defined (ENABLE_NLS)
-#if defined (WIN32)
-    /* Some special stoopid way of setting locale for microsoft gettext */
-    language = getenv ("LANGUAGE");
-    if (language) {
-	debug_printf ("Environment variable LANGUAGE is %s\n", language);
-	snprintf (language_buf, MAX_LANG_BUF, "LANGUAGE=%s", language);
-	gettext_putenv(language_buf);
-    } else {
-	debug_printf ("Environment variable LANGUAGE not set.\n");
-    }
-#else
     locale = setlocale (LC_ALL, "");
     debug_printf ("Setting entire locale to %s\n", locale);
     locale = setlocale (LC_MESSAGES, "");
     debug_printf ("Setting messages locale to %s\n", locale);
     localem = setlocale (LC_MESSAGES, NULL);
     debug_printf ("Query locale is %s\n", localem);
-#endif
 #endif /* ENABLE_NLS */
     return;
 }
@@ -165,9 +148,7 @@ lincity_main (int argc, char *argv[])
     vga_init ();
 #endif
 
-#if !defined (WIN32)
     signal (SIGPIPE, SIG_IGN);    /* broken pipes are ignored. */
-#endif
 
     /* Initialize some global variables */
     //make_dir_ok_flag = 1;
@@ -215,16 +196,14 @@ lincity_main (int argc, char *argv[])
 #endif
     Create_Window (geometry);
     pirate_cursor = XCreateFontCursor (display.dpy, XC_pirate);
-#elif defined (WIN32)
-    /* Deal with all outstanding messages */
-    ProcessPendingEvents ();
 #else
-    parse_args (argc, argv);
+    parse_sdlargs (argc, argv,NULL);
+    Create_Window (NULL);
     //q = vga_setmode (G640x480x256);
     //gl_setcontextvga (G640x480x256);
 #endif
 
-#if defined (WIN32) || defined (LC_X11)
+#if defined (LC_X11)
     initialize_pixmap ();
 #endif
 
@@ -354,8 +333,8 @@ client_main_loop (void)
 	call_event ();
 	key = GetKeystroke ();
 #else
-	mouse_update ();
-	key = vga_getkey ();
+	call_event();
+	key = lc_get_keystroke ();
 #endif
 	/* nothing happened if key == 0 XXX: right? */
 	/* GCS: I'm not sure */

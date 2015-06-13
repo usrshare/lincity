@@ -34,6 +34,7 @@ extern float gamma_correct_red, gamma_correct_green, gamma_correct_blue;
 
 extern int mouse_initialized; /* wcoreyk */
 extern int cs_mouse_x, cs_mouse_y, cs_mouse_button;	/* current mouse status */
+extern int cs_shift_held, cs_ctrl_held;
 extern int cs_mouse_shifted;	/* shift key pressed with mouse. */
 extern int cs_mouse_xmax, cs_mouse_ymax, omx, omy, mox, moy;
 
@@ -186,24 +187,9 @@ extern char icon_pixmap_flag[NUM_OF_TYPES];
 #endif
 #endif
 
-#ifdef WIN32
-extern int mouse_button;
-extern char *bg_color;
-extern int verbose;		/* display settings if TRUE */
-extern int stay_in_front;	/* Try to stay in clear area of the screen. */
-extern int text_bg;
-extern int text_fg;
-extern int x_key_value;		/* GCS: Add initialization value */
-extern BOOL x_key_shifted;	/* Is the key shifted? */
-extern int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag;
-extern long unsigned int colour_table[256];
-extern unsigned char *open_font;
-extern int open_font_height, suppress_next_expose;
-
-#if defined (USE_PIXMAPS)
-extern HBITMAP icon_pixmap[NUM_OF_TYPES];
-extern char icon_pixmap_flag[NUM_OF_TYPES];
+#if defined (LC_SDL)
+struct SDL_Surface;
+extern SDL_Surface* icon_surface[NUM_OF_TYPES];
 #endif
 
-#endif /* WIN32 */
 #endif /* __cliglobs_h__ */

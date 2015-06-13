@@ -1464,19 +1464,19 @@ extern void update_pixmap (int, int, int, int, int, int, int, char *);
 
 #elif defined(LC_SDL)
 /* ----- SDL functions ----- */
-/* profiling */
-#define Fgl_write(a,b,c) Sgl_write(a,b,c)
-#define Fgl_getbox(a,b,c,d,e) Sgl_getbox(a,b,c,d,e)
-#define Fgl_putbox(a,b,c,d,e) Sgl_putbox(a,b,c,d,e)
-#define Fgl_fillbox(a,b,c,d,e) Sgl_fillbox(a,b,c,d,e)
-#define Fgl_hline(a,b,c,d) Sgl_hline(a,b,c,d)
-#define Fgl_line(a,b,c,d,e) Sgl_line(a,b,c,d,e)
-#define Fgl_setpixel(a,b,c) Sgl_setpixel(a,b,c)
-#define Fgl_setfontcolors(a,b) Sgl_setfontcolors(a,b)
-#define Fgl_setfont(a,b,c) Sgl_setfont(a,b,c)
-#define Fgl_enableclipping() Sgl_enableclipping()
-#define Fgl_setclippingwindow(a,b,c,d) Sgl_setclippingwindow(a,b,c,d)
-#define Fgl_disableclipping() Sgl_disableclipping()
+extern void Fgl_write (int, int, char *);
+extern void open_write (int, int, char *);
+extern void Fgl_getbox (int, int, int, int, void *);
+extern void Fgl_putbox (int, int, int, int, void *);
+extern void Fgl_fillbox (int, int, int, int, int);
+extern void Fgl_hline (int, int, int, int);
+extern void Fgl_line (int, int, int, int, int);
+extern void Fgl_setpixel (int, int, int);
+extern void Fgl_setfontcolors (int, int);
+extern void Fgl_setfont (int, int, void*);
+extern void Fgl_enableclipping (void);
+extern void Fgl_setclippingwindow (int, int, int, int);
+extern void Fgl_disableclipping (void);
 #endif
 
 /*
