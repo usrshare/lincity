@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 Project(lincity)
 
+set(CMAKE_C_FLAGS_GPROF "-pg")
+set(CMAKE_EXE_LINKER_FLAGS_GPROF "-pg")
+
 set(
 	GUI_SOURCES 
 	ldsvgui.c

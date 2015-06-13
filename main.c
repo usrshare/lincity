@@ -250,7 +250,7 @@ lincity_main (int argc, char *argv[])
     mouse_hide_count = 0;
     suppress_ok_buttons = 0;
     prog_box ("", 100);
-#ifdef USE_PIXMAPS
+#if (defined(USE_PIXMAPS) || defined(LC_SDL))
     prog_box (_("Creating pixmaps"), 1);
     init_pixmaps ();
     prog_box ("", 100);

@@ -127,8 +127,8 @@ mps_refresh(void)
     }
 
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
-
-
+    
+    refresh_screen(mps->x,mps->y,mps->x + mps->w, mps->y + mps->h);
 }
 
 void

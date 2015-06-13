@@ -239,7 +239,6 @@ update_main_screen_normal (int full_refresh)
 		}
 		grp = get_group_of_type(typ);
 #ifdef LC_SDL
-		if (icon_surface[typ] != 0) {
 		    
 		x1 = y1 = 0;
 		    if (x < main_screen_originx)
@@ -255,8 +254,15 @@ update_main_screen_normal (int full_refresh)
 		    sy = (sy << 4) - y1;
 		    dx = mw->x + (x - main_screen_originx) * 16 + x1;
 		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
-		    if (sx > 0 && sy > 0)
-			    Fgl_blit(display.dpy,dx,dy,0,0,mw->w,mw->h,icon_surface[typ],mw->w,sx,sy);
+		    if (sx > 0 && sy > 0) {
+		
+		if (icon_surface[typ] != 0) Fgl_blit(display.dpy,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
+		Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
+				mw->y + (y - main_screen_originy) * 16,
+				16 * main_groups[grp].size,
+				16 * main_groups[grp].size,
+				main_types[typ].graphic);
+		}
 		}
 #elif defined USE_PIXMAPS
 		if (icon_pixmap[typ] != 0)
@@ -292,15 +298,17 @@ update_main_screen_normal (int full_refresh)
 		    }
 		}
 		else
-#endif /* USE_PIXMAPS */
-		    Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
+
+		Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
 				mw->y + (y - main_screen_originy) * 16,
 				16 * main_groups[grp].size,
 				16 * main_groups[grp].size,
 				main_types[typ].graphic);
+#endif /* USE_PIXMAPS */
 	    }
 	}
     unclip_main_window ();
+    refresh_screen(mw->x,mw->y,mw->x + mw->w,mw->y + mw->h);
 }
 
 void
@@ -975,6 +983,7 @@ update_mini_screen (void)
 	draw_mini_screen_coal ();
 	break;
     }
+    refresh_screen(scr.mini_map.x, scr.mini_map.y, scr.mini_map.x + scr.mini_map.w, scr.mini_map.y + scr.mini_map.h);
 }
 
 void
@@ -1066,9 +1075,6 @@ draw_mini_screen (void)
     }
     draw_mini_screen_cursor ();
 
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -2542,7 +2548,7 @@ do_sust_barchart (int draw)
 		   sust_fire_count,
 		   SUST_FIRE_YEARS_NEEDED, SUST_FIRE_COL);
   }
-
+  refresh_screen(mg->x, mg->y, mg->x+mg->w, mg->y+mg->h);
 }
 
 static void

@@ -307,7 +307,7 @@ do_save_city ()
     while (0 == (c = GetKeystroke ()));	/* Wait for keystroke */
     redraw_mouse ();
 #else
-    c = getchar ();
+    c = lc_get_keystroke ();
     redraw_mouse ();
 #endif
     if (c > '0' && c <= '9')
@@ -395,11 +395,8 @@ do_load_city (void)
 	    c = x_key_value;
 	} while (c == 0);
 	x_key_value = 0;
-#elif defined (WIN32)
-	while (0 == (c = GetKeystroke ()));	/* Wait for keystroke */
-	redraw_mouse ();
 #else
-	c = getchar ();
+	c = lc_get_keystroke ();
 	redraw_mouse ();
 #endif
 	if (c > '0' && c <= '9') {
@@ -667,10 +664,8 @@ do_get_nw_server (void)
 	}
 	while (c == 0);
 	x_key_value = 0;
-#elif defined (WIN32)
-	while (0 == (c = GetKeystroke ()));	/* Wait for keystroke */
 #else
-	c = getchar ();
+	c = lc_get_keystroke ();
 #endif
 	if (c > '0' && c <= '9')
 	    if (strlen (save_names[c - '0']) < 1)

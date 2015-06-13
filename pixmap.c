@@ -41,13 +41,17 @@ int pixmap_width = 0;
 /* ---------------------------------------------------------------------- *
  * Public functions
  * ---------------------------------------------------------------------- */
-#ifdef USE_PIXMAPS
+#if (defined(USE_PIXMAPS) || defined(LC_SDL))
 void
 init_pixmaps ()
 {
     int i;
     for (i = 1; i < NUM_OF_TYPES; i++) {
+#ifdef USE_PIXMAPS
 	icon_pixmap[i] = 0;
+#else
+	icon_surface[i] = NULL;
+#endif
     }
 
     init_icon_pixmap (CST_GREEN);

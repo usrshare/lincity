@@ -39,6 +39,7 @@ pbars_full_refresh (void)
     draw_small_bezel (pba->x+4, pba->y+4, pba->w-8, pba->h-8, yellow(0));
     init_pbar_text ();
     draw_pbars ();
+
 }
 
 void
@@ -98,6 +99,7 @@ write_pbar_int (Rect* b, int val)
     Fgl_setfontcolors (0, 255);
     Fgl_write (b->x + b->w + 25, b->y + 4, s);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
+    refresh_screen(b->x + b->w+25,b->y,b->x + b->w+65,b->y+b->h);
 }
 
 void
@@ -106,6 +108,7 @@ write_pbar_text (Rect* b, char * s)
     Fgl_setfontcolors (0, 255); 
     Fgl_write (b->x + b->w + 25, b->y + 4, s);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
+    refresh_screen(b->x + b->w+25,b->y,b->x + b->w+65,b->y+b->h);
 }
 
 /* XXX: WCK: Macros anyone? */
@@ -138,6 +141,7 @@ refresh_population_text (void)
     update_pbar (PPOP, housed_population + people_pool, 0);
     b = &scr.pbar_pop;
     write_pbar_int (b, PPOP);
+    refresh_screen(b->x,b->y,b->x+b->w,b->y+b->h);
 }
 
 void 
@@ -195,6 +199,7 @@ refresh_pbars (void)
     b = &scr.pbar_money;
     draw_pbar_new (b, pbar_adjust_money(pbars[PMONEY].diff));
     write_pbar_int (b, PMONEY);
+   
 }
 
 
@@ -315,6 +320,8 @@ draw_pbar_new (Rect* b, int val)
       Fgl_fillbox (spike_start, b->y+2, spike_end - spike_start, b->h-4, 
 		   (red(12))); 
     } 
+    
+    refresh_screen(b->x,b->y,b->x+b->w,b->y+b->h);
 }
 
 
