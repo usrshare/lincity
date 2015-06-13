@@ -7,3 +7,4 @@ This is my copy of Debian Sid's version of lincity (with all the patches applied
 * Removed the help screen invoked on left-clicking items for the first time
 * Added the ability to scroll the map screen by left-dragging on the map
 * Switched (not perfectly) the build system from automake to cmake
+* Replaced SVGAlib dependency with libSDL. Enable it by adding `-Duse_sdl=1` to the cmake parameters. It almost works.
