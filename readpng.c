@@ -3,6 +3,7 @@
  * This file is part of lincity (see COPYRIGHT for copyright information).
  * ---------------------------------------------------------------------- */
 #include <stdlib.h>
+#include <string.h>
 #include "png.h"
 #include "malloc.h"
 #include "lin-city.h"
