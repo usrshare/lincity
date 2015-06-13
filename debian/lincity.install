@@ -1,0 +1,3 @@
+debian/*.desktop		usr/share/applications
+debian/lincity.xpm		usr/share/pixmaps
+xlincity			usr/games

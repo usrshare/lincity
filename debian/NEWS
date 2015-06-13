@@ -1,0 +1,20 @@
+lincity (1.13.1-2) unstable; urgency=low
+
+    lincity-ng has entered the archives, thanks to Moritz Muehlenhoff.
+
+ -- Florian Ernst <florian@debian.org>  Tue,  9 Aug 2005 14:01:55 +0200
+
+lincity (1.12.0-1) unstable; urgency=low
+
+    Please also note that as of lincity (1.11-1.12pre53-1) the location of saved
+    games has been changed from <$HOME/.Lin-city> to <$HOME/.lincity>.
+
+ -- Florian Ernst <florian@debian.org>  Tue, 20 Jul 2004 21:47:50 +0200
+
+lincity (1.11-1.12pre53-1) unstable; urgency=low
+
+    As of lincity (1.11-1.12pre53-1) SVGA support has been deprecated. If you
+    actually care about SVGA support, please read Bug #206589: "lincity: svga
+    support" in the Debian Bug Tracking System at <http://bugs.debian.org/206589>.
+
+ -- John Goerzen <jgoerzen@complete.org>  Mon, 18 Aug 2003 15:26:25 -0500

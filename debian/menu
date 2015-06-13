@@ -1,0 +1,4 @@
+?package(lincity):needs="X11" section="Games/Strategy"\
+    title="Lincity (X)" command="/usr/games/xlincity"\
+    icon="/usr/share/pixmaps/lincity.xpm"
+

@@ -1,0 +1,3514 @@
+Index: lincity-1.13.1/po/pt_BR.po
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ lincity-1.13.1/po/pt_BR.po	2012-02-04 20:17:06.646887664 +0200
+@@ -0,0 +1,1748 @@
++# Portuguese/Brazil translation of lincity.
++# Copyright (C) 2006 I.J. Peters, G.C. Sharp and others
++# This file is distributed under the same license as the lincity package.
++# Jose Carlos Medeiros <jose@psabs.com.br>, 2006.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: lincity 1.13.1\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-07-08 23:27-0600\n"
++"PO-Revision-Date: 2007-05-17 12:19-0300\n"
++"Last-Translator: Jose Carlos Medeiros <jose@psabs.com.br>\n"
++"Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=iso-8859-1\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Poedit-Language: Portuguese\n"
++"X-Poedit-Country: BRAZIL\n"
++
++#: cliglobs.c:56
++msgid "Jan"
++msgstr "Jan"
++
++#: cliglobs.c:56
++msgid "Feb"
++msgstr "Fev"
++
++#: cliglobs.c:56
++msgid "Mar"
++msgstr "Mar"
++
++#: cliglobs.c:56
++msgid "Apr"
++msgstr "Abr"
++
++#: cliglobs.c:57
++msgid "May"
++msgstr "Mai"
++
++#: cliglobs.c:57
++msgid "Jun"
++msgstr "Jun"
++
++#: cliglobs.c:57
++msgid "Jul"
++msgstr "Jul"
++
++#: cliglobs.c:57
++msgid "Aug"
++msgstr "Ago"
++
++#: cliglobs.c:58
++msgid "Sep"
++msgstr "Set"
++
++#: cliglobs.c:58
++msgid "Oct"
++msgstr "Out"
++
++#: cliglobs.c:58
++msgid "Nov"
++msgstr "Nov"
++
++#: cliglobs.c:58
++msgid "Dec"
++msgstr "Dez"
++
++#: engine.c:145
++msgid "You can't build a tip here"
++msgstr "Voce nao pode construir um aterro aqui"
++
++#: engine.c:146
++#: engine.c:177
++msgid "This area was once a landfill"
++msgstr "Este lugar tinha apenas um monte de lixo"
++
++#: engine.c:147
++#: engine.c:178
++#: engine.c:185
++#: screen.c:2284
++#: screen.c:2288
++#: screen.c:2358
++#: screen.c:2362
++msgid "OK"
++msgstr "OK"
++
++#: engine.c:176
++#: engine.c:183
++msgid "You can't build a mine here"
++msgstr "Voce nao pode construir uma mina aqui"
++
++#: engine.c:184
++msgid "There is no ore left at this site"
++msgstr "Nao existe mais minerio neste terreno"
++
++#: engine.c:670
++msgid "It's at a power line."
++msgstr "Isto e uma linha de transmissao de energia."
++
++#: engine.c:672
++msgid "It's at a solar power station."
++msgstr "Esta e uma usina de energia solar."
++
++#: engine.c:674
++msgid "It's at a substation."
++msgstr "Isto e uma sub-estacao."
++
++#: engine.c:676
++msgid "It's at a residential area."
++msgstr "Isto e uma area residencial."
++
++#: engine.c:678
++msgid "It's at a farm."
++msgstr "Isto e uma fazenda."
++
++#: engine.c:680
++msgid "It's at a market."
++msgstr "Isto e um mercado."
++
++#: engine.c:682
++msgid "It's at a track."
++msgstr "Isto e uma pista."
++
++#: engine.c:684
++msgid "It's at a coal mine."
++msgstr "Isto e uma mina de carvao."
++
++#: engine.c:686
++msgid "It's at a railway."
++msgstr "Isto e uma estrada de ferro."
++
++#: engine.c:688
++msgid "It's at a coal power station."
++msgstr "Isto e uma usina de energia carvoeira."
++
++#: engine.c:690
++msgid "It's at a road."
++msgstr "Isto e uma estrada."
++
++#: engine.c:692
++msgid "It's at light industry."
++msgstr "Isto e uma industria leve."
++
++#: engine.c:694
++msgid "It's at a university."
++msgstr "Isto e uma universidade."
++
++#: engine.c:696
++msgid "It's at a commune."
++msgstr "Isto e uma comuna."
++
++#: engine.c:698
++msgid "It's at a tip."
++msgstr "Isto e um aterro."
++
++#: engine.c:700
++msgid "It's at a port."
++msgstr "Isto e um porto."
++
++#: engine.c:702
++msgid "It's at a steel works."
++msgstr "Isto e uma siderurgica."
++
++#: engine.c:704
++msgid "It's at a recycle centre."
++msgstr "Isto e um centro de reciclagem."
++
++#: engine.c:706
++msgid "It's at a health centre."
++msgstr "Isto e um hospital."
++
++#: engine.c:708
++msgid "It's at a rocket site."
++msgstr "Isto e uma base de lancamento."
++
++#: engine.c:710
++msgid "It's at a windmill."
++msgstr "Isto e um moinho de vento."
++
++#: engine.c:712
++msgid "It's at a school."
++msgstr "Isto e uma escola."
++
++#: engine.c:714
++msgid "It's at a blacksmith."
++msgstr "Isto e um ferreiro."
++
++#: engine.c:716
++msgid "It's at a mill."
++msgstr "Isto e um moinho."
++
++#: engine.c:718
++msgid "It's at a pottery."
++msgstr "Isto e uma olaria."
++
++#: engine.c:720
++msgid "It's at a fire station!!!."
++msgstr "Isto e um corpo de bombeiros!!!."
++
++#: engine.c:722
++msgid "It's at a cricket pitch!!!."
++msgstr "Isto e um campo de cricket!!!"
++
++#: engine.c:724
++msgid "It's at a shanty town."
++msgstr "Isto e uma favela."
++
++#: engine.c:726
++msgid "UNKNOWN!"
++msgstr "DESCONHECIDO!"
++
++#: fileutil.c:299
++#: fileutil.c:349
++msgid "Error. Can't find LINCITY_HOME"
++msgstr "Erro. Nao encontro o LINCITY_HOME"
++
++#: fileutil.c:570
++msgid "Error verifying package. Can't find colour.pal."
++msgstr "Erro verificando o pacote. Nao encontro a paleta de cores."
++
++#: fileutil.c:589
++#: fileutil.c:598
++#, c-format
++msgid "Couldn't create the save directory %s\n"
++msgstr "Nao pude criar a pasta %s\n"
++
++#: fileutil.c:644
++#, c-format
++msgid "Out of memory: malloc failure\n"
++msgstr "Sem memoria. malloc falhou\n"
++
++#: geometry.c:536
++msgid "Menu"
++msgstr "Menu"
++
++#: geometry.c:561
++msgid "Help"
++msgstr "Ajuda"
++
++#: geometry.c:586
++msgid "Stats"
++msgstr "Stats"
++
++#: lchelp.c:267
++msgid "Sorry, lincity cannot run without this directory.  Exiting."
++msgstr "Desculpe mas o lincity necessita desta pasta para funcionar.  Saindo."
++
++#: lchelp.c:363
++msgid "tbutton 4 387 return-1 BACK"
++msgstr "tbutton 4 387 return-1 BACK"
++
++#: lchelp.c:367
++msgid "tbutton 370 387 return-2 OUT"
++msgstr "tbutton 370 387 return-2 OUT"
++
++#: lcsvga.c:243
++#: lcx11.c:453
++#, c-format
++msgid "An error has occurred.  The description is below...\n"
++msgstr "Ocorreu um erro.  A descricao esta a seguir...\n"
++
++#: lcsvga.c:247
++#: lcx11.c:457
++#, c-format
++msgid "Program aborting...\n"
++msgstr "Programa abortando...\n"
++
++#: lcwin32.c:57
++msgid "ERROR"
++msgstr "ERRO"
++
++#: lcx11.c:310
++#, c-format
++msgid "Version %s\n"
++msgstr "Versao %s\n"
++
++#: lcx11.c:395
++#, c-format
++msgid "xlincity, Version %s, (Copyright) IJ Peters - copying policy GNU GPL"
++msgstr "xlincity, Versao %s, (Copyright) IJ Peters - copying policy GNU GPL"
++
++#: ldsvgui.c:204
++msgid "Transport overwrite"
++msgstr "Sobrescrever transporte"
++
++#: ldsvgui.c:205
++msgid "Popup info to dialog boxes"
++msgstr "Popup informativo para caixas de dialogo"
++
++#: ldsvgui.c:206
++msgid "Time multiplexed stats windows"
++msgstr "Janelas de Status diversificados de tempos"
++
++#: ldsvgui.c:208
++msgid "Confine X pointer"
++msgstr "Demarca o apontador do X"
++
++#: ldsvgui.c:223
++msgid "OUT"
++msgstr "FORA"
++
++#: ldsvgui.c:288
++msgid "Save a scene"
++msgstr "Salva uma cena"
++
++#: ldsvgui.c:290
++msgid "Choose the number of the scene you want to save"
++msgstr "Escolha o numero da cena que deseja salvar"
++
++#: ldsvgui.c:292
++#: ldsvgui.c:384
++#: ldsvgui.c:654
++msgid "Press space to cancel."
++msgstr "Pressiona espaco para cancelar."
++
++#: ldsvgui.c:316
++msgid "Type comment for the saved scene"
++msgstr "Escreva um comentario para a cena salva"
++
++#: ldsvgui.c:318
++msgid "The comment may be up to 40 characters"
++msgstr "O comentario pode ter ter mais que 40 caracteres"
++
++#: ldsvgui.c:320
++msgid "and may contain spaces or % . - + ,"
++msgstr "e pode conter espacos ou % . - + ,"
++
++#: ldsvgui.c:329
++msgid "Saving city scene... please wait"
++msgstr "Salvando a cena da cidade... favor aguardar"
++
++#: ldsvgui.c:374
++msgid "Load a file"
++msgstr "Abrir um arquivo"
++
++#: ldsvgui.c:376
++msgid "Choose the number of the scene you want"
++msgstr "Escolha o numero da cena que deseja"
++
++#: ldsvgui.c:378
++msgid "Entries coloured red are either not there,"
++msgstr "Entradas vermelhas estao ou nao ali."
++
++#: ldsvgui.c:380
++msgid "or they are from an earlier version, they"
++msgstr "ou eles sao de uma versao anterior. eles"
++
++#: ldsvgui.c:382
++msgid "might not load properly."
++msgstr "podem nao serem abertos corretamente."
++
++#: ldsvgui.c:408
++#: ldsvgui.c:679
++msgid "No scene."
++msgstr "Sem cena."
++
++#: ldsvgui.c:409
++#: ldsvgui.c:680
++msgid "There is no save scene with this number."
++msgstr "Nao existe cena salva com este numero."
++
++#: ldsvgui.c:410
++#: ldsvgui.c:681
++msgid "Do you want to"
++msgstr "Voce deseja"
++
++#: ldsvgui.c:411
++#: ldsvgui.c:682
++msgid "try again?"
++msgstr "tentar novamente?"
++
++#: ldsvgui.c:422
++#: ldsvgui.c:693
++msgid "Loading Scene"
++msgstr "Abrindo a Cena"
++
++#: ldsvgui.c:423
++#: ldsvgui.c:694
++msgid "Do you want to load the scene"
++msgstr "Deseja abrir a cena"
++
++#: ldsvgui.c:425
++#: ldsvgui.c:696
++msgid "and forget the current game?"
++msgstr "a descartar o jogo atual?"
++
++#: ldsvgui.c:428
++#: ldsvgui.c:699
++msgid "Loading scene...  please wait"
++msgstr "Abrindo a cena...  favor aguardar"
++
++#: ldsvgui.c:469
++#, c-format
++msgid "Couldn't find the save directory %s\n"
++msgstr "Nao encontrei a pasta %s\n"
++
++#: ldsvgui.c:650
++msgid "Choose network server"
++msgstr "Escolha o servidor de rede"
++
++#: ldsvgui.c:652
++msgid "Please enter the address and port of the server"
++msgstr "Favor entrar com o endereco e porta do servidor"
++
++#: ldsvguts.c:124
++#, c-format
++msgid "Save file <%s> - "
++msgstr "Salvar arquivo <%s>.   "
++
++#: ldsvguts.c:125
++msgid "Can't open save file!"
++msgstr "Nao posso abrir o arquivo!"
++
++#: ldsvguts.c:130
++msgid "Saving scene"
++msgstr "Salvando cena"
++
++#: ldsvguts.c:357
++#, c-format
++msgid "Can't open <%s> (gzipped)"
++msgstr "Nao posso abrir <%s> (compactado)"
++
++#: ldsvguts.c:375
++msgid "Loading scene"
++msgstr "Abrindo a cena"
++
++#: lintypes.c:22
++msgid "Empty"
++msgstr "Vazio"
++
++#: lintypes.c:34
++msgid "Power line"
++msgstr "Linha de transmissao de forca"
++
++#: lintypes.c:46
++msgid "Solar PS"
++msgstr "Solar PS"
++
++#: lintypes.c:58
++#: modules/substation.c:98
++msgid "Substation"
++msgstr "Sub-estacao"
++
++#: lintypes.c:70
++msgid "Residential LL"
++msgstr "Residencial LL"
++
++#: lintypes.c:82
++msgid "Farm"
++msgstr "Fazenda"
++
++#: lintypes.c:94
++#: screen.c:2124
++msgid "Market"
++msgstr "Mercado"
++
++#: lintypes.c:106
++#: modules/track.c:44
++msgid "Track"
++msgstr "Pista"
++
++#: lintypes.c:118
++msgid "Coalmine"
++msgstr "Mina de carvao"
++
++#: lintypes.c:130
++msgid "Railway"
++msgstr "Estrada de ferro"
++
++#: lintypes.c:142
++msgid "Coal PS"
++msgstr "Carvao PS"
++
++#: lintypes.c:154
++#: modules/road.c:53
++msgid "Road"
++msgstr "Estrada"
++
++#: lintypes.c:166
++msgid "Lt. Industry"
++msgstr "Industria leve"
++
++#: lintypes.c:178
++#: modules/university.c:73
++msgid "University"
++msgstr "Universidade"
++
++#: lintypes.c:190
++#: modules/commune.c:151
++msgid "Commune"
++msgstr "Comuna"
++
++#: lintypes.c:202
++msgid "Ore mine"
++msgstr "Mina de minerio"
++
++#: lintypes.c:214
++msgid "Rubbish tip"
++msgstr "Aterro"
++
++#: lintypes.c:226
++#: screen.c:2126
++#: modules/port.c:210
++msgid "Port"
++msgstr "Porto"
++
++#: lintypes.c:238
++msgid "Hv. Industry"
++msgstr "Industria pesada"
++
++#: lintypes.c:250
++msgid "Park"
++msgstr "Parque"
++
++#: lintypes.c:262
++#: mps.c:542
++msgid "Recycle"
++msgstr "Reciclagem"
++
++#: lintypes.c:274
++#: modules/water.c:26
++msgid "Water"
++msgstr "Agua"
++
++#: lintypes.c:286
++msgid "Health centre"
++msgstr "Hospital"
++
++#: lintypes.c:298
++msgid "Rocket pad"
++msgstr "Base de lancamento"
++
++#: lintypes.c:310
++#: mps.c:532
++#: modules/windmill.c:83
++msgid "Windmill"
++msgstr "Moinho de vento"
++
++#: lintypes.c:322
++#: modules/monument.c:63
++msgid "Monument"
++msgstr "Monumento"
++
++#: lintypes.c:334
++#: modules/school.c:56
++msgid "School"
++msgstr "Escola"
++
++#: lintypes.c:346
++#: modules/blacksmith.c:103
++msgid "Blacksmith"
++msgstr "Ferreiro"
++
++#: lintypes.c:358
++msgid "Mill"
++msgstr "Moinho"
++
++#: lintypes.c:370
++#: modules/pottery.c:126
++msgid "Pottery"
++msgstr "Olaria"
++
++#: lintypes.c:382
++msgid "Fire sta'n"
++msgstr "Bombeiro"
++
++#: lintypes.c:394
++msgid "Cricket pitch"
++msgstr "Campo de cricket"
++
++#: lintypes.c:407
++msgid "Burnt"
++msgstr "Queimatorio"
++
++#: lintypes.c:420
++msgid "Shanty town"
++msgstr "Favela"
++
++#: lintypes.c:433
++#: mps.c:413
++#: modules/residence.c:297
++msgid "Fire"
++msgstr "Fogo"
++
++#: lintypes.c:446
++msgid "Used"
++msgstr "Usado"
++
++#: lintypes.c:458
++msgid "Residential ML"
++msgstr "Residencial ML"
++
++#: lintypes.c:470
++msgid "Residential HL"
++msgstr "Residencial HL"
++
++#: lintypes.c:482
++#: lintypes.c:494
++#: lintypes.c:506
++msgid "Residential"
++msgstr "Residencial"
++
++#: main.c:262
++msgid "Loading the game"
++msgstr "Abrindo o jogo"
++
++#: main.c:272
++msgid "Creating pixmaps"
++msgstr "Criando mapas de pixels"
++
++#: main.c:675
++msgid "Quit The Game?"
++msgstr "Sair do Jogo?"
++
++#: main.c:676
++msgid "Do you really want to quit?"
++msgstr "Deseja realmente sair?"
++
++#: main.c:677
++msgid "If you want to save the game select NO."
++msgstr "Caso nao queira salvar o jogo selecione NAO."
++
++#. TRANSLATORS: Test mode is like using "cheat codes"
++#: main.c:713
++msgid "TEST"
++msgstr "TEST"
++
++#: main.c:713
++msgid "You have pressed a test key"
++msgstr "Voce pressionou a tecla de teste"
++
++#: main.c:714
++msgid "You will only see this message once"
++msgstr "Voce somente vera esta mensagem uma vez"
++
++#: main.c:715
++msgid "Do you really want to play in test mode..."
++msgstr "Deseja realmente jogar no modo de teste..."
++
++#: main.c:740
++#, c-format
++msgid "Unable to open %s\n"
++msgstr "Impossivel abrir %s\n"
++
++#: main.c:745
++#, c-format
++msgid "----- IN TEST MODE -------\n"
++msgstr "----- NO MODO TESTE -------\n"
++
++#: main.c:746
++#, c-format
++msgid "Game statistics from LinCity Version %s\n"
++msgstr "Estatisticas de jogo do LinCity Versao %s\n"
++
++#: main.c:748
++#, c-format
++msgid "Initial loaded scene - %s\n"
++msgstr "Cena inicial aberta - %s\n"
++
++#: main.c:750
++#, c-format
++msgid "Economy is sustainable\n"
++msgstr "A economia e sustentavel\n"
++
++#: main.c:751
++#, c-format
++msgid "Population  %d  of which  %d  are not housed.\n"
++msgstr "A populacao e de  %d  dos quais  %d  sao sem teto.\n"
++
++#: main.c:754
++#, c-format
++msgid "Max population %d  Number evacuated %d Total births %d\n"
++msgstr "Populacao maxima %d  Numero de evacuados %d Total de nascimentos %d\n"
++
++#: main.c:757
++#, c-format
++msgid " Date  %s %04d   Money %8d   Tech-level %5.1f (%5.1f)\n"
++msgstr " Data  %s %04d   Dinheiro %8d   Nivel Tecnologico %5.1f (%5.1f)\n"
++
++#: main.c:762
++#, c-format
++msgid " Deaths by starvation %7d   History %8.3f\n"
++msgstr " Mortos pela fome %7d   Historia %8.3f\n"
++
++#: main.c:765
++#, c-format
++msgid "Deaths from pollution %7d   History %8.3f\n"
++msgstr "Mortos pela poluicao %7d   Historia %8.3f\n"
++
++#: main.c:767
++#, c-format
++msgid "Years of unemployment %7d   History %8.3f\n"
++msgstr "Anos de desemprego %7d   Historia %8.3f\n"
++
++#: main.c:769
++#, c-format
++msgid "Rockets launched %2d  Successful launches %2d\n"
++msgstr "Foguetes lancados %2d  Lancamentos bem sucedidos %2d\n"
++
++#: main.c:772
++#, c-format
++msgid "    Residences %4d         Markets %4d            Farms %4d\n"
++msgstr "    Residencias %4d         Mercados %4d            Fazendas %4d\n"
++
++#: main.c:781
++#, c-format
++msgid "        Tracks %4d           Roads %4d             Rail %4d\n"
++msgstr "        Pistas %4d           Estradas %4d             Trilhos %4d\n"
++
++#: main.c:784
++#, c-format
++msgid "     Potteries %4d     Blacksmiths %4d            Mills %4d\n"
++msgstr "     Olarias %4d     Ferreiros %4d            Moinhos %4d\n"
++
++#: main.c:787
++#, c-format
++msgid "     Monuments %4d         Schools %4d     Universities %4d\n"
++msgstr "     Monumentos %4d         Escolas %4d     Universidades %4d\n"
++
++#: main.c:790
++#, c-format
++msgid " Fire stations %4d           Parks %4d     Cricket gnds %4d\n"
++msgstr " Bombeiros %4d           Parques %4d     Campos de Cricket %4d\n"
++
++#: main.c:793
++#, c-format
++msgid "    Coal mines %4d       Ore mines %4d         Communes %4d\n"
++msgstr "    Minas de carvao %4d       Minas de minerio %4d         Comunas %4d\n"
++
++#: main.c:796
++#, c-format
++msgid "     Windmills %4d     Coal powers %4d     Solar powers %4d\n"
++msgstr "     Moinhos de vento %4d     Usinas de carvao %4d     Usinas solares %4d\n"
++
++#: main.c:800
++#, c-format
++msgid "   Substations %4d     Power lines %4d            Ports %4d\n"
++msgstr "   Sub-estacoes %4d     Linhas de transmissao %4d            Portos %4d\n"
++
++#: main.c:803
++#, c-format
++msgid "    Light inds %4d      Heavy inds %4d        Recyclers %4d\n"
++msgstr "    Industias peq %4d      Industrias grd %4d        Centros de reciclagem %4d\n"
++
++#: main.c:806
++#, c-format
++msgid "Health centres %4d            Tips %4d         Shanties %4d\n"
++msgstr "Centros de saude %4d            Aterros %4d         Favelas %4d\n"
++
++#: module_buttons.c:481
++#, c-format
++msgid "Bulldoze - cost varies"
++msgstr "Destruir - o custo varia"
++
++#: module_buttons.c:483
++#, c-format
++msgid "%s %s  Bulldoze %s"
++msgstr "%s %s  Destruir %s"
++
++#. TRANSLATORS: The part about the cup of tea is one of Ian's
++#. jokes, but the part about ports needing to be connected
++#. to rivers is true.
++#: mouse.c:587
++#: mouse.c:766
++#: mouse.c:774
++#: mouse.c:782
++msgid "WARNING"
++msgstr "AVISO"
++
++#: mouse.c:588
++msgid "Ports need to be"
++msgstr "Os portos precisam estar"
++
++#: mouse.c:589
++msgid "connected to rivers!"
++msgstr "conectados aos rios!"
++
++#: mouse.c:590
++msgid "Want to make a cup of tea?"
++msgstr "Deseja tomar uma xicara de cha?"
++
++#: mouse.c:591
++msgid "TEA BREAK"
++msgstr "PAUSA PRO CHA"
++
++#: mouse.c:592
++msgid "Boil->pour->wait->stir"
++msgstr "Ferver->derramar->esperar->mexer"
++
++#: mouse.c:593
++msgid "stir->pour->stir->wait->drink...ahhh"
++msgstr "mexer->derramar->mexer->esperar->beber...ahhh"
++
++#: mouse.c:594
++msgid "Have you finished yet?"
++msgstr "Voce ja terminou?"
++
++#: mouse.c:767
++msgid "Bulldozing a monument costs"
++msgstr "Destruir um monumento custa"
++
++#: mouse.c:768
++msgid "a lot of money."
++msgstr "muito dinheiro."
++
++#: mouse.c:769
++#: mouse.c:777
++#: mouse.c:785
++msgid "Want to bulldoze?"
++msgstr "Deseja destruir?"
++
++#: mouse.c:775
++msgid "Bulldozing a section of river"
++msgstr "Plainar uma parte do rio"
++
++#: mouse.c:776
++msgid "costs a lot of money."
++msgstr "custa muito dinheiro."
++
++#: mouse.c:783
++msgid "Bulldozing a shanty town costs a"
++msgstr "Destruir uma favela custa"
++
++#: mouse.c:784
++msgid "lot of money and may cause a fire."
++msgstr "muito dinheiro e pode causar um incendio."
++
++#. TRANSLATORS: Don't translate the leading "text"
++#: mouse.c:984
++#, c-format
++msgid "text -1 20 Choose the type of residence you want\n"
++msgstr "text -1 20 Escolha o tipo de residencia que voce deseja\n"
++
++#: mouse.c:988
++#, c-format
++msgid "text -1 45 (LB=Low Birthrate HB=High Birthrate)\n"
++msgstr "text -1 45 (BN=Baixa Natalidade AN=Alta Natalidade)\n"
++
++#: mouse.c:990
++#, c-format
++msgid "text -1 55 (LD=Low Deathrate HD=High Deathrate)\n"
++msgstr "text -1 55 (BM=Baixa Mortalidade AM=Alta Mortalidade)\n"
++
++#: mouse.c:992
++#, c-format
++msgid "text -1 85 Low Tech\n"
++msgstr "text -1 85 Baixa Tecnologia\n"
++
++#: mouse.c:995
++#, c-format
++msgid "text 68 106 Cost %4d\n"
++msgstr "text 68 106 Custa %4d\n"
++
++#. TRANSLATORS: Only translate "pop" <<for population>>
++#: mouse.c:999
++#, c-format
++msgid "tbutton 82 180 return1 pop 50\n"
++msgstr "tbutton 82 180 return1 pop 50\n"
++
++#. TRANSLATORS: Only translate LB, HD (low birth, high death)
++#: mouse.c:1001
++#, c-format
++msgid "text 89 195 LB HD\n"
++msgstr "text 89 195 BN AM\n"
++
++#: mouse.c:1004
++#, c-format
++msgid "text 155 106 Cost %4d\n"
++msgstr "text 155 106 Custo %4d\n"
++
++#: mouse.c:1007
++#, c-format
++msgid "tbutton 164 180 return2 pop 100\n"
++msgstr "tbutton 164 180 return2 pop 100\n"
++
++#: mouse.c:1008
++#, c-format
++msgid "text 175 195 HB LD\n"
++msgstr "text 175 195 HB LD\n"
++
++#: mouse.c:1011
++#, c-format
++msgid "text 238 106 Cost %4d\n"
++msgstr "text 238 106 Custo %4d\n"
++
++#: mouse.c:1014
++#, c-format
++msgid "tbutton 250 180 return3 pop 200\n"
++msgstr "tbutton 250 180 return3 pop 200\n"
++
++#: mouse.c:1015
++#, c-format
++msgid "text 261 195 HB HD\n"
++msgstr "text 261 195 HB HD\n"
++
++#: mouse.c:1017
++#, c-format
++msgid "text -1 215 Click on one to select\n"
++msgstr "text -1 215 Clique em um para selecionar\n"
++
++#: mouse.c:1021
++#, c-format
++msgid "text -1 255 High Tech\n"
++msgstr "text -1 255 Tecnologia Avancada\n"
++
++#: mouse.c:1024
++#, c-format
++msgid "text 68 276 Cost %4d\n"
++msgstr "text 68 276 Custo %4d\n"
++
++#: mouse.c:1027
++#, c-format
++msgid "tbutton 78 350 return4 pop 100\n"
++msgstr "tbutton 78 350 return4 pop 100\n"
++
++#: mouse.c:1028
++#, c-format
++msgid "text 89 365 LB HD\n"
++msgstr "text 89 365 LB HD\n"
++
++#: mouse.c:1031
++#, c-format
++msgid "text 155 276 Cost %4d\n"
++msgstr "text 155 276 Custo %4d\n"
++
++#: mouse.c:1034
++#, c-format
++msgid "tbutton 164 350 return5 pop 200\n"
++msgstr "tbutton 164 350 return5 pop 200\n"
++
++#: mouse.c:1035
++#, c-format
++msgid "text 175 365 HB LD\n"
++msgstr "text 175 365 HB LD\n"
++
++#: mouse.c:1038
++#, c-format
++msgid "text 238 276 Cost %4d\n"
++msgstr "text 238 276 Custo %4d\n"
++
++#: mouse.c:1041
++#, c-format
++msgid "tbutton 250 350 return6 pop 400\n"
++msgstr "tbutton 250 350 return6 pop 400\n"
++
++#: mouse.c:1042
++#, c-format
++msgid "text 261 365 HB HD\n"
++msgstr "text 261 365 HB HD\n"
++
++#: mouse.c:1270
++#, c-format
++msgid "Can't build %s over that!"
++msgstr "Nao pode construir %s acima disto!"
++
++#: mouse.c:1273
++#, c-format
++msgid "%d sections of %s will cost %3d to build"
++msgstr "%d partes de %s custara %3d para construir"
++
++#: mps.c:411
++msgid "Coverage"
++msgstr "Cobertura"
++
++#: mps.c:412
++#: mps.c:415
++#: mps.c:418
++#: screen.c:2226
++#: modules/commune.c:156
++#: modules/commune.c:158
++#: modules/commune.c:160
++#: modules/commune.c:162
++#: modules/water.c:29
++msgid "Yes"
++msgstr "Sim"
++
++#: mps.c:412
++#: mps.c:415
++#: mps.c:418
++#: screen.c:2227
++#: modules/commune.c:156
++#: modules/commune.c:158
++#: modules/commune.c:160
++#: modules/commune.c:162
++#: modules/water.c:29
++msgid "No"
++msgstr "Nao"
++
++#: mps.c:416
++msgid "Health"
++msgstr "Saude"
++
++#: mps.c:419
++#: mps.c:540
++#: modules/residence.c:300
++msgid "Cricket"
++msgstr "Cricket"
++
++#: mps.c:421
++#: modules/residence.c:302
++msgid "Pollution"
++msgstr "Poluicao"
++
++#: mps.c:424
++msgid "clear"
++msgstr "limpar"
++
++#: mps.c:426
++#: modules/residence.c:304
++msgid "good"
++msgstr "bom"
++
++#: mps.c:428
++msgid "fair"
++msgstr "feira"
++
++#: mps.c:430
++msgid "smelly"
++msgstr "fedorento"
++
++#: mps.c:432
++msgid "smokey"
++msgstr "fumaca"
++
++#: mps.c:434
++msgid "smoggy"
++msgstr "neblina"
++
++#: mps.c:436
++msgid "bad"
++msgstr "mau"
++
++#: mps.c:438
++msgid "very bad"
++msgstr "muito mau"
++
++#: mps.c:440
++msgid "death!"
++msgstr "morte!"
++
++#: mps.c:445
++msgid "Bulldoze Cost"
++msgstr "Destruir Custa"
++
++#: mps.c:448
++msgid "N/A"
++msgstr "N/D"
++
++#: mps.c:464
++msgid "Tax Income"
++msgstr "Taxa de Entrada"
++
++#: mps.c:468
++msgid "Income"
++msgstr "Entrada"
++
++#: mps.c:472
++#: modules/blacksmith.c:111
++#: modules/coal_power.c:97
++#: modules/coal_power.c:111
++#: modules/commune.c:157
++#: modules/heavy_industry.c:335
++#: modules/heavy_industry.c:350
++#: modules/mill.c:119
++#: modules/port.c:219
++#: modules/pottery.c:137
++#: modules/rail.c:63
++#: modules/road.c:60
++#: modules/track.c:51
++msgid "Coal"
++msgstr "Carvao"
++
++#: mps.c:476
++#: modules/blacksmith.c:109
++#: modules/cricket.c:112
++#: modules/firestation.c:131
++#: modules/health_centre.c:78
++#: modules/mill.c:115
++#: modules/port.c:227
++#: modules/pottery.c:133
++#: modules/rail.c:65
++#: modules/road.c:62
++#: modules/rocket_pad.c:178
++#: modules/school.c:64
++#: modules/track.c:53
++#: modules/university.c:83
++msgid "Goods"
++msgstr "Bens"
++
++#: mps.c:480
++msgid "Export"
++msgstr "Exportar"
++
++#: mps.c:484
++msgid "Expenses"
++msgstr "Gastos"
++
++#: mps.c:488
++msgid "Unemp."
++msgstr "Desemp."
++
++#: mps.c:492
++msgid "Transport"
++msgstr "Transporte"
++
++#: mps.c:496
++msgid "Imports"
++msgstr "Importacoes"
++
++#: mps.c:500
++msgid "Others"
++msgstr "Outros"
++
++#: mps.c:505
++msgid "Net"
++msgstr "Rede"
++
++#: mps.c:515
++msgid "Other Costs"
++msgstr "Outos Custos"
++
++#: mps.c:520
++msgid "For year"
++msgstr "Por ano"
++
++#: mps.c:524
++msgid "Interest"
++msgstr "Interesse"
++
++#: mps.c:526
++msgid "Schools"
++msgstr "Escolas"
++
++#: mps.c:528
++msgid "Univers."
++msgstr "Universidades"
++
++#: mps.c:530
++msgid "Deaths"
++msgstr "Mortes"
++
++#: mps.c:534
++msgid "Hospital"
++msgstr "Hospital"
++
++#: mps.c:536
++msgid "Rockets"
++msgstr "Foguetes"
++
++#: mps.c:538
++msgid "Fire Stn"
++msgstr "Bombeiro"
++
++#: mps.c:552
++msgid "Population"
++msgstr "Populacao"
++
++#: mps.c:554
++#: modules/port.c:235
++msgid "Total"
++msgstr "Total"
++
++#: mps.c:555
++msgid "Housed"
++msgstr "Com casa"
++
++#: mps.c:556
++msgid "Homeless"
++msgstr "Sem casa"
++
++#: mps.c:557
++msgid "Shanties"
++msgstr "Favelados"
++
++#: mps.c:558
++msgid "Unn Dths"
++msgstr "Unn Dths"
++
++#: mps.c:559
++#: screen.c:1238
++msgid "Unemployment"
++msgstr "Desempregados"
++
++#: mps.c:560
++msgid "Claims"
++msgstr "Reclamacoes"
++
++#: mps.c:561
++#: mps.c:566
++msgid "Rate"
++msgstr "Taxa"
++
++#: mps.c:563
++msgid "Starvation"
++msgstr "Fome"
++
++#: mps.c:564
++msgid "Cases"
++msgstr "Acontecimentos"
++
++#: mps.c:577
++msgid "PEOPLE"
++msgstr "PESSOAS"
++
++#: mps.c:578
++msgid "Pop"
++msgstr "Pop"
++
++#: mps.c:579
++msgid "Unnat death"
++msgstr "mortos"
++
++#: screen.c:861
++msgid "Coal survey"
++msgstr "Analise do carvao"
++
++#: screen.c:862
++msgid "This will cost you 1 million"
++msgstr "Isto custara 1 milhao a voce"
++
++#: screen.c:863
++msgid "After that it's is free to call again"
++msgstr "Apos aquilo esta livre para chamar novamente"
++
++#: screen.c:864
++msgid "Do coal survey?"
++msgstr "Analisar o carvao?"
++
++#: screen.c:1043
++msgid "Land Use    "
++msgstr "Uso da terra   "
++
++#: screen.c:1098
++msgid "Pollution   "
++msgstr "Poluicao   "
++
++#: screen.c:1130
++msgid "Fire cover  "
++msgstr "Cobertura do fogo  "
++
++#: screen.c:1166
++msgid "Crickt cover"
++msgstr "Cobertura do Crickt"
++
++#: screen.c:1202
++msgid "Health cover"
++msgstr "Cobertura da saude"
++
++#: screen.c:1267
++msgid "Starvation  "
++msgstr "Fome  "
++
++#: screen.c:1297
++msgid "Coal Reserve"
++msgstr "Reserva de carvao"
++
++#: screen.c:1315
++msgid "Click here"
++msgstr "Clique aqui"
++
++#: screen.c:1316
++msgid "   to do  "
++msgstr "   para fazer  "
++
++#: screen.c:1317
++msgid "coal survey"
++msgstr "analise do carvao"
++
++#: screen.c:1358
++msgid "Power       "
++msgstr "Energia       "
++
++#: screen.c:1360
++msgid "Power (none)"
++msgstr "Energia (nada)"
++
++#: screen.c:1800
++#, c-format
++msgid "Money: "
++msgstr "Dinheiro: "
++
++#: screen.c:1822
++#, c-format
++msgid "Date %s %04d "
++msgstr "Data %s %04d "
++
++#: screen.c:1854
++#, c-format
++msgid "%s%5.1f MINS/year  V %s"
++msgstr "%s%5.1f MINS/ano  V %s"
++
++#: screen.c:1855
++#: screen.c:1859
++msgid "TEST MODE"
++msgstr "MODO TESTE"
++
++#: screen.c:1858
++#, c-format
++msgid "%s%5.1f secs/year  V %s "
++msgstr "%s%5.1f segs/ano  V %s "
++
++#: screen.c:2133
++msgid "Buy"
++msgstr "Comprar"
++
++#: screen.c:2134
++msgid "Sell"
++msgstr "Vender"
++
++#: screen.c:2136
++msgid "JOBS"
++msgstr "TRABALHOS"
++
++#: screen.c:2138
++msgid "FOOD"
++msgstr "COMIDA"
++
++#: screen.c:2139
++msgid "COAL"
++msgstr "CARVAO"
++
++#: screen.c:2140
++msgid "ORE"
++msgstr "FERRO"
++
++#: screen.c:2141
++msgid "GOODS"
++msgstr "BENS"
++
++#: screen.c:2142
++msgid "STEEL"
++msgstr "ACO"
++
++#. TRANSLATORS:
++#. MIN=Mining, PRT=Import/export from port,
++#. MNY=Money, POP=Population, TEC=Technology,
++#. FIR=Fire coverage
++#.
++#: screen.c:2464
++msgid "MIN"
++msgstr "MIN"
++
++#: screen.c:2467
++msgid "PRT"
++msgstr "PRT"
++
++#: screen.c:2470
++msgid "MNY"
++msgstr "DIN"
++
++#: screen.c:2473
++msgid "POP"
++msgstr "POP"
++
++#: screen.c:2476
++msgid "TEC"
++msgstr "TEC"
++
++#: screen.c:2479
++msgid "FIR"
++msgstr "FOG"
++
++#: screen.c:2592
++msgid "ROCKET LAUNCH"
++msgstr "BASE DE LANCAMENTO"
++
++#: screen.c:2593
++msgid "You can launch the rocket now or wait until later."
++msgstr "Voce pode lancar o foguete agora ou esperar um pouco."
++
++#: screen.c:2594
++msgid "If you wait, it costs you *only* money to keep the"
++msgstr "se voce esperar, custara *apenas* o dinheiro pra manter o"
++
++#: screen.c:2595
++msgid "rocket ready.    Launch?"
++msgstr "foguete preparado.    Lancar?"
++
++#: screen.c:2601
++msgid "Rocket ready to launch"
++msgstr "Foguete preparado para o lancamento"
++
++#: screen.c:2602
++msgid "You can launch it now or wait until later."
++msgstr "Voce pode lanca-lo agora ou esperar um pouco."
++
++#: screen.c:2603
++msgid "If you wait it will continue costing you money."
++msgstr "se esperar isso continuara a consumir seu dinheiro."
++
++#: screen.c:2604
++msgid "Launch it later by clicking on the rocket area."
++msgstr "Lance ele mais tarde clicando na area do foguete."
++
++#: modules/blacksmith.c:106
++#: modules/heavy_industry.c:352
++#: modules/light_industry.c:353
++#: modules/mill.c:112
++#: modules/pottery.c:128
++#: modules/recycle.c:180
++#: modules/school.c:67
++#: modules/university.c:85
++msgid "Capacity"
++msgstr "Capacidade"
++
++#: modules/blacksmith.c:108
++#: modules/cricket.c:109
++#: modules/firestation.c:128
++#: modules/health_centre.c:75
++#: modules/mill.c:114
++#: modules/pottery.c:130
++#: modules/recycle.c:188
++#: modules/rocket_pad.c:175
++#: modules/school.c:61
++#: modules/university.c:80
++msgid "Inventory"
++msgstr "Inventario"
++
++#: modules/coal_power.c:98
++#: modules/solar_power.c:53
++msgid "Power Station"
++msgstr "Estacao de Energia"
++
++#: modules/coal_power.c:102
++#: modules/solar_power.c:57
++msgid "Max Output"
++msgstr "Capacidade Maxima"
++
++#: modules/coal_power.c:107
++#: modules/solar_power.c:62
++msgid "Current Output"
++msgstr "Capacidade Atual"
++
++#: modules/coal_power.c:113
++#: modules/cricket.c:110
++#: modules/firestation.c:129
++#: modules/health_centre.c:76
++#: modules/pottery.c:131
++#: modules/rail.c:61
++#: modules/road.c:58
++#: modules/rocket_pad.c:176
++#: modules/school.c:62
++#: modules/track.c:49
++#: modules/university.c:81
++msgid "Jobs"
++msgstr "Trabalhos"
++
++#: modules/coal_power.c:115
++#: modules/organic_farm.c:188
++#: modules/recycle.c:185
++#: modules/solar_power.c:66
++#: modules/windmill.c:87
++#: modules/windmill.c:98
++msgid "Tech"
++msgstr "Tecn"
++
++#: modules/coal_power.c:117
++#: modules/power_line.c:60
++#: modules/solar_power.c:68
++#: modules/substation.c:118
++#: modules/windmill.c:114
++msgid "Grid ID"
++msgstr "Grade ID"
++
++#: modules/coalmine.c:176
++msgid "Coal Mine"
++msgstr "Mina de Carvao"
++
++#: modules/coalmine.c:179
++#: modules/oremine.c:195
++msgid "Stock"
++msgstr "Estoque"
++
++#: modules/coalmine.c:183
++#: modules/coalmine.c:185
++#: modules/oremine.c:199
++msgid "Reserve"
++msgstr "Reserva"
++
++#: modules/coalmine.c:185
++msgid "EMPTY"
++msgstr "VAZIO"
++
++#: modules/commune.c:154
++msgid "Activity"
++msgstr "Atividade"
++
++#: modules/commune.c:159
++#: modules/heavy_industry.c:348
++#: modules/light_industry.c:349
++#: modules/port.c:223
++#: modules/pottery.c:135
++#: modules/rail.c:67
++#: modules/recycle.c:189
++#: modules/road.c:64
++#: modules/track.c:55
++msgid "Ore"
++msgstr "Minerio"
++
++#: modules/commune.c:161
++#: modules/light_industry.c:351
++#: modules/port.c:231
++#: modules/rail.c:69
++#: modules/road.c:66
++#: modules/rocket_pad.c:180
++#: modules/track.c:57
++msgid "Steel"
++msgstr "Aco"
++
++#: modules/commune.c:163
++#: modules/rail.c:71
++#: modules/recycle.c:191
++#: modules/road.c:68
++#: modules/track.c:59
++msgid "Waste"
++msgstr "Perdido"
++
++#: modules/cricket.c:107
++msgid "Cricket Pitch"
++msgstr "Campo de Cricket"
++
++#: modules/firestation.c:126
++msgid "Fire Station"
++msgstr "Corpo de Bombeiros"
++
++#: modules/health_centre.c:73
++msgid "Health Centre"
++msgstr "Hospital"
++
++#: modules/heavy_industry.c:329
++msgid "Heavy"
++msgstr "Pesada"
++
++#: modules/heavy_industry.c:330
++#: modules/light_industry.c:338
++msgid "Industry"
++msgstr "Industria"
++
++#: modules/heavy_industry.c:337
++msgid "Grid"
++msgstr "Grade"
++
++#: modules/heavy_industry.c:340
++#: modules/light_industry.c:342
++#: modules/recycle.c:182
++#: modules/residence.c:284
++#: modules/residence.c:287
++#: modules/residence.c:290
++#: modules/residence.c:293
++#: modules/residence.c:296
++#: modules/residence.c:299
++msgid "NO"
++msgstr "NAO"
++
++#: modules/heavy_industry.c:343
++#: modules/light_industry.c:343
++#: modules/organic_farm.c:186
++#: modules/recycle.c:183
++#: modules/residence.c:285
++msgid "Power"
++msgstr "Energia"
++
++#: modules/heavy_industry.c:345
++#: modules/light_industry.c:345
++msgid "Output"
++msgstr "Saida"
++
++#: modules/heavy_industry.c:346
++#: modules/light_industry.c:347
++msgid "Store"
++msgstr "Deposito"
++
++#: modules/light_industry.c:337
++msgid "Light"
++msgstr "Leve"
++
++#: modules/light_industry.c:342
++#: modules/organic_farm.c:182
++#: modules/recycle.c:182
++#: modules/residence.c:284
++#: modules/residence.c:287
++#: modules/residence.c:290
++#: modules/residence.c:293
++#: modules/residence.c:296
++#: modules/residence.c:299
++msgid "YES"
++msgstr "SIM"
++
++#: modules/mill.c:110
++msgid "Textile Mill"
++msgstr "Fabrica de Tecido"
++
++#: modules/mill.c:117
++#: modules/port.c:215
++#: modules/rail.c:59
++#: modules/road.c:56
++#: modules/track.c:47
++msgid "Food"
++msgstr "Comida"
++
++#: modules/monument.c:69
++msgid "Wisdom Bestowed"
++msgstr "Reconhecimento adquirido"
++
++#: modules/monument.c:73
++#, c-format
++msgid "% Complete"
++msgstr "% Completo"
++
++#: modules/oremine.c:192
++msgid "Ore Mine"
++msgstr "Mina de Minerio"
++
++#: modules/organic_farm.c:178
++#, c-format
++msgid "Organic Farm"
++msgstr "Fazenda Organica"
++
++#: modules/organic_farm.c:184
++msgid "NO "
++msgstr "NAO "
++
++#: modules/organic_farm.c:191
++msgid "Prod"
++msgstr "Prod"
++
++#: modules/power_line.c:57
++msgid "Power Line"
++msgstr "Linha de Transmissao"
++
++#: modules/rail.c:56
++msgid "Rail"
++msgstr "Trilho"
++
++#: modules/recycle.c:176
++msgid "Recycling"
++msgstr "Reciclador"
++
++#: modules/recycle.c:177
++msgid "Center"
++msgstr "Centro"
++
++#: modules/residence.c:278
++msgid "Residence"
++msgstr "Residencia"
++
++#: modules/residence.c:282
++msgid "People"
++msgstr "Pessoas"
++
++#: modules/residence.c:288
++msgid "Fed"
++msgstr "Abastecer"
++
++#: modules/residence.c:291
++msgid "Employed"
++msgstr "Empregados"
++
++#: modules/residence.c:294
++msgid "Health Cvr"
++msgstr "Saude Cvr"
++
++#: modules/residence.c:304
++msgid "poor"
++msgstr "pobres"
++
++#: modules/residence.c:305
++msgid "Job"
++msgstr "Trabalho"
++
++#: modules/rocket_pad.c:169
++msgid "Rocket Pad"
++msgstr "Base do lancamento"
++
++#: modules/rocket_pad.c:172
++msgid "Completion"
++msgstr "Completo"
++
++#: modules/school.c:58
++msgid "Lessons Learned"
++msgstr "Licoes Aprendidas"
++
++#: modules/solar_power.c:52
++msgid "Solar"
++msgstr "Solar"
++
++#: modules/substation.c:102
++msgid "Local Demand"
++msgstr "Demanda Local"
++
++#: modules/substation.c:106
++#: modules/windmill.c:102
++msgid "Grid Status"
++msgstr "Status da Grade"
++
++#: modules/substation.c:109
++#: modules/windmill.c:105
++msgid "T. Cap."
++msgstr "T. Cap."
++
++#: modules/substation.c:112
++#: modules/windmill.c:108
++msgid "A. Cap."
++msgstr "A. Cap."
++
++#: modules/substation.c:115
++#: modules/windmill.c:96
++#: modules/windmill.c:111
++msgid "Demand"
++msgstr "Demanda"
++
++#: modules/tip.c:118
++msgid "Landfill"
++msgstr "Deposito de Lixo"
++
++#: modules/tip.c:121
++msgid "Last Month"
++msgstr "Ultimo Mes"
++
++#: modules/tip.c:122
++msgid "Tons"
++msgstr "Tons"
++
++#: modules/tip.c:123
++msgid "Percent"
++msgstr "Porcento"
++
++#: modules/tip.c:126
++#, c-format
++msgid "% Filled"
++msgstr "% FCheio"
++
++#: modules/university.c:75
++msgid "Tech Produced"
++msgstr "Tecnologia Produzida"
++
++#: modules/water.c:30
++msgid "Navigable"
++msgstr "Navegavel"
++
++#: modules/windmill.c:90
++msgid "Local Status"
++msgstr "Status Local"
++
++#: modules/windmill.c:93
++msgid "Prod."
++msgstr "Prod."
++
+Index: lincity-1.13.1/po/sv.po
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ lincity-1.13.1/po/sv.po	2012-02-04 20:16:44.722888075 +0200
+@@ -0,0 +1,1748 @@
++# SOME DESCRIPTIVE TITLE.
++# Copyright (C) YEAR I.J. Peters, G.C. Sharp and others
++# This file is distributed under the same license as the PACKAGE package.
++# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
++#
++msgid ""
++msgstr ""
++"Project-Id-Version: lincity 1.13.1-3\n"
++"Report-Msgid-Bugs-To: \n"
++"POT-Creation-Date: 2004-07-08 23:27-0600\n"
++"PO-Revision-Date: 2005-11-10 21:13+0100\n"
++"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
++"Language-Team: Swedish <sv@li.org>\n"
++"MIME-Version: 1.0\n"
++"Content-Type: text/plain; charset=iso-8859-1\n"
++"Content-Transfer-Encoding: 8bit\n"
++"X-Poedit-Language: swe\n"
++"X-Poedit-Country: swe\n"
++
++#: cliglobs.c:56
++msgid "Jan"
++msgstr "Jan"
++
++#: cliglobs.c:56
++msgid "Feb"
++msgstr "Feb"
++
++#: cliglobs.c:56
++msgid "Mar"
++msgstr "Mar"
++
++#: cliglobs.c:56
++msgid "Apr"
++msgstr "Apr"
++
++#: cliglobs.c:57
++msgid "May"
++msgstr "Maj"
++
++#: cliglobs.c:57
++msgid "Jun"
++msgstr "Jun"
++
++#: cliglobs.c:57
++msgid "Jul"
++msgstr "Jul"
++
++#: cliglobs.c:57
++msgid "Aug"
++msgstr "Aug"
++
++#: cliglobs.c:58
++msgid "Sep"
++msgstr "Sep"
++
++#: cliglobs.c:58
++msgid "Oct"
++msgstr "Okt"
++
++#: cliglobs.c:58
++msgid "Nov"
++msgstr "Nov"
++
++#: cliglobs.c:58
++msgid "Dec"
++msgstr "Dec"
++
++#: engine.c:145
++msgid "You can't build a tip here"
++msgstr "Du kan inte bygga en soptipp här"
++
++#: engine.c:146
++#: engine.c:177
++msgid "This area was once a landfill"
++msgstr "Denna yta var en gång en landfyllning"
++
++#: engine.c:147
++#: engine.c:178
++#: engine.c:185
++#: screen.c:2284
++#: screen.c:2288
++#: screen.c:2358
++#: screen.c:2362
++msgid "OK"
++msgstr "OK"
++
++#: engine.c:176
++#: engine.c:183
++msgid "You can't build a mine here"
++msgstr "Du kan inte bygga en gruva här."
++
++#: engine.c:184
++msgid "There is no ore left at this site"
++msgstr "Det finns ingen malm kvar på platsen"
++
++#: engine.c:670
++msgid "It's at a power line."
++msgstr "Det är en kraftledning."
++
++#: engine.c:672
++msgid "It's at a solar power station."
++msgstr "Det är ett solkraftverk."
++
++#: engine.c:674
++msgid "It's at a substation."
++msgstr "Det är en relästation."
++
++#: engine.c:676
++msgid "It's at a residential area."
++msgstr "Det är ett bostadsområde."
++
++#: engine.c:678
++msgid "It's at a farm."
++msgstr "Det är en bondgård."
++
++#: engine.c:680
++msgid "It's at a market."
++msgstr "Det är en marknad."
++
++#: engine.c:682
++msgid "It's at a track."
++msgstr "Det är ett spår."
++
++#: engine.c:684
++msgid "It's at a coal mine."
++msgstr "Det är en kolgruva."
++
++#: engine.c:686
++msgid "It's at a railway."
++msgstr "Det är en järnväg."
++
++#: engine.c:688
++msgid "It's at a coal power station."
++msgstr "Det är ett kolkraftverk."
++
++#: engine.c:690
++msgid "It's at a road."
++msgstr "Det är en väg."
++
++#: engine.c:692
++msgid "It's at light industry."
++msgstr "Det är en lätt industri."
++
++#: engine.c:694
++msgid "It's at a university."
++msgstr "Det är ett universitet."
++
++#: engine.c:696
++msgid "It's at a commune."
++msgstr "Det är ett kollektiv."
++
++#: engine.c:698
++msgid "It's at a tip."
++msgstr "Det är en soptipp."
++
++#: engine.c:700
++msgid "It's at a port."
++msgstr "Det är en hamn."
++
++#: engine.c:702
++msgid "It's at a steel works."
++msgstr "Det är ett stålverk."
++
++#: engine.c:704
++msgid "It's at a recycle centre."
++msgstr "Det är en återvinningsstation."
++
++#: engine.c:706
++msgid "It's at a health centre."
++msgstr "Det är ett sjukhus."
++
++#: engine.c:708
++msgid "It's at a rocket site."
++msgstr "Det är en raketavfyrningsramp."
++
++#: engine.c:710
++msgid "It's at a windmill."
++msgstr "Det är en väderkvarn."
++
++#: engine.c:712
++msgid "It's at a school."
++msgstr "Det är en skola."
++
++#: engine.c:714
++msgid "It's at a blacksmith."
++msgstr "Det är en smedja."
++
++#: engine.c:716
++msgid "It's at a mill."
++msgstr "Det är en spinneri."
++
++#: engine.c:718
++msgid "It's at a pottery."
++msgstr "Det är en keramikfabrik."
++
++#: engine.c:720
++msgid "It's at a fire station!!!."
++msgstr "Det är en brandstation!!!."
++
++#: engine.c:722
++msgid "It's at a cricket pitch!!!."
++msgstr "Det är en sportarena!!!."
++
++#: engine.c:724
++msgid "It's at a shanty town."
++msgstr "Det är en kåkstad."
++
++#: engine.c:726
++msgid "UNKNOWN!"
++msgstr "OKÄND!"
++
++#: fileutil.c:299
++#: fileutil.c:349
++msgid "Error. Can't find LINCITY_HOME"
++msgstr "Fel. Kan inte hitta LINCITY_HOME"
++
++#: fileutil.c:570
++msgid "Error verifying package. Can't find colour.pal."
++msgstr "Fel vid verifiering av paketet. Kan inte hitta filen colour.pal."
++
++#: fileutil.c:589
++#: fileutil.c:598
++#, c-format
++msgid "Couldn't create the save directory %s\n"
++msgstr "Kunde inte skapa mappen för sparade spel %s\n"
++
++#: fileutil.c:644
++#, c-format
++msgid "Out of memory: malloc failure\n"
++msgstr "Slut på minne: malloc misslyckades\n"
++
++#: geometry.c:536
++msgid "Menu"
++msgstr "Meny"
++
++#: geometry.c:561
++msgid "Help"
++msgstr "Hjälp"
++
++#: geometry.c:586
++msgid "Stats"
++msgstr "Statistik"
++
++#: lchelp.c:267
++msgid "Sorry, lincity cannot run without this directory.  Exiting."
++msgstr "Ledsen men lincity kan inte köras utan denna mappa. Avslutar."
++
++#: lchelp.c:363
++msgid "tbutton 4 387 return-1 BACK"
++msgstr "tbutton 4 387 return-1 BACK"
++
++#: lchelp.c:367
++msgid "tbutton 370 387 return-2 OUT"
++msgstr "tbutton 370 387 return-2 OUT"
++
++#: lcsvga.c:243
++#: lcx11.c:453
++#, c-format
++msgid "An error has occurred.  The description is below...\n"
++msgstr "Ett fel har inträffat. Beskrivningen är nedanför...\n"
++
++#: lcsvga.c:247
++#: lcx11.c:457
++#, c-format
++msgid "Program aborting...\n"
++msgstr "Avbryter program...\n"
++
++#: lcwin32.c:57
++msgid "ERROR"
++msgstr "FEL"
++
++#: lcx11.c:310
++#, c-format
++msgid "Version %s\n"
++msgstr "Version %s\n"
++
++#: lcx11.c:395
++#, c-format
++msgid "xlincity, Version %s, (Copyright) IJ Peters - copying policy GNU GPL"
++msgstr "xlincity version %s, (Copyright) IJ Peters - kopieringspolicy GNU GPL"
++
++#: ldsvgui.c:204
++msgid "Transport overwrite"
++msgstr "Transport överskriven"
++
++#: ldsvgui.c:205
++msgid "Popup info to dialog boxes"
++msgstr "Popupinformation till dialogrutor"
++
++#: ldsvgui.c:206
++msgid "Time multiplexed stats windows"
++msgstr "Tidsmultiplexat statistikfönster"
++
++#: ldsvgui.c:208
++msgid "Confine X pointer"
++msgstr "Begränsa X-pekaren"
++
++#: ldsvgui.c:223
++msgid "OUT"
++msgstr "UT"
++
++#: ldsvgui.c:288
++msgid "Save a scene"
++msgstr "Spara ett scenario"
++
++#: ldsvgui.c:290
++msgid "Choose the number of the scene you want to save"
++msgstr "Välj numret på det scenario du vill spara"
++
++#: ldsvgui.c:292
++#: ldsvgui.c:384
++#: ldsvgui.c:654
++msgid "Press space to cancel."
++msgstr "Tryck mellanslag för att avbryta."
++
++#: ldsvgui.c:316
++msgid "Type comment for the saved scene"
++msgstr "Skriv in en kommentar för det sparade scenariot"
++
++#: ldsvgui.c:318
++msgid "The comment may be up to 40 characters"
++msgstr "Kommentaren kan vara upp till 40 tecken"
++
++#: ldsvgui.c:320
++msgid "and may contain spaces or % . - + ,"
++msgstr "och kan innehålla mellanslag eller % . - + ,"
++
++#: ldsvgui.c:329
++msgid "Saving city scene... please wait"
++msgstr "Sparar stadsscenariot... var god vänta"
++
++#: ldsvgui.c:374
++msgid "Load a file"
++msgstr "Ladda en fil"
++
++#: ldsvgui.c:376
++msgid "Choose the number of the scene you want"
++msgstr "Välj numret på scenariot du vill"
++
++#: ldsvgui.c:378
++msgid "Entries coloured red are either not there,"
++msgstr "Poster färgade röda är antingen inte där,"
++
++#: ldsvgui.c:380
++msgid "or they are from an earlier version, they"
++msgstr "eller de är från en tidigare version, de"
++
++#: ldsvgui.c:382
++msgid "might not load properly."
++msgstr "kanske inte laddas in korrekt."
++
++#: ldsvgui.c:408
++#: ldsvgui.c:679
++msgid "No scene."
++msgstr "Inget scenario."
++
++#: ldsvgui.c:409
++#: ldsvgui.c:680
++msgid "There is no save scene with this number."
++msgstr "Det finns inget sparad scenario med detta nummer."
++
++#: ldsvgui.c:410
++#: ldsvgui.c:681
++msgid "Do you want to"
++msgstr "Vill du"
++
++#: ldsvgui.c:411
++#: ldsvgui.c:682
++msgid "try again?"
++msgstr "försöka igen?"
++
++#: ldsvgui.c:422
++#: ldsvgui.c:693
++msgid "Loading Scene"
++msgstr "Laddar scenario"
++
++#: ldsvgui.c:423
++#: ldsvgui.c:694
++msgid "Do you want to load the scene"
++msgstr "Vill du ladda in scenariot"
++
++#: ldsvgui.c:425
++#: ldsvgui.c:696
++msgid "and forget the current game?"
++msgstr "och glömma det nuvarande spelet?"
++
++#: ldsvgui.c:428
++#: ldsvgui.c:699
++msgid "Loading scene...  please wait"
++msgstr "Laddar scenario... var god vänta"
++
++#: ldsvgui.c:469
++#, c-format
++msgid "Couldn't find the save directory %s\n"
++msgstr "Kunde inte hitta mappen med sparade spel %s\n"
++
++#: ldsvgui.c:650
++msgid "Choose network server"
++msgstr "Välj nätverksserver"
++
++#: ldsvgui.c:652
++msgid "Please enter the address and port of the server"
++msgstr "Ange addressen och porten på servern"
++
++#: ldsvguts.c:124
++#, c-format
++msgid "Save file <%s> - "
++msgstr "Spara fil <%s> - "
++
++#: ldsvguts.c:125
++msgid "Can't open save file!"
++msgstr "Kan inte öppna sparad fil!"
++
++#: ldsvguts.c:130
++msgid "Saving scene"
++msgstr "Sparar scenario"
++
++#: ldsvguts.c:357
++#, c-format
++msgid "Can't open <%s> (gzipped)"
++msgstr "Kan inte öppna <%s> (gzippad)"
++
++#: ldsvguts.c:375
++msgid "Loading scene"
++msgstr "Laddar scenario"
++
++#: lintypes.c:22
++msgid "Empty"
++msgstr "Tom"
++
++#: lintypes.c:34
++msgid "Power line"
++msgstr "Kraftledning"
++
++#: lintypes.c:46
++msgid "Solar PS"
++msgstr "Solkraftverk"
++
++#: lintypes.c:58
++#: modules/substation.c:98
++msgid "Substation"
++msgstr "Relästation"
++
++#: lintypes.c:70
++msgid "Residential LL"
++msgstr "Bostadsområde LN"
++
++#: lintypes.c:82
++msgid "Farm"
++msgstr "Bondgård"
++
++#: lintypes.c:94
++#: screen.c:2124
++msgid "Market"
++msgstr "Marknad"
++
++#: lintypes.c:106
++#: modules/track.c:44
++msgid "Track"
++msgstr "Spår"
++
++#: lintypes.c:118
++msgid "Coalmine"
++msgstr "Kolgruva"
++
++#: lintypes.c:130
++msgid "Railway"
++msgstr "Järnväg"
++
++#: lintypes.c:142
++msgid "Coal PS"
++msgstr "Kolkraftverk"
++
++#: lintypes.c:154
++#: modules/road.c:53
++msgid "Road"
++msgstr "Väg"
++
++#: lintypes.c:166
++msgid "Lt. Industry"
++msgstr "Lätt industri"
++
++#: lintypes.c:178
++#: modules/university.c:73
++msgid "University"
++msgstr "Universitet"
++
++#: lintypes.c:190
++#: modules/commune.c:151
++msgid "Commune"
++msgstr "Kollektiv"
++
++#: lintypes.c:202
++msgid "Ore mine"
++msgstr "Malmgruva"
++
++#: lintypes.c:214
++msgid "Rubbish tip"
++msgstr "Soptipp"
++
++#: lintypes.c:226
++#: screen.c:2126
++#: modules/port.c:210
++msgid "Port"
++msgstr "Hamn"
++
++#: lintypes.c:238
++msgid "Hv. Industry"
++msgstr "Tung industri"
++
++#: lintypes.c:250
++msgid "Park"
++msgstr "Park"
++
++#: lintypes.c:262
++#: mps.c:542
++msgid "Recycle"
++msgstr "Återvinning"
++
++#: lintypes.c:274
++#: modules/water.c:26
++msgid "Water"
++msgstr "Vatten"
++
++#: lintypes.c:286
++msgid "Health centre"
++msgstr "Sjukhus"
++
++#: lintypes.c:298
++msgid "Rocket pad"
++msgstr "Raketramp"
++
++#: lintypes.c:310
++#: mps.c:532
++#: modules/windmill.c:83
++msgid "Windmill"
++msgstr "Väderkvarn"
++
++#: lintypes.c:322
++#: modules/monument.c:63
++msgid "Monument"
++msgstr "Monument"
++
++#: lintypes.c:334
++#: modules/school.c:56
++msgid "School"
++msgstr "Skola"
++
++#: lintypes.c:346
++#: modules/blacksmith.c:103
++msgid "Blacksmith"
++msgstr "Smed"
++
++#: lintypes.c:358
++msgid "Mill"
++msgstr "Spinneri"
++
++#: lintypes.c:370
++#: modules/pottery.c:126
++msgid "Pottery"
++msgstr "Keramikfabrik"
++
++#: lintypes.c:382
++msgid "Fire sta'n"
++msgstr "Brandstation"
++
++#: lintypes.c:394
++msgid "Cricket pitch"
++msgstr "Sportarena"
++
++#: lintypes.c:407
++msgid "Burnt"
++msgstr "Bränd"
++
++#: lintypes.c:420
++msgid "Shanty town"
++msgstr "Kåkstad"
++
++#: lintypes.c:433
++#: mps.c:413
++#: modules/residence.c:297
++msgid "Fire"
++msgstr "Brand"
++
++#: lintypes.c:446
++msgid "Used"
++msgstr "Använd"
++
++#: lintypes.c:458
++msgid "Residential ML"
++msgstr "Bostadsområde MN"
++
++#: lintypes.c:470
++msgid "Residential HL"
++msgstr "Bostadsområde HN"
++
++#: lintypes.c:482
++#: lintypes.c:494
++#: lintypes.c:506
++msgid "Residential"
++msgstr "Bostadsområde"
++
++#: main.c:262
++msgid "Loading the game"
++msgstr "Laddar spelet"
++
++#: main.c:272
++msgid "Creating pixmaps"
++msgstr "Skapar bilder"
++
++#: main.c:675
++msgid "Quit The Game?"
++msgstr "Avsluta spelet?"
++
++#: main.c:676
++msgid "Do you really want to quit?"
++msgstr "Vill du verkligen avsluta?"
++
++#: main.c:677
++msgid "If you want to save the game select NO."
++msgstr "Om du vill spara spelet, välj NEJ."
++
++#. TRANSLATORS: Test mode is like using "cheat codes"
++#: main.c:713
++msgid "TEST"
++msgstr "TEST"
++
++#: main.c:713
++msgid "You have pressed a test key"
++msgstr "Du har tryckt en testknapp"
++
++#: main.c:714
++msgid "You will only see this message once"
++msgstr "Du kommer bara att se detta meddelande en gång"
++
++#: main.c:715
++msgid "Do you really want to play in test mode..."
++msgstr "Vill du verkligen spela i testläget..."
++
++#: main.c:740
++#, c-format
++msgid "Unable to open %s\n"
++msgstr "Kunde inte öppna %s\n"
++
++#: main.c:745
++#, c-format
++msgid "----- IN TEST MODE -------\n"
++msgstr "----- I TESTLÄGE -------\n"
++
++#: main.c:746
++#, c-format
++msgid "Game statistics from LinCity Version %s\n"
++msgstr "Spelstatistik från LinCity version %s\n"
++
++#: main.c:748
++#, c-format
++msgid "Initial loaded scene - %s\n"
++msgstr "Initialt laddat scenario -%s\n"
++
++#: main.c:750
++#, c-format
++msgid "Economy is sustainable\n"
++msgstr "Ekonomin är hållbar\n"
++
++#: main.c:751
++#, c-format
++msgid "Population  %d  of which  %d  are not housed.\n"
++msgstr "Befolkning  %d  av vilka  %d  är hemlösa.\n"
++
++#: main.c:754
++#, c-format
++msgid "Max population %d  Number evacuated %d Total births %d\n"
++msgstr "Max befolkning %d  Antal evakuerade %d  Nyfödda %d\n"
++
++#: main.c:757
++#, c-format
++msgid " Date  %s %04d   Money %8d   Tech-level %5.1f (%5.1f)\n"
++msgstr " Datum  %s %04d   Pengar %8d   Teknologinivå %5.1f (%5.1f)\n"
++
++#: main.c:762
++#, c-format
++msgid " Deaths by starvation %7d   History %8.3f\n"
++msgstr " Döda av svält %7d   Historik %8.3f\n"
++
++#: main.c:765
++#, c-format
++msgid "Deaths from pollution %7d   History %8.3f\n"
++msgstr "Döda av miljöförstöring %7d   Historik %8.3f\n"
++
++#: main.c:767
++#, c-format
++msgid "Years of unemployment %7d   History %8.3f\n"
++msgstr "År av arbetslöshet %7d   Historik %8.3f\n"
++
++#: main.c:769
++#, c-format
++msgid "Rockets launched %2d  Successful launches %2d\n"
++msgstr "Raketer avfyrade %2d  Lyckade avfyrningar %2d\n"
++
++#: main.c:772
++#, c-format
++msgid "    Residences %4d         Markets %4d            Farms %4d\n"
++msgstr "    Bostäder %4d         Marknader %4d            Bondgårdar %4d\n"
++
++#: main.c:781
++#, c-format
++msgid "        Tracks %4d           Roads %4d             Rail %4d\n"
++msgstr "        Spår %4d           Vägar %4d             Järnväg %4d\n"
++
++#: main.c:784
++#, c-format
++msgid "     Potteries %4d     Blacksmiths %4d            Mills %4d\n"
++msgstr "     Keramikfabriker %4d     Smedjor %4d            Spinnerier %4d\n"
++
++#: main.c:787
++#, c-format
++msgid "     Monuments %4d         Schools %4d     Universities %4d\n"
++msgstr "     Monument %4d         Skolor %4d     Universitet %4d\n"
++
++#: main.c:790
++#, c-format
++msgid " Fire stations %4d           Parks %4d     Cricket gnds %4d\n"
++msgstr " Brandstationer %4d           Parker %4d     Sportarenor %4d\n"
++
++#: main.c:793
++#, c-format
++msgid "    Coal mines %4d       Ore mines %4d         Communes %4d\n"
++msgstr "    Kolgruvor %4d       Malmgruvor %4d         Kollektiv %4d\n"
++
++#: main.c:796
++#, c-format
++msgid "     Windmills %4d     Coal powers %4d     Solar powers %4d\n"
++msgstr "     Väderkvarnar %4d     Kolkraft %4d     Solkraft %4d\n"
++
++#: main.c:800
++#, c-format
++msgid "   Substations %4d     Power lines %4d            Ports %4d\n"
++msgstr "   Relästationer %4d     Kraftledningar %4d            Hamnar %4d\n"
++
++#: main.c:803
++#, c-format
++msgid "    Light inds %4d      Heavy inds %4d        Recyclers %4d\n"
++msgstr "    Industri %4d      Tung industri %4d        Återvinning %4d\n"
++
++#: main.c:806
++#, c-format
++msgid "Health centres %4d            Tips %4d         Shanties %4d\n"
++msgstr "Sjukhus %4d            Soptippar %4d         Kåkstäder %4d\n"
++
++#: module_buttons.c:481
++#, c-format
++msgid "Bulldoze - cost varies"
++msgstr "Rivning - kostnad varierar"
++
++#: module_buttons.c:483
++#, c-format
++msgid "%s %s  Bulldoze %s"
++msgstr "%s %s  Riv %s"
++
++#. TRANSLATORS: The part about the cup of tea is one of Ian's
++#. jokes, but the part about ports needing to be connected
++#. to rivers is true.
++#: mouse.c:587
++#: mouse.c:766
++#: mouse.c:774
++#: mouse.c:782
++msgid "WARNING"
++msgstr "VARNING"
++
++#: mouse.c:588
++msgid "Ports need to be"
++msgstr "Hamnar behöver vara"
++
++#: mouse.c:589
++msgid "connected to rivers!"
++msgstr "anslutna till floder!"
++
++#: mouse.c:590
++msgid "Want to make a cup of tea?"
++msgstr "Vill du göra dig en kopp te?"
++
++#: mouse.c:591
++msgid "TEA BREAK"
++msgstr "TEPAUS"
++
++#: mouse.c:592
++msgid "Boil->pour->wait->stir"
++msgstr "Koka->häll upp->vänta->rör om"
++
++#: mouse.c:593
++msgid "stir->pour->stir->wait->drink...ahhh"
++msgstr "rör om->häll upp->rör om->vänta->drick...ahhh"
++
++#: mouse.c:594
++msgid "Have you finished yet?"
++msgstr "Är du klar nu?"
++
++#: mouse.c:767
++msgid "Bulldozing a monument costs"
++msgstr "Riva ett monument kostar"
++
++#: mouse.c:768
++msgid "a lot of money."
++msgstr "en hel del pengar."
++
++#: mouse.c:769
++#: mouse.c:777
++#: mouse.c:785
++msgid "Want to bulldoze?"
++msgstr "Vill du riva?"
++
++#: mouse.c:775
++msgid "Bulldozing a section of river"
++msgstr "Riva en flodsektion"
++
++#: mouse.c:776
++msgid "costs a lot of money."
++msgstr "kostar en hel del pengar."
++
++#: mouse.c:783
++msgid "Bulldozing a shanty town costs a"
++msgstr "Rivning av en kåkstad kostar en"
++
++#: mouse.c:784
++msgid "lot of money and may cause a fire."
++msgstr "hel del pengar och kan orsaka en brand."
++
++#. TRANSLATORS: Don't translate the leading "text"
++#: mouse.c:984
++#, c-format
++msgid "text -1 20 Choose the type of residence you want\n"
++msgstr "text -1 20 Välj den typ av bostad du vill ha\n"
++
++#: mouse.c:988
++#, c-format
++msgid "text -1 45 (LB=Low Birthrate HB=High Birthrate)\n"
++msgstr "text -1 45 (LF=Låg födselsgrad HF=Hög födselsgrad)\n"
++
++#: mouse.c:990
++#, c-format
++msgid "text -1 55 (LD=Low Deathrate HD=High Deathrate)\n"
++msgstr "text -1 55 (LD=Låg dödsgrad HD=Hög dödsgrad)\n"
++
++#: mouse.c:992
++#, c-format
++msgid "text -1 85 Low Tech\n"
++msgstr "text -1 85 Låg teknologi\n"
++
++#: mouse.c:995
++#, c-format
++msgid "text 68 106 Cost %4d\n"
++msgstr "text 68 106 Kostnad %4d\n"
++
++#. TRANSLATORS: Only translate "pop" <<for population>>
++#: mouse.c:999
++#, c-format
++msgid "tbutton 82 180 return1 pop 50\n"
++msgstr "tbutton 82 180 return1 pop 50\n"
++
++#. TRANSLATORS: Only translate LB, HD (low birth, high death)
++#: mouse.c:1001
++#, c-format
++msgid "text 89 195 LB HD\n"
++msgstr "text 89 195 LF HD\n"
++
++#: mouse.c:1004
++#, c-format
++msgid "text 155 106 Cost %4d\n"
++msgstr "text 155 106 Kostnad %4d\n"
++
++#: mouse.c:1007
++#, c-format
++msgid "tbutton 164 180 return2 pop 100\n"
++msgstr "tbutton 164 180 return2 pop 100\n"
++
++#: mouse.c:1008
++#, c-format
++msgid "text 175 195 HB LD\n"
++msgstr "text 175 195 HF LD\n"
++
++#: mouse.c:1011
++#, c-format
++msgid "text 238 106 Cost %4d\n"
++msgstr "text 238 106 Kostnad %4d\n"
++
++#: mouse.c:1014
++#, c-format
++msgid "tbutton 250 180 return3 pop 200\n"
++msgstr "tbutton 250 180 return3 pop 200\n"
++
++#: mouse.c:1015
++#, c-format
++msgid "text 261 195 HB HD\n"
++msgstr "text 261 195 HF HD\n"
++
++#: mouse.c:1017
++#, c-format
++msgid "text -1 215 Click on one to select\n"
++msgstr "text -1 215 Klicka på en för att välja\n"
++
++#: mouse.c:1021
++#, c-format
++msgid "text -1 255 High Tech\n"
++msgstr "text -1 255 Hög teknologi\n"
++
++#: mouse.c:1024
++#, c-format
++msgid "text 68 276 Cost %4d\n"
++msgstr "text 68 276 Kostnad %4d\n"
++
++#: mouse.c:1027
++#, c-format
++msgid "tbutton 78 350 return4 pop 100\n"
++msgstr "tbutton 78 350 return4 pop 100\n"
++
++#: mouse.c:1028
++#, c-format
++msgid "text 89 365 LB HD\n"
++msgstr "text 89 365 LF HD\n"
++
++#: mouse.c:1031
++#, c-format
++msgid "text 155 276 Cost %4d\n"
++msgstr "text 155 276 Kostnad %4d\n"
++
++#: mouse.c:1034
++#, c-format
++msgid "tbutton 164 350 return5 pop 200\n"
++msgstr "tbutton 164 350 return5 pop 200\n"
++
++#: mouse.c:1035
++#, c-format
++msgid "text 175 365 HB LD\n"
++msgstr "text 175 365 HF LD\n"
++
++#: mouse.c:1038
++#, c-format
++msgid "text 238 276 Cost %4d\n"
++msgstr "text 238 276 Cost %4d\n"
++
++#: mouse.c:1041
++#, c-format
++msgid "tbutton 250 350 return6 pop 400\n"
++msgstr "tbutton 250 350 return6 pop 400\n"
++
++#: mouse.c:1042
++#, c-format
++msgid "text 261 365 HB HD\n"
++msgstr "text 261 365 HF HD\n"
++
++#: mouse.c:1270
++#, c-format
++msgid "Can't build %s over that!"
++msgstr "Kan inte bygga %s över den!"
++
++#: mouse.c:1273
++#, c-format
++msgid "%d sections of %s will cost %3d to build"
++msgstr "%d sektioner av %s kommer att kosta %3d att bygga"
++
++#: mps.c:411
++msgid "Coverage"
++msgstr "Täckning"
++
++#: mps.c:412
++#: mps.c:415
++#: mps.c:418
++#: screen.c:2226
++#: modules/commune.c:156
++#: modules/commune.c:158
++#: modules/commune.c:160
++#: modules/commune.c:162
++#: modules/water.c:29
++msgid "Yes"
++msgstr "Ja"
++
++#: mps.c:412
++#: mps.c:415
++#: mps.c:418
++#: screen.c:2227
++#: modules/commune.c:156
++#: modules/commune.c:158
++#: modules/commune.c:160
++#: modules/commune.c:162
++#: modules/water.c:29
++msgid "No"
++msgstr "Nej"
++
++#: mps.c:416
++msgid "Health"
++msgstr "Hälsa"
++
++#: mps.c:419
++#: mps.c:540
++#: modules/residence.c:300
++msgid "Cricket"
++msgstr "Cricket"
++
++#: mps.c:421
++#: modules/residence.c:302
++msgid "Pollution"
++msgstr "Förorening"
++
++#: mps.c:424
++msgid "clear"
++msgstr "rent"
++
++#: mps.c:426
++#: modules/residence.c:304
++msgid "good"
++msgstr "bra"
++
++#: mps.c:428
++msgid "fair"
++msgstr "ok"
++
++#: mps.c:430
++msgid "smelly"
++msgstr "stinkigt"
++
++#: mps.c:432
++msgid "smokey"
++msgstr "rökigt"
++
++#: mps.c:434
++msgid "smoggy"
++msgstr "smoggigt"
++
++#: mps.c:436
++msgid "bad"
++msgstr "dålig"
++
++#: mps.c:438
++msgid "very bad"
++msgstr "mycket dålig"
++
++#: mps.c:440
++msgid "death!"
++msgstr "död!"
++
++#: mps.c:445
++msgid "Bulldoze Cost"
++msgstr "Rivningskostnad"
++
++#: mps.c:448
++msgid "N/A"
++msgstr "N/A"
++
++#: mps.c:464
++msgid "Tax Income"
++msgstr "Skattad inkomst"
++
++#: mps.c:468
++msgid "Income"
++msgstr "Inkomst"
++
++#: mps.c:472
++#: modules/blacksmith.c:111
++#: modules/coal_power.c:97
++#: modules/coal_power.c:111
++#: modules/commune.c:157
++#: modules/heavy_industry.c:335
++#: modules/heavy_industry.c:350
++#: modules/mill.c:119
++#: modules/port.c:219
++#: modules/pottery.c:137
++#: modules/rail.c:63
++#: modules/road.c:60
++#: modules/track.c:51
++msgid "Coal"
++msgstr "Kol"
++
++#: mps.c:476
++#: modules/blacksmith.c:109
++#: modules/cricket.c:112
++#: modules/firestation.c:131
++#: modules/health_centre.c:78
++#: modules/mill.c:115
++#: modules/port.c:227
++#: modules/pottery.c:133
++#: modules/rail.c:65
++#: modules/road.c:62
++#: modules/rocket_pad.c:178
++#: modules/school.c:64
++#: modules/track.c:53
++#: modules/university.c:83
++msgid "Goods"
++msgstr "Varor"
++
++#: mps.c:480
++msgid "Export"
++msgstr "Export"
++
++#: mps.c:484
++msgid "Expenses"
++msgstr "Utgifter"
++
++#: mps.c:488
++msgid "Unemp."
++msgstr "Arbetslö"
++
++#: mps.c:492
++msgid "Transport"
++msgstr "Transporter"
++
++#: mps.c:496
++msgid "Imports"
++msgstr "Importer"
++
++#: mps.c:500
++msgid "Others"
++msgstr "Övrigt"
++
++#: mps.c:505
++msgid "Net"
++msgstr "Netto"
++
++#: mps.c:515
++msgid "Other Costs"
++msgstr "Andra kostnader"
++
++#: mps.c:520
++msgid "For year"
++msgstr "För år"
++
++#: mps.c:524
++msgid "Interest"
++msgstr "Ränta"
++
++#: mps.c:526
++msgid "Schools"
++msgstr "Skolor"
++
++#: mps.c:528
++msgid "Univers."
++msgstr "Univers."
++
++#: mps.c:530
++msgid "Deaths"
++msgstr "Dödsfall"
++
++#: mps.c:534
++msgid "Hospital"
++msgstr "Sjukhus"
++
++#: mps.c:536
++msgid "Rockets"
++msgstr "Raketer"
++
++#: mps.c:538
++msgid "Fire Stn"
++msgstr "Brandst"
++
++#: mps.c:552
++msgid "Population"
++msgstr "Invånare"
++
++#: mps.c:554
++#: modules/port.c:235
++msgid "Total"
++msgstr "Totalt"
++
++#: mps.c:555
++msgid "Housed"
++msgstr "Bebodda"
++
++#: mps.c:556
++msgid "Homeless"
++msgstr "Hemlösa"
++
++#: mps.c:557
++msgid "Shanties"
++msgstr "Kåkstäder"
++
++#: mps.c:558
++msgid "Unn Dths"
++msgstr "Onorm död"
++
++#: mps.c:559
++#: screen.c:1238
++msgid "Unemployment"
++msgstr "Arbetslösa"
++
++#: mps.c:560
++msgid "Claims"
++msgstr "Kräver"
++
++#: mps.c:561
++#: mps.c:566
++msgid "Rate"
++msgstr "Grad"
++
++#: mps.c:563
++msgid "Starvation"
++msgstr "Svält"
++
++#: mps.c:564
++msgid "Cases"
++msgstr "Fall"
++
++#: mps.c:577
++msgid "PEOPLE"
++msgstr "FOLK"
++
++#: mps.c:578
++msgid "Pop"
++msgstr "Bef"
++
++#: mps.c:579
++msgid "Unnat death"
++msgstr "Onat döda"
++
++#: screen.c:861
++msgid "Coal survey"
++msgstr "Kolsökning"
++
++#: screen.c:862
++msgid "This will cost you 1 million"
++msgstr "Detta kommer att kosta dig 1 miljon"
++
++#: screen.c:863
++msgid "After that it's is free to call again"
++msgstr "Efter det är det fritt att ringa igen"
++
++#: screen.c:864
++msgid "Do coal survey?"
++msgstr "Gör sökning efter kol?"
++
++#: screen.c:1043
++msgid "Land Use    "
++msgstr "Land använt"
++
++#: screen.c:1098
++msgid "Pollution   "
++msgstr "Miljöförstöring"
++
++#: screen.c:1130
++msgid "Fire cover  "
++msgstr "Brandskydd  "
++
++#: screen.c:1166
++msgid "Crickt cover"
++msgstr "Sporttäckning"
++
++#: screen.c:1202
++msgid "Health cover"
++msgstr "Sjukhustäckning"
++
++#: screen.c:1267
++msgid "Starvation  "
++msgstr "Svält"
++
++#: screen.c:1297
++msgid "Coal Reserve"
++msgstr "Kolreserv"
++
++#: screen.c:1315
++msgid "Click here"
++msgstr "Klicka här"
++
++#: screen.c:1316
++msgid "   to do  "
++msgstr "  för att  "
++
++#: screen.c:1317
++msgid "coal survey"
++msgstr "kolsökning"
++
++#: screen.c:1358
++msgid "Power       "
++msgstr "Ström"
++
++#: screen.c:1360
++msgid "Power (none)"
++msgstr "Ström (ingen)"
++
++#: screen.c:1800
++#, c-format
++msgid "Money: "
++msgstr "Pengar: "
++
++#: screen.c:1822
++#, c-format
++msgid "Date %s %04d "
++msgstr "Datum %s %04d "
++
++#: screen.c:1854
++#, c-format
++msgid "%s%5.1f MINS/year  V %s"
++msgstr "%s%5.1f MINS/år  V %s"
++
++#: screen.c:1855
++#: screen.c:1859
++msgid "TEST MODE"
++msgstr "TESTLÄGE"
++
++#: screen.c:1858
++#, c-format
++msgid "%s%5.1f secs/year  V %s "
++msgstr "%s%5.1f sek/år  V %s "
++
++#: screen.c:2133
++msgid "Buy"
++msgstr "Köp"
++
++#: screen.c:2134
++msgid "Sell"
++msgstr "Sälj"
++
++#: screen.c:2136
++msgid "JOBS"
++msgstr "JOBB"
++
++#: screen.c:2138
++msgid "FOOD"
++msgstr "MAT"
++
++#: screen.c:2139
++msgid "COAL"
++msgstr "KOL"
++
++#: screen.c:2140
++msgid "ORE"
++msgstr "MAL"
++
++#: screen.c:2141
++msgid "GOODS"
++msgstr "VAROR"
++
++#: screen.c:2142
++msgid "STEEL"
++msgstr "STÅL"
++
++#. TRANSLATORS:
++#. MIN=Mining, PRT=Import/export from port,
++#. MNY=Money, POP=Population, TEC=Technology,
++#. FIR=Fire coverage
++#.
++#: screen.c:2464
++msgid "MIN"
++msgstr "GRU"
++
++#: screen.c:2467
++msgid "PRT"
++msgstr "HAM"
++
++#: screen.c:2470
++msgid "MNY"
++msgstr "PEN"
++
++#: screen.c:2473
++msgid "POP"
++msgstr "BEF"
++
++#: screen.c:2476
++msgid "TEC"
++msgstr "TEK"
++
++#: screen.c:2479
++msgid "FIR"
++msgstr "BRA"
++
++#: screen.c:2592
++msgid "ROCKET LAUNCH"
++msgstr "RAKETUPPSKJUTNING"
++
++#: screen.c:2593
++msgid "You can launch the rocket now or wait until later."
++msgstr "Du kan avfyra raketen nu eller vänta tills senare."
++
++#: screen.c:2594
++msgid "If you wait, it costs you *only* money to keep the"
++msgstr "Om du väntar kommer det kosta dig *bara* pengar för att hålla den"
++
++#: screen.c:2595
++msgid "rocket ready.    Launch?"
++msgstr "raket klar.   Avfyra?"
++
++#: screen.c:2601
++msgid "Rocket ready to launch"
++msgstr "Raket klar för avfyrning"
++
++#: screen.c:2602
++msgid "You can launch it now or wait until later."
++msgstr "Du kan avfyra den nu eller vänta tills senare."
++
++#: screen.c:2603
++msgid "If you wait it will continue costing you money."
++msgstr "Om du väntar kommer den fortsätta kosta dig pengar."
++
++#: screen.c:2604
++msgid "Launch it later by clicking on the rocket area."
++msgstr "Avfyra den senare genom att klicka på avfyrningsrampen."
++
++#: modules/blacksmith.c:106
++#: modules/heavy_industry.c:352
++#: modules/light_industry.c:353
++#: modules/mill.c:112
++#: modules/pottery.c:128
++#: modules/recycle.c:180
++#: modules/school.c:67
++#: modules/university.c:85
++msgid "Capacity"
++msgstr "Kapacitet"
++
++#: modules/blacksmith.c:108
++#: modules/cricket.c:109
++#: modules/firestation.c:128
++#: modules/health_centre.c:75
++#: modules/mill.c:114
++#: modules/pottery.c:130
++#: modules/recycle.c:188
++#: modules/rocket_pad.c:175
++#: modules/school.c:61
++#: modules/university.c:80
++msgid "Inventory"
++msgstr "Lager"
++
++#: modules/coal_power.c:98
++#: modules/solar_power.c:53
++msgid "Power Station"
++msgstr "Kraftverk"
++
++#: modules/coal_power.c:102
++#: modules/solar_power.c:57
++msgid "Max Output"
++msgstr "Max produktion"
++
++#: modules/coal_power.c:107
++#: modules/solar_power.c:62
++msgid "Current Output"
++msgstr "Nuvarande produktion"
++
++#: modules/coal_power.c:113
++#: modules/cricket.c:110
++#: modules/firestation.c:129
++#: modules/health_centre.c:76
++#: modules/pottery.c:131
++#: modules/rail.c:61
++#: modules/road.c:58
++#: modules/rocket_pad.c:176
++#: modules/school.c:62
++#: modules/track.c:49
++#: modules/university.c:81
++msgid "Jobs"
++msgstr "Jobb"
++
++#: modules/coal_power.c:115
++#: modules/organic_farm.c:188
++#: modules/recycle.c:185
++#: modules/solar_power.c:66
++#: modules/windmill.c:87
++#: modules/windmill.c:98
++msgid "Tech"
++msgstr "Teknologi"
++
++#: modules/coal_power.c:117
++#: modules/power_line.c:60
++#: modules/solar_power.c:68
++#: modules/substation.c:118
++#: modules/windmill.c:114
++msgid "Grid ID"
++msgstr "Nät ID"
++
++#: modules/coalmine.c:176
++msgid "Coal Mine"
++msgstr "Kolgruva"
++
++#: modules/coalmine.c:179
++#: modules/oremine.c:195
++msgid "Stock"
++msgstr "Lager"
++
++#: modules/coalmine.c:183
++#: modules/coalmine.c:185
++#: modules/oremine.c:199
++msgid "Reserve"
++msgstr "Reserv"
++
++#: modules/coalmine.c:185
++msgid "EMPTY"
++msgstr "TOM"
++
++#: modules/commune.c:154
++msgid "Activity"
++msgstr "Aktivitet"
++
++#: modules/commune.c:159
++#: modules/heavy_industry.c:348
++#: modules/light_industry.c:349
++#: modules/port.c:223
++#: modules/pottery.c:135
++#: modules/rail.c:67
++#: modules/recycle.c:189
++#: modules/road.c:64
++#: modules/track.c:55
++msgid "Ore"
++msgstr "Malm"
++
++#: modules/commune.c:161
++#: modules/light_industry.c:351
++#: modules/port.c:231
++#: modules/rail.c:69
++#: modules/road.c:66
++#: modules/rocket_pad.c:180
++#: modules/track.c:57
++msgid "Steel"
++msgstr "Stål"
++
++#: modules/commune.c:163
++#: modules/rail.c:71
++#: modules/recycle.c:191
++#: modules/road.c:68
++#: modules/track.c:59
++msgid "Waste"
++msgstr "Skräp"
++
++#: modules/cricket.c:107
++msgid "Cricket Pitch"
++msgstr "Sportarena"
++
++#: modules/firestation.c:126
++msgid "Fire Station"
++msgstr "Brandstation"
++
++#: modules/health_centre.c:73
++msgid "Health Centre"
++msgstr "Sjukhus"
++
++#: modules/heavy_industry.c:329
++msgid "Heavy"
++msgstr "Tung"
++
++#: modules/heavy_industry.c:330
++#: modules/light_industry.c:338
++msgid "Industry"
++msgstr "Industri"
++
++#: modules/heavy_industry.c:337
++msgid "Grid"
++msgstr "Rutnät"
++
++#: modules/heavy_industry.c:340
++#: modules/light_industry.c:342
++#: modules/recycle.c:182
++#: modules/residence.c:284
++#: modules/residence.c:287
++#: modules/residence.c:290
++#: modules/residence.c:293
++#: modules/residence.c:296
++#: modules/residence.c:299
++msgid "NO"
++msgstr "NEJ"
++
++#: modules/heavy_industry.c:343
++#: modules/light_industry.c:343
++#: modules/organic_farm.c:186
++#: modules/recycle.c:183
++#: modules/residence.c:285
++msgid "Power"
++msgstr "Kraft"
++
++#: modules/heavy_industry.c:345
++#: modules/light_industry.c:345
++msgid "Output"
++msgstr "Produktion"
++
++#: modules/heavy_industry.c:346
++#: modules/light_industry.c:347
++msgid "Store"
++msgstr "Lagra"
++
++#: modules/light_industry.c:337
++msgid "Light"
++msgstr "Lätt"
++
++#: modules/light_industry.c:342
++#: modules/organic_farm.c:182
++#: modules/recycle.c:182
++#: modules/residence.c:284
++#: modules/residence.c:287
++#: modules/residence.c:290
++#: modules/residence.c:293
++#: modules/residence.c:296
++#: modules/residence.c:299
++msgid "YES"
++msgstr "JA"
++
++#: modules/mill.c:110
++msgid "Textile Mill"
++msgstr "Textilfabrik"
++
++#: modules/mill.c:117
++#: modules/port.c:215
++#: modules/rail.c:59
++#: modules/road.c:56
++#: modules/track.c:47
++msgid "Food"
++msgstr "Mat"
++
++#: modules/monument.c:69
++msgid "Wisdom Bestowed"
++msgstr "Visdom består"
++
++#: modules/monument.c:73
++#, c-format
++msgid "% Complete"
++msgstr ""
++
++#: modules/oremine.c:192
++msgid "Ore Mine"
++msgstr "Malmgruva"
++
++#: modules/organic_farm.c:178
++#, c-format
++msgid "Organic Farm"
++msgstr "Organisk bondgård"
++
++#: modules/organic_farm.c:184
++msgid "NO "
++msgstr "NEJ "
++
++#: modules/organic_farm.c:191
++msgid "Prod"
++msgstr "Prod"
++
++#: modules/power_line.c:57
++msgid "Power Line"
++msgstr "Kraftledning"
++
++#: modules/rail.c:56
++msgid "Rail"
++msgstr "Järnväg"
++
++#: modules/recycle.c:176
++msgid "Recycling"
++msgstr "Återvinning"
++
++#: modules/recycle.c:177
++msgid "Center"
++msgstr "Centrum"
++
++#: modules/residence.c:278
++msgid "Residence"
++msgstr "Bostad"
++
++#: modules/residence.c:282
++msgid "People"
++msgstr "Folk"
++
++#: modules/residence.c:288
++msgid "Fed"
++msgstr "Matade"
++
++#: modules/residence.c:291
++msgid "Employed"
++msgstr "Anställda"
++
++#: modules/residence.c:294
++msgid "Health Cvr"
++msgstr "Sjukhustäck"
++
++#: modules/residence.c:304
++msgid "poor"
++msgstr "fattig"
++
++#: modules/residence.c:305
++msgid "Job"
++msgstr "Jobb"
++
++#: modules/rocket_pad.c:169
++msgid "Rocket Pad"
++msgstr "Raketavfyrningsramp"
++
++#: modules/rocket_pad.c:172
++msgid "Completion"
++msgstr "Färdig"
++
++#: modules/school.c:58
++msgid "Lessons Learned"
++msgstr "Läxor lärda"
++
++#: modules/solar_power.c:52
++msgid "Solar"
++msgstr "Sol"
++
++#: modules/substation.c:102
++msgid "Local Demand"
++msgstr "Lokala krav"
++
++#: modules/substation.c:106
++#: modules/windmill.c:102
++msgid "Grid Status"
++msgstr "Nätstatus"
++
++#: modules/substation.c:109
++#: modules/windmill.c:105
++msgid "T. Cap."
++msgstr "T. Cap."
++
++#: modules/substation.c:112
++#: modules/windmill.c:108
++msgid "A. Cap."
++msgstr "A. Cap."
++
++#: modules/substation.c:115
++#: modules/windmill.c:96
++#: modules/windmill.c:111
++msgid "Demand"
++msgstr "Krav"
++
++#: modules/tip.c:118
++msgid "Landfill"
++msgstr "Landfyllning"
++
++#: modules/tip.c:121
++msgid "Last Month"
++msgstr "Förra månaden"
++
++#: modules/tip.c:122
++msgid "Tons"
++msgstr "Ton"
++
++#: modules/tip.c:123
++msgid "Percent"
++msgstr "Procent"
++
++#: modules/tip.c:126
++#, c-format
++msgid "% Filled"
++msgstr "% fylld"
++
++#: modules/university.c:75
++msgid "Tech Produced"
++msgstr "Teknologi producerad"
++
++#: modules/water.c:30
++msgid "Navigable"
++msgstr "Navigerbar"
++
++#: modules/windmill.c:90
++msgid "Local Status"
++msgstr "Lokal status"
++
++#: modules/windmill.c:93
++msgid "Prod."
++msgstr "Prod."
++
+Index: lincity-1.13.1/po/LINGUAS
+===================================================================
+--- lincity-1.13.1.orig/po/LINGUAS	2012-02-04 11:58:58.211417290 +0200
++++ lincity-1.13.1/po/LINGUAS	2012-02-04 20:17:22.130887412 +0200
+@@ -1,2 +1,2 @@
+ # Set of available languages.
+-ca it
++ca it sv pt_BR
