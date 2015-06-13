@@ -237,6 +237,13 @@ cs_mouse_handler (int enc_button, int dx, int dy)
 	{
 	    mt_draw(cs_mouse_x, cs_mouse_y, MT_CONTINUE);
 	}
+
+	if (mouse_in_rect(&scr.mini_map,x,y) && buttons[LC_MOUSE_LEFTBUTTON-1].pressed) {
+
+	adjust_main_origin ((x - scr.mini_map.x) - scr.main_win.w / 32, 
+	(y - scr.mini_map.y) - scr.main_win.h / 32, 1);
+
+	}
     }
     cs_mouse_button = button;
 }
