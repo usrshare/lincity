@@ -1,3 +1,17 @@
+1.14
+***
+
+Major features
+- Switched build system from automake to cmake.
+- Switched libSVGA graphics library to SDL 1.2.
+
+Minor enhancements
+- Removed the annoying help screen that appears every time a user clicks on an
+  item for the first time. Now it only appears when right clicking.
+- Added the ability to scroll the map screen by left-dragging on the mini-map.
+
+Bug fixes
+- Fixed a segfailt that appeared in the beginning on 64-bit machines.
 
 1.12
 ****
