@@ -751,6 +751,9 @@ void HandleEvent (SDL_Event *event)
 
 				SDL_ResizeEvent ev = event->resize;
 
+				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
+				do_setcustompalette(NULL);	
+
 				resize_geometry (ev.w, ev.h);
 
 			}
