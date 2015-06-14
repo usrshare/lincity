@@ -316,10 +316,6 @@ draw_square_mouse (int x, int y, int size)	/* size is pixels */
     }
     omx = x;
     omy = y;
-#if defined (WIN32)
-    cs_square_mouse_visible = 1;
-    RefreshArea (omx - 2, omy - 2, omx + size + 1, omy + size + 1);
-#else
     Fgl_getbox (x - 2, y - 2, size + 4, 2, under_square_mouse_pointer_top);
     Fgl_getbox (x - 2, y, 2, size, under_square_mouse_pointer_left);
     Fgl_getbox (x + size, y, 2, size, under_square_mouse_pointer_right);
@@ -334,7 +330,6 @@ draw_square_mouse (int x, int y, int size)	/* size is pixels */
     Fgl_line (x - 1, y, x - 1, y + size, blue (31));
     Fgl_line (x + size + 1, y - 1, x + size + 1, y + size + 1, yellow (31));
     Fgl_line (x + size, y, x + size, y + size, blue (31));
-#endif
 }
 
 void
@@ -343,10 +338,6 @@ hide_square_mouse (void)
     int size;
 
     size = (main_groups[selected_module_group].size) * 16;
-#if defined (WIN32)
-    cs_square_mouse_visible = 0;
-    RefreshArea (omx - 3, omy - 3, omx + size + 2, omy + size + 2);
-#else
     if (mouse_buffer_fresh) {
       Fgl_putbox (omx - 2, omy - 2, size + 4, 2, under_square_mouse_pointer_top);
       Fgl_putbox (omx - 2, omy, 2, size, under_square_mouse_pointer_left);
@@ -357,7 +348,6 @@ hide_square_mouse (void)
     } else {
       //      printf ("Mouse buffer stale in hide_mouse!  Not putting back!\n");
     }
-#endif
 }
 
 void
@@ -367,10 +357,6 @@ redraw_square_mouse (void)
 
     size = (main_groups[selected_module_group].size) * 16;
 
-#if defined (WIN32)
-    cs_square_mouse_visible = 1;
-    RefreshArea (omx - 2, omy - 2, omx + size + 1, omy + size + 1);
-#else
     Fgl_getbox (omx - 2, omy - 2, size + 4, 2, under_square_mouse_pointer_top);
     Fgl_getbox (omx - 2, omy, 2, size, under_square_mouse_pointer_left);
     Fgl_getbox (omx + size, omy, 2, size, under_square_mouse_pointer_right);
@@ -385,7 +371,6 @@ redraw_square_mouse (void)
     Fgl_line (omx - 1, omy, omx - 1, omy + size, blue (31));
     Fgl_line (omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
     Fgl_line (omx + size, omy, omx + size, omy + size, blue (31));
-#endif
 }
 
 void

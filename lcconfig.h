@@ -8,13 +8,6 @@
 
 #include <stdint.h>
 
-#if defined (HAVE_CONFIG_H)
-#include "config.h"
-#elif defined (WIN32)
-#include "confw32.h"
-#endif
-
-
 typedef int32_t Int32;
 
 typedef int16_t Int16;

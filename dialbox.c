@@ -249,9 +249,6 @@ dialog_box(int arg_color, int argc, ...)
       call_wait_event ();
       key = x_key_value;
       x_key_value = 0;
-#elif defined (WIN32)
-      HandleMouse ();
-      key = GetKeystroke ();
 #else
       call_wait_event ();
       key = lc_get_keystroke ();

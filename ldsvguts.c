@@ -27,17 +27,6 @@
 #endif
 #endif
 
-#if defined (WIN32)
-#include <winsock.h>
-#include <io.h>
-#include <direct.h>
-#include <process.h>
-#endif
-
-#ifdef __EMX__
-#define chown(x,y,z)
-#endif
-
 #if defined (HAVE_DIRENT_H)
 #include <dirent.h>
 #define NAMLEN(dirent) strlen((dirent)->d_name)
@@ -68,11 +57,6 @@
 #include "power.h"
 #include "pbar.h"
 #include "stats.h"
-
-#if defined (WIN32) && !defined (NDEBUG)
-#define START_FAST_SPEED 1
-#define SKIP_OPENING_SCENE 1
-#endif
 
 #define SI_BLACK 252
 #define SI_RED 253
@@ -115,11 +99,7 @@ void
 save_city_raw (char *cname)
 {
     int x, y, z, q, n, p;
-#if defined (WIN32)
-    FILE *ofile = fopen (cname, "wb");
-#else
     FILE *ofile = fopen (cname, "w");
-#endif
     if (ofile == NULL) {
 	printf (_("Save file <%s> - "), cname);
 	do_error (_("Can't open save file!"));
@@ -327,15 +307,11 @@ save_city (char *cname)
     sprintf (s3, "gzip -f %s", s2);
     sprintf (s4, "mv %s.gz %s", s2, s);
 
-#if defined (WIN32)
-    save_city_raw (s);
-#else
     save_city_raw (s2);
     if (system (s3) != 0)
 	do_error ("gzip failed while in save_city");
     if (system (s4) != 0)
 	do_error ("mv failed while in save_city");
-#endif
 
     free (s);
     free (s2);

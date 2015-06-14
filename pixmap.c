@@ -393,13 +393,11 @@ resize_pixmap (int new_width, int new_height)
                   For some reason, MSVC likes it in the header, while gcc 
 		  likes it in the file.  Still need to fix this in autoconf,
                   but for now this will do. */
-#if !defined (WIN32)
 inline int 
 pixmap_index (int x, int y)
 {
     return y*pixmap_width + x;
 }
-#endif
 
 int 
 pixmap_getpixel (int x, int y)

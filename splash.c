@@ -9,13 +9,6 @@
 #include <ctype.h>
 #include "lcstring.h"
 
-#if defined (WIN32)
-#include <winsock.h>
-#include <io.h>
-#include <direct.h>
-#include <process.h>
-#endif
-
 #include "common.h"
 #ifdef LC_X11
 #include <X11/cursorfont.h>
@@ -113,9 +106,6 @@ load_start_image (void)
   lc_setpalettecolor (SI_GREEN, 0, 240, 0);
   lc_setpalettecolor (SI_YELLOW, 240, 240, 0);
 #endif
-#if defined (WIN32)
-  UpdatePalette ();
-#endif
   for (y = 0; y < 480; y++)
     for (x = 0; x < 640; x++)
       {
@@ -140,9 +130,6 @@ load_start_image (void)
 
   fclose_read_gzipped (fp);
 
-#if defined (WIN32)
-  RefreshScreen ();
-#endif
   start_image_text ();
 }
 
@@ -209,7 +196,7 @@ si_scroll_text (void)
       Fgl_setfont (8, 8, start_font1);
       Fgl_setclippingwindow (120, 30, 520, 40);
       Fgl_setfontcolors (SI_BLACK, SI_RED);
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
       open_write (120 - l1c, 31, line1);
 #else
       Fgl_write (120 - l1c, 31, line1);
@@ -226,7 +213,7 @@ si_scroll_text (void)
       Fgl_setfont (8, 16, start_font2);
       Fgl_setclippingwindow (120, 55, 520, 73);
       Fgl_setfontcolors (SI_BLACK, SI_GREEN);
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
       open_write (120 - l2c, 57, line2);
 #else
       Fgl_write (120 - l2c, 57, line2);
@@ -243,26 +230,12 @@ si_scroll_text (void)
       Fgl_setfont (8, 16, start_font3);
       Fgl_setclippingwindow (120, 88, 520, 106);
       Fgl_setfontcolors (SI_BLACK, SI_YELLOW);
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
       open_write (120 - l3c, 90, line3);
 #else
       Fgl_write (120 - l3c, 90, line3);
 #endif
       l3c += 2;
-#if defined (WIN32)		/* Scroll a little faster for WIN32 */
-      if (pix_double)
-	{
-	  l1c += 10;
-	  l2c += 10;
-	  l3c += 10;
-	}
-      else
-	{
-	  l1c += 2;
-	  l2c += 4;
-	  l3c += 4;
-	}
-#endif
       while (real_time < t)
 	{
 	  lc_usleep(1000*(t-real_time));

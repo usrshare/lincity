@@ -13,24 +13,9 @@
 #include "dialbox.h"
 #include "mps.h"
 
-/* this is for OS/2 - RVI */
-#ifdef __EMX__
-#include <sys/select.h>
-#include <X11/Xlibint.h>      /* required for __XOS2RedirRoot */
-#define chown(x,y,z)
-/* #define OS2_DEFAULT_LIBDIR "/XFree86/lib/X11/lincity" */
-/* This was moved to fileutil.c */
-#endif
-
 #include <sys/types.h>
 #include <fcntl.h>
 
-#if defined (WIN32)
-#include <winsock.h>
-#include <io.h>
-#include <direct.h>
-#include <process.h>
-#endif
 
 #include <time.h>
 
@@ -59,11 +44,6 @@
 #include "module_buttons.h"
 #include "fileutil.h"
 
-#if defined (WIN32) && !defined (NDEBUG)
-#define START_FAST_SPEED 1
-//#define SKIP_OPENING_SCENE 1
-#endif
-
 #define SI_BLACK 252
 #define SI_RED 253
 #define SI_GREEN 254
@@ -85,18 +65,11 @@ int execute_timestep (void);
  * Private Global Variables
  * ---------------------------------------------------------------------- */
 #if defined (commentout)          /* Moved to fileutil.c */
-#if defined (WIN32)
-char LIBDIR[_MAX_PATH];
-#elif defined (__EMX__)
-#ifdef LIBDIR
-#undef LIBDIR   /* yes, I know I shouldn't ;-) */
-#endif
 /* GCS: Presumably I can do this, right? */
 #if defined (commentout)
 char LIBDIR[256];
 #endif
 char LIBDIR[LC_PATH_MAX];
-#endif
 #endif
 
 char *lc_save_dir;
@@ -111,13 +84,11 @@ int prof_countdown = PROFILE_COUNTDOWN;
 /* ---------------------------------------------------------------------- *
  * Public Functions
  * ---------------------------------------------------------------------- */
-#if !defined (WIN32)
 int
 main (int argc, char *argv[])
 {
     return lincity_main (argc, argv);
 }
-#endif
 
 void
 lincity_set_locale (void)
@@ -263,15 +234,11 @@ lincity_main (int argc, char *argv[])
 
     print_results ();
 
-#if defined (WIN32) || defined (LC_X11)
+#if defined (LC_X11)
     free_pixmap ();
 #endif
 
-#if defined (WIN32)
-    return 0;
-#else
     exit (0);
-#endif
 }
 
 void
@@ -318,9 +285,6 @@ client_main_loop (void)
 	call_event ();
 	key = x_key_value;
 	x_key_value = 0;
-#elif defined (WIN32)
-	call_event ();
-	key = GetKeystroke ();
 #else
 	call_event();
 	key = lc_get_keystroke ();
@@ -371,7 +335,7 @@ process_keystrokes (int key)
 	break;
 
 
-#if defined (WIN32) || defined (LC_X11)
+#if defined (LC_X11)
     case 1:
 	/* Scroll left */
 	if (x_key_shifted) {
@@ -595,9 +559,6 @@ execute_timestep (void)
     }			        /* this to redraw the screen */
 
     if (load_flag != 0) {
-#if defined (WIN32)
-	DisableWindowsMenuItems ();
-#endif
 	if (help_flag == 0)	/* block loading when in help */
 	    do_load_city ();
 	load_flag = 0;
@@ -605,9 +566,6 @@ execute_timestep (void)
     }			        /* this to redraw the screen */
 
     else if (save_flag != 0) {
-#if defined (WIN32)
-	DisableWindowsMenuItems ();
-#endif
 	if (help_flag == 0)
 	    do_save_city ();
 	save_flag = 0;
@@ -615,9 +573,6 @@ execute_timestep (void)
     }
 
     else if (quit_flag != 0) {
-#if defined (WIN32)
-	DisableWindowsMenuItems ();
-#endif
 	if (yn_dial_box (_("Quit The Game?")
 			 ,_("Do you really want to quit?")
 			 ,_("If you want to save the game select NO.")
@@ -641,7 +596,7 @@ execute_timestep (void)
 void
 do_error (char *s)
 {
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
     HandleError (s, FATAL);
 #else
     printf ("%s\n", s);
@@ -760,7 +715,6 @@ compile_results (void)
 void
 print_results (void)
 {
-#if !defined (WIN32)		/* GCS FIX: How should I do this? */
     char *s;
     if (compile_results () == 0)
 	return;
@@ -775,7 +729,6 @@ print_results (void)
     printf ("\n");
     system (s);
     printf ("\n");
-#endif
 }
 
 #if defined (commentout)

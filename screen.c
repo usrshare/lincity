@@ -95,7 +95,7 @@ draw_background (void)
     /* XXX: we don't need to draw the whole background! */
     /* GCS: but this routine is only called on a full refresh, so it's OK */
 
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
     /* Draw border region, but don't put into pixmap */
     draw_border ();
     /* Draw main area */
@@ -188,15 +188,8 @@ update_main_screen (int full_refresh)
 	    break;
 	}
     }
-#if defined (WIN32)
-    /* GCS -- I have a feeling this is wrong ... */
-    if (full_refresh) {
-	UpdateWindow (display.hWnd);
-    }
-#else
     if (mouse_type == MOUSE_TYPE_SQUARE)
 	redraw_mouse ();
-#endif
 }
 
 void
@@ -1117,9 +1110,6 @@ draw_mini_screen_pollution (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1155,9 +1145,6 @@ draw_mini_screen_fire_cover (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1191,9 +1178,6 @@ draw_mini_screen_cricket_cover (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1227,9 +1211,6 @@ draw_mini_screen_health_cover (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1256,9 +1237,6 @@ draw_mini_screen_ub40 (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1286,9 +1264,6 @@ draw_mini_screen_starve (void)
 	}
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1321,9 +1296,6 @@ draw_mini_screen_coal (void)
 	Fgl_write (mm->x + 4, mm->y + 44, _("coal survey"));
 	Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
     }
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 void
@@ -1364,9 +1336,6 @@ draw_mini_screen_power (void)
 	draw_ms_text (_("Power (none)"));
     }
     draw_mini_screen_cursor ();
-#if defined (WIN32)
-    RefreshArea (mm->x, mm->y, mm->x + x, mm->y + y);
-#endif
 }
 
 /* GCS -- This is obsolete, right?? */
@@ -1573,9 +1542,7 @@ draw_mini_screen_cursor (void)
 void 
 initialize_print_stats (void)
 {
-#if !defined (WIN32)
     hide_mouse ();
-#endif
     update_scoreboard.mps = 0;
     update_scoreboard.mini = 0;
     update_scoreboard.date = 0;
@@ -1611,9 +1578,7 @@ initialize_print_stats (void)
     Fgl_write (FINANCE_X, FINANCE_Y + 48, "Tot");
 #endif
 
-#if !defined (WIN32)
     redraw_mouse ();
-#endif
 }
 
 void
@@ -1652,9 +1617,7 @@ print_stats (void)
 	flag = 1;
     }
 
-#if !defined (WIN32)
     hide_mouse ();
-#endif
 
     if (total_time % NUMOF_DAYS_IN_MONTH == (NUMOF_DAYS_IN_MONTH - 1)) {
 	update_scoreboard.monthly = 1;
@@ -1769,13 +1732,9 @@ print_stats (void)
 	 * I need to workaround the fact that a dialog box might pop 
 	 * up, causing move_mouse() to nest hide_mouse() calls,
 	 * which means that the cursor will leave a trail.		*/
-#if !defined (WIN32)
         redraw_mouse ();
-#endif
 	update_avail_modules (1);
-#if !defined (WIN32)
         hide_mouse ();
-#endif
     }
 
     if (update_scoreboard.yearly_1) {
@@ -1787,11 +1746,7 @@ print_stats (void)
 	reset_status_message ();
     }
 
-#if defined (WIN32)
-    UpdateWindow (display.hWnd);
-#else
     redraw_mouse ();
-#endif
 }
 
 void
@@ -1826,9 +1781,6 @@ print_date (void)
     sprintf (s, _("Date %s %04d "), current_month(total_time),
 	     current_year(total_time));
     Fgl_write (b->x, b->y, s);
-#if defined (WIN32)
-    UpdateWindow (display.hWnd);
-#endif
 }
 
 void
@@ -1893,9 +1845,6 @@ status_message (char* m1, char* m2)
 {
     status_message_1(m1);
     status_message_2(m2);
-#if defined (WIN32)
-    UpdateWindow (display.hWnd);
-#endif
     update_scoreboard.message_area = real_time + 10000;
 }
 
@@ -1904,9 +1853,6 @@ reset_status_message (void)
 {
     status_message_1(0);
     status_message_2(0);
-#if defined (WIN32)
-    UpdateWindow (display.hWnd);
-#endif
     update_scoreboard.message_area = 0;
 }
 
@@ -1933,13 +1879,6 @@ do_monthgraph (int full_refresh)
     do_history_linegraph (monthgraph_style == MONTHGRAPH_STYLE_ECONOMY);
     do_sust_barchart (monthgraph_style == MONTHGRAPH_STYLE_SUSTAIN);
 
-#if defined (WIN32)
-    {
-	Rect* mg = &scr.monthgraph;
-	RefreshArea (mg->x, mg->y, mg->x + mg->w,
-		     mg->y + mg->h);
-    }
-#endif
 }
 
 /* Must be called after initialize_geometry */
@@ -2426,10 +2365,6 @@ prog_box (char *title, int percent)
 #endif
     if (percent < 100)
     {
-#if defined (WIN32) /* GCS FIX:  Do I need this ????? */
-	/* GCS: Fgl_putbox does a refresh; no need to refresh twice */
-	RefreshArea (PROGBOXX - 8, PROGBOXY - 8, PROGBOXW + 16, PROGBOXH + 16);
-#endif
 	return;
     }
 

@@ -120,7 +120,7 @@
    #define CS_PROFILE
 */
 
-#if defined (LC_X11) || defined (WIN32)
+#if defined (LC_X11)
 #define BORDERX 30
 #define BORDERY 30
 #endif
@@ -1440,27 +1440,6 @@ extern void init_pixmaps (void);
 extern void init_icon_pixmap (short);
 extern void update_pixmap (int, int, int, int, int, int, int, char *);
 #endif
-
-#elif defined (WIN32)
-/* ----- Win32 functions ----- */
-extern void gl_setpalettecolor (long, long, long, long);
-extern void Fgl_write (int, int, char *);
-extern void open_write (int, int, char *);
-extern void Fgl_getbox (int, int, int, int, void *);
-extern void Fgl_putbox (int, int, int, int, void *);
-extern void Fgl_fillbox (int, int, int, int, int);
-extern void Fgl_hline (int, int, int, int);
-extern void Fgl_line (int, int, int, int, int);
-extern void Fgl_setpixel (int, int, int);
-extern void Fgl_setfontcolors (int, int);
-extern void Fgl_setfont (int, int, void*);
-extern void Fgl_enableclipping (void);
-extern void Fgl_setclippingwindow (int, int, int, int);
-extern void Fgl_disableclipping (void);
-#define USE_PIXMAPS		/* Always */
-extern void init_pixmaps (void);
-extern void init_icon_pixmap (short);
-extern void update_pixmap (int, int, int, int, int, int, int, char *);
 
 #elif defined(LC_SDL)
 /* ----- SDL functions ----- */

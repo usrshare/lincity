@@ -10,12 +10,6 @@
 #include "lcstring.h"
 #include <sys/types.h>
 #include <fcntl.h>
-#if defined (WIN32)
-#include <winsock.h>
-#include <io.h>
-#include <direct.h>
-#include <process.h>
-#endif
 
 #include <ctype.h>
 #include "common.h"

@@ -11,16 +11,6 @@
 #include "lcstring.h"
 #include "ldsvgui.h"
 
-/* XXX: Where are SVGA specific includes? */
-
-/* this is for OS/2 - RVI */
-#ifdef __EMX__
-#include <sys/select.h>
-#include <X11/Xlibint.h>      /* required for __XOS2RedirRoot */
-#define chown(x,y,z)
-#define OS2_DEFAULT_LIBDIR "/XFree86/lib/X11/lincity"
-#endif
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -34,19 +24,6 @@
 #else
 #include <time.h>
 #endif
-#endif
-
-#if defined (WIN32)
-#include <winsock.h>
-#if defined (__BORLANDC__)
-#include <dir.h>
-#include <dirent.h>
-#include <dos.h>
-#endif
-#include <io.h>
-#include <direct.h>
-#include <process.h>
-#include <lcwin32.h>
 #endif
 
 #if defined (HAVE_DIRENT_H)
@@ -244,19 +221,11 @@ fclose_read_gzipped (FILE* fp)
 int
 directory_exists (char *dir)
 {
-#if defined (WIN32)
-    if (_chdir (dir) == -1) {
-	_chdir (LIBDIR);		/* go back... */
-	return 0;
-    }
-    _chdir (LIBDIR);		/* go back... */
-#else /* UNIX */
     DIR *dp;
     if ((dp = opendir (dir)) == NULL) {
 	return 0;
     }
     closedir (dp);
-#endif
     return 1;
 }
 
@@ -272,41 +241,6 @@ file_exists (char *filename)
     return 1;
 }
 
-#if defined (WIN32)
-void
-find_libdir (void)
-{
-    const char searchfile[] = "Colour.pal";
-    /* default_dir will be something like "C:\\LINCITY1.11" */
-    const char default_dir[] = "C:\\LINCITY" VERSION;
-//    const char default_dir[] = "D:\\LINCITY";	/* For GCS's use */
-
-    /* Check 1: environment variable */
-    _searchenv (searchfile, "LINCITY_HOME", LIBDIR);
-    if (*LIBDIR != '\0') {
-	int endofpath_offset = strlen (LIBDIR) - strlen (searchfile) - 1;
-	LIBDIR[endofpath_offset] = '\0';
-	return;
-    }
-
-    /* Check 2: default location */
-    if ((_access (default_dir, 0)) != -1) {
-	strcpy (LIBDIR, default_dir);
-	return;
-    }
-
-    /* Finally give up */
-    HandleError (_("Error. Can't find LINCITY_HOME"), FATAL);
-}
-
-#elif defined (__EMX__)
-void
-find_libdir (void)
-{
-    strcpy(LIBDIR, __XOS2RedirRoot(OS2_DEFAULT_LIBDIR));
-}
-
-#else /* Unix with configure */
 void
 find_libdir (void)
 {
@@ -348,7 +282,6 @@ find_libdir (void)
     /* Finally give up */
     HandleError (_("Error. Can't find LINCITY_HOME"), FATAL);
 }
-#endif
 
 
 /* GCS:  This function comes from dcgettext.c in the gettext package.      */
@@ -495,13 +428,7 @@ init_path_strings (void)
 
     find_libdir ();
 
-#if defined (WIN32)
-    homedir = LIBDIR;
-#elif defined (__EMX__)
     homedir = getenv ("HOME");
-#else
-    homedir = getenv ("HOME");
-#endif
 
     /* Various dirs and files */
     lc_save_dir_len = strlen (homedir) + strlen (LC_SAVE_DIR) + 1;
@@ -510,11 +437,7 @@ init_path_strings (void)
     sprintf (lc_save_dir, "%s%c%s", homedir, PATH_SLASH, LC_SAVE_DIR);
     sprintf (colour_pal_file, "%s%c%s", LIBDIR, PATH_SLASH, "colour.pal");
     sprintf (opening_path, "%s%c%s", LIBDIR, PATH_SLASH, "opening");
-#if defined (WIN32)
-    sprintf (opening_pic, "%s%c%s",opening_path,PATH_SLASH,"open.tga");
-#else
     sprintf (opening_pic, "%s%c%s",opening_path,PATH_SLASH,"open.tga.gz");
-#endif
     sprintf (graphic_path, "%s%c%s%c", LIBDIR, PATH_SLASH, "icons",
 	     PATH_SLASH);
     sprintf (lincityrc_file, "%s%c%s", homedir, PATH_SLASH, 
@@ -526,20 +449,6 @@ init_path_strings (void)
     /* Font stuff */
     sprintf (fontfile, "%s%c%s", opening_path, PATH_SLASH,
 	     "iso8859-1-8x8.raw");
-#if defined (WIN32)
-    /* GCS: Use windows font for extra speed */
-    strcpy (windowsfontfile, LIBDIR);
-#if defined (commentout)
-    if (!pix_double)
-	strcat (windowsfontfile, "\\opening\\iso8859-1-8x8.fnt");
-    else
-	strcat (windowsfontfile, "\\opening\\iso8859-1-9x15.fnt");
-#endif
-    if (!pix_double)
-	strcat (windowsfontfile, "\\opening\\winfont_8x8.fnt");
-    else
-	strcat (windowsfontfile, "\\opening\\winfont_16x16.fnt");
-#endif
 
     /* Temp file for results */
     lc_temp_filename = (char *) malloc (lc_save_dir_len + 16);
@@ -550,11 +459,6 @@ init_path_strings (void)
 
     /* Path for localization */
 #if defined (ENABLE_NLS)
-#if defined (WIN32)
-    sprintf (lc_textdomain_directory, "%s%c%s", LIBDIR, PATH_SLASH, "locale");
-#else
-    strcpy (lc_textdomain_directory, LOCALEDIR);
-#endif
     dm = bindtextdomain (PACKAGE, lc_textdomain_directory);
     debug_printf ("Bound textdomain directory is %s\n", dm);
     td = textdomain (PACKAGE);
@@ -575,21 +479,13 @@ verify_package (void)
 void
 make_savedir (void)
 {
-#if !defined (WIN32)
     DIR *dp;
-#endif
 
 #if defined (commentout)
     if (make_dir_ok_flag == 0)
 	return;
 #endif
 
-#if defined (WIN32)
-    if (_mkdir (lc_save_dir)) {
-	printf (_("Couldn't create the save directory %s\n"), lc_save_dir);
-	exit (-1);
-    }
-#else
     mkdir (lc_save_dir, 0755);
     chown (lc_save_dir, getuid (), getgid ());
     if ((dp = opendir (lc_save_dir)) == NULL)
@@ -599,7 +495,6 @@ make_savedir (void)
 	exit (1);
     }
     closedir (dp);
-#endif
 
 #if defined (commentout)
     make_dir_ok_flag = 0;

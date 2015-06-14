@@ -14,14 +14,6 @@
 #include "module_buttons.h"
 #include "fileutil.h"
 
-/* this is for OS/2 - RVI */
-#ifdef __EMX__
-#include <sys/select.h>
-#include <X11/Xlibint.h>      /* required for __XOS2RedirRoot */
-#define chown(x,y,z)
-#define OS2_DEFAULT_LIBDIR "/XFree86/lib/X11/lincity"
-#endif
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -35,18 +27,6 @@
 #else
 #include <time.h>
 #endif
-#endif
-
-#if defined (WIN32)
-#include <winsock.h>
-#if defined (__BORLANDC__)
-#include <dir.h>
-#include <dirent.h>
-#include <dos.h>
-#endif
-#include <io.h>
-#include <direct.h>
-#include <process.h>
 #endif
 
 #if defined (HAVE_DIRENT_H)
@@ -90,14 +70,6 @@ void input_network_port (char *s);
 /* ---------------------------------------------------------------------- *
  * Private Global Variables
  * ---------------------------------------------------------------------- */
-#if defined (WIN32)
-char LIBDIR[_MAX_PATH];
-#elif defined (__EMX__)
-#ifdef LIBDIR
-#undef LIBDIR   /* yes, I know I shouldn't ;-) */
-#endif
-char LIBDIR[256];
-#endif
 
 char *lc_save_dir;
 char save_names[10][42];
@@ -255,9 +227,7 @@ do_network_screen (void)
     Fgl_write (mw->x + 100, mw->y + 15, "Connect to network game");
     Fgl_write (mw->x + 100, mw->y + 25, "Select host and port");
 
-#if !defined (WIN32)
     redraw_mouse ();
-#endif
 
     strcpy (s, DEFAULT_SOCK_HOST);
     input_network_host (s);
@@ -303,9 +273,6 @@ do_save_city ()
     }
     while (c == 0);
     x_key_value = 0;
-#elif defined (WIN32)
-    while (0 == (c = GetKeystroke ()));	/* Wait for keystroke */
-    redraw_mouse ();
 #else
     c = lc_get_keystroke ();
     redraw_mouse ();
@@ -446,18 +413,8 @@ draw_save_dir (int bg_colour)
     Rect* mw = &scr.main_win;
     char *s, s2[200];
     int i, j, l;
-#if defined (WIN32)
-    char filespec[4];
-#if defined(_MSC_VER)
-    struct _finddata_t fileinfo;
-#elif defined (__BORLANDC__)
-    struct ffblk fileinfo;
-#endif
-    long fh;
-#else
     struct dirent *ep;
     DIR *dp;
-#endif
     if ((s = (char *) malloc (lc_save_dir_len + strlen (LC_SAVE_DIR) + 64)) == 0)
 	malloc_failure ();
     strcpy (s, lc_save_dir);
@@ -468,56 +425,24 @@ draw_save_dir (int bg_colour)
 	return;
     }
     /* GCS FIX:  Technically speaking, there is a race condition here. */
-#if defined (WIN32)
-    _chdir (s);
-#else
     dp = opendir (s);
-#endif
     for (i = 1; i < 10; i++)
     {
 	save_names[i][0] = 0;
-#if defined (WIN32)
-	sprintf (filespec, "%d_*", i);
-#if defined (_MSC_VER)
-	fh = _findfirst (filespec, &fileinfo);
-#elif defined (__BORLANDC__)
-	fh = findfirst (filespec, &fileinfo, FA_ARCH);
-#endif
-	if (fh != -1)
-	{
-#else
 	    while ((ep = readdir (dp)))	/* extra brackets to stop warning */
 
 	    {
 		if (*(ep->d_name) == (i + '0')
 		    && *((ep->d_name) + 1) == '_')
 		{
-#endif
 		    sprintf (s2, "%2d ", i);
-#if defined (WIN32)
-#if defined (_MSC_VER)
-		    strncpy (save_names[i], fileinfo.name, 40);
-#elif defined (__BORLANDC__)
-		    strncpy (save_names[i], fileinfo.ff_name, 40);
-#endif
-#else /* UNIX */
 		    strncpy (save_names[i], ep->d_name, 40);
-#endif
 		    if (strlen (save_names[i]) > 2)
 			strncat (s2, &(save_names[i][2]), 40);
 		    else
 			strcat (s2, "???");
-#if defined (WIN32)
-#if defined (_MSC_VER)
-		    _findclose (fh);
-#elif defined (__BORLANDC__)
-		    findclose(&fileinfo);
-#endif
-		}
-#else
 	    }
 	}
-#endif
 	if (strlen (save_names[i]) < 1)
 	    sprintf (s2, " %d .....", i);
 	else
@@ -532,15 +457,9 @@ draw_save_dir (int bg_colour)
 	else
 	    Fgl_setfontcolors (bg_colour, green (28));
 	Fgl_write (mw->x + 24, mw->y + 10 * (10 + i), s2);
-#if !defined (WIN32)
 	rewinddir (dp);
-#endif
     }
-#if defined (WIN32)
-    _chdir (LIBDIR);		/* go back... */
-#else
     closedir (dp);
-#endif
     Fgl_setfontcolors (bg_colour, TEXT_FG_COLOUR);
     free (s);
 }
@@ -566,8 +485,6 @@ edit_string (char* s, unsigned int maxlen, int xpos, int ypos)
 #ifdef LC_X11
 	call_event ();
 	while ((c = x_key_value) == 0)
-#elif defined (WIN32)
-	    while ((c = GetKeystroke ()) == 0)
 #else
 		while ((c = lc_get_keystroke()) == 0)
 #endif
