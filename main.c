@@ -220,6 +220,7 @@ lincity_main (int argc, char *argv[])
     unlock_window_size ();
 #endif
 
+    setcustompalette ();
     Fgl_setfont (8, 8, main_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
@@ -239,7 +240,6 @@ lincity_main (int argc, char *argv[])
 #elif defined (WIN32)
     RefreshScreen ();
 #endif
-    setcustompalette ();
     draw_background ();
     prog_box (_("Loading the game"), 1);
     init_types ();

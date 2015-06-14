@@ -94,4 +94,6 @@ void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 
 extern SDL_Surface* icon_surface[];
 
+extern SDL_Surface* font_surface;
+
 #endif /* __lcsdl_h__ */

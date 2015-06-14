@@ -23,6 +23,8 @@
 #include "mouse.h"
 #include "screen.h"
 
+SDL_Surface* font_surface = NULL;
+
 #ifndef M_PI
 #define M_PI            3.14159265358979323846
 #endif
@@ -219,8 +221,13 @@ initfont ()
 	void
 Fgl_setfontcolors (int bg, int fg)
 {
-	text_fg = fg;
-	text_bg = bg;
+	if (font_surface == 0) {printf("font_surface not created yet.\n"); return;}
+
+	SDL_Color textcolors[2];
+	textcolors[0] = display.pixcolour_gc[bg];
+	textcolors[1] = display.pixcolour_gc[fg];
+
+	SDL_SetPalette(font_surface,SDL_LOGPAL,textcolors,0,2);
 }
 
 	void
@@ -228,6 +235,26 @@ Fgl_setfont (int fw, int fh, void *fp)
 {
 	open_font = fp;
 	open_font_height = fh;
+
+	if (font_surface == 0) {printf("font_surface not created yet.\n"); return;}
+
+	int bpl = font_surface->pitch;
+
+	SDL_LockSurface(font_surface);
+
+	for (int y=0; y < 256 * 8; y++) {
+
+		uint8_t c = main_font[y];
+		for (int x=0; x < 8; x++) {
+			uint8_t* p = (uint8_t*)font_surface->pixels + (y * bpl + x);
+			*p = (uint8_t)((c & 0x80) ? 1 : 0);
+			c <<= 1;
+		}
+	}
+
+	SDL_UnlockSurface(font_surface);
+
+
 }
 
 	void
@@ -294,6 +321,12 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 	display.winH = WINHEIGHT;
 	winX = 0;
 	winY = 0;
+
+	font_surface = SDL_CreateRGBSurface(SDL_SWSURFACE, 8, 256 * 8, 8, 0,0,0,0);
+	//8-bit surface. 256 colors.
+
+	if (font_surface == 0) { fprintf(stderr,"Unable to create font surface.\n"); return; }
+
 }
 
 
@@ -302,19 +335,19 @@ void Create_Window (char *geometry)
 
 	display.dpy = SDL_SetVideoMode(display.winW, display.winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
 
-    
+
 	char wname[256];	/* Window Name */
 	char iname[256];	/* Window Name */
 
-    	sprintf (wname,
-	     _("xlincity, Version %s, "
-	     "(Copyright) IJ Peters - copying policy GNU GPL"),
-	     VERSION);
-	
+	sprintf (wname,
+			_("xlincity, Version %s, "
+				"(Copyright) IJ Peters - copying policy GNU GPL"),
+			VERSION);
+
 	sprintf (iname, "xlincity");
 
 	SDL_WM_SetCaption(wname, iname);
-	
+
 }
 
 	void 
@@ -420,26 +453,22 @@ open_write (int x, int y, char *s)
 	void
 my_x_putchar (int xx, int yy, unsigned char c)
 {
-	SDL_LockSurface((display.dpy));
-	int x, y, b;
-	for (y = 0; y < 8; y++)
-	{
-		b = main_font[c * 8 + y];
-		for (x = 0; x < 8; x++)
-		{
-			if ((b & 0x80) == 0)
-				Fgl_setpixel (xx + x, yy + y, text_bg);
-			else
-				Fgl_setpixel (xx + x, yy + y, text_fg);
-			b = b << 1;
-		}
-	}
-	SDL_UnlockSurface((display.dpy));
+	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
+	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
+
+	SDL_BlitSurface(font_surface,&srcrect,display.dpy,&dstrect);
 }
 
 	void
 open_x_putchar (int xx, int yy, unsigned char c)
 {
+
+	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
+	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
+
+	SDL_BlitSurface(font_surface,&srcrect,display.dpy,&dstrect);
+
+	/*
 	SDL_LockSurface((display.dpy));
 	int x, y, b;
 	for (y = 0; y < open_font_height; y++)
@@ -455,6 +484,7 @@ open_x_putchar (int xx, int yy, unsigned char c)
 		}
 	}
 	SDL_UnlockSurface((display.dpy));
+	*/
 }
 
 	void
@@ -564,8 +594,8 @@ void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
 
 void HandleEvent (SDL_Event *event)
 {
-    
-    	SDL_Event loop_ev; /* for clearing the queue of events */
+
+	SDL_Event loop_ev; /* for clearing the queue of events */
 	switch (event->type)
 	{
 		case SDL_KEYDOWN:
@@ -610,14 +640,14 @@ void HandleEvent (SDL_Event *event)
 					event = &loop_ev; ev = event->motion;
 					dx += ev.xrel; dy += ev.yrel;
 				}
-  				
+
 				cs_mouse_handler (0, dx, dy);  
 
 				cs_mouse_x = ev.x;
 				cs_mouse_y = ev.y;
 
 				if (ev.state & SDL_BUTTON(2))
-				drag_screen();
+					drag_screen();
 			}
 			break;
 
@@ -684,7 +714,7 @@ void HandleEvent (SDL_Event *event)
 
 		case SDL_VIDEOEXPOSE:
 			{
-			
+
 				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_VIDEOEXPOSEMASK) > 0) {
 					event = &loop_ev;
 				}
@@ -718,11 +748,11 @@ void HandleEvent (SDL_Event *event)
 				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_VIDEORESIZEMASK) > 0) {
 					event = &loop_ev;
 				}
-				
+
 				SDL_ResizeEvent ev = event->resize;
 
 				resize_geometry (ev.w, ev.h);
-				 
+
 			}
 			break;
 		case SDL_QUIT:
@@ -732,9 +762,9 @@ void HandleEvent (SDL_Event *event)
 				break;
 			}
 		default: {
-			fprintf(stderr,"Unknown event type %d\n",event->type);
-			return;
-		}
+				 fprintf(stderr,"Unknown event type %d\n",event->type);
+				 return;
+			 }
 	}
 	refresh_screen (0,0,display.winW,display.winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
 }
@@ -823,7 +853,7 @@ init_icon_pixmap (short type)
 	int grp;
 
 	grp = get_group_of_type(type);
-	
+
 	g = (unsigned char *) main_types[type].graphic;
 	if (g == NULL) return;
 
@@ -834,7 +864,7 @@ init_icon_pixmap (short type)
 
 
 	SDL_LockSurface(icon_surface[type]);
-	
+
 	Fgl_putbox_low (icon_surface[type],
 			0, 0, 0, 0, main_groups[grp].size * 16, 
 			main_groups[grp].size * 16,

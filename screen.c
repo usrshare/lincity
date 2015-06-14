@@ -838,13 +838,7 @@ load_fonts()
 void
 init_fonts (void)
 {
-#if defined (WIN32)
-    init_windows_font();
-#endif
     load_fonts();
-#if defined (SVGALIB)
-    gl_setwritemode (FONT_COMPRESSED);
-#endif
     Fgl_setfont (8, 8, main_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
