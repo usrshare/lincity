@@ -301,6 +301,20 @@ void Create_Window (char *geometry)
 {
 
 	display.dpy = SDL_SetVideoMode(display.winW, display.winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
+
+    
+	char wname[256];	/* Window Name */
+	char iname[256];	/* Window Name */
+
+    	sprintf (wname,
+	     _("xlincity, Version %s, "
+	     "(Copyright) IJ Peters - copying policy GNU GPL"),
+	     VERSION);
+	
+	sprintf (iname, "xlincity");
+
+	SDL_WM_SetCaption(wname, iname);
+	
 }
 
 	void 
@@ -809,13 +823,15 @@ init_icon_pixmap (short type)
 	int grp;
 
 	grp = get_group_of_type(type);
+	
+	g = (unsigned char *) main_types[type].graphic;
+	if (g == NULL) return;
 
 	icon_surface[type] = SDL_CreateRGBSurface(SDL_HWSURFACE,main_groups[grp].size * 16, main_groups[grp].size * 16, 8,0,0,0,0);
 
 	SDL_SetPalette(icon_surface[type], SDL_LOGPAL, display.pixcolour_gc, 0, 256);	
 	SDL_SetPalette(icon_surface[type], SDL_PHYSPAL, display.pixcolour_gc, 0, 256);	
 
-	g = (unsigned char *) main_types[type].graphic;
 
 	SDL_LockSurface(icon_surface[type]);
 	
