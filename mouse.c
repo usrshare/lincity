@@ -68,24 +68,9 @@ cs_mouse_handler (int enc_button, int dx, int dy)
     x = cs_mouse_x;
     y = cs_mouse_y;
 
-#if defined (SVGALIB)
-    cs_mouse_x += dx * MOUSE_SENSITIVITY;
-    cs_mouse_y += dy * MOUSE_SENSITIVITY;
-#else
     cs_mouse_x += dx;
     cs_mouse_y += dy;
-#endif
 
-#if defined (SVGALIB)
-    if (cs_mouse_x >= cs_mouse_xmax)
-	cs_mouse_x = cs_mouse_xmax;
-    if (cs_mouse_y >= cs_mouse_ymax)
-	cs_mouse_y = cs_mouse_ymax;
-    if (cs_mouse_x < 0)
-	cs_mouse_x = 0;
-    if (cs_mouse_y < 0)
-	cs_mouse_y = 0;
-#endif
  
     if (cs_mouse_x != x || cs_mouse_y != y)
 	move_mouse (cs_mouse_x, cs_mouse_y);
@@ -411,17 +396,6 @@ draw_normal_mouse (int x, int y)
 	mouse_type = MOUSE_TYPE_NORMAL;
 	kmouse_val = 8;
     }
-#if defined (SVGALIB)
-    Fgl_getbox (x, y, 8, 8, under_mouse_pointer);
-    if (x > cs_mouse_xmax - 8 || y > cs_mouse_ymax - 8) {
-	Fgl_enableclipping ();
-	Fgl_setclippingwindow (0, 0, cs_mouse_xmax, cs_mouse_ymax);
-	Fgl_putbox (x, y, 8, 8, mouse_pointer);
-	Fgl_disableclipping ();
-    } else {
-	Fgl_putbox (x, y, 8, 8, mouse_pointer);
-    }
-#endif
     mox = x;
     moy = y;
 }
@@ -429,34 +403,11 @@ draw_normal_mouse (int x, int y)
 void
 hide_normal_mouse (void)
 {
-#if defined (SVGALIB)
-    if (mox > cs_mouse_xmax - 8 || moy > cs_mouse_ymax - 8) {
-	Fgl_enableclipping ();
-	Fgl_setclippingwindow (0, 0, cs_mouse_xmax, cs_mouse_ymax);
-	Fgl_putbox (mox, moy, 8, 8, under_mouse_pointer);
-	Fgl_disableclipping ();
-    } else {
-	Fgl_putbox (mox, moy, 8, 8, under_mouse_pointer);
-    }
-#endif
 }
 
 void
 redraw_normal_mouse (void)
 {
-#if defined (SVGALIB)
-    if (mox > cs_mouse_xmax - 8 || moy > cs_mouse_ymax - 8) {
-	Fgl_enableclipping ();
-	Fgl_setclippingwindow (0, 0, cs_mouse_xmax, cs_mouse_ymax);
-	Fgl_getbox (mox, moy, 8, 8, under_mouse_pointer);
-	Fgl_putbox (mox, moy, 8, 8, mouse_pointer);
-	Fgl_disableclipping ();
-    } else {
-	/* may have changed */
-	Fgl_getbox (mox, moy, 8, 8, under_mouse_pointer);
-	Fgl_putbox (mox, moy, 8, 8, mouse_pointer);
-    }
-#endif
 }
 
 void

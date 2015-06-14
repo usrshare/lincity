@@ -13,16 +13,6 @@
 #include "lin-city.h"
 #include "lcx11.h"
 
-#elif defined WIN32
-#include <windows.h>
-#include "lcwin32.h"
-
-#elif defined SVGALIB
-#include <vga.h>
-#include <vgagl.h>
-#include <vgamouse.h>
-#include "lcsvga.h"
-
 #elif defined LC_SDL
 #include <SDL.h>
 #include "lcsdl.h"

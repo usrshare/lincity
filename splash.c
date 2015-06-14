@@ -149,13 +149,7 @@ load_start_image (void)
 void
 start_image_text (void)
 {
-#if defined (SVGALIB)
-  gl_setwritemode (FONT_COMPRESSED);
-#endif
   Fgl_setfont (8, 8, start_font1);
-#if defined (SVGALIB)
-  gl_setwritemode (FONT_COMPRESSED);
-#endif
   Fgl_setfontcolors (SI_BLACK, SI_RED);
   si_scroll_text ();
 }

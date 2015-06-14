@@ -143,10 +143,6 @@ lincity_main (int argc, char *argv[])
     char *geometry = NULL;
 #endif
 
-#if defined (SVGALIB)
-    int q;
-    vga_init ();
-#endif
 
     signal (SIGPIPE, SIG_IGN);    /* broken pipes are ignored. */
 
@@ -264,10 +260,6 @@ lincity_main (int argc, char *argv[])
     /* Main loop! */
     client_main_loop ();
 
-#if defined (SVGALIB)
-    mouse_close ();
-    vga_setmode (TEXT);
-#endif
 
     print_results ();
 
@@ -378,28 +370,6 @@ process_keystrokes (int key)
 	}
 	break;
 
-#if defined (SVGALIB)
-    case 91:
-	{
-	    int w = vga_getkey ();
-	    switch (w)
-	    {
-	    case ('A'):
-		cs_mouse_handler (0, 0, -kmouse_val);
-		break;
-	    case ('B'):
-		cs_mouse_handler (0, 0, kmouse_val);
-		break;
-	    case ('C'):
-		cs_mouse_handler (0, kmouse_val, 0);
-		break;
-	    case ('D'):
-		cs_mouse_handler (0, -kmouse_val, 0);
-		break;
-	    }
-	}
-	break;
-#endif
 
 #if defined (WIN32) || defined (LC_X11)
     case 1:
@@ -609,9 +579,6 @@ execute_timestep (void)
 	    draw_market_cb ();
 	if (port_cb_flag != 0 && port_cb_drawn_flag == 0)
 	    draw_port_cb ();
-#if defined (SVGALIB)
-	mouse_update ();
-#endif
     }
 
 #if defined (NETWORK_ENABLE)

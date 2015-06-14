@@ -346,17 +346,12 @@ resize_geometry (int new_width, int new_height)
     scr.med_button.y = MED_BUTTON_Y + (scr.main_win.h - MAIN_WIN_H);
     scr.fast_button.y = FAST_BUTTON_Y + (scr.main_win.h - MAIN_WIN_H);
 
-#if defined (SVGALIB)
-    mouse_set_range (new_width,new_height);
-#endif
 
     /* Complete refresh of the screen required here */
-#if !defined (SVGALIB)
     /* Prevent refresh if no init done yet (happens if the WM
      * disregards hints and resizes the splash screen).  */
     if (monthgraph_nojobs)
 	screen_full_refresh ();
-#endif
 }
 
 int 
