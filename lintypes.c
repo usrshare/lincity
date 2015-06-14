@@ -539,9 +539,7 @@ void init_types(void)
     uint32_t palette[256];
    
     load_png_graphics (txt_file,png_file,palette);
-#ifdef LC_SDL
     lc_loadpalette(palette);
-#endif
 
 
 #if defined (commentout)

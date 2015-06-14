@@ -19,6 +19,7 @@ set(
 	pbar.c
 	module_buttons.c
 	dialbox.c
+	lcsdl.c
    )
 
 set (
@@ -77,41 +78,11 @@ endif()
 SET(CMAKE_C_FLAGS "--std=gnu99 -Wall -g")
 SET(CMAKE_CXX_FLAGS "--std=gnu99 -Wall -g")
 
-option (USE_SDL "USE_SDL" ON)
-
-Find_Package(X11)
-
-if (USE_SDL)
-Find_Package(SDL)
-endif()
-
-if (SDL_FOUND) 
+Find_Package(SDL REQUIRED)
 
 include_directories(${SDL_INCLUDE_DIR})
 
-add_definitions(-DLC_SDL=1)
-link_libraries(${SDL_LIBRARY} png z m)
-
-set (GUI_SOURCES
-	${GUI_SOURCES}
-	lcsdl.c
-)
-
-elseif (X11_FOUND)
-
-set (GUI_SOURCES
-	${GUI_SOURCES}
-	lcx11.c
-)
-add_definitions(-DLC_X11=1)
-link_libraries(Xext X11 png z m)
-
-else()
-	message (FATAL_ERROR "Unable to find either libX11 or SDL.")
-
-endif()
-
-link_libraries(modules)
+link_libraries(${SDL_LIBRARY} png z m modules)
 
 add_executable (
 		xlincity

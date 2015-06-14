@@ -10,15 +10,13 @@
 #include "lcstring.h"
 
 #include "common.h"
-#ifdef LC_X11
-#include <X11/cursorfont.h>
-#endif
 #include "lctypes.h"
 #include "lin-city.h"
 #include "cliglobs.h"
 #include "engglobs.h"
 #include "screen.h"
 #include "fileutil.h"
+#include "lcsdl.h"
 
 #define SI_BLACK 252
 #define SI_RED 253
@@ -41,10 +39,6 @@
 void
 load_start_image (void)
 {
-#ifdef LC_X11
-  XColor pal[256];
-  XEvent xev;
-#endif
   long x, y, l, r, g, b;
   FILE *fp;
 
@@ -63,49 +57,13 @@ load_start_image (void)
       r = fgetc (fp);
       g = fgetc (fp);
       b = fgetc (fp);
-#ifdef LC_X11
-      pal[x].red = r;
-      pal[x].green = g;
-      pal[x].blue = b;
-      pal[x].flags = DoRed | DoGreen | DoBlue;
-#else
       lc_setpalettecolor (x, r*4, g*4, b*4);
-#endif
     }
   /* use last 4 colours for text */
-#ifdef LC_X11
-  pal[SI_BLACK].red = 0;
-  pal[SI_BLACK].green = 0;
-  pal[SI_BLACK].blue = 0;
-  pal[SI_BLACK].flags = DoRed | DoGreen | DoBlue;
-  pal[SI_RED].red = 60;
-  pal[SI_RED].green = 0;
-  pal[SI_RED].blue = 0;
-  pal[SI_RED].flags = DoRed | DoGreen | DoBlue;
-  pal[SI_GREEN].red = 0;
-  pal[SI_GREEN].green = 60;
-  pal[SI_GREEN].blue = 0;
-  pal[SI_GREEN].flags = DoRed | DoGreen | DoBlue;
-  pal[SI_YELLOW].red = 60;
-  pal[SI_YELLOW].green = 60;
-  pal[SI_YELLOW].blue = 0;
-  pal[SI_YELLOW].flags = DoRed | DoGreen | DoBlue;
-  open_setcustompalette (pal);
-  suppress_next_expose = 1;
-  do
-    {
-      while (XPending (display.dpy) == 0);
-      XNextEvent (display.dpy, &xev);
-      HandleEvent (&xev);
-    }
-  while (xev.type != MapNotify);
-
-#else
   lc_setpalettecolor (SI_BLACK, 0, 0, 0);
   lc_setpalettecolor (SI_RED, 240, 0, 0);
   lc_setpalettecolor (SI_GREEN, 0, 240, 0);
   lc_setpalettecolor (SI_YELLOW, 240, 240, 0);
-#endif
   for (y = 0; y < 480; y++)
     for (x = 0; x < 640; x++)
       {
@@ -148,9 +106,6 @@ si_scroll_text (void)
   int i, l1c = 0, l2c = 0, l3c = 0;
   long t;
   FILE *inf1, *inf2, *inf3;
-#ifdef LC_X11
-  XEvent xev;
-#endif
   Fgl_enableclipping ();
   sprintf (s, "%s%c%s", opening_path, PATH_SLASH, "text1");
   if ((inf1 = fopen (s, "rb")) == NULL)
@@ -174,18 +129,7 @@ si_scroll_text (void)
     {
       get_real_time ();
       t = real_time + SPLASH_SCROLL_DELAY;
-#ifdef LC_X11
-      if (XPending (display.dpy))
-
-	{
-	  XNextEvent (display.dpy, &xev);
-	  HandleEvent (&xev);
-	}
-
-      c = x_key_value;
-#else
       c = lc_get_keystroke ();
-#endif
       if (l1c >= 8)
 	{
 	  for (i = 0; i < 51; i++)
@@ -196,11 +140,7 @@ si_scroll_text (void)
       Fgl_setfont (8, 8, start_font1);
       Fgl_setclippingwindow (120, 30, 520, 40);
       Fgl_setfontcolors (SI_BLACK, SI_RED);
-#if defined (LC_X11)
-      open_write (120 - l1c, 31, line1);
-#else
       Fgl_write (120 - l1c, 31, line1);
-#endif
       l1c++;
 
       if (l2c >= 8)
@@ -213,11 +153,7 @@ si_scroll_text (void)
       Fgl_setfont (8, 16, start_font2);
       Fgl_setclippingwindow (120, 55, 520, 73);
       Fgl_setfontcolors (SI_BLACK, SI_GREEN);
-#if defined (LC_X11)
-      open_write (120 - l2c, 57, line2);
-#else
       Fgl_write (120 - l2c, 57, line2);
-#endif
       l2c += 2;
 
       if (l3c >= 8)
@@ -230,11 +166,7 @@ si_scroll_text (void)
       Fgl_setfont (8, 16, start_font3);
       Fgl_setclippingwindow (120, 88, 520, 106);
       Fgl_setfontcolors (SI_BLACK, SI_YELLOW);
-#if defined (LC_X11)
-      open_write (120 - l3c, 90, line3);
-#else
       Fgl_write (120 - l3c, 90, line3);
-#endif
       l3c += 2;
       while (real_time < t)
 	{

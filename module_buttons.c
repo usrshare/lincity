@@ -562,15 +562,6 @@ set_selected_module (int type)
 	choose_residence ();
     }
 
-/*
-#ifdef LC_X11  // XXX: WCK: shouldn't be any platform specific code here
-    if (selected_module_group == GROUP_BARE) 
-	XDefineCursor (display.dpy, display.win, pirate_cursor);
-    else
-	XDefineCursor (display.dpy, display.win, None);
-#endif
-*/
-
     draw_selected_module_cost();
 
     if (selected_module_type == CST_GREEN) {

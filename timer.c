@@ -3,23 +3,9 @@
  * This file is part of lincity.
  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
  * ---------------------------------------------------------------------- */
-#if defined (HAVE_CONFIG_H)
-#include "config.h"
-#endif
 
-#if defined (TIME_WITH_SYS_TIME)
 #include <time.h>
 #include <sys/time.h>
-#else
-#if defined (HAVE_SYS_TIME_H)
-#include <sys/time.h>
-#else
-#include <time.h>
-#endif
-#endif
-#if defined(AIX) || defined(__EMX__)
-#include <sys/select.h>
-#endif
 
 #include "cliglobs.h"
 #include "mouse.h"

@@ -48,9 +48,6 @@
 
 #include <ctype.h>
 #include "common.h"
-#ifdef LC_X11
-#include <X11/cursorfont.h>
-#endif
 #include "lctypes.h"
 #include "lin-city.h"
 #include "cliglobs.h"
@@ -59,6 +56,7 @@
 #include "fileutil.h"
 #include "mouse.h"
 #include "stats.h"
+#include "lcsdl.h"
 
 /* ---------------------------------------------------------------------- *
  * Private Fn Prototypes
@@ -99,11 +97,6 @@ draw_prefs_cb (void)
 	    checked_box_graphic : unchecked_box_graphic;
     Fgl_putbox (x, y, 16, 16, graphic);
 
-#if defined (LC_X11)
-    y += 16;
-    graphic = confine_flag ? checked_box_graphic : unchecked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, graphic);
-#endif
 }
 
 void
@@ -127,14 +120,6 @@ do_prefs_buttons (int x, int y)
 	    time_multiplex_stats = !time_multiplex_stats;
 	    draw_prefs_cb ();
 	    redraw_mouse ();
-#if defined (LC_X11)
-	} else if (y > mw->y + 30 + 3*16 && y < mw->y + 30 + 4*16) {
-	    hide_mouse ();
-	    confine_flag = !confine_flag;
-	    draw_prefs_cb ();
-	    set_pointer_confinement ();
-	    redraw_mouse ();
-#endif
 	}
     }
     outx = 370;
@@ -176,9 +161,6 @@ do_prefs_screen (void)
     Fgl_write (mw->x + 80, mw->y + 4*8, _("Transport overwrite"));
     Fgl_write (mw->x + 80, mw->y + 6*8, _("Popup info to dialog boxes"));
     Fgl_write (mw->x + 80, mw->y + 8*8, _("Time multiplexed stats windows"));
-#if defined (LC_X11)
-    Fgl_write (mw->x + 80, mw->y + 10*8, _("Confine X pointer"));
-#endif
 
     x = 370;
     y = 387;
@@ -262,21 +244,8 @@ do_save_city ()
 	       ,_("Press space to cancel."));
     draw_save_dir (SAVE_BG_COLOUR);
     db_flag = 1;
-#ifdef LC_X11
-    redraw_mouse ();
-    cs_mouse_handler (0, -1, 0);
-    cs_mouse_handler (0, 1, 0);
-    do
-    {
-	call_event ();
-	c = x_key_value;
-    }
-    while (c == 0);
-    x_key_value = 0;
-#else
     c = lc_get_keystroke ();
     redraw_mouse ();
-#endif
     if (c > '0' && c <= '9')
     {
 	Fgl_write (mw->x + 40, mw->y + 300
@@ -353,19 +322,8 @@ do_load_city (void)
     db_flag = 1;
 
     do {
-#ifdef LC_X11
-	redraw_mouse ();
-	cs_mouse_handler (0, -1, 0);
-	cs_mouse_handler (0, 1, 0);
-	do {
-	    call_event ();
-	    c = x_key_value;
-	} while (c == 0);
-	x_key_value = 0;
-#else
 	c = lc_get_keystroke ();
 	redraw_mouse ();
-#endif
 	if (c > '0' && c <= '9') {
 	    if (strlen (save_names[c - '0']) < 1) {
 		redraw_mouse ();
@@ -482,16 +440,8 @@ edit_string (char* s, unsigned int maxlen, int xpos, int ypos)
 	on = 1;
 	get_real_time ();
 	t = real_time;
-#ifdef LC_X11
-	call_event ();
-	while ((c = x_key_value) == 0)
-#else
 		while ((c = lc_get_keystroke()) == 0)
-#endif
 		{
-#ifdef LC_X11
-		    call_event ();
-#endif
 		    get_real_time ();
 		    if (real_time > t + 200) {
 			if (on == 1) {
@@ -507,9 +457,6 @@ edit_string (char* s, unsigned int maxlen, int xpos, int ypos)
 			t = real_time;
 		    }
 		}
-#ifdef LC_X11
-	x_key_value = 0;
-#endif
 	if ((isalnum (c) || c == ' ' || c == '.' || c == '%' || c == ','
 	     || c == '-' || c == '+') && strlen (s) < maxlen)
 	{
@@ -569,21 +516,7 @@ do_get_nw_server (void)
     draw_save_dir (NW_BG_COLOUR);
     do
     {
-#ifdef LC_X11
-	db_flag = 1;
-	redraw_mouse ();
-	cs_mouse_handler (0, -1, 0);
-	cs_mouse_handler (0, 1, 0);
-	do
-	{
-	    call_event ();
-	    c = x_key_value;
-	}
-	while (c == 0);
-	x_key_value = 0;
-#else
 	c = lc_get_keystroke ();
-#endif
 	if (c > '0' && c <= '9')
 	    if (strlen (save_names[c - '0']) < 1)
 	    {

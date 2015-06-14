@@ -34,6 +34,28 @@ SDL_Surface* font_surface = NULL;
 #define DEBUG_X11_MOUSE
 #undef DEBUG_X11_MOUSE
 
+disp display;
+int borderx, bordery;
+
+int command_line_debug = 0;
+
+int winX, winY, mouse_button;
+
+char *bg_color = NULL;
+int verbose = FALSE;		// display settings if TRUE
+int stay_in_front = FALSE;	// Try to stay in clear area of the screen.
+int text_bg = 0;
+int text_fg = 255;
+int x_key_value;
+int x_key_shifted = 0;	//Is the key shifted?
+int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
+//long unsigned int colour_table[256];
+unsigned char *open_font;
+int open_font_height, suppress_next_expose = 0;
+
+SDL_Surface* icon_surface[NUM_OF_TYPES];
+char icon_surface_flag[NUM_OF_TYPES];
+
 void set_pointer_confinement (void)
 {
 	if (confine_flag) {

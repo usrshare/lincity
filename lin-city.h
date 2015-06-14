@@ -65,8 +65,6 @@
 #define PATH_SLASH_STRING "/"
 #endif
 
-#define USE_X11_PIXMAPS
-
 #ifndef TRUE
 #define TRUE 1
 #endif
@@ -84,9 +82,6 @@
 
 
 /* comment out the the next three lines for _slightly_ faster X drawing. */
-#ifdef LC_X11
-#define ALLOW_PIX_DOUBLING
-#endif
 
 /*
   Gamma correction. The numbers GAMMA_CORRECT_X are between 0.0 and 1.0
@@ -120,10 +115,6 @@
    #define CS_PROFILE
 */
 
-#if defined (LC_X11)
-#define BORDERX 30
-#define BORDERY 30
-#endif
 
 #define TEXT_FG_COLOUR  (white(24))
 #define TEXT_BG_COLOUR  105
@@ -1182,9 +1173,7 @@ extern void window_results (void);
 extern void init_path_strings (void);
 extern void lc_usleep (unsigned long);
 extern void dump_tcore (void);
-#ifndef LC_X11
 extern void parse_args (int, char **);
-#endif
 extern void sustainability_test (void);
 extern int sust_fire_cover (void);
 extern void check_endian (void);
@@ -1419,29 +1408,6 @@ extern int put_stuff2 (Map_Point_Info *, short *, int, int);
 extern int put_stuff3 (Map_Point_Info *, short *, int, int);
 extern int put_stuff4 (Map_Point_Info *, short *, int, int);
 
-#ifdef LC_X11
-/* ----- X11 functions ----- */
-extern void Fgl_write (int, int, char *);
-extern void open_write (int, int, char *);
-extern void Fgl_getbox (int, int, int, int, void *);
-extern void Fgl_putbox (int, int, int, int, void *);
-extern void Fgl_fillbox (int, int, int, int, int);
-extern void Fgl_hline (int, int, int, int);
-extern void Fgl_line (int, int, int, int, int);
-extern void Fgl_setpixel (int, int, int);
-extern void Fgl_setfontcolors (int, int);
-extern void Fgl_setfont (int, int, void*);
-extern void Fgl_enableclipping (void);
-extern void Fgl_setclippingwindow (int, int, int, int);
-extern void Fgl_disableclipping (void);
-#ifdef USE_X11_PIXMAPS
-#define USE_PIXMAPS
-extern void init_pixmaps (void);
-extern void init_icon_pixmap (short);
-extern void update_pixmap (int, int, int, int, int, int, int, char *);
-#endif
-
-#elif defined(LC_SDL)
 /* ----- SDL functions ----- */
 extern void Fgl_write (int, int, char *);
 extern void open_write (int, int, char *);
@@ -1456,7 +1422,6 @@ extern void Fgl_setfont (int, int, void*);
 extern void Fgl_enableclipping (void);
 extern void Fgl_setclippingwindow (int, int, int, int);
 extern void Fgl_disableclipping (void);
-#endif
 
 /*
   *******   end of lin-city.h   ***********

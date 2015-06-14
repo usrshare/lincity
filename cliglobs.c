@@ -7,6 +7,7 @@
 #include "common.h"
 #include "geometry.h"
 #include "lcintl.h"
+#include "lcsdl.h"
 
 Screen_Geometry scr;
 short mappointoldtype[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
@@ -70,9 +71,6 @@ char *slow_button1_on, *slow_button2_on;
 char *results_button1, *results_button2;
 char *toveron_button1, *toveron_button2;
 char *toveroff_button1, *toveroff_button2;
-#ifdef LC_X11
-char *confine_button, *unconfine_button;
-#endif
 int pause_flag = 0, slow_flag = 0, med_flag = 0, fast_flag = 0;
 
 char *ms_pollution_button_graphic, *ms_normal_button_graphic;
@@ -115,51 +113,4 @@ int db_flag, db_yesbox_clicked, db_nobox_clicked;
 char okmessage[22][74];
 int db_okbox_x1, db_okbox_x2, db_okbox_y1, db_okbox_y2, db_okflag, db_okbox_clicked;
 int suppress_ok_buttons;
-
-disp display;
-int borderx, bordery;
-
-int command_line_debug = 0;
-
-#ifdef LC_X11
-int winX, winY, mouse_button;
-
-char *bg_color = NULL;
-int verbose = FALSE;		/* display settings if TRUE */
-int stay_in_front = FALSE;	/* Try to stay in clear area of the screen. */
-int text_bg = 0;
-int text_fg = 255;
-int x_key_value;
-int x_key_shifted = 0;	/* Is the key shifted? */
-int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
-long unsigned int colour_table[256];
-unsigned char *open_font;
-int open_font_height, suppress_next_expose = 0;
-Cursor pirate_cursor;
-
-#ifdef USE_PIXMAPS
-Pixmap icon_pixmap[NUM_OF_TYPES];
-char icon_pixmap_flag[NUM_OF_TYPES];
-#endif
-#endif
-
-#ifdef LC_SDL
-int winX, winY, mouse_button;
-
-char *bg_color = NULL;
-int verbose = FALSE;		/* display settings if TRUE */
-int stay_in_front = FALSE;	/* Try to stay in clear area of the screen. */
-int text_bg = 0;
-int text_fg = 255;
-int x_key_value;
-int x_key_shifted = 0;	/* Is the key shifted? */
-int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
-//long unsigned int colour_table[256];
-unsigned char *open_font;
-int open_font_height, suppress_next_expose = 0;
-
-SDL_Surface* icon_surface[NUM_OF_TYPES];
-char icon_surface_flag[NUM_OF_TYPES];
-
-#endif
 

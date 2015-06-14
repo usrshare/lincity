@@ -17,7 +17,7 @@
 #include "lcintl.h"
 #include "pbar.h"
 #include "mouse.h"
-
+#include "lcsdl.h"
 
 /* ---------------------------------------------------------------------- *
  * Private function prototypes

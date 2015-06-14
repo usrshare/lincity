@@ -241,18 +241,9 @@ dialog_box(int arg_color, int argc, ...)
   /* Mouse clicks arrive from the mouse handler and set db_return_value */
 
   while (!db_return_value)  {
-#ifndef LC_X11
-      lc_usleep (1000); /* call_wait_event does this for X11 */
-#endif
       
-#ifdef LC_X11
-      call_wait_event ();
-      key = x_key_value;
-      x_key_value = 0;
-#else
       call_wait_event ();
       key = lc_get_keystroke ();
-#endif
       if (key == 0) continue;
 
       if (key == 10 || key == 13 || key == ' ') /* default button */

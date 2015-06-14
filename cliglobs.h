@@ -84,9 +84,6 @@ extern char *slow_button1_on, *slow_button2_on;
 extern char *results_button1, *results_button2;
 extern char *toveron_button1, *toveron_button2;
 extern char *toveroff_button1, *toveroff_button2;
-#ifdef LC_X11
-extern char *confine_button, *unconfine_button;
-#endif
 extern int pause_flag, slow_flag, med_flag, fast_flag;
 extern int prefs_flag;
 extern int prefs_drawn_flag;
@@ -157,31 +154,6 @@ extern struct _disp display;
 extern int borderx, bordery;
 
 extern int command_line_debug;
-
-#ifdef LC_X11
-extern int winX, winY, mouse_button;
-extern unsigned int winW, winH;
-
-extern char *bg_color;
-/*extern char* pixmap;*/
-extern char dummy2[1024];
-extern int verbose;		/* display settings if TRUE */
-extern int stay_in_front;	/* Try to stay in clear area of the screen. */
-extern int text_bg;
-extern int text_fg;
-extern int x_key_value;
-extern int x_key_shifted;	/* Is the key shifted? */
-extern int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag;
-extern long unsigned int colour_table[256];
-extern unsigned char *open_font;
-extern int open_font_height, suppress_next_expose;
-extern Cursor pirate_cursor;
-
-#ifdef USE_PIXMAPS
-extern Pixmap icon_pixmap[NUM_OF_TYPES];
-extern char icon_pixmap_flag[NUM_OF_TYPES];
-#endif
-#endif
 
 #if defined (LC_SDL)
 struct SDL_Surface;

@@ -17,16 +17,7 @@
 #include "lctypes.h"
 #include "cliglobs.h"
 #include "pixmap.h"
-
-#if defined (LC_X11)
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#include <X11/Xutil.h>
-#include <X11/keysym.h>
-#include <X11/keysymdef.h>
-#include "lcx11.h"
-#endif
-
+#include "lcsdl.h"
 
 #define USE_IMAGES 1
 
@@ -41,17 +32,10 @@ int pixmap_width = 0;
 /* ---------------------------------------------------------------------- *
  * Public functions
  * ---------------------------------------------------------------------- */
-#if (defined(USE_PIXMAPS) || defined(LC_SDL))
-void
-init_pixmaps ()
-{
+void init_pixmaps () {
     int i;
     for (i = 1; i < NUM_OF_TYPES; i++) {
-#ifdef USE_PIXMAPS
-	icon_pixmap[i] = 0;
-#else
 	icon_surface[i] = NULL;
-#endif
     }
 
     init_icon_pixmap (CST_GREEN);
@@ -472,5 +456,3 @@ update_pixmap (int x1, int y1, int sizex, int sizey, int dx, int dy,
 	    *(i++) = *(j++);
     }
 }
-
-#endif /* USE_PIXMAPS */

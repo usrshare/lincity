@@ -21,13 +21,7 @@
 
 #include <ctype.h>
 #include "common.h"
-#ifdef LC_SDL
 #include "lcsdl.h"
-#endif
-#ifdef LC_X11
-#include <X11/cursorfont.h>
-#include "lcx11.h"
-#endif
 
 #include "lctypes.h"
 #include "lin-city.h"
@@ -110,11 +104,6 @@ lincity_set_locale (void)
 int
 lincity_main (int argc, char *argv[])
 {
-#if defined (LC_X11)
-    char *geometry = NULL;
-#endif
-
-
     signal (SIGPIPE, SIG_IGN);    /* broken pipes are ignored. */
 
     /* Initialize some global variables */
@@ -127,12 +116,6 @@ lincity_main (int argc, char *argv[])
 	    = river_bul_flag = shanty_bul_flag;
     prefs_drawn_flag = 0;
     kmouse_val = 8;
-
-#ifdef LC_X11
-    borderx = 0;
-    bordery = 0;
-    parse_xargs (argc, argv, &geometry);
-#endif
 
     /* I18n */
     lincity_set_locale ();
@@ -155,24 +138,11 @@ lincity_main (int argc, char *argv[])
 #endif
 #endif
 
-#ifdef LC_X11
-#if defined (commentout)
-    borderx = 0;
-    bordery = 0;
-    parse_xargs (argc, argv, &geometry);
-#endif
-    Create_Window (geometry);
-    pirate_cursor = XCreateFontCursor (display.dpy, XC_pirate);
-#else
     parse_sdlargs (argc, argv,NULL);
     Create_Window (NULL);
     //q = vga_setmode (G640x480x256);
     //gl_setcontextvga (G640x480x256);
-#endif
 
-#if defined (LC_X11)
-    initialize_pixmap ();
-#endif
 
     init_fonts ();
 
@@ -183,15 +153,10 @@ lincity_main (int argc, char *argv[])
 	load_start_image ();
     }
 
-#ifdef LC_X11
-    unlock_window_size ();
-#endif
     
     init_types ();
 
-#ifndef LC_SDL
     setcustompalette ();
-#endif
     Fgl_setfont (8, 8, main_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
@@ -202,9 +167,6 @@ lincity_main (int argc, char *argv[])
     init_mini_map_mouse ();
     mps_init();
 
-#ifdef LC_X11
-    x_key_value = 0;
-#endif
     draw_background ();
     prog_box (_("Loading the game"), 1);
     init_modules();
@@ -214,15 +176,10 @@ lincity_main (int argc, char *argv[])
     mouse_hide_count = 0;
     suppress_ok_buttons = 0;
     prog_box ("", 100);
-#if (defined(USE_PIXMAPS) || defined(LC_SDL))
     prog_box (_("Creating pixmaps"), 1);
     init_pixmaps ();
     prog_box ("", 100);
-#endif
     //draw_normal_mouse (1, 1);
-#if defined (LC_X11)
-    init_x_mouse ();
-#endif
     init_timer_buttons();
     mouse_initialized = 1;
     //set_selected_module (CST_TRACK_LR);
@@ -234,9 +191,6 @@ lincity_main (int argc, char *argv[])
 
     print_results ();
 
-#if defined (LC_X11)
-    free_pixmap ();
-#endif
 
     exit (0);
 }
@@ -281,14 +235,8 @@ client_main_loop (void)
 	get_real_time();
 
 	/* Process events */
-#if defined (LC_X11)
-	call_event ();
-	key = x_key_value;
-	x_key_value = 0;
-#else
 	call_event();
 	key = lc_get_keystroke ();
-#endif
 	/* nothing happened if key == 0 XXX: right? */
 	/* GCS: I'm not sure */
 	if (key != 0) {
@@ -335,59 +283,6 @@ process_keystrokes (int key)
 	break;
 
 
-#if defined (LC_X11)
-    case 1:
-	/* Scroll left */
-	if (x_key_shifted) {
-	    adjust_main_origin (main_screen_originx - RIGHT_MOUSE_MOVE_VAL,
-				main_screen_originy,
-				TRUE);
-	} else {
-	    adjust_main_origin (main_screen_originx - 1,
-				main_screen_originy,
-				TRUE);
-	}
-	break;
-
-    case 2:
-	/* Scroll down */
-	if (x_key_shifted) {
-	    adjust_main_origin (main_screen_originx,
-				main_screen_originy + RIGHT_MOUSE_MOVE_VAL,
-				TRUE);
-	} else {
-	    adjust_main_origin (main_screen_originx,
-				main_screen_originy + 1,
-				TRUE);
-	}
-	break;
-
-    case 3:
-	/* Scroll up */
-	if (x_key_shifted) {
-	    adjust_main_origin (main_screen_originx,
-				main_screen_originy - RIGHT_MOUSE_MOVE_VAL,
-				TRUE);
-	} else {
-	    adjust_main_origin (main_screen_originx,
-				main_screen_originy - 1,
-				TRUE);
-	}
-	break;
-
-    case 4:
-	/* Scroll right */
-	if (x_key_shifted) {
-	    adjust_main_origin (main_screen_originx + RIGHT_MOUSE_MOVE_VAL,
-				main_screen_originy,
-				TRUE);
-	} else {
-	    adjust_main_origin (main_screen_originx + 1,
-				main_screen_originy,
-				TRUE);
-	}
-	break;
-#endif
 
     case 'P':
     case 'p':
@@ -440,11 +335,7 @@ process_keystrokes (int key)
 	break;
 
 	/* Escape Key */
-#ifdef LC_X11
-    case 27:
-#else
     case 5:
-#endif
 	if (help_flag) {
 	    /* exit help */
 	    draw_help_page("return-2"); 
@@ -596,12 +487,8 @@ execute_timestep (void)
 void
 do_error (char *s)
 {
-#if defined (LC_X11)
-    HandleError (s, FATAL);
-#else
     printf ("%s\n", s);
     exit (1);
-#endif
 }
 
 int

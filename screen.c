@@ -32,6 +32,7 @@
 #include "stats.h"
 #include "engine.h"
 #include "fileutil.h"
+#include "lcsdl.h"
 
 /* ---------------------------------------------------------------------- *
  * External Global Variables
@@ -95,14 +96,7 @@ draw_background (void)
     /* XXX: we don't need to draw the whole background! */
     /* GCS: but this routine is only called on a full refresh, so it's OK */
 
-#if defined (LC_X11)
-    /* Draw border region, but don't put into pixmap */
-    draw_border ();
-    /* Draw main area */
-    Fgl_fillbox (0, 0, pixmap_width, pixmap_height, TEXT_BG_COLOUR);
-#else /* SDL */
     Fgl_fillbox (0, 0, display.winW, display.winH, TEXT_BG_COLOUR);
-#endif
 }
 
 void
@@ -231,7 +225,6 @@ update_main_screen_normal (int full_refresh)
 		    continue;
 		}
 		grp = get_group_of_type(typ);
-#ifdef LC_SDL
 		    
 		x1 = y1 = 0;
 		    if (x < main_screen_originx)
@@ -257,47 +250,6 @@ update_main_screen_normal (int full_refresh)
 				main_types[typ].graphic);
 		}
 		}
-#elif defined USE_PIXMAPS
-		if (icon_pixmap[typ] != 0)
-		{
-		    x1 = y1 = 0;
-		    if (x < main_screen_originx)
-			x1 = (main_screen_originx - x) * 16;
-		    if (y < main_screen_originy)
-			y1 = (main_screen_originy - y) * 16;
-		    sx = sy = main_groups[grp].size;
-		    if ((sx + x) > (main_screen_originx + (mw->w / 16)))
-			sx = (main_screen_originx + (mw->w / 16)) - x;
-		    if ((sy + y) > (main_screen_originy + (mw->h / 16)))
-			sy = (main_screen_originy + (mw->h / 16)) - y;
-		    sx = (sx << 4) - x1;
-		    sy = (sy << 4) - y1;
-		    dx = mw->x + (x - main_screen_originx) * 16 + x1;
-		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
-		    if (sx > 0 && sy > 0)
-		    {
-#if defined (LC_X11)
-			    XCopyArea (display.dpy
-				       ,icon_pixmap[typ]
-				       ,display.win
-				       ,display.pixcolour_gc[0]
-				       ,x1, y1, sx, sy
-				       ,dx + borderx, dy + bordery);
-#endif /* LC_X11*/
-			update_pixmap (x1, y1, sx, sy, dx, dy,
-				       main_groups[grp].size,
-				       main_types[typ].graphic);
-
-		    }
-		}
-		else
-
-		Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
-				mw->y + (y - main_screen_originy) * 16,
-				16 * main_groups[grp].size,
-				16 * main_groups[grp].size,
-				main_types[typ].graphic);
-#endif /* USE_PIXMAPS */
 	    }
 	}
     unclip_main_window ();
@@ -630,12 +582,6 @@ screen_setup (void)
     toveroff_button2 = load_graphic ("tover2-off.csi");
     draw_tover (0);
 
-#ifdef LC_X11
-    /* draw the confine mouse button */
-    confine_button = load_graphic ("mouse-confined.csi");
-    unconfine_button = load_graphic ("mouse-free.csi");
-    draw_confine (0);
-#endif
 #endif
 
     /* Load and draw menu buttons */
@@ -2360,9 +2306,6 @@ prog_box (char *title, int percent)
 	Fgl_write (PROGBOXX + (PROGBOXW / 2) - 20, PROGBOXY + 24, s);
 	Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
     }
-#ifdef LC_X11
-    XSync (display.dpy, FALSE);
-#endif
     if (percent < 100)
     {
 	return;
