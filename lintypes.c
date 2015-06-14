@@ -4,6 +4,7 @@
  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
  * ---------------------------------------------------------------------- */
 #include <string.h> /* XXX: portability issue?  for strcpy */
+#include <stdint.h>
 #include "lcconfig.h"
 #include "lin-city.h"
 #include "engglobs.h"
@@ -535,7 +536,13 @@ void init_types(void)
     sprintf (png_file, "%s%c%s", opening_path, PATH_SLASH, "icons.png");
     sprintf (txt_file, "%s%c%s", opening_path, PATH_SLASH, "iconlist.txt");
 
-    load_png_graphics (txt_file,png_file);
+    uint32_t palette[256];
+   
+    load_png_graphics (txt_file,png_file,palette);
+#ifdef LC_SDL
+    lc_loadpalette(palette);
+#endif
+
 
 #if defined (commentout)
     main_types[CST_GREEN].group=GROUP_BARE;

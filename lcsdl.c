@@ -833,6 +833,21 @@ int lc_setpalettecolor(int x, int r, int g, int b) {
 	return 0;
 }
 
+int lc_loadpalette(uint32_t* pal) {
+
+	if (!pal) return 1;
+
+	for (int i=0; i < 256; i++) {
+		
+		uint32_t col = pal[i];
+
+		display.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
+
+		SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	}
+	return 0;
+}
+
 /* init_full_mouse is called just before the main client loop. */
 
 /* XXX: This needs a much better name */

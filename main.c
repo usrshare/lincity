@@ -219,16 +219,16 @@ lincity_main (int argc, char *argv[])
 #ifdef LC_X11
     unlock_window_size ();
 #endif
+    
+    init_types ();
 
+#ifndef LC_SDL
     setcustompalette ();
+#endif
     Fgl_setfont (8, 8, main_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
     initialize_geometry (&scr);
-
-#if defined (SVGALIB)
-    set_vga_mode ();
-#endif
 
     initialize_monthgraph ();
     init_mouse_registry ();
@@ -237,12 +237,9 @@ lincity_main (int argc, char *argv[])
 
 #ifdef LC_X11
     x_key_value = 0;
-#elif defined (WIN32)
-    RefreshScreen ();
 #endif
     draw_background ();
     prog_box (_("Loading the game"), 1);
-    init_types ();
     init_modules();
     init_mappoint_array ();
     initialize_tax_rates ();

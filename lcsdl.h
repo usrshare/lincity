@@ -87,6 +87,7 @@ void unlock_window_size (void);
 
 int lc_get_keystroke (void);
 int lc_setpalettecolor(int x, int r, int g, int b);
+int lc_loadpalette(uint32_t* pal);
 
 void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
