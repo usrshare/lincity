@@ -243,12 +243,7 @@ update_main_screen_normal (int full_refresh)
 		    if (sx > 0 && sy > 0) {
 		
 		if (icon_surface[typ] != 0) Fgl_blit(display.bg,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
-		Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
-				mw->y + (y - main_screen_originy) * 16,
-				16 * main_groups[grp].size,
-				16 * main_groups[grp].size,
-				main_types[typ].graphic);
-		}
+			fprintf(stderr,"No surface loaded for type %d.\n",typ); }
 		}
 	    }
 	}
@@ -1937,7 +1932,7 @@ void
 draw_cb_box (int row, int col, int checked)
 {
     int x, y;
-    char* graphic;
+    SDL_Surface* graphic;
     Rect* mcb = &scr.market_cb;
 
     y = mcb->y + 4 + (4 * 8) + (row * CB_SPACE);
@@ -2022,8 +2017,7 @@ close_market_cb (void)
     market_cb_flag = 0;
     market_cb_drawn_flag = 0;
 
-    Fgl_putbox (mcb->x, mcb->y, mcb->w, mcb->h
-		,market_cb_gbuf);
+    Fgl_fillbox_s (display.ui,mcb->x, mcb->y, mcb->w, mcb->h,0); //clear
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
     /* when exiting market cb, stop the mouse repeating straight away */
@@ -2054,7 +2048,7 @@ close_port_cb (void)
     port_cb_flag = 0;
     port_cb_drawn_flag = 0;
 
-    Fgl_putbox (mcb->x, mcb->y, mcb->w, mcb->h, market_cb_gbuf);
+    Fgl_fillbox_s (display.ui,mcb->x, mcb->y, mcb->w, mcb->h, 0);
     /* when exiting port cb, stop the mouse repeating straight away */
     cs_mouse_button = LC_MOUSE_LEFTBUTTON;
 }
@@ -2266,7 +2260,7 @@ prog_box (char *title, int percent)
 	return;
     }
 
-    Fgl_putbox (PROGBOXX - 8, PROGBOXY - 8, PROGBOXW + 16, PROGBOXH + 16, progbox);
+    //Fgl_putbox (PROGBOXX - 8, PROGBOXY - 8, PROGBOXW + 16, PROGBOXH + 16, progbox);
     redraw_mouse ();
     flag = 0;
 }

@@ -128,6 +128,8 @@ void do_setcustompalette (SDL_Color* inpal) {
 	SDL_SetPalette((display.dpy), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
 	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);
 	SDL_SetPalette((display.bg), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.ui), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
 	SDL_SetPalette((display.sprites), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
 	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 }
@@ -245,6 +247,12 @@ void Create_Window (char *geometry)
 	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
 
 	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+	
+	display.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
+
+	if (display.ui == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
+
+	SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
 
 
 	char wname[256];	/* Window Name */
@@ -622,11 +630,14 @@ void HandleEvent (SDL_Event *event)
 				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
 				SDL_FreeSurface(display.bg);
 				display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
+				SDL_FreeSurface(display.ui);
+				display.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 				SDL_FreeSurface(display.sprites);
 				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
 				do_setcustompalette(NULL);	
 
+				SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
 				SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 				resize_geometry (ev.w, ev.h);
 				winW = ev.w; winH = ev.h;
@@ -663,6 +674,7 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 
 	SDL_BlitSurface(display.bg,&orect,display.dpy,&drect);
 
+	if (display.show_ui) SDL_BlitSurface(display.ui,&orect,display.dpy,&drect);
 	if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpy,&drect);
 	SDL_UpdateRect(display.dpy,x1,y1,x2-x1,y2-y1);
 }

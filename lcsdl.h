@@ -28,8 +28,10 @@ typedef struct _disp
 {
 	SDL_Surface *dpy; //screen
 	SDL_Surface *bg; //background
+	SDL_Surface *ui; //background
 	SDL_Surface *sprites; //square mouse.
 
+	int show_ui;
 	int show_sprites;
 	int screen;
 	char *dname;
@@ -97,6 +99,7 @@ void Fgl_write (int, int, char *);
 void open_write (int, int, char *);
 //extern void Fgl_getbox (int, int, int, int, void *);
 //extern void Fgl_putbox (int, int, int, int, void *);
+void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf);
 void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col);
 void Fgl_fillbox (int, int, int, int, int);
 void Fgl_hline_s (SDL_Surface* surf, int x1, int y1, int x2, int col);
