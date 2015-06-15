@@ -23,14 +23,12 @@ game with lots of changes and enhancements.
 
 # COMPILATION AND INSTALLATION
 
-Either one of the following libraries (and development files):
+In order to compile Lincity, the following libraries are required (as well as
+the corresponding development files):
 
-* libsdl 1.2.0 (or greater).
-* X11.
-
-All of the following libraries (and development files):
-
-* The libpng and libz libraries.
+* libsdl 1.2.0 (or greater),
+* libpng,
+* libz.
 
 To install lincity, extract the supplied archive or clone the Git repository
 into a folder, then open the terminal and type the following commands:
@@ -45,26 +43,9 @@ But if you want to install, you can do this:
 
 # RUNNING LINCITY
 
-Usually you will invoke the game with 'lincity' or 'xlincity'.
+Usually you will invoke the game with the `lincity` command.
 
-             lincity  [opts]
-             xlincity [opts]
-
-The following options may apply:
-
-        -w   Do some *crude* gamma correction to boost the red and blue.
-             This makes some 'washed out' displays a bit more colourful.
-             You have control of the individual values, see below.
-
-        -R <num>
-        -G <num>
-        -B <num>
-             These options allow you to boost the individual colours.
-             <num> is a number between 0.0 and 1.0
-             The default values for -w are  1.0   0.0   0.4  (ATTOW)
-
-	-b   *obsolete* omit border around game.  Now on by default.
-
+    lincity
 
 # UPGRADING FROM VERSION 1.13
 
@@ -73,7 +54,7 @@ that 1.14 can read files generated in 1.13.
 
 # THE LINCITY HOME DIRECTORY
 
-If you get a message such as "Error. Can't find LINCITY_HOME", this
+If you get a message such as "Error. Can't find LINCITY\_HOME", this
 means that lincity can't find its home directory.  To find its 
 home directory, lincity searches for the file "colour.pal" in 
 the following three directories (in order):
@@ -89,7 +70,7 @@ Lincity now has a configuration file for saving defaults.  You can
 find it in the following location:
           
 UNIX:       $HOME/.lincityrc
-WINDOWS:    %LINCITY_HOME%\lincity.ini
+WINDOWS:    %LINCITY\_HOME%\lincity.ini
 
 To reset to the "factory default" configuration, simply delete the 
 file.  Lincity will regenerate the file if it is missing.
@@ -102,27 +83,10 @@ buildings and animations.  To modify the artwork simply edit the
 icon image file, located at opening/icons.png, with your favorite 
 image editor.  
 
-The icons.png file has a 256-color indexed format.  The palette contained
-within icons.png, however, is ignored by lincity.  Instead, lincity 
-uses the file "Colour.pal" to determine the palette.
-
-# NOTES FOR X VERSION
-
-When playing in 256 colour (8bbp) display modes, when you go over the edge
-of your window, the window manager changes the colour palette back to the
-'normal' one, then back to the game's one when the mouse reenters the
-window. This is what is supposed to happen, but can be a bit annoying when
-trying to click on areas close to the edge and overshooting. For this
-reason, I have added an extra border around the game to give players a bit
-of 'breathing space'.
-
-You can disable this feature by starting the game with a '-b' switch. ie.
-
-                 xlincity -b
-
-There is now a button that enables you to confine the mouse pointer within
-the X window. ( xlincity -b, then confining the pointer and changing the
-screen resolution to 640x480 gives you a 'full screen' game. :) )
+The icons.png file has a 256-color indexed format. The palette contained
+within icons.png is used as the in-game palette. Some color indexes are
+predefined, though, so it's better not to make radical modifications of
+the PNG file's palette.
 
 # INTERNATIONALIZATION UNDER LINUX
 
@@ -141,19 +105,19 @@ sourceforge.  Do a configure, make, and make install.
 Next, download the Italian package.  Install as described in README.it.
 Run as follows:
 
-   export LANG=it_IT          ## (on bash and similar)
-   setenv LANG it_IT          ## (on csh and similar)
+   export LANG=it\_IT          ## (on bash and similar)
+   setenv LANG it\_IT          ## (on csh and similar)
    xlincity -D
 
 Hopefully you will see something like this:
 
-   Setting entire locale to it_IT
-   Setting messages locale to it_IT
-   Query locale is it_IT
-   GUESS 1 -- intl_suffix is it_IT
-   Trying Message Path /home/gsharp/lincity/share/lincity/messages/it_IT/
-   Trying Help Path /home/gsharp/lincity/share/lincity/help/it_IT/
-   GUESS 2 -- intl_suffix is it
+   Setting entire locale to it\_IT
+   Setting messages locale to it\_IT
+   Query locale is it\_IT
+   GUESS 1 -- intl\_suffix is it\_IT
+   Trying Message Path /home/gsharp/lincity/share/lincity/messages/it\_IT/
+   Trying Help Path /home/gsharp/lincity/share/lincity/help/it\_IT/
+   GUESS 2 -- intl\_suffix is it
    Trying Message Path /home/gsharp/lincity/share/lincity/messages/it/
    Set Message Path /home/gsharp/lincity/share/lincity/messages/it/
    Trying Help Path /home/gsharp/lincity/share/lincity/help/it/
@@ -182,10 +146,10 @@ but not (2).  If so, you probably saw something like this:
    Setting entire locale to (null)
    Setting messages locale to (null)
    Query locale is C
-   GUESS 1 -- intl_suffix is it_IT
-   Trying Message Path /usr/local/lincity/messages/it_IT/
-   Trying Help Path /usr/local/lincity/help/it_IT/
-   GUESS 2 -- intl_suffix is it
+   GUESS 1 -- intl\_suffix is it\_IT
+   Trying Message Path /usr/local/lincity/messages/it\_IT/
+   Trying Help Path /usr/local/lincity/help/it\_IT/
+   GUESS 2 -- intl\_suffix is it
    Trying Message Path /usr/local/lincity/messages/it/
    Set Message Path /usr/local/lincity/messages/it/
    Trying Help Path /usr/local/lincity/help/it/
@@ -195,12 +159,12 @@ but not (2).  If so, you probably saw something like this:
    DefaultVisual id=35 bp-rgb=8 map-entries=256
 
 If this happens, it means that your system is missing some files which 
-are require to "set the locale" of your system to "it_IT".  Probably 
+are require to "set the locale" of your system to "it\_IT".  Probably 
 you are running Linux -- I don't think other Unix's have this peculiar 
 requirement.
 
 To check if this is the problem (on Linux), look for the directory 
-/usr/lib/locale/it_IT.  If this directory doesn't exist, you have this
+/usr/lib/locale/it\_IT.  If this directory doesn't exist, you have this
 problem.  To fix it, do the following:
 
    1)  Make a backup of the directory /usr/share/i18n/charmaps
@@ -209,10 +173,10 @@ problem.  To fix it, do the following:
    4)  gunzip UTF-8.gz
    5)  gunzip ISO-8859-1.gz
    6)  cd /usr/share/i18n/locale
-   7)  localedef -f ../charmaps/UTF-8 -i it_IT it_IT.UTF-8
-   8)  localedef -f ../charmaps/ISO-8859-1 -i it_IT it_IT
+   7)  localedef -f ../charmaps/UTF-8 -i it\_IT it\_IT.UTF-8
+   8)  localedef -f ../charmaps/ISO-8859-1 -i it\_IT it\_IT
 
-Now check for the directory /usr/lib/locale/it_IT.  It will be there.
+Now check for the directory /usr/lib/locale/it\_IT.  It will be there.
 
 OK, now you are ready to make translations for a new language.  
 There are three parts to making a translation:
@@ -245,7 +209,7 @@ Simply type "make" in the po directory to compile.  This will
 create the file "it.gmo".  Finally, you will need to install this file.
 To install, you will copy this file to the following location:
 
-  cp it.gmo /usr/local/share/locale/it/LC_MESSAGES/lincity.mo
+  cp it.gmo /usr/local/share/locale/it/LC\_MESSAGES/lincity.mo
 
 Now, you are ready to go.  Set the LANG environment variable and 
 lincity should run using your translations.
@@ -296,7 +260,7 @@ Copyright (c) Corey Keasling 2000-2003.
 Copyright (c) [Debian
 maintainers](http://metadata.ftp-master.debian.org/changelogs//main/l/lincity/lincity_1.13.1-12_changelog)
 1997-2015.
-Copyright (c) usr_share and github contributors 2015.
+Copyright (c) usr\_share and github contributors 2015.
 
 You may freely copy, distribute and modify lincity under the terms of the
 
