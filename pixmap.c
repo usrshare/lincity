@@ -35,7 +35,7 @@ int pixmap_width = 0;
 void init_pixmaps () {
     int i;
     for (i = 1; i < NUM_OF_TYPES; i++) {
-	icon_texture[i] = NULL;
+	icon_surface[i] = NULL;
     }
 
     init_icon_pixmap (CST_GREEN);

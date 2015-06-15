@@ -26,18 +26,6 @@
 
 void HandleEvent (SDL_Event *);
 
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    uint32_t rmask = 0xff000000;
-    uint32_t gmask = 0x00ff0000;
-    uint32_t bmask = 0x0000ff00;
-    uint32_t amask = 0x000000ff;
-#else
-    uint32_t rmask = 0x000000ff;
-    uint32_t gmask = 0x0000ff00;
-    uint32_t bmask = 0x00ff0000;
-    uint32_t amask = 0xff000000;
-#endif
-
 //SDL_Surface* font_surface = NULL;
 TTF_Font* eight_font = NULL;
 TTF_Font* sixteen_font = NULL;
@@ -74,23 +62,21 @@ int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
 unsigned char *open_font;
 int open_font_height, suppress_next_expose = 0;
 
-SDL_Texture* icon_texture[NUM_OF_TYPES];
-char icon_texture_flag[NUM_OF_TYPES];
+SDL_Surface* icon_surface[NUM_OF_TYPES];
+char icon_surface_flag[NUM_OF_TYPES];
 
 void set_pointer_confinement (void)
 {
-	/*
 	if (confine_flag) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
 		SDL_WM_GrabInput(SDL_GRAB_OFF);
 	}
-	*/
 }
 
 int confine_pointer (int x, int y, int w, int h) 
 {
-	//SDL_WM_GrabInput(SDL_GRAB_ON);
+	SDL_WM_GrabInput(SDL_GRAB_ON);
 	display.pointer_confined = 1;
 	return 0;
 }
@@ -99,7 +85,7 @@ int confine_pointer (int x, int y, int w, int h)
 void unconfine_pointer (void)
 {
 
-	//SDL_WM_GrabInput(SDL_GRAB_OFF);
+	SDL_WM_GrabInput(SDL_GRAB_OFF);
 	display.pointer_confined = 0;
 	return;
 }
@@ -115,12 +101,10 @@ void open_setcustompalette (SDL_Color* inpal) {
 }
 
 void do_setcustompalette (SDL_Color* inpal) {
-
-	SDL_SetPaletteColors((display.pixpal), display.pixcolour_gc, 0, 256);
-
-	//SDL_SetSurfacePalette(display.dpy,display.pixpal);
-	SDL_SetSurfacePalette(display.bg,display.pixpal);
-	SDL_SetSurfacePalette(display.sprites,display.pixpal);
+	SDL_SetPalette((display.dpy), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.bg), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.sprites), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
 }
 
 #if defined (commentout)
@@ -165,7 +149,7 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 	if (r == -1) {
 		fprintf(stderr,"Unable to initialize SDL_ttf.\n"); exit(1);}
 
-	//SDL_EnableUNICODE(1);
+	SDL_EnableUNICODE(1);
 
 	char* option_string = "vbrng:wR:G:B:D";
 	while ((option = getopt (argc, argv, option_string)) != EOF) {
@@ -222,34 +206,31 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 
 void Create_Window (char *geometry)
 {
+
+	display.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
 	
+	if (display.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
+	
+	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, winW, winH, 8, 0,0,0,0);
+	
+	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
+
+	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
+	
+	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
+
+
 	char wname[256];	/* Window Name */
+	char iname[256];	/* Window Name */
 
 	sprintf (wname,
 			_("xlincity, Version %s, "
 				"(Copyright) IJ Peters - copying policy GNU GPL"),
 			VERSION);
 
-	int r = SDL_CreateWindowAndRenderer(winW, winH, SDL_WINDOW_RESIZABLE, &display.dpy, &display.rend);
-	
-	if (display.dpy == 0) { fprintf(stderr,"Unable to create game window.\n"); return; }
+	sprintf (iname, "xlincity");
 
-	if (display.rend == 0) { fprintf(stderr,"Unable to create game renderer.\n"); return; }
-	
-	display.dpytext = SDL_CreateTexture(display.rend,SDL_PIXELFORMAT_RGB888,SDL_TEXTUREACCESS_STREAMING,winW,winH);
-	
-	if (display.dpytext == 0) { fprintf(stderr,"Unable to create game texture.\n"); return; }
-				
-	display.bg = SDL_CreateRGBSurface(0, winW, winH, 8, 0,0,0,0);
-	
-	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
-
-	display.sprites = SDL_CreateRGBSurface(0, winW, winH, 8, 0,0,0,0);
-	
-	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
-	
-	display.compo = SDL_CreateRGBSurface(0,winW,winH,32,rmask,gmask,bmask,0);
-	if (display.compo == 0) { fprintf(stderr,"Unable to create composite surface (%s).\n",SDL_GetError()); return; }
+	SDL_WM_SetCaption(wname, iname);
 
 }
 
@@ -426,15 +407,6 @@ void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 	SDL_BlitSurface(src,&srcrect,dst,&dstrect);
 }
 
-void Fgl_render (int sx, int sy, int w, int h,
-		int dx, int dy, SDL_Texture* src) {
-
-	SDL_Rect srcrect = (SDL_Rect){.x = sx, .y = sy, .w = w, .h = h};
-	SDL_Rect dstrect = (SDL_Rect){.x = dx, .y = dy, .w = w, .h = h};
-
-	SDL_RenderCopy(display.rend,src,&srcrect,&dstrect);
-}
-
 void Fgl_putbox (int x, int y, int w, int h, void* buf) {
 
 	int c_x0 = clipping_flag ? xclip_x1 : 0;
@@ -475,7 +447,7 @@ void HandleEvent (SDL_Event *event)
 		case SDL_KEYUP:
 			{
 				SDL_KeyboardEvent key_event = event->key;
-				SDL_Keysym ks = key_event.keysym;
+				SDL_keysym ks = key_event.keysym;
 
 				x_key_shifted = key_event.keysym.mod & (KMOD_RSHIFT | KMOD_LSHIFT);
 
@@ -497,7 +469,7 @@ void HandleEvent (SDL_Event *event)
 						x_key_value = 127;
 						break;
 					default:
-						x_key_value = key_event.keysym.scancode;	
+						x_key_value = ( ks.unicode < 127 ? ks.unicode : 0);
 						break;
 				}
 			}
@@ -509,7 +481,7 @@ void HandleEvent (SDL_Event *event)
 
 				int dx = ev.xrel; int dy = ev.yrel;
 
-				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_MOUSEMOTION,SDL_MOUSEMOTION) > 0) {
+				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_MOUSEMOTIONMASK) > 0) {
 					event = &loop_ev; ev = event->motion;
 					dx += ev.xrel; dy += ev.yrel;
 				}
@@ -585,20 +557,55 @@ void HandleEvent (SDL_Event *event)
 			}
 			break;
 
-		case SDL_WINDOWEVENT:
+		case SDL_VIDEOEXPOSE:
 			{
-				SDL_WindowEvent ev = event->window;
-				
-				if (ev.event == SDL_WINDOWEVENT_RESIZED) {
 
+				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_VIDEOEXPOSEMASK) > 0) {
+					event = &loop_ev;
+				}
+				/*
+				   XExposeEvent *ev = (XExposeEvent *) event;
+				   int gx1,gy1,gx2,gy2;
+				   gx1 = ev->x;
+				   gy1 = ev->y;
+				   gx2 = ev->x + ev->width;
+				   gy2 = ev->y + ev->height;
+
+				// Coalesce waiting exposes into single redraw
+				while (XCheckMaskEvent(display.dpy,ExposureMask,&loop_ev)) {
+				ev = (XExposeEvent *) &loop_ev;
+				gx1 = min_int (gx1,ev->x);
+				gy1 = min_int (gy1,ev->y);
+				gx2 = max_int (gx2,ev->x + ev->width);
+				gy2 = max_int (gy2,ev->y + ev->height);
+				}
+				if (suppress_next_expose) {
+				suppress_next_expose = 0;
+				break;
+				}
+				 */
+				refresh_screen (0,0,winW,winH);
+			}
+			break;
+
+		case SDL_VIDEORESIZE:
+			{
+				while (SDL_PeepEvents(&loop_ev,1,SDL_GETEVENT,SDL_VIDEORESIZEMASK) > 0) {
+					event = &loop_ev;
+				}
+
+				SDL_ResizeEvent ev = event->resize;
+
+				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
 				SDL_FreeSurface(display.bg);
-				display.bg = SDL_CreateRGBSurface(0, ev.data1, ev.data2, 8, 0,0,0,0);
+				display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
 				SDL_FreeSurface(display.sprites);
-				display.sprites = SDL_CreateRGBSurface(0, ev.data1, ev.data2, 8, 0,0,0,0);
+				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
-				winW = ev.data1; winH = ev.data2;
+				winW = ev.w; winH = ev.h;
 				do_setcustompalette(NULL);	
-				resize_geometry (ev.data1, ev.data2); }
+				resize_geometry (ev.w, ev.h);
+
 			}
 			break;
 		case SDL_QUIT:
@@ -629,27 +636,10 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 	SDL_Rect orect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 	SDL_Rect drect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 
-	SDL_Surface* tmpsurf = SDL_CreateRGBSurface(0,winW,winH,32,rmask,gmask,bmask,0);
-	if (tmpsurf == 0) { fprintf(stderr,"Unable to create composite surface (%s).\n",SDL_GetError()); return; }
+	SDL_BlitSurface(display.bg,&orect,display.dpy,&drect);
 
-	int r = SDL_ConvertPixels(winW,winH,SDL_PIXELFORMAT_INDEX8,display.bg->pixels,display.bg->pitch,SDL_PIXELFORMAT_RGBX8888,tmpsurf->pixels,tmpsurf->pitch);
-	
-	if (r != 0) {fprintf(stderr,"Unable to convert pixels from index8 to rgb(%s).\n",SDL_GetError()); return;}
-	
-	SDL_BlitSurface(tmpsurf,NULL,display.compo,NULL);
-	
-	r = SDL_ConvertPixels(winW,winH,SDL_PIXELFORMAT_INDEX8,display.sprites->pixels,display.sprites->pitch,SDL_PIXELFORMAT_RGBX8888,tmpsurf->pixels,tmpsurf->pitch);
-	
-	if (r != 0) {fprintf(stderr,"Unable to convert pixels from index8 to rgb(%s).\n",SDL_GetError()); return;}
-
-	SDL_BlitSurface(tmpsurf,NULL,display.compo,NULL);
-
-	SDL_UpdateTexture(display.dpytext,NULL,display.compo->pixels,display.compo->pitch);
-
-	//if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpysurf,&drect);
-
-	SDL_UpdateWindowSurfaceRects(display.dpy,&orect,1);
-
+	if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpy,&drect);
+	SDL_UpdateRect(display.dpy,x1,y1,x2-x1,y2-y1);
 }
 
 	void
@@ -699,8 +689,12 @@ int lc_get_keystroke (void)
 }
 
 int lc_setpalettecolor(int x, int r, int g, int b) {
+
 	display.pixcolour_gc[x] = (SDL_Color){.r = r, .g=g,.b=b};
-	do_setcustompalette (NULL);
+	SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
 	return 0;
 }
 
@@ -743,23 +737,20 @@ void init_icon_pixmap (short type) {
 	g = (unsigned char *) main_types[type].graphic;
 	if (g == NULL) return;
 
-	SDL_Surface* tempsurf = SDL_CreateRGBSurface(0,main_groups[grp].size * 16, main_groups[grp].size * 16, 8,0,0,0,0);
-	SDL_SetSurfacePalette(tempsurf, display.pixpal);	
-	
-	SDL_LockSurface(tempsurf);
+	icon_surface[type] = SDL_CreateRGBSurface(SDL_HWSURFACE,main_groups[grp].size * 16, main_groups[grp].size * 16, 8,0,0,0,0);
 
-	Fgl_putbox_low (tempsurf,
+	SDL_SetPalette(icon_surface[type], SDL_LOGPAL, display.pixcolour_gc, 0, 256);	
+	SDL_SetPalette(icon_surface[type], SDL_PHYSPAL, display.pixcolour_gc, 0, 256);	
+
+
+	SDL_LockSurface(icon_surface[type]);
+
+	Fgl_putbox_low (icon_surface[type],
 			0, 0, 0, 0, main_groups[grp].size * 16, 
 			main_groups[grp].size * 16,
 			g, main_groups[grp].size * 16,
 			0, 0);
 
-	SDL_UnlockSurface(tempsurf);
-
-	icon_texture[type] = SDL_CreateTextureFromSurface(display.rend, tempsurf);
-
-	SDL_FreeSurface(tempsurf);
-
-
+	SDL_UnlockSurface(icon_surface[type]);
 }
 
