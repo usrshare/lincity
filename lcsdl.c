@@ -153,7 +153,7 @@ Fgl_setfontcolors (int bg, int fg)
 	t_fgcolor = display.pixcolour_gc[fg];
 }
 
-	void
+void
 
 Fgl_setfont (int fw, int fh, void *fp)
 {
@@ -225,7 +225,7 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 
 	winW = WINWIDTH;
 	winH = WINHEIGHT;
-	
+
 }
 
 
@@ -233,17 +233,17 @@ void Create_Window (char *geometry)
 {
 
 	display.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
-	
+
 	if (display.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
-	
+
 	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, winW, winH, 8, 0,0,0,0);
-	
+
 	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
 
 	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
-	
+
 	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
-	
+
 	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 
 
@@ -337,10 +337,10 @@ void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
 
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
-	
+
 	int tw = textsurf->w;
 	int th = textsurf->h;
-	
+
 	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
 
 	switch (align) {
@@ -449,16 +449,16 @@ void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf) {
 }
 
 /*
-void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
-{
-	unsigned char *b;
-	int x, y;
-	b = (unsigned char *) buf;
-	for (y = y1; y < y1 + h; y++)
-		for (x = x1; x < x1 + w; x++)
-			*(b++) = (unsigned char) Fgl_getpixel (x, y);
-}
-*/
+   void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
+   {
+   unsigned char *b;
+   int x, y;
+   b = (unsigned char *) buf;
+   for (y = y1; y < y1 + h; y++)
+   for (x = x1; x < x1 + w; x++)
+ *(b++) = (unsigned char) Fgl_getpixel (x, y);
+ }
+ */
 
 void HandleEvent (SDL_Event *event)
 {
@@ -729,7 +729,7 @@ int lc_loadpalette(uint32_t* pal) {
 	if (!pal) return 1;
 
 	for (int i=0; i < 256; i++) {
-		
+
 		uint32_t col = pal[i];
 
 		display.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
@@ -823,19 +823,19 @@ SDL_Surface* load_graphic_autosize(char *s)
 	fseek(inf,0L,SEEK_END);
 	l=ftell(inf);
 	fseek(inf,0L,SEEK_SET);
-    if (l == 256)
-	w = h = 16;
-    else if (l == 1024)
-	w = h = 32;
-    else if (l == 2304)
-	w = h = 48;
-    else if (l == 4096)
-	w = h = 64;
-    else
-    {
-	fclose (inf);
-	return;
-    }
+	if (l == 256)
+		w = h = 16;
+	else if (l == 1024)
+		w = h = 32;
+	else if (l == 2304)
+		w = h = 48;
+	else if (l == 4096)
+		w = h = 64;
+	else
+	{
+		fclose (inf);
+		return;
+	}
 	graphic=(char *)malloc(l);
 	fread(graphic,1,l,inf);
 
