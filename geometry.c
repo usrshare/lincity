@@ -523,7 +523,7 @@ draw_menu (void)
     Fgl_line (b->x + b->w-5, b->y+4, b->x + b->w-5, b->y + b->h-2, white(8));
 
     Fgl_setfontcolors (menu_bg_color,menu_fg_color);
-    Fgl_write (b->x + 12, b->y + 10, _("Menu"));
+    Fgl_write2 (b->x, b->y + 5, b->w, _("Menu"), TA_CENTER);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
 
@@ -548,7 +548,7 @@ draw_help (void)
     Fgl_line (b->x + b->w-5, b->y+4, b->x + b->w-5, b->y + b->h-4, white(8));
 
     Fgl_setfontcolors (menu_bg_color,menu_fg_color);
-    Fgl_write (b->x + 13, b->y + 9, _("Help"));
+    Fgl_write2 (b->x, b->y + 5, b->w, _("Help"), TA_CENTER);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
 
@@ -573,7 +573,7 @@ draw_results (void)
     Fgl_line (b->x + b->w-5, b->y+4, b->x + b->w-5, b->y + b->h-4, white(8));
 
     Fgl_setfontcolors (menu_bg_color,menu_fg_color);
-    Fgl_write (b->x + 9, b->y + 9, _("Stats"));
+    Fgl_write2 (b->x, b->y + 5, b->w, _("Stats"), TA_CENTER);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
 

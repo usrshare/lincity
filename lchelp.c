@@ -18,6 +18,7 @@
 #include "lcintl.h"
 #include "module_buttons.h"
 #include "screen.h"
+#include "lcsdl.h"
 
 /* About help history:
    History count starts at 0, but is immediately incremented to 1.
@@ -441,12 +442,16 @@ parse_textline (char *st)
 	}
     }
     st += i;
+
+    enum text_align align = TA_LEFT;
     /* get rid of the newline */
     if (st[strlen (st) - 1] == 0xa)
 	st[strlen (st) - 1] = 0;
     if (x < 0) {
 	/* centre text if x is negative */
-	x = (mw->w / 2) - (strlen (st) * 4);
+	align = TA_CENTER;
+	x=0;
+	//x = (mw->w / 2) - (strlen (st) * 4);
 	if (x < 0)
 	    return;			/* line was too long */
     } else {
@@ -454,9 +459,9 @@ parse_textline (char *st)
 	x = x + (mw->w - 440) / 2;
     }
     /* check to see if text runs off the end */
-    if ((int) (strlen (st) * 8) > (mw->w - x))
+    if ((int) (lc_txtwidth(st)) > (mw->w - x))
 	return;
-    Fgl_write (mw->x + x, mw->y + y, st);
+    Fgl_write2 (mw->x+x, mw->y + y, mw->w, st, align);
 }
 
 
@@ -643,6 +648,6 @@ parse_tbuttonline (char *st)
     sprintf (ss, "text %d %d ", x + 2, y + 2);
     strcat (ss, st);
     parse_textline (ss);
-    sprintf (ss, "button %d %d %d %d %s", x, y, (strlen (st) * 8) + 4, 12, s);
+    sprintf (ss, "button %d %d %d %d %s", x, y, lc_txtwidth(st) + 4, 15, s);
     parse_buttonline (ss);
 }

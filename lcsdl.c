@@ -319,6 +319,14 @@ Fgl_line (int x1, int y1, int dummy, int y2, int col)
 }
 
 
+int lc_txtwidth(char *s) {
+
+	int w,h;
+
+	TTF_SizeUTF8(curfont,s,&w,&h);
+	return w;
+}
+
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 
 	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
