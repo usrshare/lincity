@@ -1212,21 +1212,11 @@ extern void init_types (void);
 extern void init_type_graphics (void);
 void init_costs (void);
 int get_selected_type_cost (short selected_type);
-extern char *load_graphic (char *);
 
 /*
   screen functions
   ****************
 */
-#ifdef CS_PROFILE
-extern void FPgl_write (int, int, char *);
-extern void FPgl_getbox (int, int, int, int, void *);
-extern void FPgl_putbox (int, int, int, int, void *);
-extern void FPgl_fillbox (int, int, int, int, int);
-extern void FPgl_hline (int, int, int, int);
-extern void FPgl_line (int, int, int, int, int);
-extern void FPgl_setpixel (int, int, int);
-#endif
 extern void check_power_line_graphics (void);
 extern void check_water_graphics (void);
 extern void check_track_graphics (void);
@@ -1409,19 +1399,6 @@ extern int put_stuff3 (Map_Point_Info *, short *, int, int);
 extern int put_stuff4 (Map_Point_Info *, short *, int, int);
 
 /* ----- SDL functions ----- */
-extern void Fgl_write (int, int, char *);
-extern void open_write (int, int, char *);
-extern void Fgl_getbox (int, int, int, int, void *);
-extern void Fgl_putbox (int, int, int, int, void *);
-extern void Fgl_fillbox (int, int, int, int, int);
-extern void Fgl_hline (int, int, int, int);
-extern void Fgl_line (int, int, int, int, int);
-extern void Fgl_setpixel (int, int, int);
-extern void Fgl_setfontcolors (int, int);
-extern void Fgl_setfont (int, int, void*);
-extern void Fgl_enableclipping (void);
-extern void Fgl_setclippingwindow (int, int, int, int);
-extern void Fgl_disableclipping (void);
 
 /*
   *******   end of lin-city.h   ***********

@@ -22,6 +22,7 @@
 #include "pbar.h"
 #include "lclib.h"
 #include "module_buttons.h"
+#include "lcsdl.h"
 
 #define DEBUG_MT_CODE 1
 
@@ -316,38 +317,28 @@ draw_square_mouse (int x, int y, int size)	/* size is pixels */
     }
     omx = x;
     omy = y;
-    Fgl_getbox (x - 2, y - 2, size + 4, 2, under_square_mouse_pointer_top);
-    Fgl_getbox (x - 2, y, 2, size, under_square_mouse_pointer_left);
-    Fgl_getbox (x + size, y, 2, size, under_square_mouse_pointer_right);
-    Fgl_getbox (x - 2, y + size, size + 4, 2, under_square_mouse_pointer_bottom);
+    
+    Fgl_fillbox_s(display.sprites,omx-2,omy-2,size+4,size+4,0);
     mouse_buffer_fresh = 1;
 
-    Fgl_hline (x - 2, y - 2, x + size + 1, yellow (31));
-    Fgl_hline (x - 1, y - 1, x + size, blue (31));
-    Fgl_hline (x - 2, y + size + 1, x + size + 1, yellow (31));
-    Fgl_hline (x - 1, y + size, x + size, blue (31));
-    Fgl_line (x - 2, y - 1, x - 2, y + size + 1, yellow (31));
-    Fgl_line (x - 1, y, x - 1, y + size, blue (31));
-    Fgl_line (x + size + 1, y - 1, x + size + 1, y + size + 1, yellow (31));
-    Fgl_line (x + size, y, x + size, y + size, blue (31));
+    Fgl_hline_s (display.sprites, x - 2, y - 2, x + size + 1, yellow (31));
+    Fgl_hline_s (display.sprites, x - 1, y - 1, x + size, blue (31));
+    Fgl_hline_s (display.sprites, x - 2, y + size + 1, x + size + 1, yellow (31));
+    Fgl_hline_s (display.sprites, x - 1, y + size, x + size, blue (31));
+    Fgl_line_s (display.sprites, x - 2, y - 1, x - 2, y + size + 1, yellow (31));
+    Fgl_line_s (display.sprites, x - 1, y, x - 1, y + size, blue (31));
+    Fgl_line_s (display.sprites, x + size + 1, y - 1, x + size + 1, y + size + 1, yellow (31));
+    Fgl_line_s (display.sprites, x + size, y, x + size, y + size, blue (31));
+
+    display.show_sprites = 1;
 }
 
 void
 hide_square_mouse (void)
 {
-    int size;
-
-    size = (main_groups[selected_module_group].size) * 16;
-    if (mouse_buffer_fresh) {
-      Fgl_putbox (omx - 2, omy - 2, size + 4, 2, under_square_mouse_pointer_top);
-      Fgl_putbox (omx - 2, omy, 2, size, under_square_mouse_pointer_left);
-      Fgl_putbox (omx + size, omy, 2, size, under_square_mouse_pointer_right);
-      Fgl_putbox (omx - 2, omy + size, size + 4, 2, 
-		  under_square_mouse_pointer_bottom);
-      mouse_buffer_fresh = 0;
-    } else {
-      //      printf ("Mouse buffer stale in hide_mouse!  Not putting back!\n");
-    }
+    int size = (main_groups[selected_module_group].size) * 16;
+    Fgl_fillbox_s(display.sprites,omx-2,omy-2,size+4,size+4,0);
+    display.show_sprites = 0;
 }
 
 void
@@ -357,20 +348,14 @@ redraw_square_mouse (void)
 
     size = (main_groups[selected_module_group].size) * 16;
 
-    Fgl_getbox (omx - 2, omy - 2, size + 4, 2, under_square_mouse_pointer_top);
-    Fgl_getbox (omx - 2, omy, 2, size, under_square_mouse_pointer_left);
-    Fgl_getbox (omx + size, omy, 2, size, under_square_mouse_pointer_right);
-    Fgl_getbox (omx - 2, omy + size, size + 4, 2, under_square_mouse_pointer_bottom);
-    mouse_buffer_fresh = 1;
-
-    Fgl_hline (omx - 2, omy - 2, omx + size + 1, yellow (31));
-    Fgl_hline (omx - 1, omy - 1, omx + size, blue (31));
-    Fgl_hline (omx - 2, omy + size + 1, omx + size + 1, yellow (31));
-    Fgl_hline (omx - 1, omy + size, omx + size, blue (31));
-    Fgl_line (omx - 2, omy - 1, omx - 2, omy + size + 1, yellow (31));
-    Fgl_line (omx - 1, omy, omx - 1, omy + size, blue (31));
-    Fgl_line (omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
-    Fgl_line (omx + size, omy, omx + size, omy + size, blue (31));
+    Fgl_hline_s (display.sprites, omx - 2, omy - 2, omx + size + 1, yellow (31));
+    Fgl_hline_s (display.sprites, omx - 1, omy - 1, omx + size, blue (31));
+    Fgl_hline_s (display.sprites, omx - 2, omy + size + 1, omx + size + 1, yellow (31));
+    Fgl_hline_s (display.sprites, omx - 1, omy + size, omx + size, blue (31));
+    Fgl_line_s (display.sprites, omx - 2, omy - 1, omx - 2, omy + size + 1, yellow (31));
+    Fgl_line_s (display.sprites, omx - 1, omy, omx - 1, omy + size, blue (31));
+    Fgl_line_s (display.sprites, omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
+    Fgl_line_s (display.sprites, omx + size, omy, omx + size, omy + size, blue (31));
 }
 
 void

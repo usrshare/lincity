@@ -68,33 +68,9 @@ extern int *monthgraph_starve;
 extern int *monthgraph_nojobs;
 extern int *monthgraph_ppool;
 
-extern char *up_pbar1_graphic, *up_pbar2_graphic;
-extern char *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
-extern char *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
-extern char *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
-extern char *ore_pbar_graphic, *steel_pbar_graphic;
-extern char *pause_button1_off, *pause_button2_off;
-extern char *pause_button1_on, *pause_button2_on;
-extern char *fast_button1_off, *fast_button2_off;
-extern char *fast_button1_on, *fast_button2_on;
-extern char *med_button1_off, *med_button2_off;
-extern char *med_button1_on, *med_button2_on;
-extern char *slow_button1_off, *slow_button2_off;
-extern char *slow_button1_on, *slow_button2_on;
-extern char *results_button1, *results_button2;
-extern char *toveron_button1, *toveron_button2;
-extern char *toveroff_button1, *toveroff_button2;
 extern int pause_flag, slow_flag, med_flag, fast_flag;
 extern int prefs_flag;
 extern int prefs_drawn_flag;
-
-extern char *ms_pollution_button_graphic, *ms_normal_button_graphic;
-extern char *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
-extern char *ms_cricket_cover_button_graphic;
-extern char *ms_ub40_button_graphic, *ms_coal_button_graphic;
-extern char *ms_starve_button_graphic, *ms_ocost_button_graphic;
-extern char *ms_power_button_graphic;
-extern char *checked_box_graphic, *unchecked_box_graphic;
 
 extern char market_cb_gbuf[MARKET_CB_W * MARKET_CB_H];
 extern int market_cb_flag, mcbx, mcby, market_cb_drawn_flag;

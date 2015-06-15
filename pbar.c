@@ -62,7 +62,7 @@ init_pbar_text (void)
  * ---------------------------------------------------------------------- */
 
 void 
-draw_pbar (Rect* b, char* graphic)
+draw_pbar (Rect* b, SDL_Surface* graphic)
 /* XXX: WCK: why not just make the graphic include the black? */
 /* GCS: Good idea, but xpicedit is painful to use! */
 {

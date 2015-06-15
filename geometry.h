@@ -125,14 +125,13 @@ void select_fast (void);
 void select_medium (void);
 void select_slow (void);
 void select_pause (void);
-void draw_ms_button (char* graphic);
+void draw_ms_button (void* graphic);
 void draw_ms_text (char* txt);
 void draw_small_bezel (int x, int y, int w, int h, int colour);
 void draw_bezel (Rect r, short width, int color);
 
 /* Text width */
-#define CHAR_HEIGHT 8 
-#define CHAR_WIDTH 8
+#define CHAR_HEIGHT 12
 
 /* Main window */
 #define MAIN_WIN_W 432
@@ -149,16 +148,16 @@ void draw_bezel (Rect r, short width, int color);
 #define PAUSE_BUTTON_Y SPEED_BUTTONS_Y
 #define PAUSE_BUTTON_H 16
 #define PAUSE_BUTTON_W 32
-#define SLOW_BUTTON_X SPEED_BUTTONS_X
-#define SLOW_BUTTON_Y SPEED_BUTTONS_Y + SPEED_BUTTONS_H
+#define SLOW_BUTTON_X SPEED_BUTTONS_X + SPEED_BUTTONS_W
+#define SLOW_BUTTON_Y SPEED_BUTTONS_Y
 #define SLOW_BUTTON_H 16
 #define SLOW_BUTTON_W 32
-#define MED_BUTTON_X SPEED_BUTTONS_X
-#define MED_BUTTON_Y SPEED_BUTTONS_Y + 2 * SPEED_BUTTONS_H
+#define MED_BUTTON_X SPEED_BUTTONS_X + 2 * SPEED_BUTTONS_W
+#define MED_BUTTON_Y SPEED_BUTTONS_Y
 #define MED_BUTTON_H 16
 #define MED_BUTTON_W 32
-#define FAST_BUTTON_X SPEED_BUTTONS_X
-#define FAST_BUTTON_Y SPEED_BUTTONS_Y + 3 * SPEED_BUTTONS_H
+#define FAST_BUTTON_X SPEED_BUTTONS_X + 3 * SPEED_BUTTONS_W
+#define FAST_BUTTON_Y SPEED_BUTTONS_Y
 #define FAST_BUTTON_H 16
 #define FAST_BUTTON_W 32
 
@@ -262,17 +261,17 @@ void draw_bezel (Rect r, short width, int color);
 #define PBAR_MONEY_Y    PBAR_POP_Y+(PBAR_H+1)*8
 #endif /* commentout */
 
-#define STATUS_AREA_X             MAIN_WIN_X + SPEED_BUTTONS_W
+#define STATUS_AREA_X             SPEED_BUTTONS_X
 #define DATE_W                    112
-#define MONEY_W                   32 * CHAR_WIDTH
+#define MONEY_W                   32 * 8
 #define TIME_FOR_YEAR_X           STATUS_AREA_X
-#define TIME_FOR_YEAR_Y           470
+#define TIME_FOR_YEAR_Y           444
 #define SELECT_BUTTON_MESSAGE_X   STATUS_AREA_X
-#define SELECT_BUTTON_MESSAGE_Y   460
+#define SELECT_BUTTON_MESSAGE_Y   SPEED_BUTTONS_Y + SPEED_BUTTONS_H
 #define STATUS_MESSAGE_1_X        STATUS_AREA_X
-#define STATUS_MESSAGE_1_Y        440
+#define STATUS_MESSAGE_1_Y        SELECT_BUTTON_MESSAGE_Y + 12
 #define STATUS_MESSAGE_2_X        STATUS_AREA_X
-#define STATUS_MESSAGE_2_Y        450
+#define STATUS_MESSAGE_2_Y        SELECT_BUTTON_MESSAGE_Y + 24
 
 #define SUST_SCREEN_X 96
 #define SUST_SCREEN_Y 416

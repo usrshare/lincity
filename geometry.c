@@ -174,13 +174,13 @@ initialize_geometry (Screen_Geometry* scr)
 
     scr->date.w = DATE_W;  
     scr->date.x = scr->main_win.x + scr->main_win.w - scr->date.w;
-    scr->date.y = scr->main_win.y + scr->main_win.h + 16;
-    scr->date.h = 16; 
+    scr->date.y = scr->main_win.y + scr->main_win.h + 10;
+    scr->date.h = 12; 
 
     scr->money.w = MONEY_W;
     scr->money.x = scr->main_win.x;
-    scr->money.y = scr->main_win.y + scr->main_win.h + 16;
-    scr->money.h = 16;
+    scr->money.y = scr->main_win.y + scr->main_win.h + 10;
+    scr->money.h = 12;
 
     scr->time_for_year.x = TIME_FOR_YEAR_X;
     scr->time_for_year.y = TIME_FOR_YEAR_Y;
@@ -624,15 +624,8 @@ draw_results (void)
 /* ---------------------------------------------------------------------- *
  * Mini map button functions
  * ---------------------------------------------------------------------- */
-#if defined (commentout)
 void
-draw_ms_button (Rect* b, char* graphic)
-{
-    Fgl_putbox (b->x, b->y, 16, 16, graphic);
-}
-#endif
-void
-draw_ms_button (char* graphic)
+draw_ms_button (void* graphic)
 {
     Rect* mma = &scr.mini_map_aux;
     Fgl_putbox (mma->x + 4, mma->y, 16, 16, graphic);

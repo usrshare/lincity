@@ -165,7 +165,7 @@ dialog_box(int arg_color, int argc, ...)
 	    db_entry[dbn].type = 0;
 	    db_entry[dbn].retval = 0;
 
-	    db_rect[dbn].w = (strlen(db_entry[dbn].text) * CHAR_WIDTH);
+	    db_rect[dbn].w = lc_txtwidth(db_entry[dbn].text);
 	    db_rect[dbn].h = CHAR_HEIGHT;
 	    if (db_rect[dbn].w > db_longest_line) 
 		db_longest_line = db_rect[dbn].w;
@@ -175,7 +175,7 @@ dialog_box(int arg_color, int argc, ...)
 	} while ((working_str != NULL) && (strlen(working_str) >= 1));
     } else { 
 	db_entry[dbn].text = va_arg(ap, char *);
-	db_rect[dbn].w = ((strlen(db_entry[dbn].text) * CHAR_WIDTH)
+	db_rect[dbn].w = (lc_txtwidth(db_entry[dbn].text)
 			  + (BUTTON_BORDER * 2));
 	db_rect[dbn].h = (CHAR_HEIGHT + (BUTTON_BORDER * 2));
 	
@@ -289,7 +289,7 @@ dialog_refresh(void)
 
   if (!db_screen_fresh) {
       db_screen_buffer = (char *)lcalloc(dialog_window.w * dialog_window.h);
-      Fgl_getrect(&dialog_window,db_screen_buffer);
+      //Fgl_getrect(&dialog_window,db_screen_buffer);
       db_screen_fresh = 1;
   };
 

@@ -69,6 +69,47 @@ extern int cs_mouse_x, cs_mouse_y;
 extern float gamma_correct_red, gamma_correct_green, gamma_correct_blue;
 //extern Cursor pirate_cursor;
 
+extern SDL_Surface *up_pbar1_graphic, *up_pbar2_graphic;
+extern SDL_Surface *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
+extern SDL_Surface *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
+extern SDL_Surface *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
+extern SDL_Surface *ore_pbar_graphic, *steel_pbar_graphic;
+extern SDL_Surface *pause_button1_off, *pause_button2_off;
+extern SDL_Surface *pause_button1_on, *pause_button2_on;
+extern SDL_Surface *fast_button1_off, *fast_button2_off;
+extern SDL_Surface *fast_button1_on, *fast_button2_on;
+extern SDL_Surface *med_button1_off, *med_button2_off;
+extern SDL_Surface *med_button1_on, *med_button2_on;
+extern SDL_Surface *slow_button1_off, *slow_button2_off;
+extern SDL_Surface *slow_button1_on, *slow_button2_on;
+extern SDL_Surface *results_button1, *results_button2;
+extern SDL_Surface *toveron_button1, *toveron_button2;
+extern SDL_Surface *toveroff_button1, *toveroff_button2;
+extern SDL_Surface *ms_pollution_button_graphic, *ms_normal_button_graphic;
+extern SDL_Surface *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
+extern SDL_Surface *ms_cricket_cover_button_graphic;
+extern SDL_Surface *ms_ub40_button_graphic, *ms_coal_button_graphic;
+extern SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
+extern SDL_Surface *ms_power_button_graphic;
+extern SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
+
+void Fgl_write (int, int, char *);
+void open_write (int, int, char *);
+//extern void Fgl_getbox (int, int, int, int, void *);
+//extern void Fgl_putbox (int, int, int, int, void *);
+void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col);
+void Fgl_fillbox (int, int, int, int, int);
+void Fgl_hline_s (SDL_Surface* surf, int x1, int y1, int x2, int col);
+void Fgl_line_s (SDL_Surface* surf, int x1, int y1, int dummy, int y2, int col);
+void Fgl_hline (int, int, int, int);
+void Fgl_line (int, int, int, int, int);
+void Fgl_setpixel (int, int, int);
+void Fgl_setfontcolors (int, int);
+void Fgl_setfont (int, int, void*);
+void Fgl_enableclipping (void);
+void Fgl_setclippingwindow (int, int, int, int);
+void Fgl_disableclipping (void);
+
 void parse_sdlargs (int, char **, char **);
 void set_pointer_confinement (void);
 void do_setcustompalette (SDL_Color *);
@@ -103,5 +144,7 @@ extern TTF_Font* eight_font;
 extern TTF_Font* sixteen_font;
 extern SDL_Surface* icon_surface[NUM_OF_TYPES];
 extern char icon_surface_flag[NUM_OF_TYPES];
+
+SDL_Surface* load_graphic(char *s, int w, int h);
 
 #endif /* __lcsdl_h__ */

@@ -95,6 +95,7 @@ void init_pixmaps () {
     init_icon_pixmap (CST_COMMUNE_13);
     init_icon_pixmap (CST_COMMUNE_14);
     /* farms   (3 7 11 and 15 are the only ones needed) */
+    init_icon_pixmap (CST_FARM_O0);
     init_icon_pixmap (CST_FARM_O3);
     init_icon_pixmap (CST_FARM_O7);
     init_icon_pixmap (CST_FARM_O11);

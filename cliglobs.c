@@ -55,31 +55,7 @@ char *months[] =
 N_("May"), N_("Jun"), N_("Jul"), N_("Aug"),
 N_("Sep"), N_("Oct"), N_("Nov"), N_("Dec")};
 
-char *up_pbar1_graphic, *up_pbar2_graphic;
-char *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
-char *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
-char *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
-char *ore_pbar_graphic, *steel_pbar_graphic;
-char *pause_button1_off, *pause_button2_off;
-char *pause_button1_on, *pause_button2_on;
-char *fast_button1_off, *fast_button2_off;
-char *fast_button1_on, *fast_button2_on;
-char *med_button1_off, *med_button2_off;
-char *med_button1_on, *med_button2_on;
-char *slow_button1_off, *slow_button2_off;
-char *slow_button1_on, *slow_button2_on;
-char *results_button1, *results_button2;
-char *toveron_button1, *toveron_button2;
-char *toveroff_button1, *toveroff_button2;
 int pause_flag = 0, slow_flag = 0, med_flag = 0, fast_flag = 0;
-
-char *ms_pollution_button_graphic, *ms_normal_button_graphic;
-char *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
-char *ms_cricket_cover_button_graphic;
-char *ms_ub40_button_graphic, *ms_coal_button_graphic;
-char *ms_starve_button_graphic, *ms_ocost_button_graphic;
-char *ms_power_button_graphic;
-char *checked_box_graphic, *unchecked_box_graphic;
 
 char market_cb_gbuf[MARKET_CB_W * MARKET_CB_H];
 int market_cb_flag = 0, mcbx, mcby, market_cb_drawn_flag = 0;

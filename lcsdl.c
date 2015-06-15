@@ -65,6 +65,30 @@ int open_font_height, suppress_next_expose = 0;
 SDL_Surface* icon_surface[NUM_OF_TYPES];
 char icon_surface_flag[NUM_OF_TYPES];
 
+SDL_Surface *up_pbar1_graphic, *up_pbar2_graphic;
+SDL_Surface *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
+SDL_Surface *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
+SDL_Surface *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
+SDL_Surface *ore_pbar_graphic, *steel_pbar_graphic;
+SDL_Surface *pause_button1_off, *pause_button2_off;
+SDL_Surface *pause_button1_on, *pause_button2_on;
+SDL_Surface *fast_button1_off, *fast_button2_off;
+SDL_Surface *fast_button1_on, *fast_button2_on;
+SDL_Surface *med_button1_off, *med_button2_off;
+SDL_Surface *med_button1_on, *med_button2_on;
+SDL_Surface *slow_button1_off, *slow_button2_off;
+SDL_Surface *slow_button1_on, *slow_button2_on;
+SDL_Surface *results_button1, *results_button2;
+SDL_Surface *toveron_button1, *toveron_button2;
+SDL_Surface *toveroff_button1, *toveroff_button2;
+SDL_Surface *ms_pollution_button_graphic, *ms_normal_button_graphic;
+SDL_Surface *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
+SDL_Surface *ms_cricket_cover_button_graphic;
+SDL_Surface *ms_ub40_button_graphic, *ms_coal_button_graphic;
+SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
+SDL_Surface *ms_power_button_graphic;
+SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
+
 void set_pointer_confinement (void)
 {
 	if (confine_flag) {
@@ -105,6 +129,7 @@ void do_setcustompalette (SDL_Color* inpal) {
 	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);
 	SDL_SetPalette((display.bg), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
 	SDL_SetPalette((display.sprites), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 }
 
 #if defined (commentout)
@@ -218,6 +243,8 @@ void Create_Window (char *geometry)
 	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
 	
 	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
+	
+	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 
 
 	char wname[256];	/* Window Name */
@@ -270,69 +297,46 @@ void Fgl_setpixel (int x, int y, int col) {
 
 int Fgl_getpixel (int x, int y)
 {
-
-	int bpp = (display.bg)->format->BytesPerPixel;
-	/* Here p is the address to the pixel we want to retrieve */
-	Uint8 *p = (Uint8 *)(display.bg)->pixels + y * (display.bg)->pitch + x * bpp;
-
-	switch(bpp) {
-		case 1:
-			return *p;
-
-		case 2:
-			return *(Uint16 *)p;
-
-		case 3:
-			if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
-				return p[0] << 16 | p[1] << 8 | p[2];
-			else
-				return p[0] | p[1] << 8 | p[2] << 16;
-
-		case 4:
-			return *(Uint32 *)p;
-
-		default:
-			return 0;       /* shouldn't happen, but avoids warnings */
-	}
-
 }
 
-	void
-Fgl_hline (int x1, int y1, int x2, int col)
-{
+void Fgl_hline_s (SDL_Surface* surf, int x1, int y1, int x2, int col) {
 	col &= 0xff;
 	//pixmap_hline (x1, y1, x2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=x2-x1+1, .h=1};
-	SDL_FillRect(display.bg,&dstrect,col);
+	SDL_FillRect(surf,&dstrect,col);
 }
 
-	void
-Fgl_line (int x1, int y1, int dummy, int y2, int col)
-	/* vertical lines only. */
-{
+void Fgl_line_s (SDL_Surface* surf, int x1, int y1, int dummy, int y2, int col) {
+	//vertical lines only
 	col &= 0xff;
 	//pixmap_vline (x1, y1, y2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=1, .h=y2-y1+1};
-	SDL_FillRect(display.bg,&dstrect,col);
+	SDL_FillRect(surf,&dstrect,col);
 }
 
+void Fgl_hline (int x1, int y1, int x2, int col) {
+	return Fgl_hline_s(display.bg,x1,y1,x2,col);
+}
+
+void Fgl_line (int x1, int y1, int dummy, int y2, int col) {
+	return Fgl_line_s(display.bg,x1,y1,dummy,y2,col);
+}
 
 int lc_txtwidth(char *s) {
-
 	int w,h;
-
 	TTF_SizeUTF8(curfont,s,&w,&h);
 	return w;
 }
 
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 
+	if (strlen(s) == 0) return;
+
 	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
 
-
-	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface.\n"); return;}
+	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 	
 	int tw = textsurf->w;
 	int th = textsurf->h;
@@ -358,7 +362,7 @@ void Fgl_write (int x, int y, char *s){
 	return Fgl_write2(x,y,0,s,TA_LEFT);
 }
 
-void Fgl_fillbox (int x1, int y1, int w, int h, int col)
+void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col)
 {
 	if (clipping_flag) {
 		if (x1 < xclip_x1)
@@ -374,8 +378,14 @@ void Fgl_fillbox (int x1, int y1, int w, int h, int col)
 	//pixmap_fillbox (x1, y1, w, h, col);
 
 	SDL_Rect dstrect = {.x=x1,.y=y1,.w=w,.h=h};
-	SDL_FillRect(display.bg, &dstrect, col);
+	SDL_FillRect(surf, &dstrect, col);
 }
+
+void Fgl_fillbox (int x1, int y1, int w, int h, int col)
+{
+	return Fgl_fillbox_s(display.bg,x1,y1,w,h,col);
+}
+
 
 
 /*
@@ -432,25 +442,13 @@ void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 	SDL_BlitSurface(src,&srcrect,dst,&dstrect);
 }
 
-void Fgl_putbox (int x, int y, int w, int h, void* buf) {
 
-	int c_x0 = clipping_flag ? xclip_x1 : 0;
-	int c_x1 = clipping_flag ? xclip_x2 : winW - 1;
-	int c_y0 = clipping_flag ? xclip_y1 : 0;
-	int c_y1 = clipping_flag ? xclip_y2 : winH - 1;
-	int x1 = clamp (x, c_x0, c_x1);
-	int y1 = clamp (y, c_y0, c_y1);
-	int x2 = clamp (x + w, c_x0, c_x1 + 1);
-	int y2 = clamp (y + h, c_y0, c_y1 + 1);
+void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf) {
 
-
-	if (x2 > x1 && y2 > y1)
-		Fgl_putbox_low (display.bg, 0, 0, x1, y1, x2 - x1, 
-				y2 - y1, (uint8_t*) buf, w, x1 - x, y1 - y);
-
+	return Fgl_blit(display.bg,0,0,w,h,x,y,surf);
 }
 
-
+/*
 void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
 {
 	unsigned char *b;
@@ -460,7 +458,7 @@ void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
 		for (x = x1; x < x1 + w; x++)
 			*(b++) = (unsigned char) Fgl_getpixel (x, y);
 }
-
+*/
 
 void HandleEvent (SDL_Event *event)
 {
@@ -627,9 +625,11 @@ void HandleEvent (SDL_Event *event)
 				SDL_FreeSurface(display.sprites);
 				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
-				winW = ev.w; winH = ev.h;
 				do_setcustompalette(NULL);	
+
+				SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 				resize_geometry (ev.w, ev.h);
+				winW = ev.w; winH = ev.h;
 
 			}
 			break;
@@ -720,6 +720,7 @@ int lc_setpalettecolor(int x, int r, int g, int b) {
 	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
 	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
 	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
 	return 0;
 }
 
@@ -779,3 +780,28 @@ void init_icon_pixmap (short type) {
 	SDL_UnlockSurface(icon_surface[type]);
 }
 
+
+SDL_Surface* load_graphic(char *s, int w, int h)
+{
+	int x,l;
+	char ss[LC_PATH_MAX],*graphic;
+	FILE *inf;
+	strcpy(ss,graphic_path);
+	strcat(ss,s);
+	if ((inf=fopen(ss,"rb"))==NULL)
+	{
+		strcat(ss," -- UNABLE TO LOAD");
+		do_error(ss);
+	}
+	fseek(inf,0L,SEEK_END);
+	l=ftell(inf);
+	fseek(inf,0L,SEEK_SET);
+	graphic=(char *)malloc(l);
+	fread(graphic,1,l,inf);
+
+	SDL_Surface* newsurf = SDL_CreateRGBSurfaceFrom(graphic,w,h,8,w,0,0,0,0);
+	SDL_SetPalette(newsurf,SDL_LOGPAL,display.pixcolour_gc,0,256);
+
+	fclose(inf);
+	return newsurf;
+}

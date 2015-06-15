@@ -55,7 +55,9 @@ void mps_store_sss(int i, char * s1, char * s2, char * s3);
 
 
 /* Data for new mps routines */
-extern char mps_info[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+extern char mps_info_l[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+extern char mps_info_r[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+extern char mps_info_m[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
 extern int mps_global_style;
 
 /* MPS Global displays */

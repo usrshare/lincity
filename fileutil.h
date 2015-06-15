@@ -37,7 +37,6 @@ extern char given_scene[LC_PATH_MAX];
 void gunzip_file (char *f1, char *f2);
 int file_exists (char *filename);
 int directory_exists (char *dir);
-char* load_graphic(char *s);
 void undosify_string(char *s);
 void load_lincityrc (void);
 void save_lincityrc (void);

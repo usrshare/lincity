@@ -80,22 +80,22 @@ draw_prefs_cb (void)
 {
     Rect* mw = &scr.main_win;
     int x, y;
-    char* graphic;
+    SDL_Surface* graphic;
 
     x = mw->x + 50;
     y = mw->y + 30;
     graphic = overwrite_transport_flag ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, graphic);
+    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
 
     y += 16;
     graphic = suppress_popups ? unchecked_box_graphic : checked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, graphic);
+    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
 
     y += 16;
     graphic = time_multiplex_stats ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, graphic);
+    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
 
 }
 
@@ -162,10 +162,10 @@ do_prefs_screen (void)
     Fgl_write (mw->x + 80, mw->y + 6*8, _("Popup info to dialog boxes"));
     Fgl_write (mw->x + 80, mw->y + 8*8, _("Time multiplexed stats windows"));
 
-    x = 370;
+    x = 406 - (lc_txtwidth(_("OUT")) + 4);
     y = 387;
     h = 12;
-    w = 3*8 + 4;
+    w = lc_txtwidth(_("OUT")) + 4;
     Fgl_hline (mw->x + x, mw->y + y,
 	       mw->x + x + w, HELPBUTTON_COLOUR);
     Fgl_hline (mw->x + x, mw->y + y + h, 

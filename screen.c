@@ -506,98 +506,98 @@ screen_setup (void)
 
     /* load the pbar graphics */
     /* XXX: WCK: pbar_setup? */
-    up_pbar1_graphic = load_graphic ("pbarup1.csi");
-    up_pbar2_graphic = load_graphic ("pbarup2.csi");
-    down_pbar1_graphic = load_graphic ("pbardown1.csi");
-    down_pbar2_graphic = load_graphic ("pbardown2.csi");
-    pop_pbar_graphic = load_graphic ("pbarpop.csi");
-    tech_pbar_graphic = load_graphic ("pbartech.csi");
-    food_pbar_graphic = load_graphic ("pbarfood.csi");
-    jobs_pbar_graphic = load_graphic ("pbarjobs.csi");
-    coal_pbar_graphic = load_graphic ("pbarcoal.csi");
-    goods_pbar_graphic = load_graphic ("pbargoods.csi");
-    ore_pbar_graphic = load_graphic ("pbarore.csi");
-    steel_pbar_graphic = load_graphic ("pbarsteel.csi");
-    money_pbar_graphic = load_graphic ("pbarmoney.csi");
+    up_pbar1_graphic = load_graphic ("pbarup1.csi",16,16);
+    up_pbar2_graphic = load_graphic ("pbarup2.csi",16,16);
+    down_pbar1_graphic = load_graphic ("pbardown1.csi",16,16);
+    down_pbar2_graphic = load_graphic ("pbardown2.csi",16,16);
+    pop_pbar_graphic = load_graphic ("pbarpop.csi",16,16);
+    tech_pbar_graphic = load_graphic ("pbartech.csi",16,16);
+    food_pbar_graphic = load_graphic ("pbarfood.csi",16,16);
+    jobs_pbar_graphic = load_graphic ("pbarjobs.csi",16,16);
+    coal_pbar_graphic = load_graphic ("pbarcoal.csi",16,16);
+    goods_pbar_graphic = load_graphic ("pbargoods.csi",16,16);
+    ore_pbar_graphic = load_graphic ("pbarore.csi",16,16);
+    steel_pbar_graphic = load_graphic ("pbarsteel.csi",16,16);
+    money_pbar_graphic = load_graphic ("pbarmoney.csi",16,16);
     init_pbars ();
 
     /* draw the box around the main window */
     draw_main_window_box (green (8));
     /* load the checked and unchecked box graphics */
-    checked_box_graphic = load_graphic ("checked_box.csi");
-    unchecked_box_graphic = load_graphic ("unchecked_box.csi");
+    checked_box_graphic = load_graphic ("checked_box.csi",16,16);
+    unchecked_box_graphic = load_graphic ("unchecked_box.csi",16,16);
 
     /* load minimap buttons (but don't draw) */
-    ms_normal_button_graphic = load_graphic ("ms-normal-button.csi");
-    ms_pollution_button_graphic = load_graphic ("ms-pollution-button.csi");
-    ms_fire_cover_button_graphic = load_graphic ("ms-fire-cover-button.csi");
+    ms_normal_button_graphic = load_graphic ("ms-normal-button.csi",16,16);
+    ms_pollution_button_graphic = load_graphic ("ms-pollution-button.csi",16,16);
+    ms_fire_cover_button_graphic = load_graphic ("ms-fire-cover-button.csi",16,16);
     ms_health_cover_button_graphic
-	    = load_graphic ("ms-health-cover-button.csi");
+	    = load_graphic ("ms-health-cover-button.csi",16,16);
     ms_cricket_cover_button_graphic
-	    = load_graphic ("ms-cricket-cover-button.csi");
-    ms_ub40_button_graphic = load_graphic ("ms-ub40-button.csi");
-    ms_coal_button_graphic = load_graphic ("ms-coal-button.csi");
-    ms_starve_button_graphic = load_graphic ("ms-starve-button.csi");
-    ms_power_button_graphic = load_graphic ("ms-power-button.csi");
-    ms_ocost_button_graphic = load_graphic ("ms-ocost-button.csi");
+	    = load_graphic ("ms-cricket-cover-button.csi",16,16);
+    ms_ub40_button_graphic = load_graphic ("ms-ub40-button.csi",16,16);
+    ms_coal_button_graphic = load_graphic ("ms-coal-button.csi",16,16);
+    ms_starve_button_graphic = load_graphic ("ms-starve-button.csi",16,16);
+    ms_power_button_graphic = load_graphic ("ms-power-button.csi",16,16);
+    ms_ocost_button_graphic = load_graphic ("ms-ocost-button.csi",16,16);
 
     /* draw the pause button */
-    pause_button1_off = load_graphic ("pause-offl.csi");
-    pause_button2_off = load_graphic ("pause-offr.csi");
-    pause_button1_on = load_graphic ("pause-onl.csi");
-    pause_button2_on = load_graphic ("pause-onr.csi");
+    pause_button1_off = load_graphic ("pause-offl.csi",16,16);
+    pause_button2_off = load_graphic ("pause-offr.csi",16,16);
+    pause_button1_on = load_graphic ("pause-onl.csi",16,16);
+    pause_button2_on = load_graphic ("pause-onr.csi",16,16);
     draw_pause (0);
 
     /* draw the slow button */
-    slow_button1_off = load_graphic ("slow-offl.csi");
-    slow_button2_off = load_graphic ("slow-offr.csi");
-    slow_button1_on = load_graphic ("slow-onl.csi");
-    slow_button2_on = load_graphic ("slow-onr.csi");
+    slow_button1_off = load_graphic ("slow-offl.csi",16,16);
+    slow_button2_off = load_graphic ("slow-offr.csi",16,16);
+    slow_button1_on = load_graphic ("slow-onl.csi",16,16);
+    slow_button2_on = load_graphic ("slow-onr.csi",16,16);
     draw_slow (0);
 
     /* draw the medium button */
-    med_button1_off = load_graphic ("norm-offl.csi");
-    med_button2_off = load_graphic ("norm-offr.csi");
-    med_button1_on = load_graphic ("norm-onl.csi");
-    med_button2_on = load_graphic ("norm-onr.csi");
+    med_button1_off = load_graphic ("norm-offl.csi",16,16);
+    med_button2_off = load_graphic ("norm-offr.csi",16,16);
+    med_button1_on = load_graphic ("norm-onl.csi",16,16);
+    med_button2_on = load_graphic ("norm-onr.csi",16,16);
     draw_med (0);
 
     /* draw the fast button */
-    fast_button1_off = load_graphic ("fast-offl.csi");
-    fast_button2_off = load_graphic ("fast-offr.csi");
-    fast_button1_on = load_graphic ("fast-onl.csi");
-    fast_button2_on = load_graphic ("fast-onr.csi");
+    fast_button1_off = load_graphic ("fast-offl.csi",16,16);
+    fast_button2_off = load_graphic ("fast-offr.csi",16,16);
+    fast_button1_on = load_graphic ("fast-onl.csi",16,16);
+    fast_button2_on = load_graphic ("fast-onr.csi",16,16);
     draw_fast (0);
 
     /* draw the results button */
-    results_button1 = load_graphic ("results-l.csi");
-    results_button2 = load_graphic ("results-r.csi");
+    results_button1 = load_graphic ("results-l.csi",16,16);
+    results_button2 = load_graphic ("results-r.csi",16,16);
     draw_results ();
 
     /* draw the t-overwrite button and load 'on button' */
 #if defined (commentout)
-    toveron_button1 = load_graphic ("tover1-on.csi");
-    toveroff_button1 = load_graphic ("tover1-off.csi");
-    toveron_button2 = load_graphic ("tover2-on.csi");
-    toveroff_button2 = load_graphic ("tover2-off.csi");
+    toveron_button1 = load_graphic ("tover1-on.csi",16,16);
+    toveroff_button1 = load_graphic ("tover1-off.csi",16,16);
+    toveron_button2 = load_graphic ("tover2-on.csi",16,16);
+    toveroff_button2 = load_graphic ("tover2-off.csi",16,16);
     draw_tover (0);
 
 #endif
 
     /* Load and draw menu buttons */
 #if defined (commentout)
-    menu_button_graphic = load_graphic ("menu-button.csi");
+    menu_button_graphic = load_graphic ("menu-button.csi",16,16);
 #endif
     draw_menu ();
     draw_help ();
 #if defined (commentout)
-    load_button_graphic = load_graphic ("load-button.csi");
+    load_button_graphic = load_graphic ("load-button.csi",16,16);
     draw_load ();
-    save_button_graphic = load_graphic ("save-button.csi");
+    save_button_graphic = load_graphic ("save-button.csi",16,16);
     draw_save ();
-    quit_button_graphic = load_graphic ("quit-button.csi");
+    quit_button_graphic = load_graphic ("quit-button.csi",16,16);
     draw_quit ();
-    help_button_graphic = load_graphic ("help-button.csi");
+    help_button_graphic = load_graphic ("help-button.csi",16,16);
     draw_help ();
 #endif
 
@@ -1673,21 +1673,17 @@ void
 print_total_money (void)
 {
     Rect* b = &scr.money;
-    char str[MONEY_W / CHAR_WIDTH + 1];
+    char str[32]; //enough.
     size_t count;
 
-    count = sprintf(str, _("Money: "));
-    count += commify(str + count, (MONEY_W / CHAR_WIDTH) - count, total_money);
-    count += snprintf(str + count, (MONEY_W / CHAR_WIDTH) - count, 
-		      "                                            ");
-    str[MONEY_W / CHAR_WIDTH] = '\0';
+    count = sprintf(str, _("¤%'d"), total_money);
+
+    //let the locale decide whether we need thousands separators.
 
     if (total_money < 0)
 	Fgl_setfontcolors (TEXT_BG_COLOUR, red (30));
 
-/*     Fgl_putbox (b->x, b->y, 16, 16, money_pbar_graphic); */
-    //Fgl_write (b->x + 16, b->y, str);
-    Fgl_write (b->x + 32, b->y, str);
+    Fgl_write2 (b->x + 32, b->y, MONEY_W, str, TA_RIGHT);
 
     if (total_money < 0)
 	Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
@@ -1698,9 +1694,9 @@ print_date (void)
 {
     char s[50];
     Rect* b = &scr.date;
-    sprintf (s, _("Date %s %04d "), current_month(total_time),
+    sprintf (s, _("%s %04d"), current_month(total_time),
 	     current_year(total_time));
-    Fgl_write (b->x, b->y, s);
+    Fgl_write2 (b->x, b->y, b->w, s, TA_RIGHT);
 }
 
 void
@@ -1722,19 +1718,6 @@ calculate_time_for_year (void)
 void
 print_time_for_year (void)
 {
-    char s[100];
-    Rect* b = &scr.time_for_year;
-
-
-    if (time_for_year > 3600.0)
-	sprintf (s, _("%s%5.1f MINS/year  V %s"), 
-		 cheat_flag ? _("TEST MODE") : "",
-		 time_for_year / 60.0, VERSION);
-    else
-	sprintf (s, _("%s%5.1f secs/year  V %s "), 
-		 cheat_flag ? _("TEST MODE") : "",
-		 time_for_year, VERSION);
-    Fgl_write (b->x, b->y, s);
 }
 
 /* Write a message in the status area of the screen */
@@ -1975,7 +1958,7 @@ draw_cb_template (int is_market_cb)
     x = mcbx;	/* x & y are the market's pos. */
     y = mcby;
     flags = MP_INFO(x,y).flags;
-    Fgl_getbox (mcb->x, mcb->y, mcb->w, mcb->h, market_cb_gbuf);
+    //Fgl_getbox (mcb->x, mcb->y, mcb->w, mcb->h, market_cb_gbuf);
     Fgl_fillbox (mcb->x, mcb->y, mcb->w, mcb->h, 28);
     draw_small_bezel(mcb->x+4, mcb->y+4, mcb->w-8, mcb->h-8, blue(0));
     Fgl_setfontcolors (28,TEXT_FG_COLOUR);
@@ -2235,8 +2218,6 @@ prog_box (char *title, int percent)
     int i;
     if (flag == 0) {
 	hide_mouse ();
-	Fgl_getbox (PROGBOXX - 8, PROGBOXY - 8, PROGBOXW + 16,
-		    PROGBOXH + 16, progbox);
 	Fgl_fillbox (PROGBOXX, PROGBOXY,
 		     PROGBOXW, PROGBOXH, PROGBOX_BG_COLOUR);
 	for (i = 1; i < 8; i++) {
@@ -2458,12 +2439,6 @@ display_rocket_result_dialog (int result)
 	ok_dial_box ("launch-evac.mes", GOOD, 0L);
 	break;
     }
-}
-
-void
-Fgl_getrect(Rect * r, void * buffer)
-{
-    Fgl_getbox(r->x,r->y,r->w,r->h,buffer);
 }
 
 void 

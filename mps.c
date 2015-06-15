@@ -23,8 +23,11 @@
 #include "modules.h"
 #include "mouse.h"
 #include "lclib.h"
+#include "lcsdl.h"
 
-char mps_info[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+char mps_info_l[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+char mps_info_r[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+char mps_info_m[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
 int mps_global_style;
 
 static int mps_style;
@@ -123,7 +126,9 @@ mps_refresh(void)
     Fgl_setfontcolors (14, TEXT_FG_COLOUR);
 
     for (i = 0; i < MAPPOINT_STATS_LINES; i++) {
-	Fgl_write (mps->x + 4, mps->y + (i * 8) + 4, mps_info[i]);
+	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_l[i], TA_LEFT);
+	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_r[i], TA_RIGHT);
+	//Fgl_write (mps->x + 2, mps->y + (i * 12),mps->w, mps_info_l[i], TA_LEFT);
     }
 
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
@@ -137,7 +142,8 @@ mps_update(void)
     int i;
     
     for (i = 0; i < MAPPOINT_STATS_LINES; i++) {
-	strcpy(mps_info[i],"");
+	strcpy(mps_info_l[i],"");
+	strcpy(mps_info_r[i],"");
     }
 
     switch (mps_style) {
@@ -300,7 +306,7 @@ mps_store_title(int i, char * t)
 
   l = strlen(t);
   c = (int)((MPS_INFO_CHARS - l) / 2) + l;
-  snprintf(mps_info[i],MPS_INFO_CHARS,"%*s", c, t);
+  snprintf(mps_info_l[i],MPS_INFO_CHARS,"%*s", c, t);
 }
 
 void
@@ -313,7 +319,7 @@ mps_store_fp(int i, double f)
   snprintf(s, sizeof(s), "%.1f%%",f);
   l = strlen(s);
   c = (int)((MPS_INFO_CHARS - l) / 2) + l;
-  snprintf(mps_info[i],MPS_INFO_CHARS,"%*s", c, s);
+  snprintf(mps_info_l[i],MPS_INFO_CHARS,"%*s", c, s);
 }
 
 void
@@ -326,7 +332,7 @@ mps_store_f(int i, double f)
   snprintf(s, sizeof(s), "%.1f",f);
   l = strlen(s);
   c = (int)((MPS_INFO_CHARS - l) / 2) + l;
-  snprintf(mps_info[i],MPS_INFO_CHARS,"%*s", c, s);
+  snprintf(mps_info_l[i],MPS_INFO_CHARS,"%*s", c, s);
 }
 
 void
@@ -339,16 +345,15 @@ mps_store_d(int i, int d)
   snprintf(s, sizeof(s), "%d",d);
   l = strlen(s);
   c = (int)((MPS_INFO_CHARS - l) / 2) + l;
-  snprintf(mps_info[i],MPS_INFO_CHARS,"%*s", c, s);
+  snprintf(mps_info_l[i],MPS_INFO_CHARS,"%*s", c, s);
 }
 
 void
 mps_store_ss(int i, char * s1, char * s2)
 {
     int l;
-    l = snprintf(mps_info[i], MPS_INFO_CHARS, "%s", s1);
-    snprintf(&mps_info[i][l], MPS_INFO_CHARS - l, "%*s", 
-	     (MPS_INFO_CHARS - l - 1), s2);
+    l = snprintf(mps_info_l[i], MPS_INFO_CHARS, "%s", s1);
+    l = snprintf(mps_info_r[i], MPS_INFO_CHARS, "%s", s2);
 }
 
 void
@@ -356,43 +361,33 @@ mps_store_sss(int i, char * s1, char * s2, char * s3)
 {
 
     int l, e;  /* Length and End of the strings */
-    int c = (MPS_INFO_CHARS) / 3;
-    int m = (MPS_INFO_CHARS) % 3;
 
     if (i > MAPPOINT_STATS_LINES) {
 	return;
     }
 
-    l = snprintf(mps_info[i], c + m, "%s", s1);
-    e = l;
-    l = snprintf(&mps_info[i][e], (c * 2) + m - e, "%*s", 
-		 (c * 2) + m - e - 1, s2);
-    e += l;
-    snprintf(&mps_info[i][e],  (c * 3) + m - e, "%*s", 
-	     (c * 3) + m - e - 1, s3);
+    l = snprintf(mps_info_l[i], MPS_INFO_CHARS, "%s", s1);
+    l = snprintf(mps_info_r[i], MPS_INFO_CHARS, "%s %s", s2,s3);
 }
 
 void
 mps_store_sd(int i, char * s, int d)
 {
-    int l;
 
     if (i > MAPPOINT_STATS_LINES) {
 	return;
     }
 
-    l = snprintf(mps_info[i], MPS_INFO_CHARS, "%s", s);
-    snprintf(&mps_info[i][l], MPS_INFO_CHARS, "%*d", 
-	     (MPS_INFO_CHARS - 1 - l), d);
+    snprintf(mps_info_l[i], MPS_INFO_CHARS, "%s", s);
+    snprintf(mps_info_r[i], MPS_INFO_CHARS, "%d",d);
 }
 
 void
 mps_store_sfp(int i, char * s, double fl)
 {
     int l;
-    l = snprintf(mps_info[i], MPS_INFO_CHARS, "%s", s); 
-    snprintf(&mps_info[i][l], MPS_INFO_CHARS, "%*.1f%%",
-	     MPS_INFO_CHARS - 2 - l, fl);
+    snprintf(mps_info_l[i], MPS_INFO_CHARS, "%s", s); 
+    snprintf(mps_info_r[i], MPS_INFO_CHARS, "%.1f%%", fl);
 }
 
 /* MPS Global routines */
