@@ -805,3 +805,43 @@ SDL_Surface* load_graphic(char *s, int w, int h)
 	fclose(inf);
 	return newsurf;
 }
+
+SDL_Surface* load_graphic_autosize(char *s)
+{
+	int x,l;
+
+	int w,h;
+	char ss[LC_PATH_MAX],*graphic;
+	FILE *inf;
+	strcpy(ss,graphic_path);
+	strcat(ss,s);
+	if ((inf=fopen(ss,"rb"))==NULL)
+	{
+		strcat(ss," -- UNABLE TO LOAD");
+		do_error(ss);
+	}
+	fseek(inf,0L,SEEK_END);
+	l=ftell(inf);
+	fseek(inf,0L,SEEK_SET);
+    if (l == 256)
+	w = h = 16;
+    else if (l == 1024)
+	w = h = 32;
+    else if (l == 2304)
+	w = h = 48;
+    else if (l == 4096)
+	w = h = 64;
+    else
+    {
+	fclose (inf);
+	return;
+    }
+	graphic=(char *)malloc(l);
+	fread(graphic,1,l,inf);
+
+	SDL_Surface* newsurf = SDL_CreateRGBSurfaceFrom(graphic,w,h,8,w,0,0,0,0);
+	SDL_SetPalette(newsurf,SDL_LOGPAL,display.pixcolour_gc,0,256);
+
+	fclose(inf);
+	return newsurf;
+}

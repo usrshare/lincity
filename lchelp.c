@@ -499,38 +499,21 @@ draw_help_icon (int x, int y, char *icon)
 {
     Rect* mw = &scr.main_win;
     int i, l, w, h;
-    char ss[LC_PATH_MAX];
-    FILE *inf;
-    strcpy (ss, graphic_path);
-    strcat (ss, icon);
-    if ((inf = fopen (ss, "rb")) == NULL) {
-	return;
-    }
-    fseek (inf, 0L, SEEK_END);
-    l = ftell (inf);
-    fseek (inf, 0L, SEEK_SET);
-    if (l == 256)
-	w = h = 16;
-    else if (l == 1024)
-	w = h = 32;
-    else if (l == 2304)
-	w = h = 48;
-    else if (l == 4096)
-	w = h = 64;
-    else
-    {
-	fclose (inf);
-	return;
-    }
-    for (i = 0; i < l; i++)
-	*(help_graphic + i) = fgetc (inf);
-    fclose (inf);
+
+    SDL_Surface* surf = load_graphic_autosize(icon);
+ 
+    if (!surf) return;
+    w = surf->w; h = surf->h;
 
     /* Adjust x location to within center zone */
     x = x + (mw->w - 440) / 2;
 
     if (x > 0 && y > 0 && ((x + w) < mw->w) && ((y + h) < mw->h))
-	Fgl_putbox (mw->x + x, mw->y + y, w, h, help_graphic);
+	Fgl_putbox (mw->x + x, mw->y + y, w, h, surf);
+
+    free(surf->pixels);
+    SDL_FreeSurface(surf);
+
     return;
 }
 
