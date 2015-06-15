@@ -704,8 +704,8 @@ void HandleEvent (SDL_Event *event)
 				SDL_FreeSurface(display.sprites);
 				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
+				display.winW = ev.w; display.winH = ev.h;
 				do_setcustompalette(NULL);	
-
 				resize_geometry (ev.w, ev.h);
 
 			}
@@ -729,6 +729,11 @@ void HandleEvent (SDL_Event *event)
 	void
 refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 {
+
+	//if all four parameters are zeros, the entire screen is refreshed.
+
+	if ((x1 == 0) && (x2 == 0)) x2 = display.winW;
+	if ((y1 == 0) && (y2 == 0)) y2 = display.winH;
 
 	SDL_Rect orect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 	SDL_Rect drect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
@@ -789,6 +794,9 @@ int lc_setpalettecolor(int x, int r, int g, int b) {
 
 	display.pixcolour_gc[x] = (SDL_Color){.r = r, .g=g,.b=b};
 	SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
 	return 0;
 }
 

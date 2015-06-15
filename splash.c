@@ -87,6 +87,8 @@ load_start_image (void)
       }
 
   fclose_read_gzipped (fp);
+  
+  refresh_screen(0,0,0,0);
 
   start_image_text ();
 }
@@ -141,6 +143,7 @@ si_scroll_text (void)
       Fgl_setclippingwindow (120, 30, 520, 40);
       Fgl_setfontcolors (SI_BLACK, SI_RED);
       Fgl_write (120 - l1c, 31, line1);
+      refresh_screen(120,30,520,40);
       l1c++;
 
       if (l2c >= 8)
@@ -154,6 +157,7 @@ si_scroll_text (void)
       Fgl_setclippingwindow (120, 55, 520, 73);
       Fgl_setfontcolors (SI_BLACK, SI_GREEN);
       Fgl_write (120 - l2c, 57, line2);
+      refresh_screen(120,55,520,73);
       l2c += 2;
 
       if (l3c >= 8)
@@ -167,6 +171,7 @@ si_scroll_text (void)
       Fgl_setclippingwindow (120, 88, 520, 106);
       Fgl_setfontcolors (SI_BLACK, SI_YELLOW);
       Fgl_write (120 - l3c, 90, line3);
+      refresh_screen(120,88,520,106);
       l3c += 2;
       while (real_time < t)
 	{
