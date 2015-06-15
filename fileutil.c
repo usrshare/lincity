@@ -445,9 +445,9 @@ init_path_strings (void)
 
     /* Font stuff */
     sprintf (fontfile_8, "%s%c%s", opening_path, PATH_SLASH,
-	     "lc-8x8font.ttf");
+	     "DejaVuSans-Bold.ttf");
     sprintf (fontfile_16, "%s%c%s", opening_path, PATH_SLASH,
-	     "lc-8x16font.ttf");
+	     "DejaVuSans-Bold.ttf");
 
     /* Temp file for results */
     lc_temp_filename = (char *) malloc (lc_save_dir_len + 16);

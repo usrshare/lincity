@@ -318,19 +318,36 @@ Fgl_line (int x1, int y1, int dummy, int y2, int col)
 	SDL_FillRect(display.bg,&dstrect,col);
 }
 
-	void
-Fgl_write (int x, int y, char *s)
-{
+
+void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 
 	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
 
-	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface.\n"); return;}
 
+	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface.\n"); return;}
+	
+	int tw = textsurf->w;
+	int th = textsurf->h;
+	
 	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
+
+	switch (align) {
+		case TA_LEFT:
+			break;
+		case TA_CENTER:
+			o_rect.x += (w - tw) / 2; break;
+		case TA_RIGHT:
+			o_rect.x += (w - tw); break;
+	}
 
 	SDL_BlitSurface(textsurf,NULL,display.bg,&o_rect);
 
 	SDL_FreeSurface(textsurf);
+}
+
+void Fgl_write (int x, int y, char *s){
+
+	return Fgl_write2(x,y,0,s,TA_LEFT);
 }
 
 void Fgl_fillbox (int x1, int y1, int w, int h, int col)

@@ -42,6 +42,12 @@ typedef struct _disp
 }
 disp;
 
+enum text_align {
+	TA_LEFT,
+	TA_CENTER,
+	TA_RIGHT,
+};
+
 extern int winW, winH;
 extern int mouse_button, cs_mouse_shifted;
 extern disp display;
@@ -89,6 +95,8 @@ int lc_loadfont(int fontid, char* filename);
 
 void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
+
+void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
 extern TTF_Font* eight_font;
 extern TTF_Font* sixteen_font;
