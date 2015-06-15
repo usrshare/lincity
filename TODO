@@ -93,6 +93,4 @@ REQUESTED FEATURES
 
 * Move code into src subdirectory
 
-* Remove old X11/SVGA code completely
-
 * Replace graphics with something that looks better

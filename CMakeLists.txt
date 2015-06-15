@@ -85,13 +85,13 @@ include_directories(${SDL_INCLUDE_DIR})
 link_libraries(${SDL_LIBRARY} png z m modules)
 
 add_executable (
-		xlincity
+		lincity
 		WIN32
 		MACOSX_BUNDLE
 		${GUI_SOURCES} ${ENGINE_SOURCES} ${MODULE_SOURCES}
 )
 
-INSTALL(PROGRAMS xlincity DESTINATION games)
+INSTALL(PROGRAMS lincity DESTINATION games)
 
 INSTALL(FILES colour.pal DESTINATION share/lincity)
 INSTALL(DIRECTORY help/ DESTINATION share/lincity/help)
