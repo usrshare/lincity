@@ -156,7 +156,6 @@ lincity_main (int argc, char *argv[])
     
     init_types ();
 
-    setcustompalette ();
     Fgl_setfont (8, 8, main_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 

@@ -83,51 +83,8 @@ void unconfine_pointer (void)
 
 void setcustompalette (void)
 {
-	char s[100];
-	int n, r, g, b, i, flag[256];
-	SDL_Color* pal = display.pixcolour_gc;
-	FILE *inf;
-	for (i = 0; i < 256; i++)
-		flag[i] = 0;
-	if ((inf = fopen (colour_pal_file, "r")) == 0)
-		HandleError ("Can't find the colour pallet file", FATAL);
-
-	while (feof (inf) == 0)
-	{
-		fgets (s, 99, inf);
-		if (sscanf (s, "%d %d %d %d", &n, &r, &g, &b) == 4)
-		{
-			pal[n].r = r * 4;
-			pal[n].g = g * 4;
-			pal[n].b = b * 4;
-			//pal[n].flags = DoRed | DoGreen | DoBlue;
-			//pal[n].pixel = colour_table[n];	/* ??? */
-
-			flag[n] = 1;
-		}
-	}
-	fclose (inf);
-	for (i = 0; i < 256; i++)
-	{
-		if (flag[i] == 0)
-		{
-			printf ("Colour %d not loaded\n", i);
-			HandleError ("Can't continue", FATAL);
-		}
-		pal[i].r = (unsigned char) ((pal[i].r
-					* (1 - gamma_correct_red)) + (64 * sin ((float) pal[i].r
-						* M_PI / 128)) * gamma_correct_red);
-
-		pal[i].g = (unsigned char) ((pal[i].g
-					* (1 - gamma_correct_green)) + (64 * sin ((float) pal[i].g
-						* M_PI / 128)) * gamma_correct_green);
-
-			pal[i].b = (unsigned char) ((pal[i].b
-						* (1 - gamma_correct_blue)) + (64 * sin ((float) pal[i].b
-						* M_PI / 128)) * gamma_correct_blue);
-	}
-
-	do_setcustompalette (pal);
+	fprintf(stderr,"setcustompalette() has been removed. Palettes are loaded from icons.png now.\n");
+	return;
 }
 
 void open_setcustompalette (SDL_Color* inpal) {
@@ -809,8 +766,7 @@ int lc_loadpalette(uint32_t* pal) {
 		uint32_t col = pal[i];
 
 		display.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
-
-		SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
+		do_setcustompalette(NULL);
 	}
 	return 0;
 }
