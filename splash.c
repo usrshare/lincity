@@ -96,7 +96,7 @@ load_start_image (void)
 void
 start_image_text (void)
 {
-  Fgl_setfont (8, 8, start_font1);
+  Fgl_setfont (8, 8, eight_font);
   Fgl_setfontcolors (SI_BLACK, SI_RED);
   si_scroll_text ();
 }
@@ -139,7 +139,7 @@ si_scroll_text (void)
 	  line1[51] = si_next_char (inf1);
 	  l1c = 0;
 	}
-      Fgl_setfont (8, 8, start_font1);
+      Fgl_setfont (8, 8, eight_font);
       Fgl_setclippingwindow (120, 30, 520, 40);
       Fgl_setfontcolors (SI_BLACK, SI_RED);
       Fgl_write (120 - l1c, 31, line1);
@@ -153,7 +153,7 @@ si_scroll_text (void)
 	  line2[51] = si_next_char (inf2);
 	  l2c = 0;
 	}
-      Fgl_setfont (8, 16, start_font2);
+      Fgl_setfont (8, 16, sixteen_font);
       Fgl_setclippingwindow (120, 55, 520, 73);
       Fgl_setfontcolors (SI_BLACK, SI_GREEN);
       Fgl_write (120 - l2c, 57, line2);
@@ -167,7 +167,7 @@ si_scroll_text (void)
 	  line3[51] = si_next_char (inf3);
 	  l3c = 0;
 	}
-      Fgl_setfont (8, 16, start_font3);
+      Fgl_setfont (8, 16, sixteen_font);
       Fgl_setclippingwindow (120, 88, 520, 106);
       Fgl_setfontcolors (SI_BLACK, SI_YELLOW);
       Fgl_write (120 - l3c, 90, line3);

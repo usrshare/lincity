@@ -6,9 +6,4 @@
 #ifndef __common_h__
 #define __common_h__
 
-#ifdef LC_SDL
-#include <SDL.h>
-#include "lcsdl.h"
-#endif
-
 #endif	/* __common_h__ */

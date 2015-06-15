@@ -86,7 +86,8 @@ char given_scene[LC_PATH_MAX];
 char colour_pal_file[LC_PATH_MAX];
 char opening_pic[LC_PATH_MAX];
 char graphic_path[LC_PATH_MAX];
-char fontfile[LC_PATH_MAX];
+char fontfile_8[LC_PATH_MAX];
+char fontfile_16[LC_PATH_MAX];
 char opening_path[LC_PATH_MAX];
 char help_path[LC_PATH_MAX];
 char message_path[LC_PATH_MAX];
@@ -443,8 +444,10 @@ init_path_strings (void)
     find_localized_paths ();
 
     /* Font stuff */
-    sprintf (fontfile, "%s%c%s", opening_path, PATH_SLASH,
-	     "iso8859-1-8x8.raw");
+    sprintf (fontfile_8, "%s%c%s", opening_path, PATH_SLASH,
+	     "lc-8x8font.ttf");
+    sprintf (fontfile_16, "%s%c%s", opening_path, PATH_SLASH,
+	     "lc-8x16font.ttf");
 
     /* Temp file for results */
     lc_temp_filename = (char *) malloc (lc_save_dir_len + 16);

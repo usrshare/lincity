@@ -79,10 +79,12 @@ SET(CMAKE_C_FLAGS "--std=gnu99 -Wall -g")
 SET(CMAKE_CXX_FLAGS "--std=gnu99 -Wall -g")
 
 Find_Package(SDL REQUIRED)
+Find_Package(SDL_ttf REQUIRED)
 
 include_directories(${SDL_INCLUDE_DIR})
+include_directories(${SDLTTF_INCLUDE_DIR})
 
-link_libraries(${SDL_LIBRARY} png z m modules)
+link_libraries(${SDL_LIBRARY} ${SDLTTF_LIBRARY} png z m modules)
 
 add_executable (
 		lincity

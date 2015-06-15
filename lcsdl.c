@@ -15,6 +15,7 @@
 #include "lclib.h"
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include "lin-city.h"
 #include "lctypes.h"
 #include "cliglobs.h"
@@ -23,7 +24,15 @@
 #include "mouse.h"
 #include "screen.h"
 
-SDL_Surface* font_surface = NULL;
+void HandleEvent (SDL_Event *);
+
+//SDL_Surface* font_surface = NULL;
+TTF_Font* eight_font = NULL;
+TTF_Font* sixteen_font = NULL;
+
+TTF_Font* curfont = NULL;
+
+SDL_Color t_bgcolor, t_fgcolor;
 
 #ifndef M_PI
 #define M_PI            3.14159265358979323846
@@ -39,7 +48,7 @@ int borderx, bordery;
 
 int command_line_debug = 0;
 
-int winX, winY, mouse_button;
+int winW, winH, mouse_button;
 
 char *bg_color = NULL;
 int verbose = FALSE;		// display settings if TRUE
@@ -115,40 +124,15 @@ initfont ()
 	void
 Fgl_setfontcolors (int bg, int fg)
 {
-	if (font_surface == 0) {printf("font_surface not created yet.\n"); return;}
-
-	SDL_Color textcolors[2];
-	textcolors[0] = display.pixcolour_gc[bg];
-	textcolors[1] = display.pixcolour_gc[fg];
-
-	SDL_SetPalette(font_surface,SDL_LOGPAL,textcolors,0,2);
+	t_bgcolor = display.pixcolour_gc[bg];
+	t_fgcolor = display.pixcolour_gc[fg];
 }
 
 	void
+
 Fgl_setfont (int fw, int fh, void *fp)
 {
-	open_font = fp;
-	open_font_height = fh;
-
-	if (font_surface == 0) {printf("font_surface not created yet.\n"); return;}
-
-	int bpl = font_surface->pitch;
-
-	SDL_LockSurface(font_surface);
-
-	for (int y=0; y < 256 * 8; y++) {
-
-		uint8_t c = main_font[y];
-		for (int x=0; x < 8; x++) {
-			uint8_t* p = (uint8_t*)font_surface->pixels + (y * bpl + x);
-			*p = (uint8_t)((c & 0x80) ? 1 : 0);
-			c <<= 1;
-		}
-	}
-
-	SDL_UnlockSurface(font_surface);
-
-
+	curfont = fp;
 }
 
 	void
@@ -161,6 +145,9 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 	if (r == -1) {
 		fprintf(stderr,"Unable to initialize SDL.\n"); exit(1);}
 
+	r = TTF_Init();
+	if (r == -1) {
+		fprintf(stderr,"Unable to initialize SDL_ttf.\n"); exit(1);}
 
 	SDL_EnableUNICODE(1);
 
@@ -211,31 +198,24 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 	//display.screen = DefaultScreen (display.dpy);
 	//display.root = RootWindow (display.dpy, display.screen);
 
-	display.winW = WINWIDTH;
-	display.winH = WINHEIGHT;
-	winX = 0;
-	winY = 0;
-
-	font_surface = SDL_CreateRGBSurface(SDL_SWSURFACE, 8, 256 * 8, 8, 0,0,0,0);
-	//8-bit surface. 256 colors.
-
-	if (font_surface == 0) { fprintf(stderr,"Unable to create font surface.\n"); return; }
-
+	winW = WINWIDTH;
+	winH = WINHEIGHT;
+	
 }
 
 
 void Create_Window (char *geometry)
 {
 
-	display.dpy = SDL_SetVideoMode(display.winW, display.winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
+	display.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
 	
 	if (display.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
 	
-	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, display.winW, display.winH, 8, 0,0,0,0);
+	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, winW, winH, 8, 0,0,0,0);
 	
 	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
 
-	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, display.winW, display.winH, 8, 0,0,0,0);
+	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
 	
 	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
 
@@ -341,58 +321,19 @@ Fgl_line (int x1, int y1, int dummy, int y2, int col)
 	void
 Fgl_write (int x, int y, char *s)
 {
-	int i;
-	for (i = 0; i < (int) (strlen (s)); i++)
-		my_x_putchar (x + i * 8, y, s[i]);
+
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
+
+	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface.\n"); return;}
+
+	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
+
+	SDL_BlitSurface(textsurf,NULL,display.bg,&o_rect);
+
+	SDL_FreeSurface(textsurf);
 }
 
-	void
-open_write (int x, int y, char *s)
-{
-	int i;
-	for (i = 0; i < (int) (strlen (s)); i++)
-		open_x_putchar (x + i * 8, y, s[i]);
-}
-
-	void
-my_x_putchar (int xx, int yy, unsigned char c)
-{
-	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
-	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
-
-	SDL_BlitSurface(font_surface,&srcrect,display.bg,&dstrect);
-}
-
-	void
-open_x_putchar (int xx, int yy, unsigned char c)
-{
-
-	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
-	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
-
-	SDL_BlitSurface(font_surface,&srcrect,display.bg,&dstrect);
-
-	/*
-	SDL_LockSurface((display.dpy));
-	int x, y, b;
-	for (y = 0; y < open_font_height; y++)
-	{
-		b = open_font[c * open_font_height + y];
-		for (x = 0; x < 8; x++)
-		{
-			if ((b & 0x80) == 0)
-				Fgl_setpixel (xx + x, yy + y, text_bg);
-			else
-				Fgl_setpixel (xx + x, yy + y, text_fg);
-			b = b << 1;
-		}
-	}
-	SDL_UnlockSurface((display.dpy));
-	*/
-}
-
-	void
-Fgl_fillbox (int x1, int y1, int w, int h, int col)
+void Fgl_fillbox (int x1, int y1, int w, int h, int col)
 {
 	if (clipping_flag) {
 		if (x1 < xclip_x1)
@@ -469,9 +410,9 @@ void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 void Fgl_putbox (int x, int y, int w, int h, void* buf) {
 
 	int c_x0 = clipping_flag ? xclip_x1 : 0;
-	int c_x1 = clipping_flag ? xclip_x2 : display.winW - 1;
+	int c_x1 = clipping_flag ? xclip_x2 : winW - 1;
 	int c_y0 = clipping_flag ? xclip_y1 : 0;
-	int c_y1 = clipping_flag ? xclip_y2 : display.winH - 1;
+	int c_y1 = clipping_flag ? xclip_y2 : winH - 1;
 	int x1 = clamp (x, c_x0, c_x1);
 	int y1 = clamp (y, c_y0, c_y1);
 	int x2 = clamp (x + w, c_x0, c_x1 + 1);
@@ -643,7 +584,7 @@ void HandleEvent (SDL_Event *event)
 				break;
 				}
 				 */
-				refresh_screen (0,0,display.winW,display.winH);
+				refresh_screen (0,0,winW,winH);
 			}
 			break;
 
@@ -661,7 +602,7 @@ void HandleEvent (SDL_Event *event)
 				SDL_FreeSurface(display.sprites);
 				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
-				display.winW = ev.w; display.winH = ev.h;
+				winW = ev.w; winH = ev.h;
 				do_setcustompalette(NULL);	
 				resize_geometry (ev.w, ev.h);
 
@@ -678,7 +619,7 @@ void HandleEvent (SDL_Event *event)
 				 return;
 			 }
 	}
-	refresh_screen (0,0,display.winW,display.winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
+	refresh_screen (0,0,winW,winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
 }
 
 #undef DEBUG_X11_MOUSE
@@ -689,8 +630,8 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 
 	//if all four parameters are zeros, the entire screen is refreshed.
 
-	if ((x1 == 0) && (x2 == 0)) x2 = display.winW;
-	if ((y1 == 0) && (y2 == 0)) y2 = display.winH;
+	if ((x1 == 0) && (x2 == 0)) x2 = winW;
+	if ((y1 == 0) && (y2 == 0)) y2 = winH;
 
 	SDL_Rect orect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 	SDL_Rect drect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};

@@ -338,8 +338,8 @@ void
 initialize_pixmap (void)
 {
     int i;
-    pixmap_height = display.winH - 2*borderx;
-    pixmap_width = display.winW - 2*bordery;
+    pixmap_height = winH - 2*borderx;
+    pixmap_width = winW - 2*bordery;
     pixmap = (char*) malloc (pixmap_height * pixmap_width * sizeof(char));
     for (i = 0; i < pixmap_height * pixmap_width; i++) {
 	pixmap[i] = 0;

@@ -9,6 +9,7 @@
 
 #include "lin-city.h"
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -22,35 +23,27 @@
 #define WINWIDTH 640		/* default window width */
 #define WINHEIGHT 480		/* default window height */
 
-
 /* Type Definitions */
 typedef struct _disp
 {
-    SDL_Surface *dpy; //screen
-    SDL_Surface *bg; //background
-    SDL_Surface *sprites; //square mouse.
+	SDL_Surface *dpy; //screen
+	SDL_Surface *bg; //background
+	SDL_Surface *sprites; //square mouse.
 
-    int show_sprites;
-    int screen;
-    char *dname;
+	int show_sprites;
+	int screen;
+	char *dname;
 
-    //Window win;
-    //Window confinewin;
-    //Window root;
+	SDL_Color bg_xcolor;
+	SDL_Color pixcolour_gc[256];
+	SDL_Palette* cmap;
 
-    unsigned int winH;
-    unsigned int winW;
-
-    SDL_Color bg_xcolor;
-    SDL_Color pixcolour_gc[256];
-    //Atom kill_atom, protocol_atom;
-    SDL_Palette* cmap;
-
-    int pointer_confined;
+	int pointer_confined;
 }
 disp;
 
-extern int winX, winY, mouse_button, cs_mouse_shifted;
+extern int winW, winH;
+extern int mouse_button, cs_mouse_shifted;
 extern disp display;
 
 extern char *bg_color;
@@ -75,7 +68,6 @@ void set_pointer_confinement (void);
 void do_setcustompalette (SDL_Color *);
 void Create_Window (char *);
 void HandleError (char *, int);
-void HandleEvent (SDL_Event *);
 void refresh_screen (int, int, int, int);
 void my_x_putchar (int, int, unsigned char);
 void open_x_putchar (int, int, unsigned char);
@@ -93,12 +85,14 @@ int lc_get_keystroke (void);
 int lc_setpalettecolor(int x, int r, int g, int b);
 int lc_loadpalette(uint32_t* pal);
 
+int lc_loadfont(int fontid, char* filename);
+
 void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
 
-
-extern SDL_Surface* icon_surface[];
-
-extern SDL_Surface* font_surface;
+extern TTF_Font* eight_font;
+extern TTF_Font* sixteen_font;
+extern SDL_Surface* icon_surface[NUM_OF_TYPES];
+extern char icon_surface_flag[NUM_OF_TYPES];
 
 #endif /* __lcsdl_h__ */

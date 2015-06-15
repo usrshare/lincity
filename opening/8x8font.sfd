@@ -19,7 +19,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1434348797
-ModificationTime: 1434350101
+ModificationTime: 1434353093
 OS2TypoAscent: 0
 OS2TypoAOffset: 1
 OS2TypoDescent: 0
@@ -37,6 +37,7 @@ OS2Vendor: 'PfEd'
 MarkAttachClasses: 1
 DEI: 91125
 Encoding: UnicodeBmp
+Compacted: 1
 UnicodeInterp: none
 NameList: Adobe Glyph List
 DisplaySize: 8
@@ -3509,7 +3510,7 @@ Flags: W
 LayerCount: 2
 EndChar
 EndChars
-BitmapFont: 8 449 7 1 1 
+BitmapFont: 8 451 7 1 1 
 BDFStartProperties: 13
 COMMENT 1 "Font converted from PSF to BDF."
 FONT 1 "iso01a-8x8.psf"
@@ -4252,8 +4253,8 @@ BDFChar: 361 1048 8 0 7 0 6
 j(<1XG%Sbp
 BDFChar: 362 1049 8 0 7 0 6
 IK8PKIWjlS
-BDFChar: 363 1050 8 0 6 0 6
-jo>A]!!!"2z!!$g8z!-eJDzC]FG8!!!"2z!!)-]zz
+BDFChar: 363 1050 8 0 6 6 6
+jo>A]
 BDFChar: 364 1051 8 0 6 0 6
 5%\D=AnK$_
 BDFChar: 365 1052 8 0 6 0 6
@@ -4338,8 +4339,8 @@ BDFChar: 404 1086 8 1 6 0 4
 Gg+CUGQ7^D
 BDFChar: 405 1087 8 1 6 0 4
 r63C/bQ%VC
-BDFChar: 406 1103 8 0 6 -1 4
-5%Zu:AcMf2
+BDFChar: 406 1103 8 1 6 0 4
+I*?tSbQ%VC
 BDFChar: 407 1088 8 1 6 -1 4
 prpt+pqQk0
 BDFChar: 408 1089 8 1 6 0 4

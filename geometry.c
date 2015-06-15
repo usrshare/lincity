@@ -284,7 +284,7 @@ initialize_geometry (Screen_Geometry* scr)
 void 
 resize_geometry (int new_width, int new_height)
 {
-    if (display.winW == new_width && display.winH == new_height) {
+    if (winW == new_width && winH == new_height) {
 	/* Not a resize event. */
 	return;
     }
@@ -296,8 +296,8 @@ resize_geometry (int new_width, int new_height)
     scr.client_win.h = new_height;
 
     /* Update display info */
-    display.winW = new_width;
-    display.winH = new_height;
+    winW = new_width;
+    winH = new_height;
 
     /* Expand pixmap if necessary */
     scr.client_w = new_width - 2*borderx;

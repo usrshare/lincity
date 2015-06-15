@@ -42,10 +42,10 @@ extern int network_game;
 /* ---------------------------------------------------------------------- *
  * Public Global Variables
  * ---------------------------------------------------------------------- */
-unsigned char main_font[2048];
-unsigned char start_font1[2048];
-unsigned char start_font2[4096];
-unsigned char start_font3[4096];
+//unsigned char main_font[2048];
+//unsigned char start_font1[2048];
+//unsigned char start_font2[4096];
+//unsigned char start_font3[4096];
 Update_Scoreboard update_scoreboard;
 
 int monthgraph_style = MONTHGRAPH_STYLE_MIN;
@@ -96,7 +96,7 @@ draw_background (void)
     /* XXX: we don't need to draw the whole background! */
     /* GCS: but this routine is only called on a full refresh, so it's OK */
 
-    Fgl_fillbox (0, 0, display.winW, display.winH, TEXT_BG_COLOUR);
+    Fgl_fillbox (0, 0, winW, winH, TEXT_BG_COLOUR);
 }
 
 void
@@ -742,43 +742,17 @@ draw_small_yellow_bezel (int x, int y, int h, int w)
 void
 load_fonts()
 {
-    char s[LC_PATH_MAX];
-    int i;
-    FILE *inf;
-    /* main_font */
-    if ((inf = fopen (fontfile, "r")) == 0)
-	HandleError ("Can't open the font file", FATAL);
-    for (i = 0; i < 256 * 8; i++)
-	main_font[i] = fgetc (inf);
-    fclose (inf);
-    /* start_font1 */
-    sprintf (s, "%s%c%s", opening_path, PATH_SLASH, "8x8thin");
-    if ((inf = fopen (s, "rb")) == NULL)
-	do_error ("Can't open opening screen font 8x8thin");
-    for (i = 0; i < 2048; i++)
-	start_font1[i] = fgetc (inf);
-    fclose (inf);
-    /* start_font2 */
-    sprintf (s, "%s%c%s", opening_path, PATH_SLASH, "scrawl_w.fnt");
-    if ((inf = fopen (s, "rb")) == NULL)
-	do_error ("Can't open opening screen font scrawl_w.fnt");
-    for (i = 0; i < 4096; i++)
-	start_font2[i] = fgetc (inf);
-    fclose (inf);
-    /* start_font3 */
-    sprintf (s, "%s%c%s", opening_path, PATH_SLASH, "scrawl_s.fnt");
-    if ((inf = fopen (s, "rb")) == NULL)
-	do_error ("Can't open opening screen font scrawl_s.fnt");
-    for (i = 0; i < 4096; i++)
-	start_font3[i] = fgetc (inf);
-    fclose (inf);
+    eight_font = TTF_OpenFont(fontfile_8,8);
+    if (eight_font == NULL) HandleError("Can't open the 8x8 font file", FATAL);
+    sixteen_font = TTF_OpenFont(fontfile_16,16);
+    if (eight_font == NULL) HandleError("Can't open the 8x16 font file", FATAL);
 }
 
 void
 init_fonts (void)
 {
     load_fonts();
-    Fgl_setfont (8, 8, main_font);
+    Fgl_setfont (8, 8, eight_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
 
