@@ -26,9 +26,15 @@
 /* Type Definitions */
 typedef struct _disp
 {
-	SDL_Surface *dpy; //screen
-	SDL_Surface *bg; //background
-	SDL_Surface *sprites; //square mouse.
+	SDL_Window *dpy; //screen
+
+	SDL_Texture *dpytext; //screen texture
+
+	SDL_Renderer *rend; //renderer
+
+	SDL_Surface *bg; //bg tiles
+	SDL_Surface *sprites; //sprites
+	SDL_Surface *compo; //composite
 
 	int show_sprites;
 	int screen;
@@ -36,6 +42,7 @@ typedef struct _disp
 
 	SDL_Color bg_xcolor;
 	SDL_Color pixcolour_gc[256];
+	SDL_Palette* pixpal;
 	SDL_Palette* cmap;
 
 	int pointer_confined;
@@ -89,10 +96,12 @@ int lc_loadfont(int fontid, char* filename);
 
 void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
+void Fgl_render (int sx, int sy, int w, int h,
+		int dx, int dy, SDL_Texture* src);
 
 extern TTF_Font* eight_font;
 extern TTF_Font* sixteen_font;
-extern SDL_Surface* icon_surface[NUM_OF_TYPES];
-extern char icon_surface_flag[NUM_OF_TYPES];
+extern SDL_Texture* icon_texture[NUM_OF_TYPES];
+extern char icon_texture_flag[NUM_OF_TYPES];
 
 #endif /* __lcsdl_h__ */
