@@ -122,108 +122,23 @@ void setcustompalette (void)
 					* (1 - gamma_correct_green)) + (64 * sin ((float) pal[i].g
 						* M_PI / 128)) * gamma_correct_green);
 
-		pal[i].b = (unsigned char) ((pal[i].b
-					* (1 - gamma_correct_blue)) + (64 * sin ((float) pal[i].b
+			pal[i].b = (unsigned char) ((pal[i].b
+						* (1 - gamma_correct_blue)) + (64 * sin ((float) pal[i].b
 						* M_PI / 128)) * gamma_correct_blue);
 	}
 
 	do_setcustompalette (pal);
 }
 
-	void
-open_setcustompalette (SDL_Color* inpal)
-{
+void open_setcustompalette (SDL_Color* inpal) {
 	do_setcustompalette (inpal);
 }
 
-	void
-do_setcustompalette (SDL_Color* inpal)
-{
-
-	SDL_SetPalette((display.dpy), SDL_LOGPAL, display.pixcolour_gc, 0, 256);	
-	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);	
-	/*
-	   int i, n, me = 0, flag[256], vid;
-	   int depth;
-	   long unsigned int plane_masks[3];
-	   SDL_Color pal[256];
-	   int writeable_p;
-
-	   display.cmap = XDefaultColormap (display.dpy, display.screen);
-	   depth = DefaultDepth (display.dpy, display.screen);
-
-	// Decide, if the colormap is writable
-	{
-	Visual *visual = DefaultVisual (display.dpy, display.screen);
-#if defined(__cplusplus) || defined(c_plusplus)
-int visual_class = visual->c_class;
-#else
-int visual_class = visual->class;
-#endif
-writeable_p = (visual_class == PseudoColor || visual_class == GrayScale);
-}
-
-if (writeable_p)
-{
-if (XAllocColorCells (display.dpy, display.cmap, 0
-,plane_masks, 0, colour_table, 256) == 0)
-{
-me = (*DefaultVisual (display.dpy, display.screen)).map_entries;
-vid = (*DefaultVisual (display.dpy, display.screen)).visualid;
-display.cmap = XCreateColormap (display.dpy, display.win
-,DefaultVisual (display.dpy, display.screen)
-	//      ,PseudoColor
-	,AllocNone);
-	if (me == 256 && depth != 24)
-	{
-	if (XAllocColorCells (display.dpy, display.cmap, 0
-	,plane_masks, 0, colour_table, 256) != 0) {
-	// printf ("Allocated 256 cells\n");
-	}
-	else {
-	printf ("Couldn't allocate 256 cells\n");
-	}
-	}
-	else
-	for (i = 0; i < 256; i++)
-	colour_table[i] = i;
-	}
-	if (!display.cmap)
-	HandleError ("No default colour map", FATAL);
-	}
-
-	for (i = 0; i < 256; i++)
-	flag[i] = 0;
-
-	for (n = 0; n < 256; n++)
-	{
-	pal[n].red = inpal[n].red << 10;
-	pal[n].green = inpal[n].green << 10;
-	pal[n].blue = inpal[n].blue << 10;
-	pal[n].flags = DoRed | DoGreen | DoBlue;
-	if (writeable_p)
-	pal[n].pixel = colour_table[n];
-	else
-	{
-	if (XAllocColor (display.dpy
-	,display.cmap, &(pal[n])) == 0)
-	HandleError ("alloc colour failed"
-	,FATAL);
-	colour_table[n] = pal[n].pixel;
-	XSetForeground (display.dpy
-	,display.pixcolour_gc[n]
-	,colour_table[n]);
-}
-flag[n] = 1;
-}
-
-if (writeable_p)
-{
-	XStoreColors (display.dpy, display.cmap, pal, 256);
-	XFlush (display.dpy);
-}
-XSetWindowColormap (display.dpy, display.win, display.cmap);
-*/
+void do_setcustompalette (SDL_Color* inpal) {
+	SDL_SetPalette((display.dpy), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.bg), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display.sprites), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
 }
 
 #if defined (commentout)
@@ -356,6 +271,16 @@ void Create_Window (char *geometry)
 {
 
 	display.dpy = SDL_SetVideoMode(display.winW, display.winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
+	
+	if (display.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
+	
+	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, display.winW, display.winH, 8, 0,0,0,0);
+	
+	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
+
+	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, display.winW, display.winH, 8, 0,0,0,0);
+	
+	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
 
 
 	char wname[256];	/* Window Name */
@@ -400,18 +325,18 @@ void Fgl_setpixel_s (SDL_Surface* s, int x, int y, int col) {
 
 void Fgl_setpixel (int x, int y, int col) {
 
-	assert ((display.dpy)->format->BytesPerPixel == 1);
+	assert ((display.bg)->format->BytesPerPixel == 1);
 
-	uint8_t* p = (uint8_t *)(display.dpy)->pixels + y * (display.dpy)->pitch + x;
+	uint8_t* p = (uint8_t *)(display.bg)->pixels + y * (display.bg)->pitch + x;
 	*p = col;
 }
 
 int Fgl_getpixel (int x, int y)
 {
 
-	int bpp = (display.dpy)->format->BytesPerPixel;
+	int bpp = (display.bg)->format->BytesPerPixel;
 	/* Here p is the address to the pixel we want to retrieve */
-	Uint8 *p = (Uint8 *)(display.dpy)->pixels + y * (display.dpy)->pitch + x * bpp;
+	Uint8 *p = (Uint8 *)(display.bg)->pixels + y * (display.bg)->pitch + x * bpp;
 
 	switch(bpp) {
 		case 1:
@@ -442,7 +367,7 @@ Fgl_hline (int x1, int y1, int x2, int col)
 	//pixmap_hline (x1, y1, x2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=x2-x1+1, .h=1};
-	SDL_FillRect(display.dpy,&dstrect,col);
+	SDL_FillRect(display.bg,&dstrect,col);
 }
 
 	void
@@ -453,7 +378,7 @@ Fgl_line (int x1, int y1, int dummy, int y2, int col)
 	//pixmap_vline (x1, y1, y2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=1, .h=y2-y1+1};
-	SDL_FillRect(display.dpy,&dstrect,col);
+	SDL_FillRect(display.bg,&dstrect,col);
 }
 
 	void
@@ -478,7 +403,7 @@ my_x_putchar (int xx, int yy, unsigned char c)
 	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
 	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
 
-	SDL_BlitSurface(font_surface,&srcrect,display.dpy,&dstrect);
+	SDL_BlitSurface(font_surface,&srcrect,display.bg,&dstrect);
 }
 
 	void
@@ -488,7 +413,7 @@ open_x_putchar (int xx, int yy, unsigned char c)
 	SDL_Rect srcrect = {.x = 0, .y = c*8, .w = 8, .h = 8};
 	SDL_Rect dstrect = {.x = xx, .y = yy, .w = 8, .h = 8};
 
-	SDL_BlitSurface(font_surface,&srcrect,display.dpy,&dstrect);
+	SDL_BlitSurface(font_surface,&srcrect,display.bg,&dstrect);
 
 	/*
 	SDL_LockSurface((display.dpy));
@@ -526,7 +451,7 @@ Fgl_fillbox (int x1, int y1, int w, int h, int col)
 	//pixmap_fillbox (x1, y1, w, h, col);
 
 	SDL_Rect dstrect = {.x=x1,.y=y1,.w=w,.h=h};
-	SDL_FillRect(display.dpy, &dstrect, col);
+	SDL_FillRect(display.bg, &dstrect, col);
 }
 
 
@@ -565,13 +490,13 @@ void Fgl_putbox_low (SDL_Surface* dst, int x0, int y0, int x1, int y1,
 
 	//SDL_Rect srcrect = (SDL_Rect){.x = src_x, .y = src_y, .w = w, .h = h};
 	//SDL_Rect dstrect = (SDL_Rect){.x = x0+x1, .y = y0+y1, .w = w, .h = h};
-	SDL_LockSurface((display.dpy));
+	SDL_LockSurface((display.bg));
 
 	for (int iy = 0; iy < h; iy++)
 		for (int ix = 0; ix < w; ix++)
 			Fgl_setpixel_s(dst,x0+x1+ix,y0+y1+iy,src[(src_y + iy) * bpl + (src_x + ix)]);
 
-	SDL_UnlockSurface((display.dpy));
+	SDL_UnlockSurface((display.bg));
 	//SDL_BlitSurface(src,&srcrect,dst,&dstrect);
 }
 
@@ -597,7 +522,7 @@ void Fgl_putbox (int x, int y, int w, int h, void* buf) {
 
 
 	if (x2 > x1 && y2 > y1)
-		Fgl_putbox_low (display.dpy, 0, 0, x1, y1, x2 - x1, 
+		Fgl_putbox_low (display.bg, 0, 0, x1, y1, x2 - x1, 
 				y2 - y1, (uint8_t*) buf, w, x1 - x, y1 - y);
 
 }
@@ -774,6 +699,11 @@ void HandleEvent (SDL_Event *event)
 				SDL_ResizeEvent ev = event->resize;
 
 				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
+				SDL_FreeSurface(display.bg);
+				display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
+				SDL_FreeSurface(display.sprites);
+				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
+
 				do_setcustompalette(NULL);	
 
 				resize_geometry (ev.w, ev.h);
@@ -799,6 +729,13 @@ void HandleEvent (SDL_Event *event)
 	void
 refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 {
+
+	SDL_Rect orect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
+	SDL_Rect drect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
+
+	SDL_BlitSurface(display.bg,&orect,display.dpy,&drect);
+
+	if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpy,&drect);
 	SDL_UpdateRect(display.dpy,x1,y1,x2-x1,y2-y1);
 }
 
@@ -885,9 +822,7 @@ draw_border (void)
 }
 
 
-	void
-init_icon_pixmap (short type)
-{
+void init_icon_pixmap (short type) {
 	unsigned char *g;
 
 	int grp;

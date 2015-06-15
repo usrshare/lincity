@@ -16,6 +16,7 @@
 #include "dialbox.h"
 #include "mouse.h"
 #include "lclib.h"
+#include "lcsdl.h"
 
 static Dialog_Box db_entry[MAX_DBOX_ENTRIES];
 

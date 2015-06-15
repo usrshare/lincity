@@ -242,7 +242,7 @@ update_main_screen_normal (int full_refresh)
 		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
 		    if (sx > 0 && sy > 0) {
 		
-		if (icon_surface[typ] != 0) Fgl_blit(display.dpy,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
+		if (icon_surface[typ] != 0) Fgl_blit(display.bg,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
 		Fgl_putbox (mw->x + (x - main_screen_originx) * 16,
 				mw->y + (y - main_screen_originy) * 16,
 				16 * main_groups[grp].size,

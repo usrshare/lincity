@@ -14,6 +14,7 @@
 #include "lclib.h"
 #include "stats.h"
 #include "engglobs.h"
+#include "lcsdl.h"
 
 struct pbar_st pbars[NUM_PBARS];
 

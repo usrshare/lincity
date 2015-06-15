@@ -26,7 +26,11 @@
 /* Type Definitions */
 typedef struct _disp
 {
-    SDL_Surface *dpy;
+    SDL_Surface *dpy; //screen
+    SDL_Surface *bg; //background
+    SDL_Surface *sprites; //square mouse.
+
+    int show_sprites;
     int screen;
     char *dname;
 
@@ -37,7 +41,6 @@ typedef struct _disp
     unsigned int winH;
     unsigned int winW;
 
-    long bg;			/* colors */
     SDL_Color bg_xcolor;
     SDL_Color pixcolour_gc[256];
     //Atom kill_atom, protocol_atom;
@@ -84,6 +87,7 @@ void drag_screen(void); /* WCK */
 void draw_border (void);
 void init_x_mouse (void);
 void unlock_window_size (void);
+void init_icon_pixmap (short type);
 
 int lc_get_keystroke (void);
 int lc_setpalettecolor(int x, int r, int g, int b);
