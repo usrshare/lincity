@@ -338,6 +338,32 @@ int lc_txtwidth(char *s) {
 	return w;
 }
 
+void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_align align){
+
+	if (strlen(s) == 0) return;
+
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
+
+	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
+
+	int tw = textsurf->w;
+	int th = textsurf->h;
+
+	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
+
+	switch (align) {
+		case TA_LEFT:
+			break;
+		case TA_CENTER:
+			o_rect.x += (w - tw) / 2; break;
+		case TA_RIGHT:
+			o_rect.x += (w - tw); break;
+	}
+
+	SDL_BlitSurface(textsurf,NULL,surf,&o_rect);
+	SDL_FreeSurface(textsurf);
+}
+
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 
 	if (strlen(s) == 0) return;
@@ -764,6 +790,30 @@ draw_border (void)
 {
 }
 
+
+void draw_small_bezel_s (SDL_Surface* surf, int x, int y, int w, int h, int colour){
+    int i;
+    for (i = 1; i < 4; i++) {
+	Fgl_hline_s (surf,x - 1 - i, y - 1 - i, x + w + i, colour);
+	Fgl_line_s (surf,x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
+	Fgl_hline_s (surf,x - 1 - i, y + h + i, x + w + i, colour + 2);
+	Fgl_line_s (surf,x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
+    }
+}
+
+void draw_bezel_s (SDL_Surface* surf, Rect r, short width, int color) {
+  int i;
+  int c;
+  for (i = 0; i < width; i++)
+    {
+      c = color + (width - i);
+      Fgl_hline_s (surf,r.x + i, r.y + i, r.x + r.w - i - 1, c);
+      Fgl_hline_s (surf,r.x + i, r.y + r.h - i - 1, r.x + r.w - i - 1, c);
+      Fgl_line_s (surf,r.x + i, r.y + i, r.x + i, r.y + r.h - i - 1, c);
+      Fgl_line_s (surf,r.x + r.w - i - 1, r.y + i, r.x + r.w - i - 1, 
+		r.y + r.h - i - 1, c);
+    }
+}
 
 void init_icon_pixmap (short type) {
 	unsigned char *g;

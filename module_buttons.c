@@ -498,7 +498,7 @@ draw_modules (void)
 }
 
 void
-draw_module (int module, char *graphic)
+draw_module (int module, SDL_Surface *graphic)
 {
     int x, y, xx, yy;
     int row, col;

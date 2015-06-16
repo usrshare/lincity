@@ -295,37 +295,30 @@ dialog_refresh(void)
 
 
   /* Draw the border, and fill the background */
-  draw_bezel(dialog_window,BORDER_SIZE,color);
+  draw_bezel_s(display.ui,dialog_window,BORDER_SIZE,color);
 
-  Fgl_fillbox(text_window.x,text_window.y,text_window.w,text_window.h,color);
+  Fgl_fillbox_s(display.ui,text_window.x,text_window.y,text_window.w,text_window.h,color);
 
-#ifdef USE_EXPANDED_FONT
-    gl_setwritemode (WRITEMODE_MASKED | FONT_EXPANDED);
-#else
-    Fgl_setfontcolors (color, TEXT_FG_COLOUR);
-#endif
+  Fgl_setfontcolors (color, TEXT_FG_COLOUR);
 
     /* Loop calculating line position, and drawing the line */
     for (i = 0; i < dbn; i++)
     {
 
 	if (db_entry[i].type) {
-	    Fgl_fillbox(db_rect[i].x + text_window.x,
+	    Fgl_fillbox_s(display.ui,db_rect[i].x + text_window.x,
 			db_rect[i].y + text_window.y,
 			db_rect[i].w,
 			db_rect[i].h,
 			white(0));
 	}
-	Fgl_write(db_rect[i].x + text_window.x + BUTTON_BORDER, 
-		  db_rect[i].y + text_window.y + BUTTON_BORDER,
-		  db_entry[i].text);
+	Fgl_write2_s(display.ui,db_rect[i].x + text_window.x + BUTTON_BORDER, 
+		  db_rect[i].y + text_window.y + BUTTON_BORDER,0,
+		  db_entry[i].text,TA_LEFT);
     }
 
-#ifdef USE_EXPANDED_FONT
-    gl_setwritemode (WRITEMODE_OVERWRITE | FONT_EXPANDED);
-#else
+    display.show_ui=1;
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
-#endif
 
   redraw_mouse();
 
@@ -348,11 +341,9 @@ dialog_close(int return_value)
 	if (db_entry[i].type == DB_PARA) 
 	    free(db_entry[i].text);
     
-    if (db_screen_fresh) {
-	Fgl_putrect(&dialog_window,db_screen_buffer);
-	free(db_screen_buffer);
-	db_screen_fresh = 0;
-    }
+    Fgl_fillbox_s(display.ui,db_rect[i].x,db_rect[i].y,	db_rect[i].w,db_rect[i].h,0);
+
+    display.show_ui = 0;
 
     db_flag = 0;
 }

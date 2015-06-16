@@ -138,9 +138,13 @@ int lc_loadpalette(uint32_t* pal);
 int lc_loadfont(int fontid, char* filename);
 int lc_txtwidth(char *s);
 
+void draw_small_bezel_s (SDL_Surface* surf, int x, int y, int w, int h, int colour);
+void draw_bezel_s (SDL_Surface* surf, Rect r, short width, int color);
+
 void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
 
+void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
 extern TTF_Font* eight_font;

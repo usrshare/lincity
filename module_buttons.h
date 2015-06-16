@@ -1,6 +1,8 @@
 #ifndef __module_buttons_h__
 #define __module_buttons_h__
 
+#include "lcsdl.h"
+
 void init_modules(void);  /* KBR 10/14/2002 Missing prototype */
 void init_module_buttons (void);
 
@@ -8,7 +10,7 @@ void init_module_buttons (void);
 void draw_module_buttons (void);
 
 // geometry.c: void draw_select_button_graphic (int button, char *graphic)
-void draw_module (int button, char * graphic);
+void draw_module (int button, SDL_Surface * graphic);
 
 // screen.c: void call_select_change_up (int button)
 void activate_module (int module);
