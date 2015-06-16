@@ -7,10 +7,6 @@ or unemployment graph) advances the display.  Probably only lmb should
 advance display.  Also, I'm not sure if mmb should initiate main win
 scrolling if the click was made outside the main win.
 
-* No middle mouse button support in SVGA/Win32 version.
-
-* Square cursor flashes too much in SVGA version.
-
 * Bits of the square cursor are not refreshed from the main win frame.
 For example, this happens with pollution overlay turned on.
 This problem is more pronouced in SVGA version.
@@ -39,17 +35,10 @@ exists in win32 version.
 
 * Right click outside of help should exit help.
 
-* Re-remove c++ style comments.
-
-* Since cvs doesn't store timestamps, need to manually set timestamps 
-to build from cvs.  For now, workaround using fix-timestamps.sh.
-
 * Main screen should scroll when moving mouse outside of main window 
 during multi-transport.
 
 * Miniscreen colors could be improved.
-
-* xpicedit doesn't seem to work on 24 bit color machines.
 
 * When a tip burns up, there is no pollution at all, and the tip disappears.
 Tip should stay, should cause pollution(?).
@@ -66,8 +55,6 @@ window is scrolled or updated.
 I've seen this display bug also happens when refreshing after 
 modal dialog boxes.
 
-* Need to support -display and other XWindows command line option.
-
 * Need to clean up write of gzipped files to use popen().
 
 * Why don't we use a recognized file format for the splash screen?
@@ -81,7 +68,6 @@ modal dialog boxes.
 * Coal Power Station does not accurately report actual power produced.
 
 * More than 100% of the population can be starving.
-
 
 REQUESTED FEATURES
 

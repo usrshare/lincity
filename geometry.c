@@ -639,14 +639,13 @@ draw_ms_text (char* txt)
 }
 
 void
-draw_small_bezel (int x, int y, int w, int h, int colour)
-{
+draw_small_bezel (int x, int y, int w, int h, int colour){
     int i;
     for (i = 1; i < 4; i++) {
-	Fgl_hline (x - 1 - i, y - 1 - i, x + w + i, colour + 16);
-	Fgl_line (x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 14);
-	Fgl_hline (x - 1 - i, y + h + i, x + w + i, colour + 22);
-	Fgl_line (x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 24);
+	Fgl_hline (x - 1 - i, y - 1 - i, x + w + i, colour);
+	Fgl_line (x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
+	Fgl_hline (x - 1 - i, y + h + i, x + w + i, colour + 2);
+	Fgl_line (x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
     }
 }
 
@@ -657,7 +656,7 @@ draw_bezel (Rect r, short width, int color)
   int c;
   for (i = 0; i < width; i++)
     {
-      c = color + (width - i) * 2;
+      c = color + (width - i);
       Fgl_hline (r.x + i, r.y + i, r.x + r.w - i - 1, c);
       Fgl_hline (r.x + i, r.y + r.h - i - 1, r.x + r.w - i - 1, c);
       Fgl_line (r.x + i, r.y + i, r.x + i, r.y + r.h - i - 1, c);
