@@ -737,9 +737,11 @@ draw_small_yellow_bezel (int x, int y, int h, int w)
 void
 load_fonts()
 {
-    eight_font = TTF_OpenFont(fontfile_8,11);
+    eight_font = TTF_OpenFont(fontfile_sans,11);
     if (eight_font == NULL) HandleError("Can't open the small font file", FATAL);
-    sixteen_font = TTF_OpenFont(fontfile_16,16);
+    eight_mono_font = TTF_OpenFont(fontfile_mono,11);
+    if (eight_mono_font == NULL) HandleError("Can't open the monospaced font file", FATAL);
+    sixteen_font = TTF_OpenFont(fontfile_sans,16);
     if (eight_font == NULL) HandleError("Can't open the large font file", FATAL);
 }
 

@@ -28,6 +28,7 @@ void HandleEvent (SDL_Event *);
 
 //SDL_Surface* font_surface = NULL;
 TTF_Font* eight_font = NULL;
+TTF_Font* eight_mono_font = NULL;
 TTF_Font* sixteen_font = NULL;
 
 TTF_Font* curfont = NULL;

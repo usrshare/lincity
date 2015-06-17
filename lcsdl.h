@@ -148,6 +148,7 @@ void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_al
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
 extern TTF_Font* eight_font;
+extern TTF_Font* eight_mono_font;
 extern TTF_Font* sixteen_font;
 extern SDL_Surface* icon_surface[NUM_OF_TYPES];
 extern char icon_surface_flag[NUM_OF_TYPES];

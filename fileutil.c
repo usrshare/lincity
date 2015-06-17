@@ -86,8 +86,8 @@ char given_scene[LC_PATH_MAX];
 char colour_pal_file[LC_PATH_MAX];
 char opening_pic[LC_PATH_MAX];
 char graphic_path[LC_PATH_MAX];
-char fontfile_8[LC_PATH_MAX];
-char fontfile_16[LC_PATH_MAX];
+char fontfile_sans[LC_PATH_MAX];
+char fontfile_mono[LC_PATH_MAX];
 char opening_path[LC_PATH_MAX];
 char help_path[LC_PATH_MAX];
 char message_path[LC_PATH_MAX];
@@ -444,10 +444,10 @@ init_path_strings (void)
 	find_localized_paths ();
 
 	/* Font stuff */
-	sprintf (fontfile_8, "%s%c%s", opening_path, PATH_SLASH,
+	sprintf (fontfile_sans, "%s%c%s", opening_path, PATH_SLASH,
 			"DejaVuSans-Bold.ttf");
-	sprintf (fontfile_16, "%s%c%s", opening_path, PATH_SLASH,
-			"DejaVuSans-Bold.ttf");
+	sprintf (fontfile_mono, "%s%c%s", opening_path, PATH_SLASH,
+			"DejaVuSansMono-Bold.ttf");
 
 	/* Temp file for results */
 	lc_temp_filename = (char *) malloc (lc_save_dir_len + 16);
