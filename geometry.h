@@ -262,8 +262,8 @@ void draw_bezel (Rect r, short width, int color);
 #endif /* commentout */
 
 #define STATUS_AREA_X             SPEED_BUTTONS_X
-#define DATE_W                    112
-#define MONEY_W                   32 * 8
+#define DATE_W                    128
+#define MONEY_W                   128
 #define TIME_FOR_YEAR_X           STATUS_AREA_X
 #define TIME_FOR_YEAR_Y           444
 #define SELECT_BUTTON_MESSAGE_X   STATUS_AREA_X

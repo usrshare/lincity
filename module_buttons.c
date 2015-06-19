@@ -494,7 +494,7 @@ draw_modules (void)
       draw_module (sbut[i], module_graphic[sbut[i]]);
 
     highlight_module_button(selected_module);
-
+    refresh_screen(mbw->x, mbw->y, mbw->x + mbw->w, mbw->y + mbw->h);
 }
 
 void

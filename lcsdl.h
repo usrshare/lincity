@@ -95,6 +95,8 @@ extern SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
 extern SDL_Surface *ms_power_button_graphic;
 extern SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
 
+extern SDL_Color t_bgcolor, t_fgcolor;
+
 void Fgl_write (int, int, char *);
 void open_write (int, int, char *);
 //extern void Fgl_getbox (int, int, int, int, void *);
@@ -119,6 +121,7 @@ void do_setcustompalette (SDL_Color *);
 void Create_Window (char *);
 void HandleError (char *, int);
 void refresh_screen (int, int, int, int);
+void refresh_rect(Rect* r);
 void my_x_putchar (int, int, unsigned char);
 void open_x_putchar (int, int, unsigned char);
 void do_call_event (int);
@@ -133,6 +136,7 @@ void init_icon_pixmap (short type);
 
 int lc_get_keystroke (void);
 int lc_setpalettecolor(int x, int r, int g, int b);
+int lc_setpalettecolors(int n, uint8_t* colors);
 int lc_loadpalette(uint32_t* pal);
 
 int lc_loadfont(int fontid, char* filename);

@@ -52,13 +52,17 @@ load_start_image (void)
   l &= 0xff;
   if (l == 0)
     l = 256;
+
+  uint8_t colors[l * 3];
+
   for (x = 0; x < l; x++)
     {
-      r = fgetc (fp);
-      g = fgetc (fp);
-      b = fgetc (fp);
-      lc_setpalettecolor (x, r*4, g*4, b*4);
+      colors[x * 3] = fgetc (fp) * 4;
+      colors[x*3+1] = fgetc (fp) * 4;
+      colors[x*3+2] = fgetc (fp) * 4;
     }
+ 
+  lc_setpalettecolors(256,colors);
   /* use last 4 colours for text */
   lc_setpalettecolor (SI_BLACK, 0, 0, 0);
   lc_setpalettecolor (SI_RED, 240, 0, 0);

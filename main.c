@@ -167,6 +167,7 @@ lincity_main (int argc, char *argv[])
     mps_init();
 
     draw_background ();
+    refresh_screen(0,0,winW,winH);
     prog_box (_("Loading the game"), 1);
     init_modules();
     init_mappoint_array ();

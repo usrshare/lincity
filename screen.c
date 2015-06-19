@@ -90,8 +90,7 @@ void update_main_screen_coal (void);
 /* ---------------------------------------------------------------------- *
  * Public Functions
  * ---------------------------------------------------------------------- */
-void
-draw_background (void)
+void draw_background (void)
 {
     /* XXX: we don't need to draw the whole background! */
     /* GCS: but this routine is only called on a full refresh, so it's OK */
@@ -99,8 +98,7 @@ draw_background (void)
     Fgl_fillbox (0, 0, winW, winH, TEXT_BG_COLOUR);
 }
 
-void
-connect_transport_main_screen (void)
+void connect_transport_main_screen (void)
 {
     Rect* b = &scr.main_win;
 
@@ -108,13 +106,13 @@ connect_transport_main_screen (void)
 		       b->w / 16, b->h / 16);
 }
 
-void
-refresh_main_screen (void)
+void refresh_main_screen (void)
 {
     connect_transport_main_screen ();
     update_main_screen (1);
     update_mini_screen ();
     dialog_refresh();
+    //refresh_screen(scr.main_win.x,scr.main_win.y,scr.main_win.x+scr.main_win.w,scr.main_win.y+scr.main_win.h);
 }
 
 void 
@@ -131,15 +129,14 @@ unclip_main_window ()
     Fgl_disableclipping ();
 }
 
-void
-rotate_main_screen (void)
+void rotate_main_screen (void)
 {
     if (main_screen_flag == MAIN_SCREEN_NORMAL_FLAG) {
 	main_screen_flag = MAIN_SCREEN_EQUALS_MINI;
     } else {
 	main_screen_flag = MAIN_SCREEN_NORMAL_FLAG;
     }
-    refresh_main_screen ();
+    //refresh_main_screen ();
 }
 
 void 
@@ -184,10 +181,11 @@ update_main_screen (int full_refresh)
     }
     if (mouse_type == MOUSE_TYPE_SQUARE)
 	redraw_mouse ();
+    
+    if (full_refresh) refresh_screen(scr.main_win.x,scr.main_win.y,scr.main_win.x + scr.main_win.w,scr.main_win.y + scr.main_win.h);
 }
 
-void
-update_main_screen_normal (int full_refresh)
+void update_main_screen_normal (int full_refresh)
 {
     Rect* mw = &scr.main_win;
     int x, y, xm, ym;
@@ -251,8 +249,7 @@ update_main_screen_normal (int full_refresh)
     refresh_screen(mw->x,mw->y,mw->x + mw->w,mw->y + mw->h);
 }
 
-void
-update_main_screen_pollution (void)
+void update_main_screen_pollution (void)
 {
     Rect* mw = &scr.main_win;
     int x, y, col;
@@ -490,8 +487,7 @@ update_main_screen_coal (void)
    Why do it here? */
 /* GCS: Actually, this function loads the graphics from disk */
 /* WCK: Yes, but it used to refresh everything after doing that. */
-void
-screen_setup (void)
+void screen_setup (void)
 {
     /* draw the graph boxes */
     monthgraph_full_refresh ();
@@ -609,8 +605,7 @@ screen_setup (void)
 
 }
 
-void
-screen_full_refresh (void)
+void screen_full_refresh (void)
 {
     screen_refreshing++;
     draw_background ();
@@ -658,11 +653,11 @@ screen_full_refresh (void)
     refresh_pbars();
     redraw_mouse();  /* screen_setup used to do this */
     screen_refreshing--;
+    refresh_screen(0,0,winW,winH);
 }
 
 #if defined (commentout)
-void
-draw_ms_buttons (void)
+void draw_ms_buttons (void)
 {
     draw_ms_button (&scr.ms_normal_button, ms_normal_button_graphic);
     draw_ms_button (&scr.ms_pollution_button, ms_pollution_button_graphic);
@@ -679,8 +674,7 @@ draw_ms_buttons (void)
 }
 #endif
 
-void
-draw_main_window_box (int colour)
+void draw_main_window_box (int colour)
 {
     Rect* b = &scr.main_win;
     int x;
@@ -698,8 +692,7 @@ draw_main_window_box (int colour)
     }
 }
 
-void
-draw_yellow_bezel (int x, int y, int h, int w)
+void draw_yellow_bezel (int x, int y, int h, int w)
 {
     int i;
     for (i = 1; i < 8; i++) {
@@ -711,8 +704,7 @@ draw_yellow_bezel (int x, int y, int h, int w)
     }
 }
 
-void
-draw_small_yellow_bezel (int x, int y, int h, int w)
+void draw_small_yellow_bezel (int x, int y, int h, int w)
 {
 #if defined (commentout)
     int i;
@@ -734,8 +726,7 @@ draw_small_yellow_bezel (int x, int y, int h, int w)
     }
 }
 
-void
-load_fonts()
+void load_fonts()
 {
     eight_font = TTF_OpenFont(fontfile_sans,11);
     if (eight_font == NULL) HandleError("Can't open the small font file", FATAL);
@@ -745,8 +736,7 @@ load_fonts()
     if (eight_font == NULL) HandleError("Can't open the large font file", FATAL);
 }
 
-void
-init_fonts (void)
+void init_fonts (void)
 {
     load_fonts();
     Fgl_setfont (8, 8, eight_font);
@@ -766,8 +756,7 @@ init_mini_map_mouse (void)
 }
 
 
-void
-mini_map_handler(int x, int y, int button)
+void mini_map_handler(int x, int y, int button)
 {
     if (button == LC_MOUSE_RIGHTBUTTON) {
 	mini_screen_help ();
@@ -792,8 +781,7 @@ mini_map_handler(int x, int y, int button)
 	draw_mini_screen ();
 }
 
-void
-mini_aux_handler(int x, int y, int button)
+void mini_aux_handler(int x, int y, int button)
 {
     if (button == LC_MOUSE_MIDDLEBUTTON) {
 	rotate_main_screen ();
@@ -805,8 +793,7 @@ mini_aux_handler(int x, int y, int button)
     rotate_mini_screen ();
 }
 
-void
-rotate_mini_screen (void)
+void rotate_mini_screen (void)
 {
     switch (mini_screen_flags)
     {
@@ -849,8 +836,7 @@ rotate_mini_screen (void)
     }
 }
 
-void
-update_mini_screen (void)
+void update_mini_screen (void)
 {
     switch (mini_screen_flags)
     {
@@ -890,8 +876,7 @@ update_mini_screen (void)
     refresh_screen(scr.mini_map.x, scr.mini_map.y, scr.mini_map.x + scr.mini_map.w, scr.mini_map.y + scr.mini_map.h);
 }
 
-void
-mini_screen_help (void)
+void mini_screen_help (void)
 {
     switch (mini_screen_flags)
     {
@@ -925,8 +910,7 @@ mini_screen_help (void)
     }
 }
 
-void
-mini_full_refresh (void)
+void mini_full_refresh (void)
 {
     Rect* mm = &scr.mini_map;
     Rect* mmaux = &scr.mini_map_aux;
@@ -949,8 +933,7 @@ mini_full_refresh (void)
     draw_mini_screen ();
 }
 
-void
-draw_mini_screen (void)
+void draw_mini_screen (void)
 {
     int x, y, xx, yy;
     Rect* mm = &scr.mini_map;
@@ -981,8 +964,7 @@ draw_mini_screen (void)
 
 }
 
-void
-draw_big_mini_screen (void)
+void draw_big_mini_screen (void)
 {
     Rect* b = &scr.main_win;
     int x, y, xx, yy;
@@ -1002,8 +984,7 @@ draw_big_mini_screen (void)
 }
 
 
-void
-draw_mini_screen_pollution (void)
+void draw_mini_screen_pollution (void)
 {
     int x, y, col;
     Rect* mm = &scr.mini_map;
@@ -1029,8 +1010,7 @@ draw_mini_screen_pollution (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_fire_cover (void)
+void draw_mini_screen_fire_cover (void)
 {
     int x, y, xx, yy, col;
     Rect* mm = &scr.mini_map;
@@ -1064,8 +1044,7 @@ draw_mini_screen_fire_cover (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_cricket_cover (void)
+void draw_mini_screen_cricket_cover (void)
 {
     int x, y, xx, yy, col;
     Rect* mm = &scr.mini_map;
@@ -1097,8 +1076,7 @@ draw_mini_screen_cricket_cover (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_health_cover (void)
+void draw_mini_screen_health_cover (void)
 {
     int x, y, xx, yy, col;
     Rect* mm = &scr.mini_map;
@@ -1130,8 +1108,7 @@ draw_mini_screen_health_cover (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_ub40 (void)
+void draw_mini_screen_ub40 (void)
 {
     int x, y, col;
     Rect* mm = &scr.mini_map;
@@ -1156,8 +1133,7 @@ draw_mini_screen_ub40 (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_starve (void)
+void draw_mini_screen_starve (void)
 {
     int x, y, col;
     Rect* mm = &scr.mini_map;
@@ -1183,8 +1159,7 @@ draw_mini_screen_starve (void)
     draw_mini_screen_cursor ();
 }
 
-void
-draw_mini_screen_coal (void)
+void draw_mini_screen_coal (void)
 {
     int x, y, col;
     Rect* mm = &scr.mini_map;
@@ -1215,8 +1190,7 @@ draw_mini_screen_coal (void)
     }
 }
 
-void
-draw_mini_screen_power (void)
+void draw_mini_screen_power (void)
 {
     int x, y, xx, yy, col;
     int have_power = 0;
@@ -1256,8 +1230,7 @@ draw_mini_screen_power (void)
 }
 
 /* GCS -- This is obsolete, right?? */
-void
-draw_mini_screen_ocost (void)
+void draw_mini_screen_ocost (void)
 {
     char s[100];
     Rect* b = &scr.mini_map;
@@ -1381,8 +1354,7 @@ draw_mini_screen_ocost (void)
 }
 
 #if defined (commentout)
-void
-draw_mini_screen_port (void)
+void draw_mini_screen_port (void)
 {
     char buy[256], sell[256], s[256];
     int l, i, *p1, *p2;
@@ -1430,8 +1402,7 @@ draw_mini_screen_port (void)
 }
 #endif
 
-void
-draw_mini_screen_cursor (void)
+void draw_mini_screen_cursor (void)
 {
     Rect* mini = &scr.mini_map;
     Rect* mw = &scr.main_win;
@@ -1498,8 +1469,7 @@ initialize_print_stats (void)
     redraw_mouse ();
 }
 
-void
-advance_monthgraph_style (void)
+void advance_monthgraph_style (void)
 {
     monthgraph_style = (monthgraph_style % 2) + 1;
     if (monthgraph_style == MONTHGRAPH_STYLE_ECONOMY) {
@@ -1509,22 +1479,19 @@ advance_monthgraph_style (void)
     }
 }
 
-void
-refresh_monthgraph (void)
+void refresh_monthgraph (void)
 {
     do_monthgraph (1);
 }
 
-void
-monthgraph_full_refresh (void)
+void monthgraph_full_refresh (void)
 {
     Rect* mg = &scr.monthgraph;
     draw_small_yellow_bezel (mg->x, mg->y, mg->h, mg->w);
     do_monthgraph (1);
 }
 
-void
-print_stats (void)
+void print_stats (void)
 {
     static int flag = 0;
     int monthgraph_full_update = 0;
@@ -1666,8 +1633,7 @@ print_stats (void)
     redraw_mouse ();
 }
 
-void
-print_total_money (void)
+void print_total_money (void)
 {
     Rect* b = &scr.money;
     char str[32]; //enough.
@@ -1676,28 +1642,30 @@ print_total_money (void)
     count = sprintf(str, _("¤%'d"), total_money);
 
     //let the locale decide whether we need thousands separators.
+    Fgl_fillbox_s(display.bg,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
 
     if (total_money < 0)
 	Fgl_setfontcolors (TEXT_BG_COLOUR, red (30));
 
-    Fgl_write2 (b->x + 32, b->y, MONEY_W, str, TA_RIGHT);
+    Fgl_write2 (b->x, b->y, MONEY_W, str, TA_RIGHT);
 
     if (total_money < 0)
 	Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
+    refresh_screen(b->x,b->y,b->x + b->w, b->y + b->h);
 }
 
-void
-print_date (void)
+void print_date (void)
 {
     char s[50];
     Rect* b = &scr.date;
     sprintf (s, _("%s %04d"), current_month(total_time),
 	     current_year(total_time));
+    Fgl_fillbox_s(display.bg,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
     Fgl_write2 (b->x, b->y, b->w, s, TA_RIGHT);
+    refresh_screen(b->x,b->y,b->x + b->w, b->y + b->h);
 }
 
-void
-print_population (void)
+void print_population (void)
 {
     draw_pbar (&scr.pbar_pop, pop_pbar_graphic);
 }
@@ -1712,8 +1680,7 @@ calculate_time_for_year (void)
     time_last_year = real_time;
 }
 
-void
-print_time_for_year (void)
+void print_time_for_year (void)
 {
 }
 
@@ -1727,6 +1694,7 @@ status_message_1 (char * message)
     if (message == NULL)
 	return;
     Fgl_write (b->x, b->y, message);
+    refresh_screen(b->x,b->y,b->x + b->w, b->y + b->h);
 }
 
 void 
@@ -1738,40 +1706,36 @@ status_message_2 (char * message)
     if (message == NULL)
 	return;
     Fgl_write (b->x, b->y, message);
+    refresh_screen(b->x,b->y,b->x + b->w, b->y + b->h);
 }
 
-void
-status_message (char* m1, char* m2)
+void status_message (char* m1, char* m2)
 {
     status_message_1(m1);
     status_message_2(m2);
     update_scoreboard.message_area = real_time + 10000;
 }
 
-void
-reset_status_message (void)
+void reset_status_message (void)
 {
     status_message_1(0);
     status_message_2(0);
     update_scoreboard.message_area = 0;
 }
 
-void
-init_monthgraph (void)
+void init_monthgraph (void)
 {
     Rect* mg = &scr.monthgraph;
     Fgl_fillbox (mg->x, mg->y, mg->w + 1, mg->h + 1, GRAPHS_B_COLOUR);
 }
 
-void
-clear_monthgraph (void)
+void clear_monthgraph (void)
 {
     Rect* mg = &scr.monthgraph;
     Fgl_fillbox (mg->x, mg->y, mg->w + 1, mg->h + 1, GRAPHS_B_COLOUR);
 }
 
-static void
-do_monthgraph (int full_refresh)
+static void do_monthgraph (int full_refresh)
 {
     if (full_refresh) {
 	clear_monthgraph();
@@ -1782,8 +1746,7 @@ do_monthgraph (int full_refresh)
 }
 
 /* Must be called after initialize_geometry */
-void
-initialize_monthgraph (void)
+void initialize_monthgraph (void)
 {
     int i;
 
@@ -1813,8 +1776,7 @@ initialize_monthgraph (void)
     }
 }
 
-static void
-do_history_linegraph (int draw)
+static void do_history_linegraph (int draw)
 {
     Rect* mg = &scr.monthgraph;
     int i;
@@ -1921,8 +1883,7 @@ do_history_linegraph (int draw)
     }
 }
 
-void
-clicked_market_cb (int x, int y)
+void clicked_market_cb (int x, int y)
 {
     market_cb_flag = 1;
     mcbx = x;
@@ -1930,8 +1891,7 @@ clicked_market_cb (int x, int y)
 }
 
 
-void
-draw_cb_box (int row, int col, int checked)
+void draw_cb_box (int row, int col, int checked)
 {
     int x, y;
     SDL_Surface* graphic;
@@ -1943,8 +1903,7 @@ draw_cb_box (int row, int col, int checked)
     Fgl_putbox (x, y, 16, 16, graphic);
 }
 
-void
-draw_cb_template (int is_market_cb)
+void draw_cb_template (int is_market_cb)
 {
     int x, y, flags;
     char s[100];
@@ -2004,15 +1963,13 @@ draw_cb_template (int is_market_cb)
     draw_cb_box (5, 1, MP_INFO(mcbx,mcby).flags & FLAG_MS_STEEL);
 }
 
-void
-draw_market_cb (void)
+void draw_market_cb (void)
 {
     market_cb_drawn_flag = 1;
     draw_cb_template (1);
 }
 
-void
-close_market_cb (void)
+void close_market_cb (void)
 {
     Rect* mcb = &scr.market_cb;
 
@@ -2026,24 +1983,21 @@ close_market_cb (void)
     cs_mouse_button = LC_MOUSE_LEFTBUTTON;
 }
 
-void
-clicked_port_cb (int x, int y)
+void clicked_port_cb (int x, int y)
 {
     port_cb_flag = 1;
     mcbx = x;
     mcby = y;
 }
 
-void
-draw_port_cb (void)
+void draw_port_cb (void)
 {
     port_cb_drawn_flag = 1;
     draw_cb_template (0);
 }
 
 
-void
-close_port_cb (void)
+void close_port_cb (void)
 {
     Rect* mcb = &scr.market_cb;
 
@@ -2071,8 +2025,7 @@ yn_dial_box (char * s1, char * s2, char * s3, char *s4)
     return (result == 'y') ? 1 : 0;
 }
 
-void
-ok_dial_box (char *fn, int good_bad, char *xs)
+void ok_dial_box (char *fn, int good_bad, char *xs)
 {
     FILE *inf;
     struct stat statbuf;
@@ -2134,8 +2087,7 @@ ok_dial_box (char *fn, int good_bad, char *xs)
     display_info_message (colour, ss, xs);
 }
 
-void
-format_status_message (char* sm1, char* sm2, int num_char, char* ss, char* xs)
+void format_status_message (char* sm1, char* sm2, int num_char, char* ss, char* xs)
 {
     char* src = ss;
     char* tgt = sm1;
@@ -2174,8 +2126,7 @@ format_status_message (char* sm1, char* sm2, int num_char, char* ss, char* xs)
 }
 
 /* Call this routine instead of dialog_box() */
-void
-display_info_message (int colour, char* ss, char* xs)
+void display_info_message (int colour, char* ss, char* xs)
 {
     if (suppress_popups) {
 	/* display in the message area */
@@ -2206,8 +2157,7 @@ display_info_message (int colour, char* ss, char* xs)
     }
 }
 
-void
-prog_box (char *title, int percent)
+void prog_box (char *title, int percent)
 {
     static int flag = 0, oldpercent = 0;
     char s[100];
@@ -2268,8 +2218,7 @@ prog_box (char *title, int percent)
 }
 
 
-static void
-do_sust_barchart (int draw)
+static void do_sust_barchart (int draw)
 {
 #define SUST_BAR_H      5
 #define SUST_BAR_GAP_Y  5
@@ -2374,8 +2323,7 @@ do_sust_barchart (int draw)
   refresh_screen(mg->x, mg->y, mg->x+mg->w, mg->y+mg->h);
 }
 
-static void
-draw_sustline (int yoffset, int count, int max, int col)
+static void draw_sustline (int yoffset, int count, int max, int col)
 {
   Rect* mg = &scr.monthgraph;
   int split;
@@ -2395,8 +2343,7 @@ void dump_screen (void)
 {
 }
 
-void
-debug_writeval (int v)
+void debug_writeval (int v)
 {
     char s[100];
     sprintf (s, "%d  ", v);

@@ -654,6 +654,9 @@ void HandleEvent (SDL_Event *event)
 
 				SDL_ResizeEvent ev = event->resize;
 
+				if (ev.w < 640) ev.w = 640;
+				if (ev.h < 480) ev.h = 480;
+
 				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
 				SDL_FreeSurface(display.bg);
 				display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
@@ -682,7 +685,7 @@ void HandleEvent (SDL_Event *event)
 				 return;
 			 }
 	}
-	refresh_screen (0,0,winW,winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
+	//refresh_screen (0,0,winW,winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
 }
 
 #undef DEBUG_X11_MOUSE
@@ -704,6 +707,10 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 	if (display.show_ui) SDL_BlitSurface(display.ui,&orect,display.dpy,&drect);
 	if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpy,&drect);
 	SDL_UpdateRect(display.dpy,x1,y1,x2-x1,y2-y1);
+}
+
+void refresh_rect(Rect* r) {
+	refresh_screen(r->x,r->y,r->x + r->w, r->y + r->h);
 }
 
 	void
@@ -752,6 +759,20 @@ int lc_get_keystroke (void)
 	return q;
 }
 
+int lc_setpalettecolors(int n, uint8_t* colors) {
+
+	//colors is an array to n*3 uint8_t in (r,g,b) format.
+
+	for (int i=0; i < n; i++) {
+		display.pixcolour_gc[i] = (SDL_Color){.r = colors[i*3], .g = colors[i*3+1], .b = colors[i*3+2]}; }
+
+	SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+}
+
 int lc_setpalettecolor(int x, int r, int g, int b) {
 
 	display.pixcolour_gc[x] = (SDL_Color){.r = r, .g=g,.b=b};
@@ -768,12 +789,11 @@ int lc_loadpalette(uint32_t* pal) {
 	if (!pal) return 1;
 
 	for (int i=0; i < 256; i++) {
-
 		uint32_t col = pal[i];
 
 		display.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
-		do_setcustompalette(NULL);
 	}
+	do_setcustompalette(NULL);
 	return 0;
 }
 

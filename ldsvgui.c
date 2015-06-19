@@ -97,6 +97,7 @@ draw_prefs_cb (void)
 	    checked_box_graphic : unchecked_box_graphic;
     Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
 
+    refresh_screen(mw->x, mw->y, mw->x + mw->w, mw->y + mw->h);
 }
 
 void
@@ -244,6 +245,9 @@ do_save_city ()
 	       ,_("Press space to cancel."));
     draw_save_dir (SAVE_BG_COLOUR);
     db_flag = 1;
+
+    do {
+    refresh_screen(scr.main_win.x,scr.main_win.y,scr.main_win.x+scr.main_win.w,scr.main_win.y+scr.main_win.h);
     c = lc_get_keystroke ();
     redraw_mouse ();
     if (c > '0' && c <= '9')
@@ -255,6 +259,7 @@ do_save_city ()
 	Fgl_write (mw->x + 40, mw->y + 320
 		   ,_("and may contain spaces or % . - + ,"));
 	strcpy (s, &(save_names[c - '0'][2]));
+    	refresh_screen(scr.main_win.x,scr.main_win.y,scr.main_win.x+scr.main_win.w,scr.main_win.y+scr.main_win.h);
 	input_save_filename (s);
 	remove_scene (save_names[c - '0']);
 	sprintf (save_names[c - '0'], "%d_", c - '0');
@@ -265,6 +270,7 @@ do_save_city ()
 		   ,_("Saving city scene... please wait"));
 	save_city (save_names[c - '0']);
     }
+    } while (c == 0);
     db_flag = 0;
     cs_mouse_handler (0, -1, 0);
     cs_mouse_handler (0, 1, 0);
@@ -322,6 +328,7 @@ do_load_city (void)
     db_flag = 1;
 
     do {
+    	refresh_screen(scr.main_win.x,scr.main_win.y,scr.main_win.x+scr.main_win.w,scr.main_win.y+scr.main_win.h);
 	c = lc_get_keystroke ();
 	redraw_mouse ();
 	if (c > '0' && c <= '9') {

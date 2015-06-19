@@ -377,6 +377,8 @@ draw_help_page (char *helppage)
 	    strcpy (help_button_history[i], help_button_history[i + 1]);
 	help_history_count--;
     }
+	
+    refresh_screen (mw->x, mw->y, mw->x + mw->w, mw->y + mw->h);
 
     free (helppage_short);
 }

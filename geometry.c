@@ -178,7 +178,7 @@ initialize_geometry (Screen_Geometry* scr)
     scr->date.h = 12; 
 
     scr->money.w = MONEY_W;
-    scr->money.x = scr->main_win.x;
+    scr->money.x = scr->main_win.x + scr->main_win.w - scr->date.w - scr->money.w;
     scr->money.y = scr->main_win.y + scr->main_win.h + 10;
     scr->money.h = 12;
 
@@ -316,6 +316,9 @@ resize_geometry (int new_width, int new_height)
 
     scr.date.y = scr.main_win.y + scr.main_win.h + 16;
     scr.date.x = scr.main_win.x + scr.main_win.w - scr.date.w;
+    
+    scr.money.y = scr.main_win.y + scr.main_win.h + 16;
+    scr.money.x = scr.main_win.x + scr.main_win.w - scr.date.w - scr.money.w;
 
     scr.pbar_area.x = 56 + scr.main_win.w + 16 + 2;
     scr.pbar_pop.x = scr.pbar_area.x + 4;
@@ -336,10 +339,6 @@ resize_geometry (int new_width, int new_height)
     scr.mini_map_area.x = scr.pbar_area.x + 4;
     scr.mini_map.x = scr.mini_map_aux.x 
 	    + ((scr.mini_map_aux.w - scr.mini_map.w) / 2);
-
-    scr.money.x = scr.main_win.x;
-    scr.money.y = scr.main_win.y + scr.main_win.h + 16;
-
 
     scr.pause_button.y = PAUSE_BUTTON_Y + (scr.main_win.h - MAIN_WIN_H);
     scr.slow_button.y = SLOW_BUTTON_Y + (scr.main_win.h - MAIN_WIN_H);
@@ -461,6 +460,7 @@ draw_pause (int active)
 	Fgl_putbox (b->x, b->y, 16, 16, pause_button1_off);
 	Fgl_putbox (b->x + 16, b->y, 16, 16, pause_button2_off);
     }
+    refresh_screen(b->x,b->y,b->x + 32, b->y + 16);
 }
 
 void 
@@ -474,6 +474,7 @@ draw_slow (int active)
 	Fgl_putbox (b->x, b->y, 16, 16, slow_button1_off);
 	Fgl_putbox (b->x + 16, b->y, 16, 16, slow_button2_off);
     }
+    refresh_screen(b->x,b->y,b->x + 32, b->y + 16);
 }
 
 void 
@@ -487,6 +488,7 @@ draw_med (int active)
 	Fgl_putbox (b->x, b->y, 16, 16, med_button1_off);
 	Fgl_putbox (b->x + 16, b->y, 16, 16, med_button2_off);
     }
+    refresh_screen(b->x,b->y,b->x + 32, b->y + 16);
 }
 
 void 
@@ -500,6 +502,7 @@ draw_fast (int active)
 	Fgl_putbox (b->x, b->y, 16, 16, fast_button1_off);
 	Fgl_putbox (b->x + 16, b->y, 16, 16, fast_button2_off);
     }
+    refresh_screen(b->x,b->y,b->x + 32, b->y + 16);
 }
 
 void 
@@ -629,6 +632,7 @@ draw_ms_button (void* graphic)
 {
     Rect* mma = &scr.mini_map_aux;
     Fgl_putbox (mma->x + 4, mma->y, 16, 16, graphic);
+    refresh_rect(mma);
 }
 
 void
@@ -636,6 +640,7 @@ draw_ms_text (char* txt)
 {
     Rect* mma = &scr.mini_map_aux;
     Fgl_write (mma->x + 28, mma->y + 4, txt);
+    refresh_rect(mma);
 }
 
 void

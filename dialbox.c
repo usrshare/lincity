@@ -318,6 +318,7 @@ dialog_refresh(void)
     }
 
     display.show_ui=1;
+    refresh_screen(dialog_window.x,dialog_window.y,dialog_window.x + dialog_window.w,dialog_window.y + dialog_window.h);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
   redraw_mouse();
