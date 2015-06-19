@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 Project(lincity_modules)
 
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set (
 	MODULE_SOURCES

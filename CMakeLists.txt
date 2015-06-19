@@ -6,42 +6,44 @@ set(CMAKE_EXE_LINKER_FLAGS_GPROF "-pg")
 
 set(
 	GUI_SOURCES 
-	ldsvgui.c
-	splash.c
-	lchelp.c
-	main.c
-	mouse.c
-	mps.c
-	screen.c
-	pixmap.c
-	cliglobs.c
-	geometry.c
-	pbar.c
-	module_buttons.c
-	dialbox.c
-	lcsdl.c
+	src/ldsvgui.c
+	src/splash.c
+	src/lchelp.c
+	src/main.c
+	src/mouse.c
+	src/mps.c
+	src/screen.c
+	src/pixmap.c
+	src/cliglobs.c
+	src/geometry.c
+	src/pbar.c
+	src/module_buttons.c
+	src/dialbox.c
+	src/lcsdl.c
    )
 
 set (
 	ENGINE_SOURCES
-	lclib.c
-	power.c
-	ldsvguts.c
-	engine.c
-	transport.c
-	market.c
+	src/lclib.c
+	src/power.c
+	src/ldsvguts.c
+	src/engine.c
+	src/transport.c
+	src/market.c
 
-	simulate.c
-	shrtypes.c
-	lintypes.c
-	readpng.c
-	timer.c
-	fileutil.c
-	shrglobs.c
-	stats.c
+	src/simulate.c
+	src/shrtypes.c
+	src/lintypes.c
+	src/readpng.c
+	src/timer.c
+	src/fileutil.c
+	src/shrglobs.c
+	src/stats.c
     )
 
 add_subdirectory(modules)
+
+include_directories(${CMAKE_SOURCE_DIR}/modules)
 
 add_definitions(-DVERSION="1.14.0")
 
