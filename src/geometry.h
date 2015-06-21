@@ -274,7 +274,7 @@ void draw_bezel (Rect r, short width, int color);
 #define STATUS_MESSAGE_2_Y        SELECT_BUTTON_MESSAGE_Y + 24
 
 #define SUST_SCREEN_X 96
-#define SUST_SCREEN_Y 416
+#define SUST_SCREEN_Y 428
 #define SUST_SCREEN_W (60+8)
 #define SUST_SCREEN_H 20
 
@@ -285,11 +285,11 @@ void draw_bezel (Rect r, short width, int color);
 #undef MAPPOINT_STATS_Y
 #undef MAPPOINT_STATS_W
 #endif
-#define MAPPOINT_STATS_LINES 14
+#define MAPPOINT_STATS_LINES 11
 #define MAPPOINT_STATS_X (PBAR_AREA_X + 4)
 #define MAPPOINT_STATS_Y (PBAR_AREA_Y + PBAR_AREA_H + 4)
 #define MAPPOINT_STATS_W (PBAR_AREA_W - 8)
-#define MAPPOINT_STATS_H (MAPPOINT_STATS_LINES*8)
+#define MAPPOINT_STATS_H (MAPPOINT_STATS_LINES*12)
 
 
 
@@ -302,7 +302,7 @@ void draw_bezel (Rect r, short width, int color);
 #define MONTHGRAPH_Y MINI_MAP_AREA_Y + MINI_MAP_AREA_H + 8
 /* MONTHGRAPH_W must match MAPPOINT_STATS_W as used in shrglobs.c */
 #define MONTHGRAPH_W PBAR_AREA_W - 8
-#define MONTHGRAPH_H 64
+#define MONTHGRAPH_H 50
 
 #define MINI_SCREEN_W WORLD_SIDE_LEN
 #define MINI_SCREEN_H WORLD_SIDE_LEN

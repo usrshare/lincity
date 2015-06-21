@@ -63,10 +63,10 @@ num_to_ansi(char * s, size_t size, long num)
     {
     case 0: triplets = ' '; break;
     case 1: triplets = 'k'; break; // kila
-    case 2: triplets = 'm'; break; // mega
-    case 3: triplets = 'g'; break; // giga 
-    case 4: triplets = 't'; break; // tera 
-    case 5: triplets = 'p'; break; // peta
+    case 2: triplets = 'M'; break; // mega
+    case 3: triplets = 'G'; break; // giga 
+    case 4: triplets = 'T'; break; // tera 
+    case 5: triplets = 'P'; break; // peta
     default: triplets = '?'; break;
     }
       
@@ -205,7 +205,7 @@ lcalloc (size_t size)
   void * tmp;
   tmp = malloc(size);
   if (tmp == NULL) {
-    printf("couldn't malloc %d bytes!  Dying.\n",size);
+    printf("couldn't malloc %zd bytes!  Dying.\n",size);
     exit(-1);
   }
   

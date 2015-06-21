@@ -98,7 +98,7 @@ write_pbar_int (Rect* b, int val)
     char s[16];
     format_number5 (s, pbars[val].data[pbars[val].data_size-1]);
     Fgl_setfontcolors (0, 255);
-    Fgl_write2 (b->x + b->w + 25, b->y + 2, 40, s, TA_RIGHT);
+    Fgl_write3 (NULL, eight_mono_font, b->x + b->w + 25, b->y + 2, 40, s, TA_RIGHT);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
     refresh_screen(b->x + b->w+25,b->y,b->x + b->w+65,b->y+b->h);
 }
@@ -107,7 +107,7 @@ void
 write_pbar_text (Rect* b, char * s)
 {
     Fgl_setfontcolors (0, 255); 
-    Fgl_write2 (b->x + b->w + 25, b->y + 2, 40, s, TA_RIGHT);
+    Fgl_write3 (NULL, eight_mono_font, b->x + b->w + 25, b->y + 2, 40, s, TA_RIGHT);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
     refresh_screen(b->x + b->w+25,b->y,b->x + b->w+65,b->y+b->h);
 }

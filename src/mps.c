@@ -26,6 +26,7 @@
 #include "lcsdl.h"
 
 char mps_info_l[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
+char mps_info_c[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
 char mps_info_r[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
 char mps_info_m[MAPPOINT_STATS_LINES][MPS_INFO_CHARS];
 int mps_global_style;
@@ -126,8 +127,13 @@ mps_refresh(void)
     Fgl_setfontcolors (14, TEXT_FG_COLOUR);
 
     for (i = 0; i < MAPPOINT_STATS_LINES; i++) {
+
+	if (strlen(mps_info_l[i]) || strlen(mps_info_r[i])) {
 	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_l[i], TA_LEFT);
-	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_r[i], TA_RIGHT);
+	Fgl_write3 (NULL, eight_mono_font, mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_r[i], TA_RIGHT);
+	} else {
+	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_c[i], TA_CENTER);
+	}
 	//Fgl_write (mps->x + 2, mps->y + (i * 12),mps->w, mps_info_l[i], TA_LEFT);
     }
 
@@ -302,11 +308,7 @@ void
 mps_store_title(int i, char * t)
 {
   int c;
-  int l;
-
-  l = strlen(t);
-  c = (int)((MPS_INFO_CHARS - l) / 2) + l;
-  snprintf(mps_info_l[i],MPS_INFO_CHARS,"%*s", c, t);
+  snprintf(mps_info_c[i],MPS_INFO_CHARS,"%s", t);
 }
 
 void
@@ -456,48 +458,42 @@ void mps_global_finance(void) {
 
     int cashflow = 0;
 
-    mps_store_title(i++,_("Tax Income"));
+    mps_store_title(i++,_("Yearly Budget"));
 
     cashflow += ly_income_tax;
     num_to_ansi (s, 12, ly_income_tax);
-    mps_store_ss(i++,_("Income"), s);
+    mps_store_ss(i++,_("+ Income"), s);
 
     cashflow += ly_coal_tax;
     num_to_ansi(s, 12, ly_coal_tax);
-    mps_store_ss(i++,_("Coal"), s);
+    mps_store_ss(i++,_("+ Coal"), s);
 
     cashflow += ly_goods_tax;
     num_to_ansi(s, 12, ly_goods_tax);
-    mps_store_ss(i++,_("Goods"), s);
+    mps_store_ss(i++,_("+ Goods"), s);
 
     cashflow += ly_export_tax;
     num_to_ansi(s, 12, ly_export_tax);
-    mps_store_ss(i++,_("Export"), s);
-
-    i++;
-
-    mps_store_title(i++,_("Expenses"));
+    mps_store_ss(i++,_("+ Export"), s);
 
     cashflow -= ly_unemployment_cost;
     num_to_ansi(s, 12, ly_unemployment_cost);
-    mps_store_ss(i++,_("Unemp."), s);
+    mps_store_ss(i++,_("- Unemp."), s);
 
     cashflow -= ly_transport_cost;
     num_to_ansi(s, 12, ly_transport_cost);
-    mps_store_ss(i++,_("Transport"), s);
+    mps_store_ss(i++,_("- Transport"), s);
 
     cashflow -= ly_import_cost;
     num_to_ansi(s, 12, ly_import_cost);
-    mps_store_ss(i++,_("Imports"), s);
+    mps_store_ss(i++,_("- Imports"), s);
 
     cashflow -= ly_other_cost;
     num_to_ansi(s, 12, ly_other_cost);
-    mps_store_ss(i++,_("Others"), s);
-
-    i++;
+    mps_store_ss(i++,_("- Others"), s);
 
     num_to_ansi(s, 12, cashflow);
-    mps_store_ss(i++,_("Net"), s);
+    mps_store_ss(i++,_("= Net"), s);
 }    
 
 void 
@@ -509,12 +505,6 @@ mps_global_other_costs (void)
 
     mps_store_title(i++,_("Other Costs"));
 
-    /* Don't write year if it's negative. */
-    year = (total_time / NUMOF_DAYS_IN_YEAR) - 1;
-    if (year >= 0) {
-	mps_store_sd(i++, _("For year"), year);
-    }
-    i++;
     num_to_ansi(s,sizeof(s),ly_interest);
     mps_store_ss(i++,_("Interest"),s);
     num_to_ansi(s,sizeof(s),ly_school_cost);
@@ -551,15 +541,30 @@ mps_global_housing (void)
     mps_store_sd(i++,_("Homeless"),people_pool);
     mps_store_sd(i++,_("Shanties"),numof_shanties);
     mps_store_sd(i++,_("Unn Dths"),unnat_deaths);
-    mps_store_title(i++,_("Unemployment"));
-    mps_store_sd(i++,_("Claims"),tunemployed_population);
-    mps_store_sfp(i++,_("Rate"),
-		  ((tunemployed_population * 100.0) / tp));
-    mps_store_title(i++,_("Starvation"));
-    mps_store_sd(i++,_("Cases"),tstarving_population);
 
-    mps_store_sfp(i++,_("Rate"),
-		  ((tstarving_population * 100.0) / tp));
+
+    char temptext[32];
+    
+    char tempansi[4];
+    num_to_ansi(tempansi,sizeof(tempansi),tunemployed_population);
+
+    double rate_pct = 0.0;
+
+    rate_pct = (tunemployed_population * 100.0 / tp);
+    if ( rate_pct >= 10.0) snprintf(temptext,32,"%s(%3.0f%%)",tempansi,rate_pct); else
+	    snprintf(temptext,32,"%s(%3.1f%%)",tempansi,rate_pct);
+    
+    mps_store_ss(i++,_("Unemp"),temptext);
+    
+    num_to_ansi(tempansi,sizeof(tempansi),tstarving_population);
+    
+    rate_pct = (tstarving_population * 100.0 / tp);
+    
+    if ( rate_pct >= 10.0) snprintf(temptext,32,"%s(%3.0f%%)",tempansi,rate_pct); else
+	    snprintf(temptext,32,"%s(%3.1f%%)",tempansi,rate_pct);
+    
+    mps_store_ss(i++,_("Starv"),temptext);
+
 }
 
 

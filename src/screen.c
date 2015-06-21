@@ -732,6 +732,8 @@ void load_fonts()
     if (eight_font == NULL) HandleError("Can't open the small font file", FATAL);
     eight_mono_font = TTF_OpenFont(fontfile_mono,11);
     if (eight_mono_font == NULL) HandleError("Can't open the monospaced font file", FATAL);
+    TTF_SetFontKerning(eight_mono_font,0);
+    TTF_SetFontHinting(eight_mono_font,TTF_HINTING_MONO);
     sixteen_font = TTF_OpenFont(fontfile_sans,16);
     if (eight_font == NULL) HandleError("Can't open the large font file", FATAL);
 }
@@ -2220,8 +2222,8 @@ void prog_box (char *title, int percent)
 
 static void do_sust_barchart (int draw)
 {
-#define SUST_BAR_H      5
-#define SUST_BAR_GAP_Y  5
+#define SUST_BAR_H      6
+#define SUST_BAR_GAP_Y  2
   Rect* mg = &scr.monthgraph;
   static int flag = 0;
   if (flag == 0)
@@ -2235,55 +2237,30 @@ static void do_sust_barchart (int draw)
 	/* black out the inside */
 	Fgl_fillbox (mg->x, mg->y, mg->w, mg->h, 0);
 	/* write the "informative" text */
-	Fgl_setfontcolors (0, TEXT_FG_COLOUR);
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y - 1,
-		   /* TRANSLATORS: 
-		      MIN=Mining, PRT=Import/export from port,
-		      MNY=Money, POP=Population, TEC=Technology,
-		      FIR=Fire coverage
-		   */
-		   _("MIN"));
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y + (SUST_BAR_H + SUST_BAR_GAP_Y) - 1,
-		   _("PRT"));
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y + 2 * (SUST_BAR_H + SUST_BAR_GAP_Y) - 1,
-		   _("MNY"));
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y + 3 * (SUST_BAR_H + SUST_BAR_GAP_Y) - 1,
-		   _("POP"));
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y + 4 * (SUST_BAR_H + SUST_BAR_GAP_Y) - 1,
-		   _("TEC"));
-	Fgl_write (mg->x+3,
-		   mg->y + SUST_BAR_GAP_Y + 5 * (SUST_BAR_H + SUST_BAR_GAP_Y) - 1,
-		   _("FIR"));
-	Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 	/* draw the starting line */
-	Fgl_line (mg->x + 38, mg->y, mg->x + 38, mg->y + mg->h,
+	Fgl_line (mg->x + 8, mg->y, mg->x + 8, mg->y + mg->h,
 		  yellow (24));
 	/* ore coal */
-	Fgl_fillbox (mg->x + 36, mg->y + SUST_BAR_GAP_Y,
+	Fgl_fillbox (mg->x + 8, mg->y + SUST_BAR_GAP_Y,
 		     3, SUST_BAR_H, SUST_ORE_COAL_COL);
 	/* import export */
-	Fgl_fillbox (mg->x + 36, 
+	Fgl_fillbox (mg->x + 8, 
 		     mg->y + SUST_BAR_GAP_Y + (SUST_BAR_H + SUST_BAR_GAP_Y),
 		     3, SUST_BAR_H, SUST_PORT_COL);
 	/* money */
-	Fgl_fillbox (mg->x + 36, 
+	Fgl_fillbox (mg->x + 8, 
 		     mg->y + SUST_BAR_GAP_Y + 2 * (SUST_BAR_H + SUST_BAR_GAP_Y),
 		     3, SUST_BAR_H, SUST_MONEY_COL);
 	/* population */
-	Fgl_fillbox (mg->x + 36, 
+	Fgl_fillbox (mg->x + 8, 
 		     mg->y + SUST_BAR_GAP_Y + 3 * (SUST_BAR_H + SUST_BAR_GAP_Y),
 		     3, SUST_BAR_H, SUST_POP_COL);
 	/* tech */
-	Fgl_fillbox (mg->x + 36, 
+	Fgl_fillbox (mg->x + 8, 
 		     mg->y + SUST_BAR_GAP_Y + 4 * (SUST_BAR_H + SUST_BAR_GAP_Y),
 		     3, SUST_BAR_H, SUST_TECH_COL);
 	/* fire */
-	Fgl_fillbox (mg->x + 36, 
+	Fgl_fillbox (mg->x + 8, 
 		     mg->y + SUST_BAR_GAP_Y + 5 * (SUST_BAR_H + SUST_BAR_GAP_Y),
 		     3, SUST_BAR_H, SUST_FIRE_COL);
       }

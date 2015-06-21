@@ -339,6 +339,35 @@ int lc_txtwidth(char *s) {
 	return w;
 }
 
+void Fgl_write3 (SDL_Surface* surf, TTF_Font* font, int x, int y, int w, char *s, enum text_align align){
+
+	if (!surf) surf = display.bg;
+	if (!font) font = curfont;
+
+	if (strlen(s) == 0) return;
+
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(font,s,t_fgcolor,t_bgcolor);
+
+	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
+
+	int tw = textsurf->w;
+	int th = textsurf->h;
+
+	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
+
+	switch (align) {
+		case TA_LEFT:
+			break;
+		case TA_CENTER:
+			o_rect.x += (w - tw) / 2; break;
+		case TA_RIGHT:
+			o_rect.x += (w - tw); break;
+	}
+
+	SDL_BlitSurface(textsurf,NULL,surf,&o_rect);
+	SDL_FreeSurface(textsurf);
+}
+
 void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_align align){
 
 	if (strlen(s) == 0) return;
