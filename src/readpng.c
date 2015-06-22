@@ -578,8 +578,7 @@ load_png_graphics (char *txt_filename, char *png_filename, uint32_t* out_palette
 	return (OK);
 }
 
-	static char* 
-load_png_graphic (short type, short group, char* id,
+static char* load_png_graphic (short type, short group, char* id,
 		FILE* txt_fp,png_bytep *row_pointers, 
 		png_uint_32 width, png_uint_32 height)
 {
