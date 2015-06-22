@@ -133,6 +133,81 @@ void draw_bezel (Rect r, short width, int color);
 /* Text width */
 #define CHAR_HEIGHT 12
 
+#define STATS_X 232
+#define STATS_Y 428
+#define STATS_W 304
+#define STATS_H 32
+
+/* GCS FIX: This is still used in static data structure for size 
+   of monthgraph.  Fix by encapsulating the monthgraph and dynamically
+   allocating.  */
+#if defined (commentout)
+#ifndef MONTHGRAPH_W
+#define MONTHGRAPH_X 91
+#define MONTHGRAPH_W 120
+#define MONTHGRAPH_Y 116
+#define MONTHGRAPH_H 64
+#endif
+#define DIFFGRAPH_POWER_COLOUR (yellow(28))
+#define DIFFGRAPH_COAL_COLOUR  (white(18))
+#define DIFFGRAPH_GOODS_COLOUR (cyan(24))
+#define DIFFGRAPH_ORE_COLOUR   (red(22))
+#define DIFFGRAPH_POPULATION_COLOUR 7
+#endif
+
+#define GRAPHS_B_COLOUR (white(6))
+
+/* These constants are still used by save-under buffer */
+#if defined (commentout)
+#define MARKET_CB_X (79)
+#define MARKET_CB_Y 0
+#endif
+//#define MARKET_CB_W (18*8)
+#define MARKET_CB_W (17*8 - 2)
+#define MARKET_CB_H (23*8)
+
+#define SCROLL_LONG_COUNT 5
+#define SCROLL_RIGHT_BUTTON_X 100
+#define SCROLL_RIGHT_BUTTON_W 32
+#define SCROLL_RIGHT_BUTTON_Y 100
+#define SCROLL_RIGHT_BUTTON_H 32
+#define SCROLL_LEFT_BUTTON_X 100
+#define SCROLL_LEFT_BUTTON_W 32
+#define SCROLL_LEFT_BUTTON_Y 132
+#define SCROLL_LEFT_BUTTON_H 32
+#define SCROLL_DOWN_BUTTON_X 100
+#define SCROLL_DOWN_BUTTON_W 32
+#define SCROLL_DOWN_BUTTON_Y 164
+#define SCROLL_DOWN_BUTTON_H 32
+#define SCROLL_UP_BUTTON_X 100
+#define SCROLL_UP_BUTTON_W 32
+#define SCROLL_UP_BUTTON_Y 196
+#define SCROLL_UP_BUTTON_H 32
+
+#define SHUFFLE_MAPPOINT_COUNT 4
+
+#if defined (commentout)
+#define MAPPOINT_STATS_X 91
+/* MAPPOINT_STATS_W must be == MONTHGRAPH_W because of the graph drawing. */
+#define MAPPOINT_STATS_W MONTHGRAPH_W
+#define MAPPOINT_STATS_Y 8
+#define MAPPOINT_STATS_H (11*8)
+#endif
+
+
+
+#define MOUSE_TYPE_NORMAL 1
+#define MOUSE_TYPE_SQUARE 2
+#define MOUSE_BUTTON_REPEAT 4
+
+#define red(x) (32 + x)
+#define green(x) (64 + x)
+#define yellow(x) (96 + x)
+#define blue(x) (128 + x)
+#define magenta(x) (160 + x)
+#define cyan(x) (192 + x)
+#define white(x) (224 + x)
+
 /* Main window */
 #define MAIN_WIN_W 432
 #define MAIN_WIN_X 56+8+1
