@@ -13,9 +13,9 @@ text -1 140 are not being fed!
 text -1 160 The areas are more or less at the extent
 text -1 170 of their range.
 
-icon 90 200 monument2.csi
-icon 180 200 market-low.csi
-icon 270 192 resmedlow.csi
+icon 90 200 monument2.png
+icon 180 200 market-low.png
+icon 270 192 resmedlow.png
 
 tbutton 72 240 monument.hlp Monument
 text 174 242 Market

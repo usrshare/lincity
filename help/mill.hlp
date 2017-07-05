@@ -17,7 +17,7 @@ text -1 150 You can tell when mills are working by the
 text -1 160 smoke and steam coming from the building.
 
 text 30 190 This is a non-working mill.
-icon 290 180 mill0.csi
+icon 290 180 mill0.png
 
 text 20 250 See also:
 tbutton 100 250 goods.hlp Goods

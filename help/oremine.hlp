@@ -16,7 +16,7 @@ text -1 140 are hardly worked to nearly exhausted.
 text -1 155 Transport (not shown) connects to the top left
 text -1 165 hand corner of the ore mine.
 
-icon 30 200 oremine1.csi
-icon 125 200 oremine3.csi
-icon 215 200 oremine5.csi
-icon 310 200 oremine7.csi
+icon 30 200 oremine1.png
+icon 125 200 oremine3.png
+icon 215 200 oremine5.png
+icon 310 200 oremine7.png

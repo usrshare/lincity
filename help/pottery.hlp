@@ -12,7 +12,7 @@ text -1 105 kiln is not making smoke, then you are
 text -1 115 producing less than 100% of possible output.
 
 text 50 150 This is a pottery
-icon 200 140 pottery0.csi
+icon 200 140 pottery0.png
 
 text 80 200 See also:
 tbutton 200 220 transport.hlp Transport

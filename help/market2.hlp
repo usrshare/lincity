@@ -7,9 +7,9 @@ text -1 80 left hand side a window will appear allowing
 text -1 90 you to select what is traded.
 text -1 105 The default is to trade in everything.
 
-icon 50 140 checked_box.csi
+icon 50 140 checked_box.png
 text 80 146 Means the trade is allowed.
-icon 50 170 unchecked_box.csi
+icon 50 170 unchecked_box.png
 text 80 176 Means the trade is NOT allowed.
 
 text -1 200 The numbers between the words Buy and Sell

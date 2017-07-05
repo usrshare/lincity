@@ -8,10 +8,10 @@ text -1 65 Power lines connect at the top left
 text -1 75 corner of the station, transport connects
 text -1 85 to the next possition in. See the example.
 
-icon 100 150 powerscoal-full.csi
-icon 84 150 powerlhl.csi
-icon 68 150 powerlhl.csi
-icon 52 150 powerlhl.csi
+icon 100 150 powerscoal-full.png
+icon 84 150 powerlhl.png
+icon 68 150 powerlhl.png
+icon 52 150 powerlhl.png
 
 text 180 160 Coal fired power station
 text 180 180 See also:
@@ -19,19 +19,19 @@ tbutton 255 178 transport.hlp Transport
 tbutton 180 200 tech-level.hlp Tech level
 tbutton 275 200 powerline.hlp Power lines
 
-icon 84 166 roadlr.csi
-icon 68 166 roaddr.csi
-icon 68 182 roadud.csi
+icon 84 166 roadlr.png
+icon 68 166 roaddr.png
+icon 68 182 roadud.png
 
-icon 100 134 powerlvl.csi
-icon 100 118 powerlldl.csi
-icon 84 118 powerlhl.csi
-icon 68 118 powerlhl.csi
+icon 100 134 powerlvl.png
+icon 100 118 powerlldl.png
+icon 84 118 powerlhl.png
+icon 68 118 powerlhl.png
 
-icon 116 134 raildr.csi
-icon 132 134 raillr.csi
-icon 148 134 raillr.csi
-icon 164 134 raillr.csi
+icon 116 134 raildr.png
+icon 132 134 raillr.png
+icon 148 134 raillr.png
+icon 164 134 raillr.png
 
 text -1 240 The above example shows a coal fired
 text -1 250 power station with all its connection

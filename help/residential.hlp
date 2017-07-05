@@ -10,12 +10,12 @@ text -1 115 different birth and death rates associated
 text -1 125 with each area, this gives you some control
 text -1 135 over your population.
 
-icon 55 170 reslowlow.csi
-icon 215 170 resmedlow.csi
-icon 295 170 reshilow.csi
+icon 55 170 reslowlow.png
+icon 215 170 resmedlow.png
+icon 295 170 reshilow.png
 
 tbutton 155 245 market.hlp Market
-icon 220 230 market-full.csi
+icon 220 230 market-full.png
 text -1 290 The above market is within range of the last
 text -1 300 two residential areas, however, it is
 text -1 310 probably out range of the first.

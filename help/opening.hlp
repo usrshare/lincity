@@ -2,29 +2,29 @@ text -1 10 Welcome to Lincity
 
 text -1 30 To get started, build something like this:
 
-icon 76 158 trackdr.csi
-icon 92 158 trackldr.csi
-icon 108 158 tracklr.csi
-icon 124 158 tracklr.csi
-icon 140 158 tracklr.csi
-icon 156 158 trackldr.csi
-icon 172 158 trackldr.csi
-icon 188 158 tracklr.csi
-icon 204 158 tracklr.csi
-icon 220 158 tracklr.csi
-icon 236 158 tracklr.csi
-icon 252 158 trackld.csi
+icon 76 158 trackdr.png
+icon 92 158 trackldr.png
+icon 108 158 tracklr.png
+icon 124 158 tracklr.png
+icon 140 158 tracklr.png
+icon 156 158 trackldr.png
+icon 172 158 trackldr.png
+icon 188 158 tracklr.png
+icon 204 158 tracklr.png
+icon 220 158 tracklr.png
+icon 236 158 tracklr.png
+icon 252 158 trackld.png
 
-icon 204 126 market-med.csi
-icon 140 126 pottery4.csi
-icon 140 62 farm11.csi
-icon 204 78 resmedlow.csi
+icon 204 126 market-med.png
+icon 140 126 pottery4.png
+icon 140 62 farm11.png
+icon 204 78 resmedlow.png
 
-icon 92 174 commune8.csi
-icon 76 174 trackur.csi
-icon 172 174 commune8.csi
-icon 156 174 trackur.csi
-icon 253 174 oremine2.csi
+icon 92 174 commune8.png
+icon 76 174 trackur.png
+icon 172 174 commune8.png
+icon 156 174 trackur.png
+icon 253 174 oremine2.png
 
 
 tbutton 260 96 residential.hlp Residences

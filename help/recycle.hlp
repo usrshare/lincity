@@ -16,11 +16,11 @@ text -1 185 (ie no ore dug etc) with less than 100%
 text -1 195 efficient recycle centres if you have some
 text -1 205 mills to make up for the 'lost' waste goods.
 
-icon 180 300 roaddr.csi
-icon 180 316 recycle-centre.csi
-icon 196 300 roadlr.csi
-icon 212 300 roadlr.csi
-icon 164 316 raildr.csi
-icon 164 332 railud.csi
-icon 164 348 railud.csi
+icon 180 300 roaddr.png
+icon 180 316 recycle-centre.png
+icon 196 300 roadlr.png
+icon 212 300 roadlr.png
+icon 164 316 raildr.png
+icon 164 332 railud.png
+icon 164 348 railud.png
 

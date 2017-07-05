@@ -9,15 +9,15 @@ text -1 100 The example below shows a solar power station
 text -1 110 feeding a substation. A medium populated
 text -1 120 residential area is within range.
 
-icon 220 200 powerssolar.csi
-icon 220 184 powerlvl.csi
-icon 204 200 powerlhl.csi
-icon 188 200 powerlhd.csi
-icon 172 200 powerlhl.csi
-icon 156 200 powerlrdl.csi
+icon 220 200 powerssolar.png
+icon 220 184 powerlvl.png
+icon 204 200 powerlhl.png
+icon 188 200 powerlhd.png
+icon 172 200 powerlhl.png
+icon 156 200 powerlrdl.png
 text 60 228 Substation
-icon 156 216 substation-G.csi
-icon 130 280 resmedlow.csi
+icon 156 216 substation-G.png
+icon 130 280 resmedlow.png
 
 tbutton 108 182 powerline.hlp Power lines
 //text 110 184 Power lines

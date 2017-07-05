@@ -8,21 +8,21 @@ text -1 100 The size of the bar indicates the amount of change.
 text -1 120 The number at the right indicates the total quantity.
 
 text 50 180 The things are as follows
-icon 50 190 pbarpop.csi
+icon 50 190 pbarpop.png
 text 75 195 Population
-icon 50 205 pbartech.csi
+icon 50 205 pbartech.png
 text 75 210 Technology Level
-icon 50 220 pbarfood.csi
+icon 50 220 pbarfood.png
 text 75 225 Food
-icon 50 235 pbarjobs.csi
+icon 50 235 pbarjobs.png
 text 75 240 Jobs
-icon 50 250 pbarcoal.csi
+icon 50 250 pbarcoal.png
 text 75 255 Coal
-icon 50 265 pbarore.csi
+icon 50 265 pbarore.png
 text 75 270 Ore
-icon 50 280 pbargoods.csi
+icon 50 280 pbargoods.png
 text 75 285 Goods
-icon 50 295 pbarsteel.csi
+icon 50 295 pbarsteel.png
 text 75 300 Steel
-icon 50 310 pbarmoney.csi
+icon 50 310 pbarmoney.png
 text 75 315 Money

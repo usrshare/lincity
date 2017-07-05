@@ -10,10 +10,10 @@ text -1 110 almost the same situation, but the farm is
 text -1 120 not within range. The left market is full
 text -1 130 of food, the right one has none.
 
-icon 28 152 farm3.csi
-icon 103 160 market-full.csi
-icon 210 152 farm7.csi
-icon 338 160 market-low.csi
+icon 28 152 farm3.png
+icon 103 160 market-full.png
+icon 210 152 farm7.png
+icon 338 160 market-low.png
 
 tbutton 98 200 market.hlp Market
 text 170 180 Farm

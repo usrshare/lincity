@@ -513,7 +513,7 @@ draw_help_icon (int x, int y, char *icon)
     if (x > 0 && y > 0 && ((x + w) < mw->w) && ((y + h) < mw->h))
 	Fgl_putbox (mw->x + x, mw->y + y, w, h, surf);
 
-    free(surf->pixels);
+    //free(surf->pixels); //the surface is loaded with IMG_Load, which means we don't need that.
     SDL_FreeSurface(surf);
 
     return;

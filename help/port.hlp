@@ -12,15 +12,15 @@ text -1 115 by double clicking on the area. This
 text -1 125 brings up a menu with boxes to select
 text -1 135 what you import or export.
 
-icon 100 170 ex_port.csi
-icon 68 170 roadlr.csi
-icon 84 170 roadlr.csi
-icon 164 154 waterd.csi
-icon 164 170 waterlud.csi
-icon 164 186 waterlud.csi
-icon 164 202 waterlud.csi
-icon 164 218 waterlur.csi
-icon 180 218 waterl.csi
+icon 100 170 ex_port.png
+icon 68 170 roadlr.png
+icon 84 170 roadlr.png
+icon 164 154 waterd.png
+icon 164 170 waterlud.png
+icon 164 186 waterlud.png
+icon 164 202 waterlud.png
+icon 164 218 waterlur.png
+icon 180 218 waterl.png
 
 text 200 170 They MUST be connected
 text 200 180 to rivers all along

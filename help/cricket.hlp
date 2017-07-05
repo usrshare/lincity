@@ -22,7 +22,7 @@ text -1 195 not covered are just dark green.
 
 text -1 210 The cricket button above the
 text 80 225 mini-screen looks like this
-icon 306 221 cricket-button.csi
+icon 306 221 cricket-button.png
 
 text -1 240 Cricket grounds increase the desirability
 text -1 250 of residential areas within their range.
@@ -41,4 +41,4 @@ text 220 310 show that they
 text 220 320 are working.
 
 text 50 360 This is a cricket ground
-icon 260 350 cricket1.csi
+icon 260 350 cricket1.png

@@ -27,7 +27,7 @@ tbutton 50 285 transport.hlp Transport
 tbutton 50 305 goods.hlp Goods
 tbutton 50 325 jobs.hlp Jobs
 
-icon 220 260 university.csi
+icon 220 260 university.png
 text 195 320 A university
 /text 150 335 [ Thanks to:
 /text 150 345 jasper@wulfrun.demon.co.uk ]

@@ -19,7 +19,7 @@ text -1 165 school work.
 text -1 180 Schools cost money to run. You can see
 text -1 190 the total cost for the LAST year by
 text -1 205 clicking on the money button.
-icon 316 202 ms-ocost-button.csi
+icon 316 202 ms-ocost-button.png
 
 text -1 220 The value 'scl' is the school cost.
 
@@ -31,4 +31,4 @@ tbutton 100 310 goods.hlp Goods
 tbutton 100 330 jobs.hlp Jobs
 
 text 275 264 A school
-icon 290 280 school0.csi
+icon 290 280 school0.png

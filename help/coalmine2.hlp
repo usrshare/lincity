@@ -5,10 +5,10 @@ text -1 55 already dug but not put onto transport.
 text -1 65 The following coal mines show the stock
 text -1 75 levels, from left to right, empty to full.
 
-icon 40 100 coalmine-empty.csi
-icon 125 100 coalmine-low.csi
-icon 210 100 coalmine-med.csi
-icon 295 100 coalmine-full.csi
+icon 40 100 coalmine-empty.png
+icon 125 100 coalmine-low.png
+icon 210 100 coalmine-med.png
+icon 295 100 coalmine-full.png
 
 text -1 200 Clicking on a coal mine will show you,
 text -1 210 in the mappoint stats window, the coal stock

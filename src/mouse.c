@@ -921,7 +921,7 @@ choose_residence (void)
 
     cost = get_group_cost(GROUP_RESIDENCE_LL);
     fprintf (tempfile, _("text 68 106 Cost %4d\n"), cost);
-    fprintf (tempfile, "icon 85 120 reslowlow.csi\n");
+    fprintf (tempfile, "icon 85 120 reslowlow.png\n");
     fprintf (tempfile, "button 83 118 52 52 return1\n");
     /* TRANSLATORS: Only translate "pop" <<for population>> */
     fprintf (tempfile, _("tbutton 82 180 return1 pop 50\n"));
@@ -930,14 +930,14 @@ choose_residence (void)
 
     cost = get_group_cost(GROUP_RESIDENCE_ML);
     fprintf (tempfile, _("text 155 106 Cost %4d\n"), cost);
-    fprintf (tempfile, "icon 170 120 resmedlow.csi\n");
+    fprintf (tempfile, "icon 170 120 resmedlow.png\n");
     fprintf (tempfile, "button 168 118 52 52 return2\n");
     fprintf (tempfile, _("tbutton 164 180 return2 pop 100\n"));
     fprintf (tempfile, _("text 175 195 HB LD\n"));
 
     cost = get_group_cost(GROUP_RESIDENCE_HL);
     fprintf (tempfile, _("text 238 106 Cost %4d\n"), cost);
-    fprintf (tempfile, "icon 255 120 reshilow.csi\n");
+    fprintf (tempfile, "icon 255 120 reshilow.png\n");
     fprintf (tempfile, "button 253 118 52 52 return3\n");
     fprintf (tempfile, _("tbutton 250 180 return3 pop 200\n"));
     fprintf (tempfile, _("text 261 195 HB HD\n"));
@@ -950,21 +950,21 @@ choose_residence (void)
 
 	cost = get_group_cost(GROUP_RESIDENCE_LH);
 	fprintf (tempfile, _("text 68 276 Cost %4d\n"), cost);
-	fprintf (tempfile, "icon 85 290 reslowhi.csi\n");
+	fprintf (tempfile, "icon 85 290 reslowhi.png\n");
 	fprintf (tempfile, "button 83 288 52 52 return4\n");
 	fprintf (tempfile, _("tbutton 78 350 return4 pop 100\n"));
 	fprintf (tempfile, _("text 89 365 LB HD\n"));
 
 	cost = get_group_cost(GROUP_RESIDENCE_MH);
 	fprintf (tempfile, _("text 155 276 Cost %4d\n"), cost);
-	fprintf (tempfile, "icon 170 290 resmedhi.csi\n");
+	fprintf (tempfile, "icon 170 290 resmedhi.png\n");
 	fprintf (tempfile, "button 168 288 52 52 return5\n");
 	fprintf (tempfile, _("tbutton 164 350 return5 pop 200\n"));
 	fprintf (tempfile, _("text 175 365 HB LD\n"));
 
 	cost = get_group_cost(GROUP_RESIDENCE_HH);
 	fprintf (tempfile, _("text 238 276 Cost %4d\n"), cost);
-	fprintf (tempfile, "icon 255 290 reshihi.csi\n");
+	fprintf (tempfile, "icon 255 290 reshihi.png\n");
 	fprintf (tempfile, "button 253 288 52 52 return6\n");
 	fprintf (tempfile, _("tbutton 250 350 return6 pop 400\n"));
 	fprintf (tempfile, _("text 261 365 HB HD\n"));

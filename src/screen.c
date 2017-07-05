@@ -497,98 +497,98 @@ void screen_setup (void)
 
     /* load the pbar graphics */
     /* XXX: WCK: pbar_setup? */
-    up_pbar1_graphic = load_graphic ("pbarup1.csi",16,16);
-    up_pbar2_graphic = load_graphic ("pbarup2.csi",16,16);
-    down_pbar1_graphic = load_graphic ("pbardown1.csi",16,16);
-    down_pbar2_graphic = load_graphic ("pbardown2.csi",16,16);
-    pop_pbar_graphic = load_graphic ("pbarpop.csi",16,16);
-    tech_pbar_graphic = load_graphic ("pbartech.csi",16,16);
-    food_pbar_graphic = load_graphic ("pbarfood.csi",16,16);
-    jobs_pbar_graphic = load_graphic ("pbarjobs.csi",16,16);
-    coal_pbar_graphic = load_graphic ("pbarcoal.csi",16,16);
-    goods_pbar_graphic = load_graphic ("pbargoods.csi",16,16);
-    ore_pbar_graphic = load_graphic ("pbarore.csi",16,16);
-    steel_pbar_graphic = load_graphic ("pbarsteel.csi",16,16);
-    money_pbar_graphic = load_graphic ("pbarmoney.csi",16,16);
+    up_pbar1_graphic = load_graphic ("pbarup1.png",16,16);
+    up_pbar2_graphic = load_graphic ("pbarup2.png",16,16);
+    down_pbar1_graphic = load_graphic ("pbardown1.png",16,16);
+    down_pbar2_graphic = load_graphic ("pbardown2.png",16,16);
+    pop_pbar_graphic = load_graphic ("pbarpop.png",16,16);
+    tech_pbar_graphic = load_graphic ("pbartech.png",16,16);
+    food_pbar_graphic = load_graphic ("pbarfood.png",16,16);
+    jobs_pbar_graphic = load_graphic ("pbarjobs.png",16,16);
+    coal_pbar_graphic = load_graphic ("pbarcoal.png",16,16);
+    goods_pbar_graphic = load_graphic ("pbargoods.png",16,16);
+    ore_pbar_graphic = load_graphic ("pbarore.png",16,16);
+    steel_pbar_graphic = load_graphic ("pbarsteel.png",16,16);
+    money_pbar_graphic = load_graphic ("pbarmoney.png",16,16);
     init_pbars ();
 
     /* draw the box around the main window */
     draw_main_window_box (green (8));
     /* load the checked and unchecked box graphics */
-    checked_box_graphic = load_graphic ("checked_box.csi",16,16);
-    unchecked_box_graphic = load_graphic ("unchecked_box.csi",16,16);
+    checked_box_graphic = load_graphic ("checked_box.png",16,16);
+    unchecked_box_graphic = load_graphic ("unchecked_box.png",16,16);
 
     /* load minimap buttons (but don't draw) */
-    ms_normal_button_graphic = load_graphic ("ms-normal-button.csi",16,16);
-    ms_pollution_button_graphic = load_graphic ("ms-pollution-button.csi",16,16);
-    ms_fire_cover_button_graphic = load_graphic ("ms-fire-cover-button.csi",16,16);
+    ms_normal_button_graphic = load_graphic ("ms-normal-button.png",16,16);
+    ms_pollution_button_graphic = load_graphic ("ms-pollution-button.png",16,16);
+    ms_fire_cover_button_graphic = load_graphic ("ms-fire-cover-button.png",16,16);
     ms_health_cover_button_graphic
-	    = load_graphic ("ms-health-cover-button.csi",16,16);
+	    = load_graphic ("ms-health-cover-button.png",16,16);
     ms_cricket_cover_button_graphic
-	    = load_graphic ("ms-cricket-cover-button.csi",16,16);
-    ms_ub40_button_graphic = load_graphic ("ms-ub40-button.csi",16,16);
-    ms_coal_button_graphic = load_graphic ("ms-coal-button.csi",16,16);
-    ms_starve_button_graphic = load_graphic ("ms-starve-button.csi",16,16);
-    ms_power_button_graphic = load_graphic ("ms-power-button.csi",16,16);
-    ms_ocost_button_graphic = load_graphic ("ms-ocost-button.csi",16,16);
+	    = load_graphic ("ms-cricket-cover-button.png",16,16);
+    ms_ub40_button_graphic = load_graphic ("ms-ub40-button.png",16,16);
+    ms_coal_button_graphic = load_graphic ("ms-coal-button.png",16,16);
+    ms_starve_button_graphic = load_graphic ("ms-starve-button.png",16,16);
+    ms_power_button_graphic = load_graphic ("ms-power-button.png",16,16);
+    ms_ocost_button_graphic = load_graphic ("ms-ocost-button.png",16,16);
 
     /* draw the pause button */
-    pause_button1_off = load_graphic ("pause-offl.csi",16,16);
-    pause_button2_off = load_graphic ("pause-offr.csi",16,16);
-    pause_button1_on = load_graphic ("pause-onl.csi",16,16);
-    pause_button2_on = load_graphic ("pause-onr.csi",16,16);
+    pause_button1_off = load_graphic ("pause-offl.png",16,16);
+    pause_button2_off = load_graphic ("pause-offr.png",16,16);
+    pause_button1_on = load_graphic ("pause-onl.png",16,16);
+    pause_button2_on = load_graphic ("pause-onr.png",16,16);
     draw_pause (0);
 
     /* draw the slow button */
-    slow_button1_off = load_graphic ("slow-offl.csi",16,16);
-    slow_button2_off = load_graphic ("slow-offr.csi",16,16);
-    slow_button1_on = load_graphic ("slow-onl.csi",16,16);
-    slow_button2_on = load_graphic ("slow-onr.csi",16,16);
+    slow_button1_off = load_graphic ("slow-offl.png",16,16);
+    slow_button2_off = load_graphic ("slow-offr.png",16,16);
+    slow_button1_on = load_graphic ("slow-onl.png",16,16);
+    slow_button2_on = load_graphic ("slow-onr.png",16,16);
     draw_slow (0);
 
     /* draw the medium button */
-    med_button1_off = load_graphic ("norm-offl.csi",16,16);
-    med_button2_off = load_graphic ("norm-offr.csi",16,16);
-    med_button1_on = load_graphic ("norm-onl.csi",16,16);
-    med_button2_on = load_graphic ("norm-onr.csi",16,16);
+    med_button1_off = load_graphic ("norm-offl.png",16,16);
+    med_button2_off = load_graphic ("norm-offr.png",16,16);
+    med_button1_on = load_graphic ("norm-onl.png",16,16);
+    med_button2_on = load_graphic ("norm-onr.png",16,16);
     draw_med (0);
 
     /* draw the fast button */
-    fast_button1_off = load_graphic ("fast-offl.csi",16,16);
-    fast_button2_off = load_graphic ("fast-offr.csi",16,16);
-    fast_button1_on = load_graphic ("fast-onl.csi",16,16);
-    fast_button2_on = load_graphic ("fast-onr.csi",16,16);
+    fast_button1_off = load_graphic ("fast-offl.png",16,16);
+    fast_button2_off = load_graphic ("fast-offr.png",16,16);
+    fast_button1_on = load_graphic ("fast-onl.png",16,16);
+    fast_button2_on = load_graphic ("fast-onr.png",16,16);
     draw_fast (0);
 
     /* draw the results button */
-    results_button1 = load_graphic ("results-l.csi",16,16);
-    results_button2 = load_graphic ("results-r.csi",16,16);
+    results_button1 = load_graphic ("results-l.png",16,16);
+    results_button2 = load_graphic ("results-r.png",16,16);
     draw_results ();
 
     /* draw the t-overwrite button and load 'on button' */
 #if defined (commentout)
-    toveron_button1 = load_graphic ("tover1-on.csi",16,16);
-    toveroff_button1 = load_graphic ("tover1-off.csi",16,16);
-    toveron_button2 = load_graphic ("tover2-on.csi",16,16);
-    toveroff_button2 = load_graphic ("tover2-off.csi",16,16);
+    toveron_button1 = load_graphic ("tover1-on.png",16,16);
+    toveroff_button1 = load_graphic ("tover1-off.png",16,16);
+    toveron_button2 = load_graphic ("tover2-on.png",16,16);
+    toveroff_button2 = load_graphic ("tover2-off.png",16,16);
     draw_tover (0);
 
 #endif
 
     /* Load and draw menu buttons */
 #if defined (commentout)
-    menu_button_graphic = load_graphic ("menu-button.csi",16,16);
+    menu_button_graphic = load_graphic ("menu-button.png",16,16);
 #endif
     draw_menu ();
     draw_help ();
 #if defined (commentout)
-    load_button_graphic = load_graphic ("load-button.csi",16,16);
+    load_button_graphic = load_graphic ("load-button.png",16,16);
     draw_load ();
-    save_button_graphic = load_graphic ("save-button.csi",16,16);
+    save_button_graphic = load_graphic ("save-button.png",16,16);
     draw_save ();
-    quit_button_graphic = load_graphic ("quit-button.csi",16,16);
+    quit_button_graphic = load_graphic ("quit-button.png",16,16);
     draw_quit ();
-    help_button_graphic = load_graphic ("help-button.csi",16,16);
+    help_button_graphic = load_graphic ("help-button.png",16,16);
     draw_help ();
 #endif
 

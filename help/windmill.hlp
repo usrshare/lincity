@@ -19,16 +19,16 @@ text -1 160 There are two forms of windmills. The
 text -1 170 first is a low-tech 'wooden' windmill.
 text -1 180 The second is a 'modern' wind-farm type.
 
-icon 130 210 windmill1w.csi
-icon 230 210 windmill1g.csi
+icon 130 210 windmill1w.png
+icon 230 210 windmill1g.png
 
 text -1 255 The type you get depends on your
 text -1 265 tech-level when you build it.
 
-icon 216 316 windmill1g.csi
-icon 216 300 powerlldl.csi
-icon 200 300 powerlhd.csi
-icon 184 300 powerlhl.csi
+icon 216 316 windmill1g.png
+icon 216 300 powerlldl.png
+icon 200 300 powerlhd.png
+icon 184 300 powerlhl.png
 
 text -1 360 High tech ones can supply power lines.
 

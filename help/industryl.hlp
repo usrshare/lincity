@@ -20,22 +20,22 @@ text -1 175 These areas connect to transport ONLY to
 text -1 185 the top left hand corner, as shown.
 text -1 195 Transport will curve in when it is connected.
 
-icon 110 250 industrylm1.csi
-icon 94 250 roadlr.csi
-icon 78 250 roadlr.csi
-icon 110 234 railud.csi
-icon 110 218 railud.csi
+icon 110 250 industrylm1.png
+icon 94 250 roadlr.png
+icon 78 250 roadlr.png
+icon 110 234 railud.png
+icon 110 218 railud.png
 
-icon 250 250 industrylm1.csi
-icon 234 250 roaddr.csi
-icon 234 266 roadud.csi
-icon 234 282 roadud.csi
-icon 234 298 roadud.csi
-icon 250 234 raildr.csi
-icon 266 234 raillr.csi
-icon 282 234 raillr.csi
-icon 298 234 raillr.csi
-icon 180 270 market-full.csi
+icon 250 250 industrylm1.png
+icon 234 250 roaddr.png
+icon 234 266 roadud.png
+icon 234 282 roadud.png
+icon 234 298 roadud.png
+icon 250 234 raildr.png
+icon 266 234 raillr.png
+icon 282 234 raillr.png
+icon 298 234 raillr.png
+icon 180 270 market-full.png
 
 text -1 320 The market is within range of both areas.
 text -1 330 (The market must have jobs to supply)

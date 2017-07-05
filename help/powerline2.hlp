@@ -6,65 +6,65 @@ text -1 50 placed either side of a transport or river
 text -1 60 area, they act as if they are joined.
 text -1 75 See the examples below.
 
-icon 40 110 powerlhl.csi
-icon 56 110 powerlhl.csi
-icon 72 110 powerlhl.csi
-icon 88 110 roadud.csi
-icon 104 110 powerlhl.csi
-icon 120 110 powerlhl.csi
-icon 88 94 roadud.csi
-icon 88 126 roadud.csi
+icon 40 110 powerlhl.png
+icon 56 110 powerlhl.png
+icon 72 110 powerlhl.png
+icon 88 110 roadud.png
+icon 104 110 powerlhl.png
+icon 120 110 powerlhl.png
+icon 88 94 roadud.png
+icon 88 126 roadud.png
 text 145 108 These power lines are
 text 145 118 connected under the road.
 
-icon 40 170 powerlhl.csi
-icon 56 170 powerlhl.csi
-icon 72 170 powerlhl.csi
-icon 88 170 railud.csi
-icon 104 170 powerlhl.csi
-icon 120 170 powerlhl.csi
-icon 88 154 railld.csi
-icon 72 154 raillr.csi
-icon 88 186 raillur.csi
-icon 72 186 raillr.csi
-icon 104 186 raillr.csi
+icon 40 170 powerlhl.png
+icon 56 170 powerlhl.png
+icon 72 170 powerlhl.png
+icon 88 170 railud.png
+icon 104 170 powerlhl.png
+icon 120 170 powerlhl.png
+icon 88 154 railld.png
+icon 72 154 raillr.png
+icon 88 186 raillur.png
+icon 72 186 raillr.png
+icon 104 186 raillr.png
 
 text 145 168 These power lines are
 text 145 178 connected under the rails.
  
-icon 50 210 water.csi
-icon 66 210 water.csi
-icon 50 226 water.csi
-icon 66 226 water.csi
-icon 66 242 water.csi
-/icon 82 242 water.csi
-icon 66 258 water.csi
-icon 82 258 water.csi
-icon 50 274 water.csi
-icon 66 274 water.csi
-icon 66 290 water.csi
-icon 82 290 water.csi
-icon 66 306 water.csi
-icon 82 306 water.csi
-icon 82 322 water.csi
-icon 98 322 water.csi
-icon 82 338 water.csi
-icon 98 338 water.csi
+icon 50 210 water.png
+icon 66 210 water.png
+icon 50 226 water.png
+icon 66 226 water.png
+icon 66 242 water.png
+/icon 82 242 water.png
+icon 66 258 water.png
+icon 82 258 water.png
+icon 50 274 water.png
+icon 66 274 water.png
+icon 66 290 water.png
+icon 82 290 water.png
+icon 66 306 water.png
+icon 82 306 water.png
+icon 82 322 water.png
+icon 98 322 water.png
+icon 82 338 water.png
+icon 98 338 water.png
 
-icon 34 242 powerlhl.csi
-icon 50 242 powerlhl.csi
-icon 82 242 powerlhl.csi
-icon 98 242 powerlhl.csi
+icon 34 242 powerlhl.png
+icon 50 242 powerlhl.png
+icon 82 242 powerlhl.png
+icon 98 242 powerlhl.png
 
-icon 34 322 powerlhl.csi
-icon 50 322 powerlhl.csi
-icon 66 322 powerlhl.csi
-/icon 98 322 powerlhd.csi
-icon 114 322 powerlhd.csi
-icon 130 322 powerlhd.csi
+icon 34 322 powerlhl.png
+icon 50 322 powerlhl.png
+icon 66 322 powerlhl.png
+/icon 98 322 powerlhd.png
+icon 114 322 powerlhd.png
+icon 130 322 powerlhd.png
 
-icon 98 306 powerlvd.csi
-icon 98 290 powerlvd.csi
+icon 98 306 powerlvd.png
+icon 98 290 powerlvd.png
 
 text 130 230 These power lines are connected
 text 130 240 under the river. Often you will

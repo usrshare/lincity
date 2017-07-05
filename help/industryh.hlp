@@ -19,28 +19,28 @@ text -1 170 A typical steel works is shown below.
 text 80 185 Steel works produce
 tbutton 240 183 pollution.hlp Pollution
 
-icon 140 220 industryhm1.csi
-icon 124 220 raillr.csi
-icon 108 220 raillr.csi
+icon 140 220 industryhm1.png
+icon 124 220 raillr.png
+icon 108 220 raillr.png
 text 20 220 Ore and
 text 20 230 steel come 
 text 20 240 by rail.
 
-icon 140 300 market-full.csi
-icon 124 316 roadlr.csi
-icon 108 316 roadlr.csi
+icon 140 300 market-full.png
+icon 124 316 roadlr.png
+icon 108 316 roadlr.png
 text 20 300 A market to
 text 30 310 supply
 text 30 320 jobs.
 
-icon 240 226 substation-G.csi
-icon 240 210 powerlrdl.csi
-icon 256 210 powerlhl.csi
-icon 272 210 powerlhd.csi
-icon 288 210 powerlhl.csi
-icon 304 210 powerlhl.csi
-icon 320 210 powerlhd.csi
-icon 336 210 powerlhl.csi
+icon 240 226 substation-G.png
+icon 240 210 powerlrdl.png
+icon 256 210 powerlhl.png
+icon 272 210 powerlhd.png
+icon 288 210 powerlhl.png
+icon 304 210 powerlhl.png
+icon 320 210 powerlhd.png
+icon 336 210 powerlhl.png
 text 280 235 Power from a
 text 280 245 power station.
 

@@ -21,12 +21,12 @@ text -1 190 of centre). Also the graphic changes as it
 text -1 200 is built. The following 6 graphics show the
 text -1 210 stages of construction from 0% to 100%
 
-icon 50 230 monument0.csi
-icon 100 230 monument1.csi
-icon 150 230 monument2.csi
-icon 200 230 monument3.csi
-icon 250 230 monument4.csi
-icon 300 230 monument5.csi
+icon 50 230 monument0.png
+icon 100 230 monument1.png
+icon 150 230 monument2.png
+icon 200 230 monument3.png
+icon 250 230 monument4.png
+icon 300 230 monument5.png
 
 text -1 270 HINT: How to stop monument building sucking
 text -1 280 too many jobs out of an area and therefore
@@ -37,17 +37,17 @@ text 10 320 Track connected
 text 10 330 to the main part
 text 10 340 of the game.
 
-icon 148 330 tracklr.csi
-icon 164 330 tracklr.csi
-icon 180 330 tracklr.csi
-icon 196 330 tracklr.csi
-icon 212 330 tracklr.csi
-icon 228 330 tracklr.csi
-icon 244 330 tracklr.csi
-icon 260 330 tracklr.csi
-icon 276 330 tracklr.csi
-icon 292 330 market-med.csi
-icon 324 330 monument4.csi
+icon 148 330 tracklr.png
+icon 164 330 tracklr.png
+icon 180 330 tracklr.png
+icon 196 330 tracklr.png
+icon 212 330 tracklr.png
+icon 228 330 tracklr.png
+icon 244 330 tracklr.png
+icon 260 330 tracklr.png
+icon 276 330 tracklr.png
+icon 292 330 market-med.png
+icon 324 330 monument4.png
 
 text 150 370 You will need a          here
 tbutton 286 368 market.hlp market

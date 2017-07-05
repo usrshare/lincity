@@ -14,9 +14,9 @@ text -1 135 of their residential area. See below for an
 text -1 145 example of the distances involved. Be
 text -1 155 conservative until you have got the feel of it.
 
-icon 60 200 resmedlow.csi
-icon 130 270 resmedlow.csi
-icon 220 230 market-full.csi
+icon 60 200 resmedlow.png
+icon 130 270 resmedlow.png
+icon 220 230 market-full.png
 
 tbutton 30 270 residential.hlp Residences
 tbutton 210 270 market.hlp Market

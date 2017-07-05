@@ -5,7 +5,7 @@ text -1 50 To see where the veins are, you can click
 text -1 60 on the coal button just above the mini screen.
 
 text 100 80 It looks like this
-icon 260 75 ms-coal-button.csi
+icon 260 75 ms-coal-button.png
  
 text -1 95 The first time you use this button, it will
 text -1 105 cost you 1 million. After that it is free.
@@ -14,19 +14,19 @@ text -1 130 will have to find the coal by trial and error.
 
 text -1 145 Coal mines need jobs to dig coal.
 
-icon 120 200 coalmine-full.csi
-icon 104 200 roadlr.csi
-icon 88 200 roadlr.csi
-icon 72 200 roadlr.csi
-icon 56 200 roaddr.csi
-/icon 40 200 roaddr.csi
-icon 40 216 powerscoal-full.csi
+icon 120 200 coalmine-full.png
+icon 104 200 roadlr.png
+icon 88 200 roadlr.png
+icon 72 200 roadlr.png
+icon 56 200 roaddr.png
+/icon 40 200 roaddr.png
+icon 40 216 powerscoal-full.png
 
-icon 120 184 raildr.csi
-icon 136 184 raillr.csi
-icon 150 184 raillr.csi
-icon 166 184 raillr.csi
-icon 180 184 raillr.csi
+icon 120 184 raildr.png
+icon 136 184 raillr.png
+icon 150 184 raillr.png
+icon 166 184 raillr.png
+icon 180 184 raillr.png
 
 text 210 190 This shows a coal fired
 text 210 200 power station connected

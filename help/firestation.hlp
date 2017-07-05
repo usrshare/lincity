@@ -22,7 +22,7 @@ text -1 195 not covered are just dark green.
 
 text -1 210 The fire station button above the
 text 80 225 mini-screen looks like this
-icon 306 221 firestation-button.csi
+icon 306 221 firestation-button.png
 
 text -1 240 Fire stations increase the desirability of
 text -1 250 residential areas within their range.
@@ -41,4 +41,4 @@ text 220 310 show that they
 text 220 320 are working.
 
 text 60 360 This is a fire station
-icon 260 350 firestation1.csi
+icon 260 350 firestation1.png
