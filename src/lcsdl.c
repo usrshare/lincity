@@ -32,8 +32,6 @@ TTF_Font* eight_font = NULL;
 TTF_Font* eight_mono_font = NULL;
 TTF_Font* sixteen_font = NULL;
 
-TTF_Font* curfont = NULL;
-
 SDL_Color t_bgcolor, t_fgcolor;
 
 #ifndef M_PI
@@ -72,7 +70,8 @@ int text_bg = 0;
 int text_fg = 255;
 int x_key_value;
 int x_key_shifted = 0;	//Is the key shifted?
-int xclip_x1, xclip_y1, xclip_x2, xclip_y2, clipping_flag = 0;
+SDL_Rect cliprect;
+int clipping_flag = 0;
 //long unsigned int colour_table[256];
 unsigned char *open_font;
 int open_font_height, suppress_next_expose = 0;
@@ -110,6 +109,15 @@ static SDL_Surface* surface_by_layer(enum disp_layers l) {
 		case DL_BG: return display_p.bg;
 		case DL_UI: return display_p.ui;
 		case DL_SPRITES: return display_p.sprites;
+		default: return NULL;
+	}
+}
+
+static TTF_Font* getsdlfont(enum text_fonts f) {
+	switch(f) {
+		case TF_DEFAULT: return eight_font;
+		case TF_MONO: return eight_mono_font;
+		case TF_LARGE: return sixteen_font;
 		default: return NULL;
 	}
 }
@@ -180,15 +188,7 @@ Fgl_setfontcolors (int bg, int fg)
 	t_fgcolor = display_p.pixcolour_gc[fg];
 }
 
-void
-
-Fgl_setfont (int fw, int fh, void *fp)
-{
-	curfont = fp;
-}
-
-	void
-parse_sdlargs (int argc, char **argv, char **geometry)
+void parse_sdlargs (int argc, char **argv, char **geometry)
 {
 	int option;
 	extern char *optarg;
@@ -253,6 +253,17 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 	winW = WINWIDTH;
 	winH = WINHEIGHT;
 
+}
+
+void lcsdl_load_fonts(void) {
+    eight_font = TTF_OpenFont(fontfile_sans,11);
+    if (eight_font == NULL) HandleError("Can't open the small font file", FATAL);
+    eight_mono_font = TTF_OpenFont(fontfile_mono,11);
+    if (eight_mono_font == NULL) HandleError("Can't open the monospaced font file", FATAL);
+    TTF_SetFontKerning(eight_mono_font,0);
+    TTF_SetFontHinting(eight_mono_font,TTF_HINTING_MONO);
+    sixteen_font = TTF_OpenFont(fontfile_sans,16);
+    if (eight_font == NULL) HandleError("Can't open the large font file", FATAL);
 }
 
 
@@ -353,19 +364,17 @@ void Fgl_line (int x1, int y1, int dummy, int y2, int col) {
 	return Fgl_line_s(DL_BG,x1,y1,dummy,y2,col);
 }
 
-int lc_txtwidth(char *s) {
+int lc_txtwidth(enum text_fonts f, char *s) {
 	int w,h;
-	TTF_SizeUTF8(curfont,s,&w,&h);
+	TTF_SizeUTF8(getsdlfont(f),s,&w,&h);
 	return w;
 }
 
-void Fgl_write3 (enum disp_layers l, TTF_Font* font, int x, int y, int w, char *s, enum text_align align){
-
-	if (!font) font = curfont;
+void Fgl_write3 (enum disp_layers l, enum text_fonts f, int x, int y, int w, char *s, enum text_align align){
 
 	if (strlen(s) == 0) return;
 
-	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(font,s,t_fgcolor,t_bgcolor);
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(getsdlfont(f),s,t_fgcolor,t_bgcolor);
 
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
@@ -390,7 +399,7 @@ void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_a
 
 	if (strlen(s) == 0) return;
 
-	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(eight_font,s,t_fgcolor,t_bgcolor);
 
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
@@ -416,7 +425,7 @@ void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 
 	if (strlen(s) == 0) return;
 
-	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(curfont,s,t_fgcolor,t_bgcolor);
+	SDL_Surface* textsurf = TTF_RenderUTF8_Shaded(eight_font,s,t_fgcolor,t_bgcolor);
 
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
@@ -446,6 +455,7 @@ void Fgl_write (int x, int y, char *s){
 
 void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col)
 {
+	/*
 	if (clipping_flag) {
 		if (x1 < xclip_x1)
 			x1 = xclip_x1;
@@ -455,7 +465,7 @@ void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col)
 			y1 = xclip_y1;
 		if (y1 + h - 1 > xclip_y2)
 			h = xclip_y2 - y1 + 1;
-	}
+	}*/
 	col &= 0xff;
 	//pixmap_fillbox (x1, y1, w, h, col);
 
@@ -747,25 +757,25 @@ void refresh_rect(Rect* r) {
 	refresh_screen(r->x,r->y,r->x + r->w, r->y + r->h);
 }
 
-	void
-Fgl_enableclipping (void)
+void Fgl_enableclipping (void)
 {
 	clipping_flag = 1;
+	SDL_SetClipRect(display_p.dpy, clipping_flag ? &cliprect : NULL);
 }
 
-	void
-Fgl_setclippingwindow (int x1, int y1, int x2, int y2)
+void Fgl_setclippingwindow (int x1, int y1, int x2, int y2)
 {
-	xclip_x1 = x1;
-	xclip_y1 = y1;
-	xclip_x2 = x2;
-	xclip_y2 = y2;
+	cliprect.x = x1;
+	cliprect.y = y1;
+	cliprect.w = x2 - x1;
+	cliprect.h = y2 - y1;
+	SDL_SetClipRect(display_p.dpy, clipping_flag ? &cliprect : NULL);
 }
 
-	void
-Fgl_disableclipping (void)
+void Fgl_disableclipping (void)
 {
 	clipping_flag = 0;
+	SDL_SetClipRect(display_p.dpy, clipping_flag ? &cliprect : NULL);
 }
 
 void do_call_event (int wait) {

@@ -728,20 +728,13 @@ void draw_small_yellow_bezel (int x, int y, int h, int w)
 
 void load_fonts()
 {
-    eight_font = TTF_OpenFont(fontfile_sans,11);
-    if (eight_font == NULL) HandleError("Can't open the small font file", FATAL);
-    eight_mono_font = TTF_OpenFont(fontfile_mono,11);
-    if (eight_mono_font == NULL) HandleError("Can't open the monospaced font file", FATAL);
-    TTF_SetFontKerning(eight_mono_font,0);
-    TTF_SetFontHinting(eight_mono_font,TTF_HINTING_MONO);
-    sixteen_font = TTF_OpenFont(fontfile_sans,16);
-    if (eight_font == NULL) HandleError("Can't open the large font file", FATAL);
+	return lcsdl_load_fonts();
 }
 
 void init_fonts (void)
 {
     load_fonts();
-    Fgl_setfont (8, 8, eight_font);
+    //Fgl_setfont (8, 8, eight_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 }
 

@@ -461,7 +461,7 @@ parse_textline (char *st)
 	x = x + (mw->w - 440) / 2;
     }
     /* check to see if text runs off the end */
-    if ((int) (lc_txtwidth(st)) > (mw->w - x))
+    if ((int) (lc_txtwidth(TF_DEFAULT,st)) > (mw->w - x))
 	return;
     Fgl_write2 (mw->x+x, mw->y + y, mw->w, st, align);
 }
@@ -633,6 +633,6 @@ parse_tbuttonline (char *st)
     sprintf (ss, "text %d %d ", x + 2, y + 2);
     strcat (ss, st);
     parse_textline (ss);
-    sprintf (ss, "button %d %d %d %d %s", x, y, lc_txtwidth(st) + 4, 15, s);
+    sprintf (ss, "button %d %d %d %d %s", x, y, lc_txtwidth(TF_DEFAULT,st) + 4, 15, s);
     parse_buttonline (ss);
 }

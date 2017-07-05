@@ -42,6 +42,12 @@ enum disp_layers {
 	DL_SPRITES,
 };
 
+enum text_fonts {
+	TF_DEFAULT = 0,
+	TF_MONO = 1,
+	TF_LARGE = 2,
+};
+
 enum text_align {
 	TA_LEFT,
 	TA_CENTER,
@@ -114,6 +120,7 @@ void Fgl_setclippingwindow (int, int, int, int);
 void Fgl_disableclipping (void);
 
 void parse_sdlargs (int, char **, char **);
+void lcsdl_load_fonts(void);
 void set_pointer_confinement (void);
 void do_setcustompalette (SDL_Color *);
 void Create_Window (char *);
@@ -138,7 +145,7 @@ int lc_setpalettecolors(int n, uint8_t* colors);
 int lc_loadpalette(uint32_t* pal);
 
 int lc_loadfont(int fontid, char* filename);
-int lc_txtwidth(char *s);
+int lc_txtwidth(enum text_fonts f, char *s);
 
 void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour);
 void draw_bezel_s (enum disp_layers l, Rect r, short width, int color);
@@ -146,13 +153,10 @@ void draw_bezel_s (enum disp_layers l, Rect r, short width, int color);
 void Fgl_blit (enum disp_layers l, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
 
-void Fgl_write3 (enum disp_layers l, TTF_Font* font, int x, int y, int w, char *s, enum text_align align);
+void Fgl_write3 (enum disp_layers l, enum text_fonts f, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
-extern TTF_Font* eight_font;
-extern TTF_Font* eight_mono_font;
-extern TTF_Font* sixteen_font;
 extern SDL_Surface* icon_surface[NUM_OF_TYPES];
 extern char icon_surface_flag[NUM_OF_TYPES];
 

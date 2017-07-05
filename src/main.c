@@ -156,7 +156,7 @@ lincity_main (int argc, char *argv[])
     
     init_types ();
 
-    Fgl_setfont (8, 8, eight_font);
+    //Fgl_setfont (8, 8, eight_font);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
     initialize_geometry (&scr);
