@@ -26,23 +26,21 @@
 /* Type Definitions */
 typedef struct _disp
 {
-	SDL_Surface *dpy; //screen
-	SDL_Surface *bg; //background
-	SDL_Surface *ui; //background
-	SDL_Surface *sprites; //square mouse.
-
 	int show_ui;
 	int show_sprites;
 	int screen;
 	char *dname;
 
-	SDL_Color bg_xcolor;
-	SDL_Color pixcolour_gc[256];
-	SDL_Palette* cmap;
-
 	int pointer_confined;
 }
 disp;
+
+enum disp_layers {
+	DL_DIRECT = -1, //do not use
+	DL_BG = 0,
+	DL_UI,
+	DL_SPRITES,
+};
 
 enum text_align {
 	TA_LEFT,
@@ -102,10 +100,10 @@ void open_write (int, int, char *);
 //extern void Fgl_getbox (int, int, int, int, void *);
 //extern void Fgl_putbox (int, int, int, int, void *);
 void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf);
-void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col);
+void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col);
 void Fgl_fillbox (int, int, int, int, int);
-void Fgl_hline_s (SDL_Surface* surf, int x1, int y1, int x2, int col);
-void Fgl_line_s (SDL_Surface* surf, int x1, int y1, int dummy, int y2, int col);
+void Fgl_hline_s (enum disp_layers l, int x1, int y1, int x2, int col);
+void Fgl_line_s (enum disp_layers l, int x1, int y1, int dummy, int y2, int col);
 void Fgl_hline (int, int, int, int);
 void Fgl_line (int, int, int, int, int);
 void Fgl_setpixel (int, int, int);
@@ -142,14 +140,14 @@ int lc_loadpalette(uint32_t* pal);
 int lc_loadfont(int fontid, char* filename);
 int lc_txtwidth(char *s);
 
-void draw_small_bezel_s (SDL_Surface* surf, int x, int y, int w, int h, int colour);
-void draw_bezel_s (SDL_Surface* surf, Rect r, short width, int color);
+void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour);
+void draw_bezel_s (enum disp_layers l, Rect r, short width, int color);
 
-void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
+void Fgl_blit (enum disp_layers l, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src);
 
-void Fgl_write3 (SDL_Surface* surf, TTF_Font* font, int x, int y, int w, char *s, enum text_align align);
-void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_align align);
+void Fgl_write3 (enum disp_layers l, TTF_Font* font, int x, int y, int w, char *s, enum text_align align);
+void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
 extern TTF_Font* eight_font;

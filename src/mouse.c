@@ -318,17 +318,17 @@ draw_square_mouse (int x, int y, int size)	/* size is pixels */
     omx = x;
     omy = y;
     
-    Fgl_fillbox_s(display.sprites,omx-2,omy-2,size+4,size+4,0);
+    Fgl_fillbox_s(DL_SPRITES,omx-2,omy-2,size+4,size+4,0);
     mouse_buffer_fresh = 1;
 
-    Fgl_hline_s (display.sprites, x - 2, y - 2, x + size + 1, yellow (31));
-    Fgl_hline_s (display.sprites, x - 1, y - 1, x + size, blue (31));
-    Fgl_hline_s (display.sprites, x - 2, y + size + 1, x + size + 1, yellow (31));
-    Fgl_hline_s (display.sprites, x - 1, y + size, x + size, blue (31));
-    Fgl_line_s (display.sprites, x - 2, y - 1, x - 2, y + size + 1, yellow (31));
-    Fgl_line_s (display.sprites, x - 1, y, x - 1, y + size, blue (31));
-    Fgl_line_s (display.sprites, x + size + 1, y - 1, x + size + 1, y + size + 1, yellow (31));
-    Fgl_line_s (display.sprites, x + size, y, x + size, y + size, blue (31));
+    Fgl_hline_s (DL_SPRITES, x - 2, y - 2, x + size + 1, yellow (31));
+    Fgl_hline_s (DL_SPRITES, x - 1, y - 1, x + size, blue (31));
+    Fgl_hline_s (DL_SPRITES, x - 2, y + size + 1, x + size + 1, yellow (31));
+    Fgl_hline_s (DL_SPRITES, x - 1, y + size, x + size, blue (31));
+    Fgl_line_s (DL_SPRITES, x - 2, y - 1, x - 2, y + size + 1, yellow (31));
+    Fgl_line_s (DL_SPRITES, x - 1, y, x - 1, y + size, blue (31));
+    Fgl_line_s (DL_SPRITES, x + size + 1, y - 1, x + size + 1, y + size + 1, yellow (31));
+    Fgl_line_s (DL_SPRITES, x + size, y, x + size, y + size, blue (31));
 
     display.show_sprites = 1;
 }
@@ -337,7 +337,7 @@ void
 hide_square_mouse (void)
 {
     int size = (main_groups[selected_module_group].size) * 16;
-    Fgl_fillbox_s(display.sprites,omx-2,omy-2,size+4,size+4,0);
+    Fgl_fillbox_s(DL_SPRITES,omx-2,omy-2,size+4,size+4,0);
     display.show_sprites = 0;
 }
 
@@ -348,14 +348,14 @@ redraw_square_mouse (void)
 
     size = (main_groups[selected_module_group].size) * 16;
 
-    Fgl_hline_s (display.sprites, omx - 2, omy - 2, omx + size + 1, yellow (31));
-    Fgl_hline_s (display.sprites, omx - 1, omy - 1, omx + size, blue (31));
-    Fgl_hline_s (display.sprites, omx - 2, omy + size + 1, omx + size + 1, yellow (31));
-    Fgl_hline_s (display.sprites, omx - 1, omy + size, omx + size, blue (31));
-    Fgl_line_s (display.sprites, omx - 2, omy - 1, omx - 2, omy + size + 1, yellow (31));
-    Fgl_line_s (display.sprites, omx - 1, omy, omx - 1, omy + size, blue (31));
-    Fgl_line_s (display.sprites, omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
-    Fgl_line_s (display.sprites, omx + size, omy, omx + size, omy + size, blue (31));
+    Fgl_hline_s (DL_SPRITES, omx - 2, omy - 2, omx + size + 1, yellow (31));
+    Fgl_hline_s (DL_SPRITES, omx - 1, omy - 1, omx + size, blue (31));
+    Fgl_hline_s (DL_SPRITES, omx - 2, omy + size + 1, omx + size + 1, yellow (31));
+    Fgl_hline_s (DL_SPRITES, omx - 1, omy + size, omx + size, blue (31));
+    Fgl_line_s (DL_SPRITES, omx - 2, omy - 1, omx - 2, omy + size + 1, yellow (31));
+    Fgl_line_s (DL_SPRITES, omx - 1, omy, omx - 1, omy + size, blue (31));
+    Fgl_line_s (DL_SPRITES, omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
+    Fgl_line_s (DL_SPRITES, omx + size, omy, omx + size, omy + size, blue (31));
 }
 
 void

@@ -240,7 +240,7 @@ void update_main_screen_normal (int full_refresh)
 		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
 		    if (sx > 0 && sy > 0) {
 		
-		if (icon_surface[typ] != 0) Fgl_blit(display.bg,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
+		if (icon_surface[typ] != 0) Fgl_blit(DL_BG,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
 			fprintf(stderr,"No surface loaded for type %d.\n",typ); }
 		}
 	    }
@@ -1644,7 +1644,7 @@ void print_total_money (void)
     count = sprintf(str, _("¤%'d"), total_money);
 
     //let the locale decide whether we need thousands separators.
-    Fgl_fillbox_s(display.bg,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
+    Fgl_fillbox_s(DL_BG,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
 
     if (total_money < 0)
 	Fgl_setfontcolors (TEXT_BG_COLOUR, red (30));
@@ -1662,7 +1662,7 @@ void print_date (void)
     Rect* b = &scr.date;
     sprintf (s, _("%s %04d"), current_month(total_time),
 	     current_year(total_time));
-    Fgl_fillbox_s(display.bg,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
+    Fgl_fillbox_s(DL_BG,b->x,b->y,b->w,b->h,TEXT_BG_COLOUR);
     Fgl_write2 (b->x, b->y, b->w, s, TA_RIGHT);
     refresh_screen(b->x,b->y,b->x + b->w, b->y + b->h);
 }
@@ -1978,7 +1978,7 @@ void close_market_cb (void)
     market_cb_flag = 0;
     market_cb_drawn_flag = 0;
 
-    Fgl_fillbox_s (display.ui,mcb->x, mcb->y, mcb->w, mcb->h,0); //clear
+    Fgl_fillbox_s (DL_UI,mcb->x, mcb->y, mcb->w, mcb->h,0); //clear
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
     /* when exiting market cb, stop the mouse repeating straight away */
@@ -2006,7 +2006,7 @@ void close_port_cb (void)
     port_cb_flag = 0;
     port_cb_drawn_flag = 0;
 
-    Fgl_fillbox_s (display.ui,mcb->x, mcb->y, mcb->w, mcb->h, 0);
+    Fgl_fillbox_s (DL_UI,mcb->x, mcb->y, mcb->w, mcb->h, 0);
     /* when exiting port cb, stop the mouse repeating straight away */
     cs_mouse_button = LC_MOUSE_LEFTBUTTON;
 }

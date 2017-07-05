@@ -130,7 +130,7 @@ mps_refresh(void)
 
 	if (strlen(mps_info_l[i]) || strlen(mps_info_r[i])) {
 	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_l[i], TA_LEFT);
-	Fgl_write3 (NULL, eight_mono_font, mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_r[i], TA_RIGHT);
+	Fgl_write3 (DL_BG, eight_mono_font, mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_r[i], TA_RIGHT);
 	} else {
 	Fgl_write2 (mps->x + 2, mps->y + (i * 12),mps->w-4, mps_info_c[i], TA_CENTER);
 	}

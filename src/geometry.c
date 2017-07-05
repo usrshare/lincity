@@ -643,8 +643,7 @@ draw_ms_text (char* txt)
     refresh_rect(mma);
 }
 
-void
-draw_small_bezel (int x, int y, int w, int h, int colour){
+void draw_small_bezel (int x, int y, int w, int h, int colour){
     int i;
     for (i = 1; i < 4; i++) {
 	Fgl_hline (x - 1 - i, y - 1 - i, x + w + i, colour);
@@ -654,8 +653,7 @@ draw_small_bezel (int x, int y, int w, int h, int colour){
     }
 }
 
-void 
-draw_bezel (Rect r, short width, int color)
+void draw_bezel (Rect r, short width, int color)
 {
   int i;
   int c;

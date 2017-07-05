@@ -46,6 +46,19 @@ SDL_Color t_bgcolor, t_fgcolor;
 #undef DEBUG_X11_MOUSE
 
 disp display;
+
+typedef struct _disp_private {
+	SDL_Surface *dpy; //screen
+	SDL_Surface *bg; //background
+	SDL_Surface *ui; //background
+	SDL_Surface *sprites; //square mouse.
+	
+	SDL_Color bg_xcolor;
+	SDL_Color pixcolour_gc[256];
+	SDL_Palette* cmap;
+} disp_private;
+disp_private display_p;
+
 int borderx, bordery;
 
 int command_line_debug = 0;
@@ -91,6 +104,16 @@ SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
 SDL_Surface *ms_power_button_graphic;
 SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
 
+static SDL_Surface* surface_by_layer(enum disp_layers l) {
+	switch(l) {
+		case DL_DIRECT: return display_p.dpy;
+		case DL_BG: return display_p.bg;
+		case DL_UI: return display_p.ui;
+		case DL_SPRITES: return display_p.sprites;
+		default: return NULL;
+	}
+}
+
 void set_pointer_confinement (void)
 {
 	if (confine_flag) {
@@ -127,13 +150,13 @@ void open_setcustompalette (SDL_Color* inpal) {
 }
 
 void do_setcustompalette (SDL_Color* inpal) {
-	SDL_SetPalette((display.dpy), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display.dpy), SDL_PHYSPAL, display.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display.bg), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display.ui), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
-	SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
-	SDL_SetPalette((display.sprites), SDL_LOGPAL, display.pixcolour_gc, 0, 256);
-	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+	SDL_SetPalette((display_p.dpy), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display_p.dpy), SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display_p.bg), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	SDL_SetPalette((display_p.ui), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
+	SDL_SetPalette((display_p.sprites), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
 }
 
 #if defined (commentout)
@@ -153,8 +176,8 @@ initfont ()
 	void
 Fgl_setfontcolors (int bg, int fg)
 {
-	t_bgcolor = display.pixcolour_gc[bg];
-	t_fgcolor = display.pixcolour_gc[fg];
+	t_bgcolor = display_p.pixcolour_gc[bg];
+	t_fgcolor = display_p.pixcolour_gc[fg];
 }
 
 void
@@ -224,8 +247,8 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 		printf (_("Version %s\n"), VERSION);
 
 	// Record the screen number and root window.
-	//display.screen = DefaultScreen (display.dpy);
-	//display.root = RootWindow (display.dpy, display.screen);
+	//display.screen = DefaultScreen (display_p.dpy);
+	//display.root = RootWindow (display_p.dpy, display.screen);
 
 	winW = WINWIDTH;
 	winH = WINHEIGHT;
@@ -236,25 +259,25 @@ parse_sdlargs (int argc, char **argv, char **geometry)
 void Create_Window (char *geometry)
 {
 
-	display.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
+	display_p.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
 
-	if (display.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
+	if (display_p.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
 
-	display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, winW, winH, 8, 0,0,0,0);
+	display_p.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, winW, winH, 8, 0,0,0,0);
 
-	if (display.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
+	if (display_p.bg == 0) { fprintf(stderr,"Unable to create background surface.\n"); return; }
 
-	display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
+	display_p.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
 
-	if (display.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
+	if (display_p.sprites == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
 
-	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
 	
-	display.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
+	display_p.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, winW, winH, 8, 0,0,0,0);
 
-	if (display.ui == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
+	if (display_p.ui == 0) { fprintf(stderr,"Unable to create sprite surface.\n"); return; }
 
-	SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
+	SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
 
 
 	char wname[256];	/* Window Name */
@@ -299,39 +322,35 @@ void Fgl_setpixel_s (SDL_Surface* s, int x, int y, int col) {
 
 void Fgl_setpixel (int x, int y, int col) {
 
-	assert ((display.bg)->format->BytesPerPixel == 1);
+	assert ((display_p.bg)->format->BytesPerPixel == 1);
 
-	uint8_t* p = (uint8_t *)(display.bg)->pixels + y * (display.bg)->pitch + x;
+	uint8_t* p = (uint8_t *)(display_p.bg)->pixels + y * (display_p.bg)->pitch + x;
 	*p = col;
 }
 
-int Fgl_getpixel (int x, int y)
-{
-}
-
-void Fgl_hline_s (SDL_Surface* surf, int x1, int y1, int x2, int col) {
+void Fgl_hline_s (enum disp_layers l, int x1, int y1, int x2, int col) {
 	col &= 0xff;
 	//pixmap_hline (x1, y1, x2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=x2-x1+1, .h=1};
-	SDL_FillRect(surf,&dstrect,col);
+	SDL_FillRect(surface_by_layer(l),&dstrect,col);
 }
 
-void Fgl_line_s (SDL_Surface* surf, int x1, int y1, int dummy, int y2, int col) {
+void Fgl_line_s (enum disp_layers l, int x1, int y1, int dummy, int y2, int col) {
 	//vertical lines only
 	col &= 0xff;
 	//pixmap_vline (x1, y1, y2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=1, .h=y2-y1+1};
-	SDL_FillRect(surf,&dstrect,col);
+	SDL_FillRect(surface_by_layer(l),&dstrect,col);
 }
 
 void Fgl_hline (int x1, int y1, int x2, int col) {
-	return Fgl_hline_s(display.bg,x1,y1,x2,col);
+	return Fgl_hline_s(DL_BG,x1,y1,x2,col);
 }
 
 void Fgl_line (int x1, int y1, int dummy, int y2, int col) {
-	return Fgl_line_s(display.bg,x1,y1,dummy,y2,col);
+	return Fgl_line_s(DL_BG,x1,y1,dummy,y2,col);
 }
 
 int lc_txtwidth(char *s) {
@@ -340,9 +359,8 @@ int lc_txtwidth(char *s) {
 	return w;
 }
 
-void Fgl_write3 (SDL_Surface* surf, TTF_Font* font, int x, int y, int w, char *s, enum text_align align){
+void Fgl_write3 (enum disp_layers l, TTF_Font* font, int x, int y, int w, char *s, enum text_align align){
 
-	if (!surf) surf = display.bg;
 	if (!font) font = curfont;
 
 	if (strlen(s) == 0) return;
@@ -352,7 +370,6 @@ void Fgl_write3 (SDL_Surface* surf, TTF_Font* font, int x, int y, int w, char *s
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
 	int tw = textsurf->w;
-	int th = textsurf->h;
 
 	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
 
@@ -365,11 +382,11 @@ void Fgl_write3 (SDL_Surface* surf, TTF_Font* font, int x, int y, int w, char *s
 			o_rect.x += (w - tw); break;
 	}
 
-	SDL_BlitSurface(textsurf,NULL,surf,&o_rect);
+	SDL_BlitSurface(textsurf,NULL,surface_by_layer(l),&o_rect);
 	SDL_FreeSurface(textsurf);
 }
 
-void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_align align){
+void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_align align){
 
 	if (strlen(s) == 0) return;
 
@@ -391,7 +408,7 @@ void Fgl_write2_s (SDL_Surface* surf, int x, int y, int w, char *s, enum text_al
 			o_rect.x += (w - tw); break;
 	}
 
-	SDL_BlitSurface(textsurf,NULL,surf,&o_rect);
+	SDL_BlitSurface(textsurf,NULL,surface_by_layer(l),&o_rect);
 	SDL_FreeSurface(textsurf);
 }
 
@@ -417,7 +434,7 @@ void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 			o_rect.x += (w - tw); break;
 	}
 
-	SDL_BlitSurface(textsurf,NULL,display.bg,&o_rect);
+	SDL_BlitSurface(textsurf,NULL,display_p.bg,&o_rect);
 
 	SDL_FreeSurface(textsurf);
 }
@@ -427,7 +444,7 @@ void Fgl_write (int x, int y, char *s){
 	return Fgl_write2(x,y,0,s,TA_LEFT);
 }
 
-void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col)
+void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col)
 {
 	if (clipping_flag) {
 		if (x1 < xclip_x1)
@@ -443,12 +460,12 @@ void Fgl_fillbox_s (SDL_Surface* surf, int x1, int y1, int w, int h, int col)
 	//pixmap_fillbox (x1, y1, w, h, col);
 
 	SDL_Rect dstrect = {.x=x1,.y=y1,.w=w,.h=h};
-	SDL_FillRect(surf, &dstrect, col);
+	SDL_FillRect(surface_by_layer(l), &dstrect, col);
 }
 
 void Fgl_fillbox (int x1, int y1, int w, int h, int col)
 {
-	return Fgl_fillbox_s(display.bg,x1,y1,w,h,col);
+	return Fgl_fillbox_s(DL_BG,x1,y1,w,h,col);
 }
 
 
@@ -488,42 +505,30 @@ void Fgl_putbox_low (SDL_Surface* dst, int x0, int y0, int x1, int y1,
 
 	//SDL_Rect srcrect = (SDL_Rect){.x = src_x, .y = src_y, .w = w, .h = h};
 	//SDL_Rect dstrect = (SDL_Rect){.x = x0+x1, .y = y0+y1, .w = w, .h = h};
-	SDL_LockSurface((display.bg));
+	SDL_LockSurface((display_p.bg));
 
 	for (int iy = 0; iy < h; iy++)
 		for (int ix = 0; ix < w; ix++)
 			Fgl_setpixel_s(dst,x0+x1+ix,y0+y1+iy,src[(src_y + iy) * bpl + (src_x + ix)]);
 
-	SDL_UnlockSurface((display.bg));
+	SDL_UnlockSurface((display_p.bg));
 	//SDL_BlitSurface(src,&srcrect,dst,&dstrect);
 }
 
-void Fgl_blit (SDL_Surface* dst, int sx, int sy, int w, int h,
+void Fgl_blit (enum disp_layers l, int sx, int sy, int w, int h,
 		int dx, int dy, SDL_Surface* src) {
 
 	SDL_Rect srcrect = (SDL_Rect){.x = sx, .y = sy, .w = w, .h = h};
 	SDL_Rect dstrect = (SDL_Rect){.x = dx, .y = dy, .w = w, .h = h};
 
-	SDL_BlitSurface(src,&srcrect,dst,&dstrect);
+	SDL_BlitSurface(src,&srcrect,surface_by_layer(l),&dstrect);
 }
 
 
 void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf) {
 
-	return Fgl_blit(display.bg,0,0,w,h,x,y,surf);
+	return Fgl_blit(DL_BG,0,0,w,h,x,y,surf);
 }
-
-/*
-   void Fgl_getbox (int x1, int y1, int w, int h, void *buf)
-   {
-   unsigned char *b;
-   int x, y;
-   b = (unsigned char *) buf;
-   for (y = y1; y < y1 + h; y++)
-   for (x = x1; x < x1 + w; x++)
- *(b++) = (unsigned char) Fgl_getpixel (x, y);
- }
- */
 
 void HandleEvent (SDL_Event *event)
 {
@@ -660,7 +665,7 @@ void HandleEvent (SDL_Event *event)
 				   gy2 = ev->y + ev->height;
 
 				// Coalesce waiting exposes into single redraw
-				while (XCheckMaskEvent(display.dpy,ExposureMask,&loop_ev)) {
+				while (XCheckMaskEvent(display_p.dpy,ExposureMask,&loop_ev)) {
 				ev = (XExposeEvent *) &loop_ev;
 				gx1 = min_int (gx1,ev->x);
 				gy1 = min_int (gy1,ev->y);
@@ -687,18 +692,18 @@ void HandleEvent (SDL_Event *event)
 				if (ev.w < 640) ev.w = 640;
 				if (ev.h < 480) ev.h = 480;
 
-				display.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
-				SDL_FreeSurface(display.bg);
-				display.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
-				SDL_FreeSurface(display.ui);
-				display.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
-				SDL_FreeSurface(display.sprites);
-				display.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
+				display_p.dpy = SDL_SetVideoMode(ev.w,ev.h,8,SDL_HWSURFACE | SDL_RESIZABLE);
+				SDL_FreeSurface(display_p.bg);
+				display_p.bg = SDL_CreateRGBSurface(SDL_HWSURFACE, ev.w, ev.h, 8, 0,0,0,0);
+				SDL_FreeSurface(display_p.ui);
+				display_p.ui = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
+				SDL_FreeSurface(display_p.sprites);
+				display_p.sprites = SDL_CreateRGBSurface(SDL_HWSURFACE | SDL_SRCCOLORKEY, ev.w, ev.h, 8, 0,0,0,0);
 
 				do_setcustompalette(NULL);	
 
-				SDL_SetColorKey(display.ui,SDL_SRCCOLORKEY,0);
-				SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+				SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
+				SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
 				resize_geometry (ev.w, ev.h);
 				winW = ev.w; winH = ev.h;
 
@@ -711,11 +716,10 @@ void HandleEvent (SDL_Event *event)
 				break;
 			}
 		default: {
-				 fprintf(stderr,"Unknown event type %d\n",event->type);
+				 //fprintf(stderr,"Unknown event type %d\n",event->type);
 				 return;
 			 }
 	}
-	//refresh_screen (0,0,winW,winH); // I don't get when exactly should the screen refresh. Neither the X11 nor SVGAlib code are giving me any hints. 
 }
 
 #undef DEBUG_X11_MOUSE
@@ -732,11 +736,11 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 	SDL_Rect orect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 	SDL_Rect drect = {.x = x1, .y = y1, .w = x2-x1, .h = y2-y1};
 
-	SDL_BlitSurface(display.bg,&orect,display.dpy,&drect);
+	SDL_BlitSurface(display_p.bg,&orect,display_p.dpy,&drect);
 
-	if (display.show_ui) SDL_BlitSurface(display.ui,&orect,display.dpy,&drect);
-	if (display.show_sprites) SDL_BlitSurface(display.sprites,&orect,display.dpy,&drect);
-	SDL_UpdateRect(display.dpy,x1,y1,x2-x1,y2-y1);
+	if (display.show_ui) SDL_BlitSurface(display_p.ui,&orect,display_p.dpy,&drect);
+	if (display.show_sprites) SDL_BlitSurface(display_p.sprites,&orect,display_p.dpy,&drect);
+	SDL_UpdateRect(display_p.dpy,x1,y1,x2-x1,y2-y1);
 }
 
 void refresh_rect(Rect* r) {
@@ -794,23 +798,24 @@ int lc_setpalettecolors(int n, uint8_t* colors) {
 	//colors is an array to n*3 uint8_t in (r,g,b) format.
 
 	for (int i=0; i < n; i++) {
-		display.pixcolour_gc[i] = (SDL_Color){.r = colors[i*3], .g = colors[i*3+1], .b = colors[i*3+2]}; }
+		display_p.pixcolour_gc[i] = (SDL_Color){.r = colors[i*3], .g = colors[i*3+1], .b = colors[i*3+2]}; }
 
-	SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+	SDL_SetPalette(display_p.dpy,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.dpy,SDL_PHYSPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.bg,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.sprites,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
+	return 0;
 }
 
 int lc_setpalettecolor(int x, int r, int g, int b) {
 
-	display.pixcolour_gc[x] = (SDL_Color){.r = r, .g=g,.b=b};
-	SDL_SetPalette(display.dpy,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.dpy,SDL_PHYSPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.bg,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetPalette(display.sprites,SDL_LOGPAL,display.pixcolour_gc,0,256);
-	SDL_SetColorKey(display.sprites,SDL_SRCCOLORKEY,0);
+	display_p.pixcolour_gc[x] = (SDL_Color){.r = r, .g=g,.b=b};
+	SDL_SetPalette(display_p.dpy,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.dpy,SDL_PHYSPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.bg,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetPalette(display_p.sprites,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
+	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
 	return 0;
 }
 
@@ -821,7 +826,7 @@ int lc_loadpalette(uint32_t* pal) {
 	for (int i=0; i < 256; i++) {
 		uint32_t col = pal[i];
 
-		display.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
+		display_p.pixcolour_gc[i] = (SDL_Color){.r = (col & 0xff0000) >> 16, .g = (col & 0xff00) >> 8, .b = (col & 0xff)};
 	}
 	do_setcustompalette(NULL);
 	return 0;
@@ -842,26 +847,26 @@ draw_border (void)
 }
 
 
-void draw_small_bezel_s (SDL_Surface* surf, int x, int y, int w, int h, int colour){
+void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour){
     int i;
     for (i = 1; i < 4; i++) {
-	Fgl_hline_s (surf,x - 1 - i, y - 1 - i, x + w + i, colour);
-	Fgl_line_s (surf,x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
-	Fgl_hline_s (surf,x - 1 - i, y + h + i, x + w + i, colour + 2);
-	Fgl_line_s (surf,x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
+	Fgl_hline_s (l,x - 1 - i, y - 1 - i, x + w + i, colour);
+	Fgl_line_s (l,x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
+	Fgl_hline_s (l,x - 1 - i, y + h + i, x + w + i, colour + 2);
+	Fgl_line_s (l,x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
     }
 }
 
-void draw_bezel_s (SDL_Surface* surf, Rect r, short width, int color) {
+void draw_bezel_s (enum disp_layers l, Rect r, short width, int color) {
   int i;
   int c;
   for (i = 0; i < width; i++)
     {
       c = color + (width - i);
-      Fgl_hline_s (surf,r.x + i, r.y + i, r.x + r.w - i - 1, c);
-      Fgl_hline_s (surf,r.x + i, r.y + r.h - i - 1, r.x + r.w - i - 1, c);
-      Fgl_line_s (surf,r.x + i, r.y + i, r.x + i, r.y + r.h - i - 1, c);
-      Fgl_line_s (surf,r.x + r.w - i - 1, r.y + i, r.x + r.w - i - 1, 
+      Fgl_hline_s (l,r.x + i, r.y + i, r.x + r.w - i - 1, c);
+      Fgl_hline_s (l,r.x + i, r.y + r.h - i - 1, r.x + r.w - i - 1, c);
+      Fgl_line_s (l,r.x + i, r.y + i, r.x + i, r.y + r.h - i - 1, c);
+      Fgl_line_s (l,r.x + r.w - i - 1, r.y + i, r.x + r.w - i - 1, 
 		r.y + r.h - i - 1, c);
     }
 }
@@ -878,8 +883,8 @@ void init_icon_pixmap (short type) {
 
 	icon_surface[type] = SDL_CreateRGBSurface(SDL_HWSURFACE,main_groups[grp].size * 16, main_groups[grp].size * 16, 8,0,0,0,0);
 
-	SDL_SetPalette(icon_surface[type], SDL_LOGPAL, display.pixcolour_gc, 0, 256);	
-	SDL_SetPalette(icon_surface[type], SDL_PHYSPAL, display.pixcolour_gc, 0, 256);	
+	SDL_SetPalette(icon_surface[type], SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);	
+	SDL_SetPalette(icon_surface[type], SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);	
 
 
 	SDL_LockSurface(icon_surface[type]);
@@ -906,14 +911,14 @@ SDL_Surface* load_graphic(char *s, int w, int h)
 		do_error(ss);
 	}
 
-	SDL_Surface* convsurf = SDL_ConvertSurface(newsurf,display.dpy->format,0);
+	SDL_Surface* convsurf = SDL_ConvertSurface(newsurf,display_p.dpy->format,0);
 	if (!convsurf) {
 		strcat(ss," -- UNABLE TO CONVERT");
 		do_error(ss);
 	}
 	free(newsurf);
 
-	SDL_SetPalette(convsurf,SDL_LOGPAL,display.pixcolour_gc,0,256);
+	SDL_SetPalette(convsurf,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
 	return convsurf;
 }
 

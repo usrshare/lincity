@@ -86,16 +86,16 @@ draw_prefs_cb (void)
     y = mw->y + 30;
     graphic = overwrite_transport_flag ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
 
     y += 16;
     graphic = suppress_popups ? unchecked_box_graphic : checked_box_graphic;
-    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
 
     y += 16;
     graphic = time_multiplex_stats ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_blit (display.bg, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
 
     refresh_screen(mw->x, mw->y, mw->x + mw->w, mw->y + mw->h);
 }

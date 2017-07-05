@@ -295,9 +295,9 @@ dialog_refresh(void)
 
 
   /* Draw the border, and fill the background */
-  draw_bezel_s(display.ui,dialog_window,BORDER_SIZE,color);
+  draw_bezel_s(DL_UI,dialog_window,BORDER_SIZE,color);
 
-  Fgl_fillbox_s(display.ui,text_window.x,text_window.y,text_window.w,text_window.h,color);
+  Fgl_fillbox_s(DL_UI,text_window.x,text_window.y,text_window.w,text_window.h,color);
 
   Fgl_setfontcolors (color, TEXT_FG_COLOUR);
 
@@ -306,13 +306,13 @@ dialog_refresh(void)
     {
 
 	if (db_entry[i].type) {
-	    Fgl_fillbox_s(display.ui,db_rect[i].x + text_window.x,
+	    Fgl_fillbox_s(DL_UI,db_rect[i].x + text_window.x,
 			db_rect[i].y + text_window.y,
 			db_rect[i].w,
 			db_rect[i].h,
 			white(0));
 	}
-	Fgl_write2_s(display.ui,db_rect[i].x + text_window.x + BUTTON_BORDER, 
+	Fgl_write2_s(DL_UI,db_rect[i].x + text_window.x + BUTTON_BORDER, 
 		  db_rect[i].y + text_window.y + BUTTON_BORDER,0,
 		  db_entry[i].text,TA_LEFT);
     }
@@ -342,7 +342,7 @@ dialog_close(int return_value)
 	if (db_entry[i].type == DB_PARA) 
 	    free(db_entry[i].text);
     
-    Fgl_fillbox_s(display.ui,db_rect[i].x,db_rect[i].y,	db_rect[i].w,db_rect[i].h,0);
+    Fgl_fillbox_s(DL_UI,db_rect[i].x,db_rect[i].y,	db_rect[i].w,db_rect[i].h,0);
 
     display.show_ui = 0;
 
