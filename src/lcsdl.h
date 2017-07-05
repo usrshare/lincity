@@ -159,5 +159,6 @@ extern SDL_Surface* icon_surface[NUM_OF_TYPES];
 extern char icon_surface_flag[NUM_OF_TYPES];
 
 SDL_Surface* load_graphic(char *s, int w, int h);
+SDL_Surface* load_graphic_autosize(char *s);
 
 #endif /* __lcsdl_h__ */
