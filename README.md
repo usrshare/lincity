@@ -26,7 +26,7 @@ game with lots of changes and enhancements.
 In order to compile Lincity, the following libraries are required (as well as
 the corresponding development files):
 
-* SDL 1.2 or newer, SDL\_ttf 2.0 or newer.
+* SDL 1.2 or newer, SDL\_image 1.2 or newer, SDL\_ttf 2.0 or newer.
 * libpng,
 * libz.
 
