@@ -206,8 +206,6 @@ void update_main_screen_normal (int full_refresh)
     ym = main_screen_originy;
     if (ym > 3)
 	ym = 3;
-    if (mouse_type == MOUSE_TYPE_SQUARE)
-	hide_mouse ();
     clip_main_window ();
     for (y = main_screen_originy - ym; y < main_screen_originy
 		 + (mw->h / 16); y++)

@@ -331,6 +331,7 @@ draw_square_mouse (int x, int y, int size)	/* size is pixels */
     Fgl_line_s (DL_SPRITES, x + size, y, x + size, y + size, blue (31));
 
     display.show_sprites = 1;
+    refresh_screen(omx-2,omy-2,omx+size+2,omy+size+2);
 }
 
 void
@@ -339,6 +340,7 @@ hide_square_mouse (void)
     int size = (main_groups[selected_module_group].size) * 16;
     Fgl_fillbox_s(DL_SPRITES,omx-2,omy-2,size+4,size+4,0);
     display.show_sprites = 0;
+    refresh_screen(omx-2,omy-2,omx+size+2,omy+size+2);
 }
 
 void
@@ -356,6 +358,8 @@ redraw_square_mouse (void)
     Fgl_line_s (DL_SPRITES, omx - 1, omy, omx - 1, omy + size, blue (31));
     Fgl_line_s (DL_SPRITES, omx + size + 1, omy - 1, omx + size + 1, omy + size + 1, yellow (31));
     Fgl_line_s (DL_SPRITES, omx + size, omy, omx + size, omy + size, blue (31));
+
+    refresh_screen(omx-2,omy-2,omx+size+2,omy+size+2);
 }
 
 void
