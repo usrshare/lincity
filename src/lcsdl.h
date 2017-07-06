@@ -7,9 +7,10 @@
 #ifndef __lcsdl_h__
 #define __lcsdl_h__
 
+#include <stdint.h>
+#include <stdio.h>
 #include "lin-city.h"
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include "lintypes.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -54,6 +55,28 @@ enum text_align {
 	TA_RIGHT,
 };
 
+typedef struct _lcsdl_icon {
+
+	//this is meant to represent a single graphic, either
+	//in a surface of its own, or as part of a big spritesheet.
+
+	void* _surface; //stores a pointer to an SDL_Surface.
+	int x_offset;
+	int y_offset;
+	int width; // primarily used for icons
+	int height;
+
+} lcicon;
+
+struct rect_struct
+{
+    int x;
+    int y;
+    int w;
+    int h;
+};
+typedef struct rect_struct Rect;
+
 extern int winW, winH;
 extern int mouse_button, cs_mouse_shifted;
 extern disp display;
@@ -75,37 +98,37 @@ extern int cs_mouse_x, cs_mouse_y;
 extern float gamma_correct_red, gamma_correct_green, gamma_correct_blue;
 //extern Cursor pirate_cursor;
 
-extern SDL_Surface *up_pbar1_graphic, *up_pbar2_graphic;
-extern SDL_Surface *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
-extern SDL_Surface *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
-extern SDL_Surface *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
-extern SDL_Surface *ore_pbar_graphic, *steel_pbar_graphic;
-extern SDL_Surface *pause_button1_off, *pause_button2_off;
-extern SDL_Surface *pause_button1_on, *pause_button2_on;
-extern SDL_Surface *fast_button1_off, *fast_button2_off;
-extern SDL_Surface *fast_button1_on, *fast_button2_on;
-extern SDL_Surface *med_button1_off, *med_button2_off;
-extern SDL_Surface *med_button1_on, *med_button2_on;
-extern SDL_Surface *slow_button1_off, *slow_button2_off;
-extern SDL_Surface *slow_button1_on, *slow_button2_on;
-extern SDL_Surface *results_button1, *results_button2;
-extern SDL_Surface *toveron_button1, *toveron_button2;
-extern SDL_Surface *toveroff_button1, *toveroff_button2;
-extern SDL_Surface *ms_pollution_button_graphic, *ms_normal_button_graphic;
-extern SDL_Surface *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
-extern SDL_Surface *ms_cricket_cover_button_graphic;
-extern SDL_Surface *ms_ub40_button_graphic, *ms_coal_button_graphic;
-extern SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
-extern SDL_Surface *ms_power_button_graphic;
-extern SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
+extern lcicon type_icons[NUM_OF_TYPES];
 
-extern SDL_Color t_bgcolor, t_fgcolor;
+extern lcicon up_pbar1_graphic, up_pbar2_graphic;
+extern lcicon down_pbar1_graphic, down_pbar2_graphic, pop_pbar_graphic;
+extern lcicon tech_pbar_graphic, food_pbar_graphic, jobs_pbar_graphic;
+extern lcicon money_pbar_graphic, coal_pbar_graphic, goods_pbar_graphic;
+extern lcicon ore_pbar_graphic, steel_pbar_graphic;
+extern lcicon pause_button1_off, pause_button2_off;
+extern lcicon pause_button1_on, pause_button2_on;
+extern lcicon fast_button1_off, fast_button2_off;
+extern lcicon fast_button1_on, fast_button2_on;
+extern lcicon med_button1_off, med_button2_off;
+extern lcicon med_button1_on, med_button2_on;
+extern lcicon slow_button1_off, slow_button2_off;
+extern lcicon slow_button1_on, slow_button2_on;
+extern lcicon results_button1, results_button2;
+extern lcicon toveron_button1, toveron_button2;
+extern lcicon toveroff_button1, toveroff_button2;
+extern lcicon ms_pollution_button_graphic, ms_normal_button_graphic;
+extern lcicon ms_fire_cover_button_graphic, ms_health_cover_button_graphic;
+extern lcicon ms_cricket_cover_button_graphic;
+extern lcicon ms_ub40_button_graphic, ms_coal_button_graphic;
+extern lcicon ms_starve_button_graphic, ms_ocost_button_graphic;
+extern lcicon ms_power_button_graphic;
+extern lcicon checked_box_graphic, unchecked_box_graphic;
+
+//extern SDL_Color t_bgcolor, t_fgcolor;
 
 void Fgl_write (int, int, char *);
-void open_write (int, int, char *);
-//extern void Fgl_getbox (int, int, int, int, void *);
-//extern void Fgl_putbox (int, int, int, int, void *);
-void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf);
+void Fgl_blit (enum disp_layers l, lcicon i, int dx, int dy, int w, int h);
+void Fgl_putbox (int x, int y, int w, int h, lcicon i);
 void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col);
 void Fgl_fillbox (int, int, int, int, int);
 void Fgl_hline_s (enum disp_layers l, int x1, int y1, int x2, int col);
@@ -122,7 +145,6 @@ void Fgl_disableclipping (void);
 void parse_sdlargs (int, char **, char **);
 void lcsdl_load_fonts(void);
 void set_pointer_confinement (void);
-void do_setcustompalette (SDL_Color *);
 void Create_Window (char *);
 void HandleError (char *, int);
 void refresh_screen (int, int, int, int);
@@ -132,12 +154,10 @@ void open_x_putchar (int, int, unsigned char);
 void do_call_event (int);
 void call_event (void);
 void call_wait_event (void);
-void open_setcustompalette (SDL_Color *);
 void drag_screen(void); /* WCK */
 void draw_border (void);
 void init_x_mouse (void);
 void unlock_window_size (void);
-void init_icon_pixmap (short type);
 
 int lc_get_keystroke (void);
 int lc_setpalettecolor(int x, int r, int g, int b);
@@ -150,17 +170,17 @@ int lc_txtwidth(enum text_fonts f, char *s);
 void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour);
 void draw_bezel_s (enum disp_layers l, Rect r, short width, int color);
 
-void Fgl_blit (enum disp_layers l, int sx, int sy, int w, int h,
-		int dx, int dy, SDL_Surface* src);
-
 void Fgl_write3 (enum disp_layers l, enum text_fonts f, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_align align);
 void Fgl_write2 (int x, int y, int w, char *s, enum text_align align);
 
-extern SDL_Surface* icon_surface[NUM_OF_TYPES];
-extern char icon_surface_flag[NUM_OF_TYPES];
+void init_icon_pixmap (short type);
 
-SDL_Surface* load_graphic(char *s, int w, int h);
-SDL_Surface* load_graphic_autosize(char *s);
+lcicon load_icon(char* filename, int w, int h); // load an icon from a separate PNG file
+int free_icon(lcicon i);
+
+int load_tilemap (char* png_filename, uint32_t* out_palette); //load the tilemap
+int load_tilemap_graphic (short type, short group, char* id, FILE* txt_fp); //load an icon from the tilemap
+
 
 #endif /* __lcsdl_h__ */

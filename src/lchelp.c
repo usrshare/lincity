@@ -497,25 +497,23 @@ parse_iconline (char *st)
 }
 
 void
-draw_help_icon (int x, int y, char *icon)
+draw_help_icon (int x, int y, char *icon_file)
 {
     Rect* mw = &scr.main_win;
     int i, l, w, h;
 
-    SDL_Surface* surf = load_graphic_autosize(icon);
+    lcicon icon = load_icon(icon_file,0,0);
  
-    if (!surf) return;
-    w = surf->w; h = surf->h;
+    if (!(icon._surface)) return;
+    w = icon.width; h = icon.height;
 
     /* Adjust x location to within center zone */
     x = x + (mw->w - 440) / 2;
 
     if (x > 0 && y > 0 && ((x + w) < mw->w) && ((y + h) < mw->h))
-	Fgl_putbox (mw->x + x, mw->y + y, w, h, surf);
+	Fgl_putbox (mw->x + x, mw->y + y, w, h, icon);
 
-    //free(surf->pixels); //the surface is loaded with IMG_Load, which means we don't need that.
-    SDL_FreeSurface(surf);
-
+    free_icon(icon);
     return;
 }
 

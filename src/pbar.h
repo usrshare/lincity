@@ -13,7 +13,7 @@
 void init_pbars (void);
 void pbars_full_refresh (void);
 void init_pbar_text (void);
-void draw_pbar (Rect* b, SDL_Surface* graphic);
+void draw_pbar (Rect* b, lcicon icon);
 void draw_pbars (void);
 void clear_pbar_text (Rect* pbar);
 void write_pbar_int (Rect* b, int val);

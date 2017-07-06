@@ -13,7 +13,6 @@ set(
 	src/mouse.c
 	src/mps.c
 	src/screen.c
-	src/pixmap.c
 	src/cliglobs.c
 	src/geometry.c
 	src/pbar.c

@@ -31,7 +31,6 @@
 #include "ldsvgui.h"
 #include "simulate.h"
 #include "mouse.h"
-#include "pixmap.h"
 #include "screen.h"
 #include "lcintl.h"
 #include "engine.h"
@@ -175,9 +174,9 @@ lincity_main (int argc, char *argv[])
     prog_box ("", 95);
     mouse_hide_count = 0;
     suppress_ok_buttons = 0;
-    prog_box ("", 100);
-    prog_box (_("Creating pixmaps"), 1);
-    init_pixmaps ();
+    //prog_box ("", 100);
+    //prog_box (_("Creating pixmaps"), 1);
+    //init_pixmaps ();
     prog_box ("", 100);
     //draw_normal_mouse (1, 1);
     init_timer_buttons();

@@ -10,7 +10,7 @@ void init_module_buttons (void);
 void draw_module_buttons (void);
 
 // geometry.c: void draw_select_button_graphic (int button, char *graphic)
-void draw_module (int button, SDL_Surface * graphic);
+void draw_module (int button, lcicon icon);
 
 // screen.c: void call_select_change_up (int button)
 void activate_module (int module);

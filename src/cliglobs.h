@@ -131,9 +131,4 @@ extern int borderx, bordery;
 
 extern int command_line_debug;
 
-#if defined (LC_SDL)
-struct SDL_Surface;
-extern SDL_Surface* icon_surface[NUM_OF_TYPES];
-#endif
-
 #endif /* __cliglobs_h__ */

@@ -12,7 +12,6 @@
 #include "common.h"
 #include "geometry.h"
 #include "cliglobs.h"
-#include "pixmap.h"
 #include "screen.h"
 #include "lcintl.h"
 #include "pbar.h"
@@ -628,10 +627,10 @@ draw_results (void)
  * Mini map button functions
  * ---------------------------------------------------------------------- */
 void
-draw_ms_button (void* graphic)
+draw_ms_button (lcicon icon)
 {
     Rect* mma = &scr.mini_map_aux;
-    Fgl_putbox (mma->x + 4, mma->y, 16, 16, graphic);
+    Fgl_putbox (mma->x + 4, mma->y, 16, 16, icon);
     refresh_rect(mma);
 }
 

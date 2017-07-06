@@ -19,7 +19,6 @@
 #include "screen.h"
 #include "engglobs.h"
 #include "cliglobs.h"
-#include "pixmap.h"
 #include "lchelp.h"
 #include "mouse.h"
 #include "mps.h"
@@ -190,7 +189,7 @@ void update_main_screen_normal (int full_refresh)
     Rect* mw = &scr.main_win;
     int x, y, xm, ym;
     short typ, grp;
-    int sx, sy, dx, dy, x1, y1;
+    int sw, sh, dx, dy, x1, y1;
     /*  main_screen_origin[x|y] contain the mappoint of the top left of win */
 #ifdef DEBUG_MAIN_SCREEN
     printf ("Updating main screen\n");
@@ -224,23 +223,24 @@ void update_main_screen_normal (int full_refresh)
 		}
 		grp = get_group_of_type(typ);
 		    
-		x1 = y1 = 0;
+		x1 = y1 = 0; //amount hidden by border
+
 		    if (x < main_screen_originx)
 			x1 = (main_screen_originx - x) * 16;
 		    if (y < main_screen_originy)
 			y1 = (main_screen_originy - y) * 16;
-		    sx = sy = main_groups[grp].size;
-		    if ((sx + x) > (main_screen_originx + (mw->w / 16)))
-			sx = (main_screen_originx + (mw->w / 16)) - x;
-		    if ((sy + y) > (main_screen_originy + (mw->h / 16)))
-			sy = (main_screen_originy + (mw->h / 16)) - y;
-		    sx = (sx << 4) - x1;
-		    sy = (sy << 4) - y1;
+		    sw = sh = main_groups[grp].size;
+		    if ((sw + x) > (main_screen_originx + (mw->w / 16)))
+			sw = (main_screen_originx + (mw->w / 16)) - x;
+		    if ((sh + y) > (main_screen_originy + (mw->h / 16)))
+			sh = (main_screen_originy + (mw->h / 16)) - y;
+		    sw = (sw << 4) - x1;
+		    sh = (sh << 4) - y1;
 		    dx = mw->x + (x - main_screen_originx) * 16 + x1;
 		    dy = mw->y + (y - main_screen_originy) * 16 + y1;
-		    if (sx > 0 && sy > 0) {
+		    if (sw > 0 && sh > 0) {
 		
-		if (icon_surface[typ] != 0) Fgl_blit(DL_BG,x1,y1,sx,sy,dx,dy,icon_surface[typ]); else {
+		if (type_icons[typ]._surface != 0) Fgl_blit(DL_BG,type_icons[typ],dx,dy,sw,sh); else {
 			fprintf(stderr,"No surface loaded for type %d.\n",typ); }
 		}
 	    }
@@ -497,98 +497,98 @@ void screen_setup (void)
 
     /* load the pbar graphics */
     /* XXX: WCK: pbar_setup? */
-    up_pbar1_graphic = load_graphic ("pbarup1.png",16,16);
-    up_pbar2_graphic = load_graphic ("pbarup2.png",16,16);
-    down_pbar1_graphic = load_graphic ("pbardown1.png",16,16);
-    down_pbar2_graphic = load_graphic ("pbardown2.png",16,16);
-    pop_pbar_graphic = load_graphic ("pbarpop.png",16,16);
-    tech_pbar_graphic = load_graphic ("pbartech.png",16,16);
-    food_pbar_graphic = load_graphic ("pbarfood.png",16,16);
-    jobs_pbar_graphic = load_graphic ("pbarjobs.png",16,16);
-    coal_pbar_graphic = load_graphic ("pbarcoal.png",16,16);
-    goods_pbar_graphic = load_graphic ("pbargoods.png",16,16);
-    ore_pbar_graphic = load_graphic ("pbarore.png",16,16);
-    steel_pbar_graphic = load_graphic ("pbarsteel.png",16,16);
-    money_pbar_graphic = load_graphic ("pbarmoney.png",16,16);
+    up_pbar1_graphic = load_icon ("pbarup1.png",16,16);
+    up_pbar2_graphic = load_icon ("pbarup2.png",16,16);
+    down_pbar1_graphic = load_icon ("pbardown1.png",16,16);
+    down_pbar2_graphic = load_icon ("pbardown2.png",16,16);
+    pop_pbar_graphic = load_icon ("pbarpop.png",16,16);
+    tech_pbar_graphic = load_icon ("pbartech.png",16,16);
+    food_pbar_graphic = load_icon ("pbarfood.png",16,16);
+    jobs_pbar_graphic = load_icon ("pbarjobs.png",16,16);
+    coal_pbar_graphic = load_icon ("pbarcoal.png",16,16);
+    goods_pbar_graphic = load_icon ("pbargoods.png",16,16);
+    ore_pbar_graphic = load_icon ("pbarore.png",16,16);
+    steel_pbar_graphic = load_icon ("pbarsteel.png",16,16);
+    money_pbar_graphic = load_icon ("pbarmoney.png",16,16);
     init_pbars ();
 
     /* draw the box around the main window */
     draw_main_window_box (green (8));
     /* load the checked and unchecked box graphics */
-    checked_box_graphic = load_graphic ("checked_box.png",16,16);
-    unchecked_box_graphic = load_graphic ("unchecked_box.png",16,16);
+    checked_box_graphic = load_icon ("checked_box.png",16,16);
+    unchecked_box_graphic = load_icon ("unchecked_box.png",16,16);
 
     /* load minimap buttons (but don't draw) */
-    ms_normal_button_graphic = load_graphic ("ms-normal-button.png",16,16);
-    ms_pollution_button_graphic = load_graphic ("ms-pollution-button.png",16,16);
-    ms_fire_cover_button_graphic = load_graphic ("ms-fire-cover-button.png",16,16);
+    ms_normal_button_graphic = load_icon ("ms-normal-button.png",16,16);
+    ms_pollution_button_graphic = load_icon ("ms-pollution-button.png",16,16);
+    ms_fire_cover_button_graphic = load_icon ("ms-fire-cover-button.png",16,16);
     ms_health_cover_button_graphic
-	    = load_graphic ("ms-health-cover-button.png",16,16);
+	    = load_icon ("ms-health-cover-button.png",16,16);
     ms_cricket_cover_button_graphic
-	    = load_graphic ("ms-cricket-cover-button.png",16,16);
-    ms_ub40_button_graphic = load_graphic ("ms-ub40-button.png",16,16);
-    ms_coal_button_graphic = load_graphic ("ms-coal-button.png",16,16);
-    ms_starve_button_graphic = load_graphic ("ms-starve-button.png",16,16);
-    ms_power_button_graphic = load_graphic ("ms-power-button.png",16,16);
-    ms_ocost_button_graphic = load_graphic ("ms-ocost-button.png",16,16);
+	    = load_icon ("ms-cricket-cover-button.png",16,16);
+    ms_ub40_button_graphic = load_icon ("ms-ub40-button.png",16,16);
+    ms_coal_button_graphic = load_icon ("ms-coal-button.png",16,16);
+    ms_starve_button_graphic = load_icon ("ms-starve-button.png",16,16);
+    ms_power_button_graphic = load_icon ("ms-power-button.png",16,16);
+    ms_ocost_button_graphic = load_icon ("ms-ocost-button.png",16,16);
 
     /* draw the pause button */
-    pause_button1_off = load_graphic ("pause-offl.png",16,16);
-    pause_button2_off = load_graphic ("pause-offr.png",16,16);
-    pause_button1_on = load_graphic ("pause-onl.png",16,16);
-    pause_button2_on = load_graphic ("pause-onr.png",16,16);
+    pause_button1_off = load_icon ("pause-offl.png",16,16);
+    pause_button2_off = load_icon ("pause-offr.png",16,16);
+    pause_button1_on = load_icon ("pause-onl.png",16,16);
+    pause_button2_on = load_icon ("pause-onr.png",16,16);
     draw_pause (0);
 
     /* draw the slow button */
-    slow_button1_off = load_graphic ("slow-offl.png",16,16);
-    slow_button2_off = load_graphic ("slow-offr.png",16,16);
-    slow_button1_on = load_graphic ("slow-onl.png",16,16);
-    slow_button2_on = load_graphic ("slow-onr.png",16,16);
+    slow_button1_off = load_icon ("slow-offl.png",16,16);
+    slow_button2_off = load_icon ("slow-offr.png",16,16);
+    slow_button1_on = load_icon ("slow-onl.png",16,16);
+    slow_button2_on = load_icon ("slow-onr.png",16,16);
     draw_slow (0);
 
     /* draw the medium button */
-    med_button1_off = load_graphic ("norm-offl.png",16,16);
-    med_button2_off = load_graphic ("norm-offr.png",16,16);
-    med_button1_on = load_graphic ("norm-onl.png",16,16);
-    med_button2_on = load_graphic ("norm-onr.png",16,16);
+    med_button1_off = load_icon ("norm-offl.png",16,16);
+    med_button2_off = load_icon ("norm-offr.png",16,16);
+    med_button1_on = load_icon ("norm-onl.png",16,16);
+    med_button2_on = load_icon ("norm-onr.png",16,16);
     draw_med (0);
 
     /* draw the fast button */
-    fast_button1_off = load_graphic ("fast-offl.png",16,16);
-    fast_button2_off = load_graphic ("fast-offr.png",16,16);
-    fast_button1_on = load_graphic ("fast-onl.png",16,16);
-    fast_button2_on = load_graphic ("fast-onr.png",16,16);
+    fast_button1_off = load_icon ("fast-offl.png",16,16);
+    fast_button2_off = load_icon ("fast-offr.png",16,16);
+    fast_button1_on = load_icon ("fast-onl.png",16,16);
+    fast_button2_on = load_icon ("fast-onr.png",16,16);
     draw_fast (0);
 
     /* draw the results button */
-    results_button1 = load_graphic ("results-l.png",16,16);
-    results_button2 = load_graphic ("results-r.png",16,16);
+    results_button1 = load_icon ("results-l.png",16,16);
+    results_button2 = load_icon ("results-r.png",16,16);
     draw_results ();
 
     /* draw the t-overwrite button and load 'on button' */
 #if defined (commentout)
-    toveron_button1 = load_graphic ("tover1-on.png",16,16);
-    toveroff_button1 = load_graphic ("tover1-off.png",16,16);
-    toveron_button2 = load_graphic ("tover2-on.png",16,16);
-    toveroff_button2 = load_graphic ("tover2-off.png",16,16);
+    toveron_button1 = load_icon ("tover1-on.png",16,16);
+    toveroff_button1 = load_icon ("tover1-off.png",16,16);
+    toveron_button2 = load_icon ("tover2-on.png",16,16);
+    toveroff_button2 = load_icon ("tover2-off.png",16,16);
     draw_tover (0);
 
 #endif
 
     /* Load and draw menu buttons */
 #if defined (commentout)
-    menu_button_graphic = load_graphic ("menu-button.png",16,16);
+    menu_button_graphic = load_icon ("menu-button.png",16,16);
 #endif
     draw_menu ();
     draw_help ();
 #if defined (commentout)
-    load_button_graphic = load_graphic ("load-button.png",16,16);
+    load_button_graphic = load_icon ("load-button.png",16,16);
     draw_load ();
-    save_button_graphic = load_graphic ("save-button.png",16,16);
+    save_button_graphic = load_icon ("save-button.png",16,16);
     draw_save ();
-    quit_button_graphic = load_graphic ("quit-button.png",16,16);
+    quit_button_graphic = load_icon ("quit-button.png",16,16);
     draw_quit ();
-    help_button_graphic = load_graphic ("help-button.png",16,16);
+    help_button_graphic = load_icon ("help-button.png",16,16);
     draw_help ();
 #endif
 
@@ -1889,13 +1889,13 @@ void clicked_market_cb (int x, int y)
 void draw_cb_box (int row, int col, int checked)
 {
     int x, y;
-    SDL_Surface* graphic;
+    lcicon icon;
     Rect* mcb = &scr.market_cb;
 
     y = mcb->y + 4 + (4 * 8) + (row * CB_SPACE);
     x = mcb->x + 12 + (col * 12) * 8;
-    graphic = checked ? checked_box_graphic : unchecked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, graphic);
+    icon = checked ? checked_box_graphic : unchecked_box_graphic;
+    Fgl_putbox (x, y, 16, 16, icon);
 }
 
 void draw_cb_template (int is_market_cb)
@@ -2353,10 +2353,3 @@ display_rocket_result_dialog (int result)
 	break;
     }
 }
-
-void 
-Fgl_putrect(Rect *r, void * buffer)
-{
-    Fgl_putbox(r->x,r->y,r->w,r->h,buffer);
-}
-

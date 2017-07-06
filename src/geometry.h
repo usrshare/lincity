@@ -7,15 +7,8 @@
 #define __geometry_h__
 
 #include "lin-city.h"
+#include "lcsdl.h"
 
-struct rect_struct
-{
-    int x;
-    int y;
-    int w;
-    int h;
-};
-typedef struct rect_struct Rect;
 
 struct screen_geometry_struct
 {
@@ -102,8 +95,6 @@ struct screen_geometry_struct
 };
 typedef struct screen_geometry_struct Screen_Geometry;
 
-
-
 void initialize_geometry (Screen_Geometry* scr);
 void resize_geometry (int new_width, int new_height);
 int mouse_in_rect (Rect* b, int x, int y);
@@ -125,7 +116,7 @@ void select_fast (void);
 void select_medium (void);
 void select_slow (void);
 void select_pause (void);
-void draw_ms_button (void* graphic);
+void draw_ms_button (lcicon icon);
 void draw_ms_text (char* txt);
 void draw_small_bezel (int x, int y, int w, int h, int colour);
 void draw_bezel (Rect r, short width, int color);

@@ -19,571 +19,885 @@ struct TYPE main_types[NUM_OF_TYPES];
 
 struct GROUP main_groups[NUM_OF_GROUPS] =
 {
-    /* 0 */
-    { N_("Empty"),       /* name */
-      FALSE,            /* need credit? */
-      GROUP_BARE,       /* group number */
-      1,                /* size */
-      (green(12)),      /* color */
-      1,                /* cost multiplier */
-      1,                /* bulldoze cost */
-      0,                /* probability of fire */
-      0,                /* cost */
-      0                 /* tech */
-    },
-    /* 1 */
-    { N_("Power line"),
-      FALSE,                           /* need credit? */
-      GROUP_POWER_LINE,
-      1,                               /* size */
-      GROUP_POWER_LINE_COLOUR,
-      GROUP_POWER_LINE_COST_MUL,
-      GROUP_POWER_LINE_BUL_COST,
-      GROUP_POWER_LINE_FIREC,
-      GROUP_POWER_LINE_COST,
-      GROUP_POWER_LINE_TECH
-    },
-    /* 2 */
-    { N_("Solar PS"),
-      TRUE,                            /* need credit? */
-      GROUP_SOLAR_POWER,
-      4,                               /* size */
-      GROUP_SOLAR_POWER_COLOUR,
-      GROUP_SOLAR_POWER_COST_MUL,
-      GROUP_SOLAR_POWER_BUL_COST,
-      GROUP_SOLAR_POWER_FIREC,
-      GROUP_SOLAR_POWER_COST,
-      GROUP_SOLAR_POWER_TECH
-    },
-    /* 3 */
-    { N_("Substation"),
-      FALSE,                           /* need credit? */
-      GROUP_SUBSTATION,
-      2,                               /* size */
-      GROUP_SUBSTATION_COLOUR,
-      GROUP_SUBSTATION_COST_MUL,
-      GROUP_SUBSTATION_BUL_COST,
-      GROUP_SUBSTATION_FIREC,
-      GROUP_SUBSTATION_COST,
-      GROUP_SUBSTATION_TECH
-    },
-    /* 4 */
-    { N_("Residential LL"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_LL,
-      3,                               /* size */
-      GROUP_RESIDENCE_LL_COLOUR,
-      GROUP_RESIDENCE_LL_COST_MUL,
-      GROUP_RESIDENCE_LL_BUL_COST,
-      GROUP_RESIDENCE_LL_FIREC,
-      GROUP_RESIDENCE_LL_COST,
-      GROUP_RESIDENCE_LL_TECH
-    },
-    /* 5 */
-    { N_("Farm"),
-      FALSE,                           /* need credit? */
-      GROUP_ORGANIC_FARM,
-      4,                               /* size */
-      GROUP_ORGANIC_FARM_COLOUR,
-      GROUP_ORGANIC_FARM_COST_MUL,
-      GROUP_ORGANIC_FARM_BUL_COST,
-      GROUP_ORGANIC_FARM_FIREC,
-      GROUP_ORGANIC_FARM_COST,
-      GROUP_ORGANIC_FARM_TECH
-    },
-    /* 6 */
-    { N_("Market"),
-      FALSE,                           /* need credit? */
-      GROUP_MARKET,
-      2,                               /* size */
-      GROUP_MARKET_COLOUR,
-      GROUP_MARKET_COST_MUL,
-      GROUP_MARKET_BUL_COST,
-      GROUP_MARKET_FIREC,
-      GROUP_MARKET_COST,
-      GROUP_MARKET_TECH
-    },
-    /* 7 */
-    { N_("Track"),
-      FALSE,                           /* need credit? */
-      GROUP_TRACK,
-      1,                               /* size */
-      GROUP_TRACK_COLOUR,
-      GROUP_TRACK_COST_MUL,
-      GROUP_TRACK_BUL_COST,
-      GROUP_TRACK_FIREC,
-      GROUP_TRACK_COST,
-      GROUP_TRACK_TECH
-    },
-    /* 8 */
-    { N_("Coalmine"),
-      FALSE,                           /* need credit? */
-      GROUP_COALMINE,
-      4,                               /* size */
-      GROUP_COALMINE_COLOUR,
-      GROUP_COALMINE_COST_MUL,
-      GROUP_COALMINE_BUL_COST,
-      GROUP_COALMINE_FIREC,
-      GROUP_COALMINE_COST,
-      GROUP_COALMINE_TECH
-    },
-    /* 9 */
-    { N_("Railway"),
-      FALSE,                           /* need credit? */
-      GROUP_RAIL,
-      1,                               /* size */
-      GROUP_RAIL_COLOUR,
-      GROUP_RAIL_COST_MUL,
-      GROUP_RAIL_BUL_COST,
-      GROUP_RAIL_FIREC,
-      GROUP_RAIL_COST,
-      GROUP_RAIL_TECH
-    },
-    /* 10 */
-    { N_("Coal PS"),
-      FALSE,                           /* need credit? */
-      GROUP_COAL_POWER,
-      4,                               /* size */
-      GROUP_COAL_POWER_COLOUR,
-      GROUP_COAL_POWER_COST_MUL,
-      GROUP_COAL_POWER_BUL_COST,
-      GROUP_COAL_POWER_FIREC,
-      GROUP_COAL_POWER_COST,
-      GROUP_COAL_POWER_TECH
-    },
-    /* 11 */
-    { N_("Road"),
-      FALSE,                           /* need credit? */
-      GROUP_ROAD,
-      1,                               /* size */
-      GROUP_ROAD_COLOUR,
-      GROUP_ROAD_COST_MUL,
-      GROUP_ROAD_BUL_COST,
-      GROUP_ROAD_FIREC,
-      GROUP_ROAD_COST,
-      GROUP_ROAD_TECH
-    },
-    /* 12 */
-    { N_("Lt. Industry"),
-      FALSE,                           /* need credit? */
-      GROUP_INDUSTRY_L,
-      3,                               /* size */
-      GROUP_INDUSTRY_L_COLOUR,
-      GROUP_INDUSTRY_L_COST_MUL,
-      GROUP_INDUSTRY_L_BUL_COST,
-      GROUP_INDUSTRY_L_FIREC,
-      GROUP_INDUSTRY_L_COST,
-      GROUP_INDUSTRY_L_TECH
-    },
-    /* 13 */
-    { N_("University"),
-      FALSE,                           /* need credit? */
-      GROUP_UNIVERSITY,
-      3,                               /* size */
-      GROUP_UNIVERSITY_COLOUR,
-      GROUP_UNIVERSITY_COST_MUL,
-      GROUP_UNIVERSITY_BUL_COST,
-      GROUP_UNIVERSITY_FIREC,
-      GROUP_UNIVERSITY_COST,
-      GROUP_UNIVERSITY_TECH
-    },
-    /* 14 */
-    { N_("Commune"),
-      FALSE,                           /* need credit? */
-      GROUP_COMMUNE,
-      4,                               /* size */
-      GROUP_COMMUNE_COLOUR,
-      GROUP_COMMUNE_COST_MUL,
-      GROUP_COMMUNE_BUL_COST,
-      GROUP_COMMUNE_FIREC,
-      GROUP_COMMUNE_COST,
-      GROUP_COMMUNE_TECH
-    },
-    /* 15 */
-    { N_("Ore mine"),
-      FALSE,                           /* need credit? */
-      GROUP_OREMINE,
-      4,                               /* size */
-      GROUP_OREMINE_COLOUR,
-      GROUP_OREMINE_COST_MUL,
-      GROUP_OREMINE_BUL_COST,
-      GROUP_OREMINE_FIREC,
-      GROUP_OREMINE_COST,
-      GROUP_OREMINE_TECH
-    },
-    /* 16 */
-    { N_("Rubbish tip"),
-      FALSE,                           /* need credit? */
-      GROUP_TIP,
-      4,                               /* size */
-      GROUP_TIP_COLOUR,
-      GROUP_TIP_COST_MUL,
-      GROUP_TIP_BUL_COST,
-      GROUP_TIP_FIREC,
-      GROUP_TIP_COST,
-      GROUP_TIP_TECH
-    },
-    /* 17 */
-    { N_("Port"),
-      FALSE,                           /* need credit? */
-      GROUP_PORT,
-      4,                               /* size */
-      GROUP_PORT_COLOUR,
-      GROUP_PORT_COST_MUL,
-      GROUP_PORT_BUL_COST,
-      GROUP_PORT_FIREC,
-      GROUP_PORT_COST,
-      GROUP_PORT_TECH
-    },
-    /* 18 */
-    { N_("Hv. Industry"),
-      FALSE,                           /* need credit? */
-      GROUP_INDUSTRY_H,
-      4,                               /* size */
-      GROUP_INDUSTRY_H_COLOUR,
-      GROUP_INDUSTRY_H_COST_MUL,
-      GROUP_INDUSTRY_H_BUL_COST,
-      GROUP_INDUSTRY_H_FIREC,
-      GROUP_INDUSTRY_H_COST,
-      GROUP_INDUSTRY_H_TECH
-    },
-    /* 19 */
-    { N_("Park"),
-      TRUE,                           /* need credit? */
-      GROUP_PARKLAND,
-      1,                               /* size */
-      GROUP_PARKLAND_COLOUR,
-      GROUP_PARKLAND_COST_MUL,
-      GROUP_PARKLAND_BUL_COST,
-      GROUP_PARKLAND_FIREC,
-      GROUP_PARKLAND_COST,
-      GROUP_PARKLAND_TECH
-    },
-    /* 20 */
-    { N_("Recycle"),
-      TRUE,                           /* need credit? */
-      GROUP_RECYCLE,
-      2,                               /* size */
-      GROUP_RECYCLE_COLOUR,
-      GROUP_RECYCLE_COST_MUL,
-      GROUP_RECYCLE_BUL_COST,
-      GROUP_RECYCLE_FIREC,
-      GROUP_RECYCLE_COST,
-      GROUP_RECYCLE_TECH
-    },
-    /* 21 */
-    { N_("Water"),
-      FALSE,                           /* need credit? */
-      GROUP_WATER,
-      1,                               /* size */
-      GROUP_WATER_COLOUR,
-      GROUP_WATER_COST_MUL,
-      GROUP_WATER_BUL_COST,
-      GROUP_WATER_FIREC,
-      GROUP_WATER_COST,
-      GROUP_WATER_TECH
-    },
-    /* 22 */
-    { N_("Health centre"),
-      FALSE,                           /* need credit? */
-      GROUP_HEALTH,
-      2,                               /* size */
-      GROUP_HEALTH_COLOUR,
-      GROUP_HEALTH_COST_MUL,
-      GROUP_HEALTH_BUL_COST,
-      GROUP_HEALTH_FIREC,
-      GROUP_HEALTH_COST,
-      GROUP_HEALTH_TECH
-    },
-    /* 23 */
-    { N_("Rocket pad"),
-      TRUE,                            /* need credit? */
-      GROUP_ROCKET,
-      4,                               /* size */
-      GROUP_ROCKET_COLOUR,
-      GROUP_ROCKET_COST_MUL,
-      GROUP_ROCKET_BUL_COST,
-      GROUP_ROCKET_FIREC,
-      GROUP_ROCKET_COST,
-      GROUP_ROCKET_TECH
-    },
-    /* 24 */
-    { N_("Windmill"),
-      FALSE,                           /* need credit? */
-      GROUP_WINDMILL,
-      2,                               /* size */
-      GROUP_WINDMILL_COLOUR,
-      GROUP_WINDMILL_COST_MUL,
-      GROUP_WINDMILL_BUL_COST,
-      GROUP_WINDMILL_FIREC,
-      GROUP_WINDMILL_COST,
-      GROUP_WINDMILL_TECH
-    },
-    /* 25 */
-    { N_("Monument"),
-      FALSE,                           /* need credit? */
-      GROUP_MONUMENT,
-      2,                               /* size */
-      GROUP_MONUMENT_COLOUR,
-      GROUP_MONUMENT_COST_MUL,
-      GROUP_MONUMENT_BUL_COST,
-      GROUP_MONUMENT_FIREC,
-      GROUP_MONUMENT_COST,
-      GROUP_MONUMENT_TECH
-    },
-    /* 26 */
-    { N_("School"),
-      FALSE,                           /* need credit? */
-      GROUP_SCHOOL,
-      2,                               /* size */
-      GROUP_SCHOOL_COLOUR,
-      GROUP_SCHOOL_COST_MUL,
-      GROUP_SCHOOL_BUL_COST,
-      GROUP_SCHOOL_FIREC,
-      GROUP_SCHOOL_COST,
-      GROUP_SCHOOL_TECH
-    },
-    /* 27 */
-    { N_("Blacksmith"),
-      FALSE,                           /* need credit? */
-      GROUP_BLACKSMITH,
-      2,                               /* size */
-      GROUP_BLACKSMITH_COLOUR,
-      GROUP_BLACKSMITH_COST_MUL,
-      GROUP_BLACKSMITH_BUL_COST,
-      GROUP_BLACKSMITH_FIREC,
-      GROUP_BLACKSMITH_COST,
-      GROUP_BLACKSMITH_TECH
-    },
-    /* 28 */
-    { N_("Mill"),
-      FALSE,                           /* need credit? */
-      GROUP_MILL,
-      2,                               /* size */
-      GROUP_MILL_COLOUR,
-      GROUP_MILL_COST_MUL,
-      GROUP_MILL_BUL_COST,
-      GROUP_MILL_FIREC,
-      GROUP_MILL_COST,
-      GROUP_MILL_TECH
-    },
-    /* 29 */
-    { N_("Pottery"),
-      FALSE,                           /* need credit? */
-      GROUP_POTTERY,
-      2,                               /* size */
-      GROUP_POTTERY_COLOUR,
-      GROUP_POTTERY_COST_MUL,
-      GROUP_POTTERY_BUL_COST,
-      GROUP_POTTERY_FIREC,
-      GROUP_POTTERY_COST,
-      GROUP_POTTERY_TECH
-    },
-    /* 30 */
-    { N_("Fire sta'n"),
-      FALSE,                           /* need credit? */
-      GROUP_FIRESTATION,
-      2,                               /* size */
-      GROUP_FIRESTATION_COLOUR,
-      GROUP_FIRESTATION_COST_MUL,
-      GROUP_FIRESTATION_BUL_COST,
-      GROUP_FIRESTATION_FIREC,
-      GROUP_FIRESTATION_COST,
-      GROUP_FIRESTATION_TECH
-    },
-    /* 31 */
-    { N_("Cricket pitch"),
-      FALSE,                           /* need credit? */
-      GROUP_CRICKET,
-      2,                               /* size */
-      GROUP_CRICKET_COLOUR,
-      GROUP_CRICKET_COST_MUL,
-      GROUP_CRICKET_BUL_COST,
-      GROUP_CRICKET_FIREC,
-      GROUP_CRICKET_COST,
-      GROUP_CRICKET_TECH
-    },
-    /* 32 */
-    /* there is no button for this. */
-    { N_("Burnt"),
-      FALSE,                           /* need credit? */
-      GROUP_BURNT,
-      1,                               /* size */
-      GROUP_BURNT_COLOUR,
-      GROUP_BURNT_COST_MUL,
-      GROUP_BURNT_BUL_COST,
-      GROUP_BURNT_FIREC,
-      GROUP_BURNT_COST,
-      GROUP_BURNT_TECH
-    },
-    /* 33 */
-    /* there is no button for this. */
-    { N_("Shanty town"),
-      FALSE,                           /* need credit? */
-      GROUP_SHANTY,
-      2,                               /* size */
-      GROUP_SHANTY_COLOUR,
-      GROUP_SHANTY_COST_MUL,
-      GROUP_SHANTY_BUL_COST,
-      GROUP_SHANTY_FIREC,
-      GROUP_SHANTY_COST,
-      GROUP_SHANTY_TECH
-    },
-    /* 34 */
-    /* there is no button for this. */
-    { N_("Fire"),
-      FALSE,                           /* need credit? */
-      GROUP_FIRE,
-      1,                               /* size */
-      GROUP_FIRE_COLOUR,
-      GROUP_FIRE_COST_MUL,
-      GROUP_FIRE_BUL_COST,
-      GROUP_FIRE_FIREC,
-      GROUP_FIRE_COST,
-      GROUP_FIRE_TECH
-    },
-    /* 35 */
-    /* there is no button for this. */
-    { N_("Used"),
-      FALSE,                           /* need credit? */
-      GROUP_USED,
-      1,                               /* size */
-      GROUP_USED_COLOUR,
-      GROUP_USED_COST_MUL,
-      GROUP_USED_BUL_COST,
-      GROUP_USED_FIREC,
-      GROUP_USED_COST,
-      GROUP_USED_TECH
-    },
-    /* 36 */
-    { N_("Residential ML"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_ML,
-      3,                               /* size */
-      GROUP_RESIDENCE_ML_COLOUR,
-      GROUP_RESIDENCE_ML_COST_MUL,
-      GROUP_RESIDENCE_ML_BUL_COST,
-      GROUP_RESIDENCE_ML_FIREC,
-      GROUP_RESIDENCE_ML_COST,
-      GROUP_RESIDENCE_ML_TECH
-    },
-    /* 37 */
-    { N_("Residential HL"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_HL,
-      3,                               /* size */
-      GROUP_RESIDENCE_HL_COLOUR,
-      GROUP_RESIDENCE_HL_COST_MUL,
-      GROUP_RESIDENCE_HL_BUL_COST,
-      GROUP_RESIDENCE_HL_FIREC,
-      GROUP_RESIDENCE_HL_COST,
-      GROUP_RESIDENCE_HL_TECH
-    },
-    /* 38 */
-    { N_("Residential"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_LH,
-      3,                               /* size */
-      GROUP_RESIDENCE_LH_COLOUR,
-      GROUP_RESIDENCE_LH_COST_MUL,
-      GROUP_RESIDENCE_LH_BUL_COST,
-      GROUP_RESIDENCE_LH_FIREC,
-      GROUP_RESIDENCE_LH_COST,
-      GROUP_RESIDENCE_LH_TECH
-    },
-    /* 39 */
-    { N_("Residential"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_MH,
-      3,                               /* size */
-      GROUP_RESIDENCE_MH_COLOUR,
-      GROUP_RESIDENCE_MH_COST_MUL,
-      GROUP_RESIDENCE_MH_BUL_COST,
-      GROUP_RESIDENCE_MH_FIREC,
-      GROUP_RESIDENCE_MH_COST,
-      GROUP_RESIDENCE_MH_TECH
-    },
-    /* 40 */
-    { N_("Residential"),
-      FALSE,                           /* need credit? */
-      GROUP_RESIDENCE_LH,
-      3,                               /* size */
-      GROUP_RESIDENCE_HH_COLOUR,
-      GROUP_RESIDENCE_HH_COST_MUL,
-      GROUP_RESIDENCE_HH_BUL_COST,
-      GROUP_RESIDENCE_HH_FIREC,
-      GROUP_RESIDENCE_HH_COST,
-      GROUP_RESIDENCE_HH_TECH
-    },
-    /* 41 */
-    /* End of Data */
-    { "EOF",
-      FALSE,                           /* need credit? */
-      0,
-      0,                               /* size */
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    }
+	/* 0 */
+	{ N_("Empty"),       /* name */
+		FALSE,            /* need credit? */
+		GROUP_BARE,       /* group number */
+		1,                /* size */
+		(green(12)),      /* color */
+		1,                /* cost multiplier */
+		1,                /* bulldoze cost */
+		0,                /* probability of fire */
+		0,                /* cost */
+		0                 /* tech */
+	},
+	/* 1 */
+	{ N_("Power line"),
+		FALSE,                           /* need credit? */
+		GROUP_POWER_LINE,
+		1,                               /* size */
+		GROUP_POWER_LINE_COLOUR,
+		GROUP_POWER_LINE_COST_MUL,
+		GROUP_POWER_LINE_BUL_COST,
+		GROUP_POWER_LINE_FIREC,
+		GROUP_POWER_LINE_COST,
+		GROUP_POWER_LINE_TECH
+	},
+	/* 2 */
+	{ N_("Solar PS"),
+		TRUE,                            /* need credit? */
+		GROUP_SOLAR_POWER,
+		4,                               /* size */
+		GROUP_SOLAR_POWER_COLOUR,
+		GROUP_SOLAR_POWER_COST_MUL,
+		GROUP_SOLAR_POWER_BUL_COST,
+		GROUP_SOLAR_POWER_FIREC,
+		GROUP_SOLAR_POWER_COST,
+		GROUP_SOLAR_POWER_TECH
+	},
+	/* 3 */
+	{ N_("Substation"),
+		FALSE,                           /* need credit? */
+		GROUP_SUBSTATION,
+		2,                               /* size */
+		GROUP_SUBSTATION_COLOUR,
+		GROUP_SUBSTATION_COST_MUL,
+		GROUP_SUBSTATION_BUL_COST,
+		GROUP_SUBSTATION_FIREC,
+		GROUP_SUBSTATION_COST,
+		GROUP_SUBSTATION_TECH
+	},
+	/* 4 */
+	{ N_("Residential LL"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_LL,
+		3,                               /* size */
+		GROUP_RESIDENCE_LL_COLOUR,
+		GROUP_RESIDENCE_LL_COST_MUL,
+		GROUP_RESIDENCE_LL_BUL_COST,
+		GROUP_RESIDENCE_LL_FIREC,
+		GROUP_RESIDENCE_LL_COST,
+		GROUP_RESIDENCE_LL_TECH
+	},
+	/* 5 */
+	{ N_("Farm"),
+		FALSE,                           /* need credit? */
+		GROUP_ORGANIC_FARM,
+		4,                               /* size */
+		GROUP_ORGANIC_FARM_COLOUR,
+		GROUP_ORGANIC_FARM_COST_MUL,
+		GROUP_ORGANIC_FARM_BUL_COST,
+		GROUP_ORGANIC_FARM_FIREC,
+		GROUP_ORGANIC_FARM_COST,
+		GROUP_ORGANIC_FARM_TECH
+	},
+	/* 6 */
+	{ N_("Market"),
+		FALSE,                           /* need credit? */
+		GROUP_MARKET,
+		2,                               /* size */
+		GROUP_MARKET_COLOUR,
+		GROUP_MARKET_COST_MUL,
+		GROUP_MARKET_BUL_COST,
+		GROUP_MARKET_FIREC,
+		GROUP_MARKET_COST,
+		GROUP_MARKET_TECH
+	},
+	/* 7 */
+	{ N_("Track"),
+		FALSE,                           /* need credit? */
+		GROUP_TRACK,
+		1,                               /* size */
+		GROUP_TRACK_COLOUR,
+		GROUP_TRACK_COST_MUL,
+		GROUP_TRACK_BUL_COST,
+		GROUP_TRACK_FIREC,
+		GROUP_TRACK_COST,
+		GROUP_TRACK_TECH
+	},
+	/* 8 */
+	{ N_("Coalmine"),
+		FALSE,                           /* need credit? */
+		GROUP_COALMINE,
+		4,                               /* size */
+		GROUP_COALMINE_COLOUR,
+		GROUP_COALMINE_COST_MUL,
+		GROUP_COALMINE_BUL_COST,
+		GROUP_COALMINE_FIREC,
+		GROUP_COALMINE_COST,
+		GROUP_COALMINE_TECH
+	},
+	/* 9 */
+	{ N_("Railway"),
+		FALSE,                           /* need credit? */
+		GROUP_RAIL,
+		1,                               /* size */
+		GROUP_RAIL_COLOUR,
+		GROUP_RAIL_COST_MUL,
+		GROUP_RAIL_BUL_COST,
+		GROUP_RAIL_FIREC,
+		GROUP_RAIL_COST,
+		GROUP_RAIL_TECH
+	},
+	/* 10 */
+	{ N_("Coal PS"),
+		FALSE,                           /* need credit? */
+		GROUP_COAL_POWER,
+		4,                               /* size */
+		GROUP_COAL_POWER_COLOUR,
+		GROUP_COAL_POWER_COST_MUL,
+		GROUP_COAL_POWER_BUL_COST,
+		GROUP_COAL_POWER_FIREC,
+		GROUP_COAL_POWER_COST,
+		GROUP_COAL_POWER_TECH
+	},
+	/* 11 */
+	{ N_("Road"),
+		FALSE,                           /* need credit? */
+		GROUP_ROAD,
+		1,                               /* size */
+		GROUP_ROAD_COLOUR,
+		GROUP_ROAD_COST_MUL,
+		GROUP_ROAD_BUL_COST,
+		GROUP_ROAD_FIREC,
+		GROUP_ROAD_COST,
+		GROUP_ROAD_TECH
+	},
+	/* 12 */
+	{ N_("Lt. Industry"),
+		FALSE,                           /* need credit? */
+		GROUP_INDUSTRY_L,
+		3,                               /* size */
+		GROUP_INDUSTRY_L_COLOUR,
+		GROUP_INDUSTRY_L_COST_MUL,
+		GROUP_INDUSTRY_L_BUL_COST,
+		GROUP_INDUSTRY_L_FIREC,
+		GROUP_INDUSTRY_L_COST,
+		GROUP_INDUSTRY_L_TECH
+	},
+	/* 13 */
+	{ N_("University"),
+		FALSE,                           /* need credit? */
+		GROUP_UNIVERSITY,
+		3,                               /* size */
+		GROUP_UNIVERSITY_COLOUR,
+		GROUP_UNIVERSITY_COST_MUL,
+		GROUP_UNIVERSITY_BUL_COST,
+		GROUP_UNIVERSITY_FIREC,
+		GROUP_UNIVERSITY_COST,
+		GROUP_UNIVERSITY_TECH
+	},
+	/* 14 */
+	{ N_("Commune"),
+		FALSE,                           /* need credit? */
+		GROUP_COMMUNE,
+		4,                               /* size */
+		GROUP_COMMUNE_COLOUR,
+		GROUP_COMMUNE_COST_MUL,
+		GROUP_COMMUNE_BUL_COST,
+		GROUP_COMMUNE_FIREC,
+		GROUP_COMMUNE_COST,
+		GROUP_COMMUNE_TECH
+	},
+	/* 15 */
+	{ N_("Ore mine"),
+		FALSE,                           /* need credit? */
+		GROUP_OREMINE,
+		4,                               /* size */
+		GROUP_OREMINE_COLOUR,
+		GROUP_OREMINE_COST_MUL,
+		GROUP_OREMINE_BUL_COST,
+		GROUP_OREMINE_FIREC,
+		GROUP_OREMINE_COST,
+		GROUP_OREMINE_TECH
+	},
+	/* 16 */
+	{ N_("Rubbish tip"),
+		FALSE,                           /* need credit? */
+		GROUP_TIP,
+		4,                               /* size */
+		GROUP_TIP_COLOUR,
+		GROUP_TIP_COST_MUL,
+		GROUP_TIP_BUL_COST,
+		GROUP_TIP_FIREC,
+		GROUP_TIP_COST,
+		GROUP_TIP_TECH
+	},
+	/* 17 */
+	{ N_("Port"),
+		FALSE,                           /* need credit? */
+		GROUP_PORT,
+		4,                               /* size */
+		GROUP_PORT_COLOUR,
+		GROUP_PORT_COST_MUL,
+		GROUP_PORT_BUL_COST,
+		GROUP_PORT_FIREC,
+		GROUP_PORT_COST,
+		GROUP_PORT_TECH
+	},
+	/* 18 */
+	{ N_("Hv. Industry"),
+		FALSE,                           /* need credit? */
+		GROUP_INDUSTRY_H,
+		4,                               /* size */
+		GROUP_INDUSTRY_H_COLOUR,
+		GROUP_INDUSTRY_H_COST_MUL,
+		GROUP_INDUSTRY_H_BUL_COST,
+		GROUP_INDUSTRY_H_FIREC,
+		GROUP_INDUSTRY_H_COST,
+		GROUP_INDUSTRY_H_TECH
+	},
+	/* 19 */
+	{ N_("Park"),
+		TRUE,                           /* need credit? */
+		GROUP_PARKLAND,
+		1,                               /* size */
+		GROUP_PARKLAND_COLOUR,
+		GROUP_PARKLAND_COST_MUL,
+		GROUP_PARKLAND_BUL_COST,
+		GROUP_PARKLAND_FIREC,
+		GROUP_PARKLAND_COST,
+		GROUP_PARKLAND_TECH
+	},
+	/* 20 */
+	{ N_("Recycle"),
+		TRUE,                           /* need credit? */
+		GROUP_RECYCLE,
+		2,                               /* size */
+		GROUP_RECYCLE_COLOUR,
+		GROUP_RECYCLE_COST_MUL,
+		GROUP_RECYCLE_BUL_COST,
+		GROUP_RECYCLE_FIREC,
+		GROUP_RECYCLE_COST,
+		GROUP_RECYCLE_TECH
+	},
+	/* 21 */
+	{ N_("Water"),
+		FALSE,                           /* need credit? */
+		GROUP_WATER,
+		1,                               /* size */
+		GROUP_WATER_COLOUR,
+		GROUP_WATER_COST_MUL,
+		GROUP_WATER_BUL_COST,
+		GROUP_WATER_FIREC,
+		GROUP_WATER_COST,
+		GROUP_WATER_TECH
+	},
+	/* 22 */
+	{ N_("Health centre"),
+		FALSE,                           /* need credit? */
+		GROUP_HEALTH,
+		2,                               /* size */
+		GROUP_HEALTH_COLOUR,
+		GROUP_HEALTH_COST_MUL,
+		GROUP_HEALTH_BUL_COST,
+		GROUP_HEALTH_FIREC,
+		GROUP_HEALTH_COST,
+		GROUP_HEALTH_TECH
+	},
+	/* 23 */
+	{ N_("Rocket pad"),
+		TRUE,                            /* need credit? */
+		GROUP_ROCKET,
+		4,                               /* size */
+		GROUP_ROCKET_COLOUR,
+		GROUP_ROCKET_COST_MUL,
+		GROUP_ROCKET_BUL_COST,
+		GROUP_ROCKET_FIREC,
+		GROUP_ROCKET_COST,
+		GROUP_ROCKET_TECH
+	},
+	/* 24 */
+	{ N_("Windmill"),
+		FALSE,                           /* need credit? */
+		GROUP_WINDMILL,
+		2,                               /* size */
+		GROUP_WINDMILL_COLOUR,
+		GROUP_WINDMILL_COST_MUL,
+		GROUP_WINDMILL_BUL_COST,
+		GROUP_WINDMILL_FIREC,
+		GROUP_WINDMILL_COST,
+		GROUP_WINDMILL_TECH
+	},
+	/* 25 */
+	{ N_("Monument"),
+		FALSE,                           /* need credit? */
+		GROUP_MONUMENT,
+		2,                               /* size */
+		GROUP_MONUMENT_COLOUR,
+		GROUP_MONUMENT_COST_MUL,
+		GROUP_MONUMENT_BUL_COST,
+		GROUP_MONUMENT_FIREC,
+		GROUP_MONUMENT_COST,
+		GROUP_MONUMENT_TECH
+	},
+	/* 26 */
+	{ N_("School"),
+		FALSE,                           /* need credit? */
+		GROUP_SCHOOL,
+		2,                               /* size */
+		GROUP_SCHOOL_COLOUR,
+		GROUP_SCHOOL_COST_MUL,
+		GROUP_SCHOOL_BUL_COST,
+		GROUP_SCHOOL_FIREC,
+		GROUP_SCHOOL_COST,
+		GROUP_SCHOOL_TECH
+	},
+	/* 27 */
+	{ N_("Blacksmith"),
+		FALSE,                           /* need credit? */
+		GROUP_BLACKSMITH,
+		2,                               /* size */
+		GROUP_BLACKSMITH_COLOUR,
+		GROUP_BLACKSMITH_COST_MUL,
+		GROUP_BLACKSMITH_BUL_COST,
+		GROUP_BLACKSMITH_FIREC,
+		GROUP_BLACKSMITH_COST,
+		GROUP_BLACKSMITH_TECH
+	},
+	/* 28 */
+	{ N_("Mill"),
+		FALSE,                           /* need credit? */
+		GROUP_MILL,
+		2,                               /* size */
+		GROUP_MILL_COLOUR,
+		GROUP_MILL_COST_MUL,
+		GROUP_MILL_BUL_COST,
+		GROUP_MILL_FIREC,
+		GROUP_MILL_COST,
+		GROUP_MILL_TECH
+	},
+	/* 29 */
+	{ N_("Pottery"),
+		FALSE,                           /* need credit? */
+		GROUP_POTTERY,
+		2,                               /* size */
+		GROUP_POTTERY_COLOUR,
+		GROUP_POTTERY_COST_MUL,
+		GROUP_POTTERY_BUL_COST,
+		GROUP_POTTERY_FIREC,
+		GROUP_POTTERY_COST,
+		GROUP_POTTERY_TECH
+	},
+	/* 30 */
+	{ N_("Fire sta'n"),
+		FALSE,                           /* need credit? */
+		GROUP_FIRESTATION,
+		2,                               /* size */
+		GROUP_FIRESTATION_COLOUR,
+		GROUP_FIRESTATION_COST_MUL,
+		GROUP_FIRESTATION_BUL_COST,
+		GROUP_FIRESTATION_FIREC,
+		GROUP_FIRESTATION_COST,
+		GROUP_FIRESTATION_TECH
+	},
+	/* 31 */
+	{ N_("Cricket pitch"),
+		FALSE,                           /* need credit? */
+		GROUP_CRICKET,
+		2,                               /* size */
+		GROUP_CRICKET_COLOUR,
+		GROUP_CRICKET_COST_MUL,
+		GROUP_CRICKET_BUL_COST,
+		GROUP_CRICKET_FIREC,
+		GROUP_CRICKET_COST,
+		GROUP_CRICKET_TECH
+	},
+	/* 32 */
+	/* there is no button for this. */
+	{ N_("Burnt"),
+		FALSE,                           /* need credit? */
+		GROUP_BURNT,
+		1,                               /* size */
+		GROUP_BURNT_COLOUR,
+		GROUP_BURNT_COST_MUL,
+		GROUP_BURNT_BUL_COST,
+		GROUP_BURNT_FIREC,
+		GROUP_BURNT_COST,
+		GROUP_BURNT_TECH
+	},
+	/* 33 */
+	/* there is no button for this. */
+	{ N_("Shanty town"),
+		FALSE,                           /* need credit? */
+		GROUP_SHANTY,
+		2,                               /* size */
+		GROUP_SHANTY_COLOUR,
+		GROUP_SHANTY_COST_MUL,
+		GROUP_SHANTY_BUL_COST,
+		GROUP_SHANTY_FIREC,
+		GROUP_SHANTY_COST,
+		GROUP_SHANTY_TECH
+	},
+	/* 34 */
+	/* there is no button for this. */
+	{ N_("Fire"),
+		FALSE,                           /* need credit? */
+		GROUP_FIRE,
+		1,                               /* size */
+		GROUP_FIRE_COLOUR,
+		GROUP_FIRE_COST_MUL,
+		GROUP_FIRE_BUL_COST,
+		GROUP_FIRE_FIREC,
+		GROUP_FIRE_COST,
+		GROUP_FIRE_TECH
+	},
+	/* 35 */
+	/* there is no button for this. */
+	{ N_("Used"),
+		FALSE,                           /* need credit? */
+		GROUP_USED,
+		1,                               /* size */
+		GROUP_USED_COLOUR,
+		GROUP_USED_COST_MUL,
+		GROUP_USED_BUL_COST,
+		GROUP_USED_FIREC,
+		GROUP_USED_COST,
+		GROUP_USED_TECH
+	},
+	/* 36 */
+	{ N_("Residential ML"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_ML,
+		3,                               /* size */
+		GROUP_RESIDENCE_ML_COLOUR,
+		GROUP_RESIDENCE_ML_COST_MUL,
+		GROUP_RESIDENCE_ML_BUL_COST,
+		GROUP_RESIDENCE_ML_FIREC,
+		GROUP_RESIDENCE_ML_COST,
+		GROUP_RESIDENCE_ML_TECH
+	},
+	/* 37 */
+	{ N_("Residential HL"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_HL,
+		3,                               /* size */
+		GROUP_RESIDENCE_HL_COLOUR,
+		GROUP_RESIDENCE_HL_COST_MUL,
+		GROUP_RESIDENCE_HL_BUL_COST,
+		GROUP_RESIDENCE_HL_FIREC,
+		GROUP_RESIDENCE_HL_COST,
+		GROUP_RESIDENCE_HL_TECH
+	},
+	/* 38 */
+	{ N_("Residential"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_LH,
+		3,                               /* size */
+		GROUP_RESIDENCE_LH_COLOUR,
+		GROUP_RESIDENCE_LH_COST_MUL,
+		GROUP_RESIDENCE_LH_BUL_COST,
+		GROUP_RESIDENCE_LH_FIREC,
+		GROUP_RESIDENCE_LH_COST,
+		GROUP_RESIDENCE_LH_TECH
+	},
+	/* 39 */
+	{ N_("Residential"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_MH,
+		3,                               /* size */
+		GROUP_RESIDENCE_MH_COLOUR,
+		GROUP_RESIDENCE_MH_COST_MUL,
+		GROUP_RESIDENCE_MH_BUL_COST,
+		GROUP_RESIDENCE_MH_FIREC,
+		GROUP_RESIDENCE_MH_COST,
+		GROUP_RESIDENCE_MH_TECH
+	},
+	/* 40 */
+	{ N_("Residential"),
+		FALSE,                           /* need credit? */
+		GROUP_RESIDENCE_LH,
+		3,                               /* size */
+		GROUP_RESIDENCE_HH_COLOUR,
+		GROUP_RESIDENCE_HH_COST_MUL,
+		GROUP_RESIDENCE_HH_BUL_COST,
+		GROUP_RESIDENCE_HH_FIREC,
+		GROUP_RESIDENCE_HH_COST,
+		GROUP_RESIDENCE_HH_TECH
+	},
+	/* 41 */
+	/* End of Data */
+	{ "EOF",
+		FALSE,                           /* need credit? */
+		0,
+		0,                               /* size */
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	}
 };
 
 void init_types(void)
 {
-    char png_file[LC_PATH_MAX], txt_file[LC_PATH_MAX];
-    sprintf (png_file, "%s%c%s", opening_path, PATH_SLASH, "icons.png");
-    sprintf (txt_file, "%s%c%s", opening_path, PATH_SLASH, "iconlist.txt");
+	char png_file[LC_PATH_MAX], txt_file[LC_PATH_MAX];
+	sprintf (png_file, "%s%c%s", opening_path, PATH_SLASH, "icons.png");
+	sprintf (txt_file, "%s%c%s", opening_path, PATH_SLASH, "iconlist.txt");
 
-    uint32_t palette[256];
-   
-    load_png_graphics (txt_file,png_file,palette);
-    lc_loadpalette(palette);
+	uint32_t palette[256];
 
-    main_types[CST_USED].group=GROUP_USED;
-    main_types[CST_USED].graphic=0;         /* Won't be dereferenced! */
+	FILE* txt_fp = fopen(txt_file,"r");
+	if (!txt_fp) {
+		fprintf(stderr,"Unable to open the icon definition text file.\n");
+		return;
+	}
+
+	load_tilemap (png_file,palette);
+	lc_loadpalette(palette);
+
+#define LG(typ,grp,id) load_tilemap_graphic(typ,grp,id,txt_fp); main_types[typ].group = grp; 
+
+	LG(CST_GREEN,GROUP_BARE,LCT_GREEN_G);
+
+	LG(CST_FIRE_1,GROUP_FIRE,LCT_FIRE_1_G);
+	LG(CST_FIRE_2,GROUP_FIRE,LCT_FIRE_2_G);
+	LG(CST_FIRE_3,GROUP_FIRE,LCT_FIRE_3_G);
+	LG(CST_FIRE_4,GROUP_FIRE,LCT_FIRE_4_G);
+	LG(CST_FIRE_5,GROUP_FIRE,LCT_FIRE_5_G);
+
+	LG(CST_FIRE_DONE1,GROUP_FIRE,LCT_FIRE_DONE1_G);
+	LG(CST_FIRE_DONE2,GROUP_FIRE,LCT_FIRE_DONE2_G);
+	LG(CST_FIRE_DONE3,GROUP_FIRE,LCT_FIRE_DONE3_G);
+	LG(CST_FIRE_DONE4,GROUP_FIRE,LCT_FIRE_DONE4_G);
+
+	LG(CST_BURNT,GROUP_BURNT,LCT_BURNT_G);
+
+	LG(CST_PARKLAND_PLANE,GROUP_PARKLAND,LCT_PARKLAND_PLANE_G);
+	LG(CST_PARKLAND_LAKE,GROUP_PARKLAND,LCT_PARKLAND_LAKE_G);
+
+	LG(CST_POWERL_H_L,GROUP_POWER_LINE,LCT_POWERL_H_L_G);
+	LG(CST_POWERL_V_L,GROUP_POWER_LINE,LCT_POWERL_V_L_G);
+	LG(CST_POWERL_LD_L,GROUP_POWER_LINE,LCT_POWERL_LD_L_G);
+	LG(CST_POWERL_RD_L,GROUP_POWER_LINE,LCT_POWERL_RD_L_G);
+	LG(CST_POWERL_LU_L,GROUP_POWER_LINE,LCT_POWERL_LU_L_G);
+	LG(CST_POWERL_RU_L,GROUP_POWER_LINE,LCT_POWERL_RU_L_G);
+	LG(CST_POWERL_LDU_L,GROUP_POWER_LINE,LCT_POWERL_LDU_L_G);
+	LG(CST_POWERL_LDR_L,GROUP_POWER_LINE,LCT_POWERL_LDR_L_G);
+	LG(CST_POWERL_LUR_L,GROUP_POWER_LINE,LCT_POWERL_LUR_L_G);
+	LG(CST_POWERL_UDR_L,GROUP_POWER_LINE,LCT_POWERL_UDR_L_G);
+	LG(CST_POWERL_LUDR_L,GROUP_POWER_LINE,LCT_POWERL_LUDR_L_G);
+	LG(CST_POWERL_H_D,GROUP_POWER_LINE,LCT_POWERL_H_D_G);
+	LG(CST_POWERL_V_D,GROUP_POWER_LINE,LCT_POWERL_V_D_G);
+	LG(CST_POWERL_LD_D,GROUP_POWER_LINE,LCT_POWERL_LD_D_G);
+	LG(CST_POWERL_RD_D,GROUP_POWER_LINE,LCT_POWERL_RD_D_G);
+	LG(CST_POWERL_LU_D,GROUP_POWER_LINE,LCT_POWERL_LU_D_G);
+	LG(CST_POWERL_RU_D,GROUP_POWER_LINE,LCT_POWERL_RU_D_G);
+	LG(CST_POWERL_LDU_D,GROUP_POWER_LINE,LCT_POWERL_LDU_D_G);
+	LG(CST_POWERL_LDR_D,GROUP_POWER_LINE,LCT_POWERL_LDR_D_G);
+	LG(CST_POWERL_LUR_D,GROUP_POWER_LINE,LCT_POWERL_LUR_D_G);
+	LG(CST_POWERL_UDR_D,GROUP_POWER_LINE,LCT_POWERL_UDR_D_G);
+	LG(CST_POWERL_LUDR_D,GROUP_POWER_LINE,LCT_POWERL_LUDR_D_G);
+
+	LG(CST_RAIL_LR,GROUP_RAIL,LCT_RAIL_LR_G);
+	LG(CST_RAIL_LU,GROUP_RAIL,LCT_RAIL_LU_G);
+	LG(CST_RAIL_LD,GROUP_RAIL,LCT_RAIL_LD_G);
+	LG(CST_RAIL_UD,GROUP_RAIL,LCT_RAIL_UD_G);
+	LG(CST_RAIL_UR,GROUP_RAIL,LCT_RAIL_UR_G);
+	LG(CST_RAIL_DR,GROUP_RAIL,LCT_RAIL_DR_G);
+	LG(CST_RAIL_LUR,GROUP_RAIL,LCT_RAIL_LUR_G);
+	LG(CST_RAIL_LDR,GROUP_RAIL,LCT_RAIL_LDR_G);
+	LG(CST_RAIL_LUD,GROUP_RAIL,LCT_RAIL_LUD_G);
+	LG(CST_RAIL_UDR,GROUP_RAIL,LCT_RAIL_UDR_G);
+	LG(CST_RAIL_LUDR,GROUP_RAIL,LCT_RAIL_LUDR_G);
+
+	LG(CST_ROAD_LR,GROUP_ROAD,LCT_ROAD_LR_G);
+	LG(CST_ROAD_LU,GROUP_ROAD,LCT_ROAD_LU_G);
+	LG(CST_ROAD_LD,GROUP_ROAD,LCT_ROAD_LD_G);
+	LG(CST_ROAD_UD,GROUP_ROAD,LCT_ROAD_UD_G);
+	LG(CST_ROAD_UR,GROUP_ROAD,LCT_ROAD_UR_G);
+	LG(CST_ROAD_DR,GROUP_ROAD,LCT_ROAD_DR_G);
+	LG(CST_ROAD_LUR,GROUP_ROAD,LCT_ROAD_LUR_G);
+	LG(CST_ROAD_LDR,GROUP_ROAD,LCT_ROAD_LDR_G);
+	LG(CST_ROAD_LUD,GROUP_ROAD,LCT_ROAD_LUD_G);
+	LG(CST_ROAD_UDR,GROUP_ROAD,LCT_ROAD_UDR_G);
+	LG(CST_ROAD_LUDR,GROUP_ROAD,LCT_ROAD_LUDR_G);
+
+	LG(CST_TRACK_LR,GROUP_TRACK,LCT_TRACK_LR_G);
+	LG(CST_TRACK_LU,GROUP_TRACK,LCT_TRACK_LU_G);
+	LG(CST_TRACK_LD,GROUP_TRACK,LCT_TRACK_LD_G);
+	LG(CST_TRACK_UD,GROUP_TRACK,LCT_TRACK_UD_G);
+	LG(CST_TRACK_UR,GROUP_TRACK,LCT_TRACK_UR_G);
+	LG(CST_TRACK_DR,GROUP_TRACK,LCT_TRACK_DR_G);
+	LG(CST_TRACK_LUR,GROUP_TRACK,LCT_TRACK_LUR_G);
+	LG(CST_TRACK_LDR,GROUP_TRACK,LCT_TRACK_LDR_G);
+	LG(CST_TRACK_LUD,GROUP_TRACK,LCT_TRACK_LUD_G);
+	LG(CST_TRACK_UDR,GROUP_TRACK,LCT_TRACK_UDR_G);
+	LG(CST_TRACK_LUDR,GROUP_TRACK,LCT_TRACK_LUDR_G);
+
+	LG(CST_WATER,GROUP_WATER,LCT_WATER_G);
+	LG(CST_WATER_D,GROUP_WATER,LCT_WATER_D_G);
+	LG(CST_WATER_R,GROUP_WATER,LCT_WATER_R_G);
+	LG(CST_WATER_U,GROUP_WATER,LCT_WATER_U_G);
+	LG(CST_WATER_L,GROUP_WATER,LCT_WATER_L_G);
+	LG(CST_WATER_LR,GROUP_WATER,LCT_WATER_LR_G);
+	LG(CST_WATER_UD,GROUP_WATER,LCT_WATER_UD_G);
+	LG(CST_WATER_LD,GROUP_WATER,LCT_WATER_LD_G);
+	LG(CST_WATER_RD,GROUP_WATER,LCT_WATER_RD_G);
+	LG(CST_WATER_LU,GROUP_WATER,LCT_WATER_LU_G);
+	LG(CST_WATER_UR,GROUP_WATER,LCT_WATER_UR_G);
+	LG(CST_WATER_LUD,GROUP_WATER,LCT_WATER_LUD_G);
+	LG(CST_WATER_LRD,GROUP_WATER,LCT_WATER_LRD_G);
+	LG(CST_WATER_LUR,GROUP_WATER,LCT_WATER_LUR_G);
+	LG(CST_WATER_URD,GROUP_WATER,LCT_WATER_URD_G);
+	LG(CST_WATER_LURD,GROUP_WATER,LCT_WATER_LURD_G);
+
+	LG(CST_BLACKSMITH_0,GROUP_BLACKSMITH,LCT_BLACKSMITH_0_G);
+	LG(CST_BLACKSMITH_1,GROUP_BLACKSMITH,LCT_BLACKSMITH_1_G);
+	LG(CST_BLACKSMITH_2,GROUP_BLACKSMITH,LCT_BLACKSMITH_2_G);
+	LG(CST_BLACKSMITH_3,GROUP_BLACKSMITH,LCT_BLACKSMITH_3_G);
+	LG(CST_BLACKSMITH_4,GROUP_BLACKSMITH,LCT_BLACKSMITH_4_G);
+	LG(CST_BLACKSMITH_5,GROUP_BLACKSMITH,LCT_BLACKSMITH_5_G);
+	LG(CST_BLACKSMITH_6,GROUP_BLACKSMITH,LCT_BLACKSMITH_6_G);
+
+	LG(CST_CRICKET_1,GROUP_CRICKET,LCT_CRICKET_1_G);
+	LG(CST_CRICKET_2,GROUP_CRICKET,LCT_CRICKET_2_G);
+	LG(CST_CRICKET_3,GROUP_CRICKET,LCT_CRICKET_3_G);
+	LG(CST_CRICKET_4,GROUP_CRICKET,LCT_CRICKET_4_G);
+	LG(CST_CRICKET_5,GROUP_CRICKET,LCT_CRICKET_5_G);
+	LG(CST_CRICKET_6,GROUP_CRICKET,LCT_CRICKET_6_G);
+	LG(CST_CRICKET_7,GROUP_CRICKET,LCT_CRICKET_7_G);
+
+	LG(CST_FIRESTATION_1,GROUP_FIRESTATION,LCT_FIRESTATION_1_G);
+	LG(CST_FIRESTATION_2,GROUP_FIRESTATION,LCT_FIRESTATION_2_G);
+	LG(CST_FIRESTATION_3,GROUP_FIRESTATION,LCT_FIRESTATION_3_G);
+	LG(CST_FIRESTATION_4,GROUP_FIRESTATION,LCT_FIRESTATION_4_G);
+	LG(CST_FIRESTATION_5,GROUP_FIRESTATION,LCT_FIRESTATION_5_G);
+	LG(CST_FIRESTATION_6,GROUP_FIRESTATION,LCT_FIRESTATION_6_G);
+	LG(CST_FIRESTATION_7,GROUP_FIRESTATION,LCT_FIRESTATION_7_G);
+	LG(CST_FIRESTATION_8,GROUP_FIRESTATION,LCT_FIRESTATION_8_G);
+	LG(CST_FIRESTATION_9,GROUP_FIRESTATION,LCT_FIRESTATION_9_G);
+	LG(CST_FIRESTATION_10,GROUP_FIRESTATION,LCT_FIRESTATION_10_G);
+
+	LG(CST_HEALTH,GROUP_HEALTH,LCT_HEALTH_G);
+
+	LG(CST_MARKET_EMPTY,GROUP_MARKET,LCT_MARKET_EMPTY_G);
+	LG(CST_MARKET_LOW,GROUP_MARKET,LCT_MARKET_LOW_G);
+	LG(CST_MARKET_MED,GROUP_MARKET,LCT_MARKET_MED_G);
+	LG(CST_MARKET_FULL,GROUP_MARKET,LCT_MARKET_FULL_G);
+
+	LG(CST_MILL_0,GROUP_MILL,LCT_MILL_0_G);
+	LG(CST_MILL_1,GROUP_MILL,LCT_MILL_1_G);
+	LG(CST_MILL_2,GROUP_MILL,LCT_MILL_2_G);
+	LG(CST_MILL_3,GROUP_MILL,LCT_MILL_3_G);
+	LG(CST_MILL_4,GROUP_MILL,LCT_MILL_4_G);
+	LG(CST_MILL_5,GROUP_MILL,LCT_MILL_5_G);
+	LG(CST_MILL_6,GROUP_MILL,LCT_MILL_6_G);
+
+	LG(CST_MONUMENT_0,GROUP_MONUMENT,LCT_MONUMENT_0_G);
+	LG(CST_MONUMENT_1,GROUP_MONUMENT,LCT_MONUMENT_1_G);
+	LG(CST_MONUMENT_2,GROUP_MONUMENT,LCT_MONUMENT_2_G);
+	LG(CST_MONUMENT_3,GROUP_MONUMENT,LCT_MONUMENT_3_G);
+	LG(CST_MONUMENT_4,GROUP_MONUMENT,LCT_MONUMENT_4_G);
+	LG(CST_MONUMENT_5,GROUP_MONUMENT,LCT_MONUMENT_5_G);
+
+	LG(CST_POTTERY_0,GROUP_POTTERY,LCT_POTTERY_0_G);
+	LG(CST_POTTERY_1,GROUP_POTTERY,LCT_POTTERY_1_G);
+	LG(CST_POTTERY_2,GROUP_POTTERY,LCT_POTTERY_2_G);
+	LG(CST_POTTERY_3,GROUP_POTTERY,LCT_POTTERY_3_G);
+	LG(CST_POTTERY_4,GROUP_POTTERY,LCT_POTTERY_4_G);
+	LG(CST_POTTERY_5,GROUP_POTTERY,LCT_POTTERY_5_G);
+	LG(CST_POTTERY_6,GROUP_POTTERY,LCT_POTTERY_6_G);
+	LG(CST_POTTERY_7,GROUP_POTTERY,LCT_POTTERY_7_G);
+	LG(CST_POTTERY_8,GROUP_POTTERY,LCT_POTTERY_8_G);
+	LG(CST_POTTERY_9,GROUP_POTTERY,LCT_POTTERY_9_G);
+	LG(CST_POTTERY_10,GROUP_POTTERY,LCT_POTTERY_10_G);
+
+	LG(CST_RECYCLE,GROUP_RECYCLE,LCT_RECYCLE_G);
+
+	LG(CST_SCHOOL,GROUP_SCHOOL,LCT_SCHOOL_G);
+
+	LG(CST_SHANTY,GROUP_SHANTY,LCT_SHANTY_G);
+
+	LG(CST_SUBSTATION_R,GROUP_SUBSTATION,LCT_SUBSTATION_R_G);
+	LG(CST_SUBSTATION_G,GROUP_SUBSTATION,LCT_SUBSTATION_G_G);
+	LG(CST_SUBSTATION_RG,GROUP_SUBSTATION,LCT_SUBSTATION_RG_G);
+
+	LG(CST_WINDMILL_1_G,GROUP_WINDMILL,LCT_WINDMILL_1_G_G);
+	LG(CST_WINDMILL_2_G,GROUP_WINDMILL,LCT_WINDMILL_2_G_G);
+	LG(CST_WINDMILL_3_G,GROUP_WINDMILL,LCT_WINDMILL_3_G_G);
+	LG(CST_WINDMILL_1_RG,GROUP_WINDMILL,LCT_WINDMILL_1_RG_G);
+	LG(CST_WINDMILL_2_RG,GROUP_WINDMILL,LCT_WINDMILL_2_RG_G);
+	LG(CST_WINDMILL_3_RG,GROUP_WINDMILL,LCT_WINDMILL_3_RG_G);
+	LG(CST_WINDMILL_1_R,GROUP_WINDMILL,LCT_WINDMILL_1_R_G);
+	LG(CST_WINDMILL_2_R,GROUP_WINDMILL,LCT_WINDMILL_2_R_G);
+	LG(CST_WINDMILL_3_R,GROUP_WINDMILL,LCT_WINDMILL_3_R_G);
+	LG(CST_WINDMILL_1_W,GROUP_WINDMILL,LCT_WINDMILL_1_W_G);
+	LG(CST_WINDMILL_2_W,GROUP_WINDMILL,LCT_WINDMILL_2_W_G);
+	LG(CST_WINDMILL_3_W,GROUP_WINDMILL,LCT_WINDMILL_3_W_G);
+
+	LG(CST_INDUSTRY_L_C,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_C_G);
+	LG(CST_INDUSTRY_L_Q1,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_Q1_G);
+	LG(CST_INDUSTRY_L_Q2,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_Q2_G);
+	LG(CST_INDUSTRY_L_Q3,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_Q3_G);
+	LG(CST_INDUSTRY_L_Q4,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_Q4_G);
+	LG(CST_INDUSTRY_L_L1,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_L1_G);
+	LG(CST_INDUSTRY_L_L2,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_L2_G);
+	LG(CST_INDUSTRY_L_L3,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_L3_G);
+	LG(CST_INDUSTRY_L_L4,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_L4_G);
+	LG(CST_INDUSTRY_L_M1,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_M1_G);
+	LG(CST_INDUSTRY_L_M2,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_M2_G);
+	LG(CST_INDUSTRY_L_M3,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_M3_G);
+	LG(CST_INDUSTRY_L_M4,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_M4_G);
+	LG(CST_INDUSTRY_L_H1,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_H1_G);
+	LG(CST_INDUSTRY_L_H2,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_H2_G);
+	LG(CST_INDUSTRY_L_H3,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_H3_G);
+	LG(CST_INDUSTRY_L_H4,GROUP_INDUSTRY_L,LCT_INDUSTRY_L_H4_G);
+
+	LG(CST_RESIDENCE_LL,GROUP_RESIDENCE_LL,LCT_RESIDENCE_LL_G);
+	LG(CST_RESIDENCE_ML,GROUP_RESIDENCE_ML,LCT_RESIDENCE_ML_G);
+	LG(CST_RESIDENCE_HL,GROUP_RESIDENCE_HL,LCT_RESIDENCE_HL_G);
+	LG(CST_RESIDENCE_LH,GROUP_RESIDENCE_LH,LCT_RESIDENCE_LH_G);
+	LG(CST_RESIDENCE_MH,GROUP_RESIDENCE_MH,LCT_RESIDENCE_MH_G);
+	LG(CST_RESIDENCE_HH,GROUP_RESIDENCE_HH,LCT_RESIDENCE_HH_G);
+
+	LG(CST_UNIVERSITY,GROUP_UNIVERSITY,LCT_UNIVERSITY_G);
+
+	LG(CST_COALMINE_EMPTY,GROUP_COALMINE,LCT_COALMINE_EMPTY_G);
+	LG(CST_COALMINE_LOW,GROUP_COALMINE,LCT_COALMINE_LOW_G);
+	LG(CST_COALMINE_MED,GROUP_COALMINE,LCT_COALMINE_MED_G);
+	LG(CST_COALMINE_FULL,GROUP_COALMINE,LCT_COALMINE_FULL_G);
+
+	LG(CST_COMMUNE_1,GROUP_COMMUNE,LCT_COMMUNE_1_G);
+	LG(CST_COMMUNE_2,GROUP_COMMUNE,LCT_COMMUNE_2_G);
+	LG(CST_COMMUNE_3,GROUP_COMMUNE,LCT_COMMUNE_3_G);
+	LG(CST_COMMUNE_4,GROUP_COMMUNE,LCT_COMMUNE_4_G);
+	LG(CST_COMMUNE_5,GROUP_COMMUNE,LCT_COMMUNE_5_G);
+	LG(CST_COMMUNE_6,GROUP_COMMUNE,LCT_COMMUNE_6_G);
+	LG(CST_COMMUNE_7,GROUP_COMMUNE,LCT_COMMUNE_7_G);
+	LG(CST_COMMUNE_8,GROUP_COMMUNE,LCT_COMMUNE_8_G);
+	LG(CST_COMMUNE_9,GROUP_COMMUNE,LCT_COMMUNE_9_G);
+	LG(CST_COMMUNE_10,GROUP_COMMUNE,LCT_COMMUNE_10_G);
+	LG(CST_COMMUNE_11,GROUP_COMMUNE,LCT_COMMUNE_11_G);
+	LG(CST_COMMUNE_12,GROUP_COMMUNE,LCT_COMMUNE_12_G);
+	LG(CST_COMMUNE_13,GROUP_COMMUNE,LCT_COMMUNE_13_G);
+	LG(CST_COMMUNE_14,GROUP_COMMUNE,LCT_COMMUNE_14_G);
+
+	LG(CST_EX_PORT,GROUP_PORT,LCT_EX_PORT_G);
+
+	LG(CST_FARM_O0,GROUP_ORGANIC_FARM,LCT_FARM_O0_G);
+	LG(CST_FARM_O1,GROUP_ORGANIC_FARM,LCT_FARM_O1_G);
+	LG(CST_FARM_O2,GROUP_ORGANIC_FARM,LCT_FARM_O2_G);
+	LG(CST_FARM_O3,GROUP_ORGANIC_FARM,LCT_FARM_O3_G);
+	LG(CST_FARM_O4,GROUP_ORGANIC_FARM,LCT_FARM_O4_G);
+	LG(CST_FARM_O5,GROUP_ORGANIC_FARM,LCT_FARM_O5_G);
+	LG(CST_FARM_O6,GROUP_ORGANIC_FARM,LCT_FARM_O6_G);
+	LG(CST_FARM_O7,GROUP_ORGANIC_FARM,LCT_FARM_O7_G);
+	LG(CST_FARM_O8,GROUP_ORGANIC_FARM,LCT_FARM_O8_G);
+	LG(CST_FARM_O9,GROUP_ORGANIC_FARM,LCT_FARM_O9_G);
+	LG(CST_FARM_O10,GROUP_ORGANIC_FARM,LCT_FARM_O10_G);
+	LG(CST_FARM_O11,GROUP_ORGANIC_FARM,LCT_FARM_O11_G);
+	LG(CST_FARM_O12,GROUP_ORGANIC_FARM,LCT_FARM_O12_G);
+	LG(CST_FARM_O13,GROUP_ORGANIC_FARM,LCT_FARM_O13_G);
+	LG(CST_FARM_O14,GROUP_ORGANIC_FARM,LCT_FARM_O14_G);
+	LG(CST_FARM_O15,GROUP_ORGANIC_FARM,LCT_FARM_O15_G);
+	LG(CST_FARM_O16,GROUP_ORGANIC_FARM,LCT_FARM_O16_G);
+
+	LG(CST_INDUSTRY_H_C,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_C_G);
+	LG(CST_INDUSTRY_H_L1,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L1_G);
+	LG(CST_INDUSTRY_H_L2,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L2_G);
+	LG(CST_INDUSTRY_H_L3,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L3_G);
+	LG(CST_INDUSTRY_H_L4,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L4_G);
+	LG(CST_INDUSTRY_H_L5,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L5_G);
+	LG(CST_INDUSTRY_H_L6,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L6_G);
+	LG(CST_INDUSTRY_H_L7,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L7_G);
+	LG(CST_INDUSTRY_H_L8,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_L8_G);
+	LG(CST_INDUSTRY_H_M1,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M1_G);
+	LG(CST_INDUSTRY_H_M2,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M2_G);
+	LG(CST_INDUSTRY_H_M3,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M3_G);
+	LG(CST_INDUSTRY_H_M4,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M4_G);
+	LG(CST_INDUSTRY_H_M5,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M5_G);
+	LG(CST_INDUSTRY_H_M6,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M6_G);
+	LG(CST_INDUSTRY_H_M7,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M7_G);
+	LG(CST_INDUSTRY_H_M8,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_M8_G);
+	LG(CST_INDUSTRY_H_H1,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H1_G);
+	LG(CST_INDUSTRY_H_H2,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H2_G);
+	LG(CST_INDUSTRY_H_H3,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H3_G);
+	LG(CST_INDUSTRY_H_H4,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H4_G);
+	LG(CST_INDUSTRY_H_H5,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H5_G);
+	LG(CST_INDUSTRY_H_H6,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H6_G);
+	LG(CST_INDUSTRY_H_H7,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H7_G);
+	LG(CST_INDUSTRY_H_H8,GROUP_INDUSTRY_H,LCT_INDUSTRY_H_H8_G);
+
+	LG(CST_OREMINE_1,GROUP_OREMINE,LCT_OREMINE_1_G);
+	LG(CST_OREMINE_2,GROUP_OREMINE,LCT_OREMINE_2_G);
+	LG(CST_OREMINE_3,GROUP_OREMINE,LCT_OREMINE_3_G);
+	LG(CST_OREMINE_4,GROUP_OREMINE,LCT_OREMINE_4_G);
+	LG(CST_OREMINE_5,GROUP_OREMINE,LCT_OREMINE_5_G);
+	LG(CST_OREMINE_6,GROUP_OREMINE,LCT_OREMINE_6_G);
+	LG(CST_OREMINE_7,GROUP_OREMINE,LCT_OREMINE_7_G);
+	LG(CST_OREMINE_8,GROUP_OREMINE,LCT_OREMINE_8_G);
+
+	LG(CST_POWERS_COAL_EMPTY,GROUP_COAL_POWER,LCT_POWERS_COAL_EMPTY_G);
+	LG(CST_POWERS_COAL_LOW,GROUP_COAL_POWER,LCT_POWERS_COAL_LOW_G);
+	LG(CST_POWERS_COAL_MED,GROUP_COAL_POWER,LCT_POWERS_COAL_MED_G);
+	LG(CST_POWERS_COAL_FULL,GROUP_COAL_POWER,LCT_POWERS_COAL_FULL_G);
+
+	LG(CST_POWERS_SOLAR,GROUP_SOLAR_POWER,LCT_POWERS_SOLAR_G);
+
+	LG(CST_ROCKET_1,GROUP_ROCKET,LCT_ROCKET_1_G);
+	LG(CST_ROCKET_2,GROUP_ROCKET,LCT_ROCKET_2_G);
+	LG(CST_ROCKET_3,GROUP_ROCKET,LCT_ROCKET_3_G);
+	LG(CST_ROCKET_4,GROUP_ROCKET,LCT_ROCKET_4_G);
+	LG(CST_ROCKET_5,GROUP_ROCKET,LCT_ROCKET_5_G);
+	LG(CST_ROCKET_6,GROUP_ROCKET,LCT_ROCKET_6_G);
+	LG(CST_ROCKET_7,GROUP_ROCKET,LCT_ROCKET_7_G);
+	LG(CST_ROCKET_FLOWN,GROUP_ROCKET,LCT_ROCKET_FLOWN_G);
+
+	LG(CST_TIP_0,GROUP_TIP,LCT_TIP_0_G);
+	LG(CST_TIP_1,GROUP_TIP,LCT_TIP_1_G);
+	LG(CST_TIP_2,GROUP_TIP,LCT_TIP_2_G);
+	LG(CST_TIP_3,GROUP_TIP,LCT_TIP_3_G);
+	LG(CST_TIP_4,GROUP_TIP,LCT_TIP_4_G);
+	LG(CST_TIP_5,GROUP_TIP,LCT_TIP_5_G);
+	LG(CST_TIP_6,GROUP_TIP,LCT_TIP_6_G);
+	LG(CST_TIP_7,GROUP_TIP,LCT_TIP_7_G);
+	LG(CST_TIP_8,GROUP_TIP,LCT_TIP_8_G);
+
+	fclose(txt_fp);
+
+	main_types[CST_USED].group=GROUP_USED;
+	//main_types[CST_USED].graphic=0;         /* Won't be dereferenced! */
 }
 
-
-
-int
+	int
 get_group_of_type (short type)
 {
-    return main_types[type].group;
+	return main_types[type].group;
 }
 
-void
+	void
 set_map_groups (void)
 {
-    int x, y;
-    for (x = 0; x < WORLD_SIDE_LEN; x++) {
-        for (y = 0; y < WORLD_SIDE_LEN; y++) {
-            MP_GROUP(x,y) = get_group_of_type(MP_TYPE(x,y));
-        }
-    }
+	int x, y;
+	for (x = 0; x < WORLD_SIDE_LEN; x++) {
+		for (y = 0; y < WORLD_SIDE_LEN; y++) {
+			MP_GROUP(x,y) = get_group_of_type(MP_TYPE(x,y));
+		}
+	}
 }
 
-int
+	int
 get_group_cost (short group)
 {
-    return (int) ((float) main_groups[group].cost
-		  + ((float) main_groups[group].cost
-		     * ((float) main_groups[group].cost_mul
-			* (float) tech_level) 
-		     / (float) MAX_TECH_LEVEL));
+	return (int) ((float) main_groups[group].cost
+			+ ((float) main_groups[group].cost
+				* ((float) main_groups[group].cost_mul
+					* (float) tech_level) 
+				/ (float) MAX_TECH_LEVEL));
 }
 
-void 
+	void 
 get_type_name (short type, char * s) 
 {
-     short g;
-     g = get_group_of_type (type);
-     strcpy (s, _(main_groups[g].name));
+	short g;
+	g = get_group_of_type (type);
+	strcpy (s, _(main_groups[g].name));
 }
 
-int
+	int
 get_type_cost (short type)
 {
-    return get_group_cost ((short) get_group_of_type (type));
+	return get_group_cost ((short) get_group_of_type (type));
 }

@@ -80,22 +80,22 @@ draw_prefs_cb (void)
 {
     Rect* mw = &scr.main_win;
     int x, y;
-    SDL_Surface* graphic;
+    lcicon graphic;
 
     x = mw->x + 50;
     y = mw->y + 30;
     graphic = overwrite_transport_flag ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, graphic, x, y, 16, 16);
 
     y += 16;
     graphic = suppress_popups ? unchecked_box_graphic : checked_box_graphic;
-    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, graphic, x, y, 16, 16);
 
     y += 16;
     graphic = time_multiplex_stats ? 
 	    checked_box_graphic : unchecked_box_graphic;
-    Fgl_blit (DL_BG, 0,0,16,16,x,y,graphic);
+    Fgl_blit (DL_BG, graphic, x, y, 16, 16);
 
     refresh_screen(mw->x, mw->y, mw->x + mw->w, mw->y + mw->h);
 }

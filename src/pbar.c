@@ -62,12 +62,12 @@ init_pbar_text (void)
  * ---------------------------------------------------------------------- */
 
 void 
-draw_pbar (Rect* b, SDL_Surface* graphic)
+draw_pbar (Rect* b, lcicon icon)
 /* XXX: WCK: why not just make the graphic include the black? */
 /* GCS: Good idea, but xpicedit is painful to use! */
 {
     Fgl_fillbox (b->x, b->y, b->w, b->h, 0);
-    Fgl_putbox (b->x + (b->w / 2) - 8, b->y, 16, 16, graphic);
+    Fgl_putbox (b->x + (b->w / 2) - 8, b->y, 16, 16, icon);
 }
 
 void

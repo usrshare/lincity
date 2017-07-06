@@ -35,7 +35,6 @@ struct GROUP
 struct TYPE
 {
     int group;          /* What group does this type belong to? */
-    char* graphic;      /* Bitmap of the graphic */
 };
 
 int get_group_of_type (short selected_type);

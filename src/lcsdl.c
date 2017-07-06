@@ -21,12 +21,12 @@
 #include "lctypes.h"
 #include "cliglobs.h"
 #include "lcsdl.h"
-#include "pixmap.h"
 #include "mouse.h"
 #include "screen.h"
 
 void HandleEvent (SDL_Event *);
 
+SDL_Surface* tilemap = NULL;
 //SDL_Surface* font_surface = NULL;
 TTF_Font* eight_font = NULL;
 TTF_Font* eight_mono_font = NULL;
@@ -76,32 +76,29 @@ int clipping_flag = 0;
 unsigned char *open_font;
 int open_font_height, suppress_next_expose = 0;
 
-SDL_Surface* icon_surface[NUM_OF_TYPES];
-char icon_surface_flag[NUM_OF_TYPES];
-
-SDL_Surface *up_pbar1_graphic, *up_pbar2_graphic;
-SDL_Surface *down_pbar1_graphic, *down_pbar2_graphic, *pop_pbar_graphic;
-SDL_Surface *tech_pbar_graphic, *food_pbar_graphic, *jobs_pbar_graphic;
-SDL_Surface *money_pbar_graphic, *coal_pbar_graphic, *goods_pbar_graphic;
-SDL_Surface *ore_pbar_graphic, *steel_pbar_graphic;
-SDL_Surface *pause_button1_off, *pause_button2_off;
-SDL_Surface *pause_button1_on, *pause_button2_on;
-SDL_Surface *fast_button1_off, *fast_button2_off;
-SDL_Surface *fast_button1_on, *fast_button2_on;
-SDL_Surface *med_button1_off, *med_button2_off;
-SDL_Surface *med_button1_on, *med_button2_on;
-SDL_Surface *slow_button1_off, *slow_button2_off;
-SDL_Surface *slow_button1_on, *slow_button2_on;
-SDL_Surface *results_button1, *results_button2;
-SDL_Surface *toveron_button1, *toveron_button2;
-SDL_Surface *toveroff_button1, *toveroff_button2;
-SDL_Surface *ms_pollution_button_graphic, *ms_normal_button_graphic;
-SDL_Surface *ms_fire_cover_button_graphic, *ms_health_cover_button_graphic;
-SDL_Surface *ms_cricket_cover_button_graphic;
-SDL_Surface *ms_ub40_button_graphic, *ms_coal_button_graphic;
-SDL_Surface *ms_starve_button_graphic, *ms_ocost_button_graphic;
-SDL_Surface *ms_power_button_graphic;
-SDL_Surface *checked_box_graphic, *unchecked_box_graphic;
+lcicon up_pbar1_graphic, up_pbar2_graphic;
+lcicon down_pbar1_graphic, down_pbar2_graphic, pop_pbar_graphic;
+lcicon tech_pbar_graphic, food_pbar_graphic, jobs_pbar_graphic;
+lcicon money_pbar_graphic, coal_pbar_graphic, goods_pbar_graphic;
+lcicon ore_pbar_graphic, steel_pbar_graphic;
+lcicon pause_button1_off, pause_button2_off;
+lcicon pause_button1_on, pause_button2_on;
+lcicon fast_button1_off, fast_button2_off;
+lcicon fast_button1_on, fast_button2_on;
+lcicon med_button1_off, med_button2_off;
+lcicon med_button1_on, med_button2_on;
+lcicon slow_button1_off, slow_button2_off;
+lcicon slow_button1_on, slow_button2_on;
+lcicon results_button1, results_button2;
+lcicon toveron_button1, toveron_button2;
+lcicon toveroff_button1, toveroff_button2;
+lcicon ms_pollution_button_graphic, ms_normal_button_graphic;
+lcicon ms_fire_cover_button_graphic, ms_health_cover_button_graphic;
+lcicon ms_cricket_cover_button_graphic;
+lcicon ms_ub40_button_graphic, ms_coal_button_graphic;
+lcicon ms_starve_button_graphic, ms_ocost_button_graphic;
+lcicon ms_power_button_graphic;
+lcicon checked_box_graphic, unchecked_box_graphic;
 
 static SDL_Surface* surface_by_layer(enum disp_layers l) {
 	switch(l) {
@@ -153,10 +150,6 @@ void setcustompalette (void)
 	return;
 }
 
-void open_setcustompalette (SDL_Color* inpal) {
-	do_setcustompalette (inpal);
-}
-
 void do_setcustompalette (SDL_Color* inpal) {
 	SDL_SetPalette((display_p.dpy), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
 	SDL_SetPalette((display_p.dpy), SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);
@@ -165,6 +158,10 @@ void do_setcustompalette (SDL_Color* inpal) {
 	SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
 	SDL_SetPalette((display_p.sprites), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
 	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
+}
+
+void open_setcustompalette (SDL_Color* inpal) {
+	do_setcustompalette (inpal);
 }
 
 #if defined (commentout)
@@ -404,7 +401,6 @@ void Fgl_write2_s (enum disp_layers l, int x, int y, int w, char *s, enum text_a
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
 	int tw = textsurf->w;
-	int th = textsurf->h;
 
 	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
 
@@ -430,7 +426,6 @@ void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 	if (textsurf == 0) {fprintf(stderr,"Unable to create text surface (%s).\n",SDL_GetError()); return;}
 
 	int tw = textsurf->w;
-	int th = textsurf->h;
 
 	SDL_Rect o_rect = {.x = x, .y = y, .w = 0, .h = 0};
 
@@ -478,8 +473,6 @@ void Fgl_fillbox (int x1, int y1, int w, int h, int col)
 	return Fgl_fillbox_s(DL_BG,x1,y1,w,h,col);
 }
 
-
-
 /*
  * Instead of transfering a pixmap pixel by pixel, it is much more
  * efficient to build an XImage in core and send it in one piece off
@@ -507,37 +500,18 @@ clamp (int x, int low, int high)
  * No clipping performed.
  */
 
-//these look like wrappers for SDL_BlitSurface
-void Fgl_putbox_low (SDL_Surface* dst, int x0, int y0, int x1, int y1,
-		int w, int h, uint8_t* src, int bpl,
-		int src_x, int src_y) {
+void Fgl_blit (enum disp_layers l, lcicon i, int dx, int dy, int w, int h) {
 
-
-	//SDL_Rect srcrect = (SDL_Rect){.x = src_x, .y = src_y, .w = w, .h = h};
-	//SDL_Rect dstrect = (SDL_Rect){.x = x0+x1, .y = y0+y1, .w = w, .h = h};
-	SDL_LockSurface((display_p.bg));
-
-	for (int iy = 0; iy < h; iy++)
-		for (int ix = 0; ix < w; ix++)
-			Fgl_setpixel_s(dst,x0+x1+ix,y0+y1+iy,src[(src_y + iy) * bpl + (src_x + ix)]);
-
-	SDL_UnlockSurface((display_p.bg));
-	//SDL_BlitSurface(src,&srcrect,dst,&dstrect);
+	SDL_Rect srcrect = (SDL_Rect){.x = i.x_offset, .y = i.y_offset,
+		.w = w ? w : i.width, .h = h ? h : i.height};
+	SDL_Rect dstrect = (SDL_Rect){.x = dx, .y = dy,
+		.w = w ? w : i.width, .h = h ? h : i.height};
+	SDL_BlitSurface(i._surface,&srcrect,surface_by_layer(l),&dstrect);
 }
 
-void Fgl_blit (enum disp_layers l, int sx, int sy, int w, int h,
-		int dx, int dy, SDL_Surface* src) {
+void Fgl_putbox (int x, int y, int w, int h, lcicon i) {
 
-	SDL_Rect srcrect = (SDL_Rect){.x = sx, .y = sy, .w = w, .h = h};
-	SDL_Rect dstrect = (SDL_Rect){.x = dx, .y = dy, .w = w, .h = h};
-
-	SDL_BlitSurface(src,&srcrect,surface_by_layer(l),&dstrect);
-}
-
-
-void Fgl_putbox (int x, int y, int w, int h, SDL_Surface* surf) {
-
-	return Fgl_blit(DL_BG,0,0,w,h,x,y,surf);
+	return Fgl_blit(DL_BG,i,x,y,w,h);
 }
 
 void HandleEvent (SDL_Event *event)
@@ -881,39 +855,18 @@ void draw_bezel_s (enum disp_layers l, Rect r, short width, int color) {
     }
 }
 
+lcicon type_icons[NUM_OF_TYPES];
+
 void init_icon_pixmap (short type) {
-	unsigned char *g;
-
-	int grp;
-
-	grp = get_group_of_type(type);
-
-	g = (unsigned char *) main_types[type].graphic;
-	if (g == NULL) return;
-
-	icon_surface[type] = SDL_CreateRGBSurface(SDL_HWSURFACE,main_groups[grp].size * 16, main_groups[grp].size * 16, 8,0,0,0,0);
-
-	SDL_SetPalette(icon_surface[type], SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);	
-	SDL_SetPalette(icon_surface[type], SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);	
-
-
-	SDL_LockSurface(icon_surface[type]);
-
-	Fgl_putbox_low (icon_surface[type],
-			0, 0, 0, 0, main_groups[grp].size * 16, 
-			main_groups[grp].size * 16,
-			g, main_groups[grp].size * 16,
-			0, 0);
-
-	SDL_UnlockSurface(icon_surface[type]);
 }
 
-SDL_Surface* load_graphic(char *s, int w, int h)
-{
-	int x,l;
+lcicon load_icon(char* filename, int w, int h) {
+	
+	lcicon newicon;
+
 	char ss[LC_PATH_MAX];
 	strcpy(ss,graphic_path);
-	strcat(ss,s);
+	strcat(ss,filename);
 
 	SDL_Surface* newsurf = IMG_Load(ss);
 	if (!newsurf) {
@@ -926,13 +879,92 @@ SDL_Surface* load_graphic(char *s, int w, int h)
 		strcat(ss," -- UNABLE TO CONVERT");
 		do_error(ss);
 	}
-	free(newsurf);
+	SDL_FreeSurface(newsurf);
 
 	SDL_SetPalette(convsurf,SDL_LOGPAL,display_p.pixcolour_gc,0,256);
-	return convsurf;
+
+	newicon._surface = convsurf;
+	newicon.x_offset = newicon.y_offset = 0;
+	newicon.width = w ? w : convsurf->w;
+	newicon.height = h ? h : convsurf->h;
+
+	return newicon;
+}
+int free_icon (lcicon i) {
+	SDL_FreeSurface(i._surface);
+	return 0;
 }
 
-SDL_Surface* load_graphic_autosize(char *s)
-{
-	return load_graphic(s,0,0);
+int load_tilemap_graphic (short type, short group, char* id, FILE* txt_fp) {
+
+	char buf[128];
+	char *id_p, *row_p, *col_p;
+	int row, col;
+
+	while (!feof(txt_fp)) {
+		fgets(buf,128,txt_fp);
+		id_p = strtok(buf, " \t");
+		
+		if ((!id_p[0]) || (id_p[0] == '#')) continue; //ignore empty lines and everything that starts with a hash
+		if (id_p[0] == '@') break; //at sign means end of list
+
+		row_p = strtok(NULL, " \t");
+		if (!row_p) continue;
+		col_p = strtok(NULL, " \t");
+		if (!col_p) continue;
+
+		row = atoi(row_p);
+		col = atoi(col_p);
+
+		if (strcmp(id_p, id) == 0) {
+			type_icons[type]._surface = tilemap;
+			type_icons[type].x_offset = col * 16;
+			type_icons[type].y_offset = row * 16;
+			return 0; //everything OK
+		} else {
+			fprintf (stderr, "Wrong ID string -- expected %s, got %s\n",id,id_p);
+			exit(-1);
+		}
+	}
+
+	return 0;
 }
+int load_tilemap (char* png_filename, uint32_t* out_palette) {
+
+	SDL_Surface* newtm = IMG_Load(png_filename);
+	if (!newtm) {
+		return 1;
+	}
+
+	if (newtm->format->BitsPerPixel != 8) {
+		fprintf(stderr,"Tilemap file is not 8-bit indexed.\n");
+		SDL_FreeSurface(newtm);
+		return 1;
+	}
+
+	SDL_Palette* imgpal = newtm->format->palette;
+	if (!imgpal) {
+		fprintf(stderr,"Tilemap file does not have a palette.\n");
+		SDL_FreeSurface(newtm);
+		return 1;
+	}
+	if (imgpal->ncolors < 256) {
+		fprintf(stderr,"Tilemap file's palette is too short (%d colors instead of 256).\n",imgpal->ncolors);
+		SDL_FreeSurface(newtm);
+		return 1;
+	}
+
+	for (int i=0; i < 256; i++) {
+		out_palette[i] = 
+			((imgpal->colors[i].r) << 16) +
+			((imgpal->colors[i].g) << 8) +
+			((imgpal->colors[i].b));
+	}
+
+	tilemap = newtm; // keep the tilemap in memory.
+
+
+	// main_t
+	return 0;
+}
+
