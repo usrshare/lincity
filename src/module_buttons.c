@@ -422,7 +422,7 @@ highlight_module_button (int module)
     hide_mouse ();
     draw_small_bezel_s(DL_BG,x + 1, y + 1,
 		     SELECT_BUTTON_WIDTH - 2, SELECT_BUTTON_WIDTH - 2,
-		     yellow(0));
+		     yellow(16));
     refresh_screen(x-4,y-4,x+SELECT_BUTTON_WIDTH+4,y+SELECT_BUTTON_WIDTH+4);
     redraw_mouse ();
 }
@@ -451,7 +451,7 @@ unhighlight_module_button (int module)
     hide_mouse ();
     draw_small_bezel_s(DL_BG,x + 1, y + 1, 
 		     SELECT_BUTTON_WIDTH - 2, SELECT_BUTTON_WIDTH - 2,
-		     blue(0));
+		     blue(16));
     refresh_screen(x-4,y-4,x+SELECT_BUTTON_WIDTH+4,y+SELECT_BUTTON_WIDTH+4);
     redraw_mouse ();
 }

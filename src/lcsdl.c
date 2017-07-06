@@ -151,13 +151,19 @@ void setcustompalette (void)
 }
 
 void do_setcustompalette (SDL_Color* inpal) {
-	SDL_SetPalette((display_p.dpy), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display_p.dpy), SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display_p.bg), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
-	SDL_SetPalette((display_p.ui), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
-	SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
-	SDL_SetPalette((display_p.sprites), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
-	SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
+	int r = 0;
+	r = SDL_SetPalette((display_p.dpy), SDL_LOGPAL | SDL_PHYSPAL, display_p.pixcolour_gc, 0, 256);
+	if (!r) { fprintf(stderr,"Failed to update screen palette.\n"); };
+	r = SDL_SetPalette((display_p.bg), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	if (!r) { fprintf(stderr,"Failed to update BG logical palette.\n"); };
+	r = SDL_SetPalette((display_p.ui), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	if (!r) { fprintf(stderr,"Failed to update UI logical palette.\n"); };
+	r = SDL_SetColorKey(display_p.ui,SDL_SRCCOLORKEY,0);
+	if (r == -1) { fprintf(stderr,"Failed to update UI color key.\n"); };
+	r = SDL_SetPalette((display_p.sprites), SDL_LOGPAL, display_p.pixcolour_gc, 0, 256);
+	if (!r) { fprintf(stderr,"Failed to update sprites logical palette.\n"); };
+	r = SDL_SetColorKey(display_p.sprites,SDL_SRCCOLORKEY,0);
+	if (r == -1) { fprintf(stderr,"Failed to update sprites color key.\n"); };
 }
 
 void open_setcustompalette (SDL_Color* inpal) {
@@ -724,6 +730,7 @@ refresh_screen (int x1, int y1, int x2, int y2)		/* bounds of refresh area */
 
 	if (display.show_ui) SDL_BlitSurface(display_p.ui,&orect,display_p.dpy,&drect);
 	if (display.show_sprites) SDL_BlitSurface(display_p.sprites,&orect,display_p.dpy,&drect);
+
 	SDL_UpdateRect(display_p.dpy,x1,y1,x2-x1,y2-y1);
 }
 
@@ -830,17 +837,6 @@ draw_border (void)
 {
 }
 
-
-void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour){
-    int i;
-    for (i = 1; i < 4; i++) {
-	Fgl_hline_s (l,x - 1 - i, y - 1 - i, x + w + i, colour);
-	Fgl_line_s (l,x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
-	Fgl_hline_s (l,x - 1 - i, y + h + i, x + w + i, colour + 2);
-	Fgl_line_s (l,x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
-    }
-}
-
 void draw_bezel_s (enum disp_layers l, Rect r, short width, int color) {
   int i;
   int c;
@@ -854,6 +850,18 @@ void draw_bezel_s (enum disp_layers l, Rect r, short width, int color) {
 		r.y + r.h - i - 1, c);
     }
 }
+
+
+void draw_small_bezel_s (enum disp_layers l, int x, int y, int w, int h, int colour){
+    int i;
+    for (i = 1; i < 4; i++) {
+	Fgl_hline_s (l,x - 1 - i, y - 1 - i, x + w + i, colour);
+	Fgl_line_s (l,x - 1 - i, y - 1 - i, x - 1 - i, y + h + i, colour + 1);
+	Fgl_hline_s (l,x - 1 - i, y + h + i, x + w + i, colour + 2);
+	Fgl_line_s (l,x + w + i, y - 1 - i, x + w + i, y + h + i, colour + 3);
+    }
+}
+
 
 lcicon type_icons[NUM_OF_TYPES];
 
