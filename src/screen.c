@@ -1870,7 +1870,6 @@ void clicked_market_cb (int x, int y)
     mcby = y;
 }
 
-
 void draw_cb_box (int row, int col, int checked)
 {
     int x, y;
@@ -1880,7 +1879,7 @@ void draw_cb_box (int row, int col, int checked)
     y = mcb->y + 4 + (4 * 8) + (row * CB_SPACE);
     x = mcb->x + 12 + (col * 12) * 8;
     icon = checked ? checked_box_graphic : unchecked_box_graphic;
-    Fgl_putbox (x, y, 16, 16, icon);
+    Fgl_blit (DL_UI, icon, x, y, 16, 16);
 }
 
 void draw_cb_template (int is_market_cb)
@@ -1895,33 +1894,33 @@ void draw_cb_template (int is_market_cb)
     y = mcby;
     flags = MP_INFO(x,y).flags;
     //Fgl_getbox (mcb->x, mcb->y, mcb->w, mcb->h, market_cb_gbuf);
-    Fgl_fillbox (mcb->x, mcb->y, mcb->w, mcb->h, 28);
-    draw_small_bezel(mcb->x+4, mcb->y+4, mcb->w-8, mcb->h-8, blue(0));
+    Fgl_fillbox_s (DL_UI, mcb->x, mcb->y, mcb->w, mcb->h, 28);
+    draw_small_bezel_s(DL_UI, mcb->x+4, mcb->y+4, mcb->w-8, mcb->h-8, blue(0));
     Fgl_setfontcolors (28,TEXT_FG_COLOUR);
 #ifdef USE_EXPANDED_FONT
     gl_setwritemode (WRITEMODE_MASKED | FONT_EXPANDED);
 #endif
 
     if (is_market_cb) {
-	Fgl_write (mcb->x + 1 * 8, mcb->y + 8, _("Market"));
+	Fgl_write_s (DL_UI, mcb->x + 1 * 8, mcb->y + 8, _("Market"));
     } else {
-	Fgl_write (mcb->x + 3 * 8, mcb->y + 8, _("Port"));
+	Fgl_write_s (DL_UI, mcb->x + 3 * 8, mcb->y + 8, _("Port"));
     }
     sprintf (s, "%3d,%3d", x, y);
-    Fgl_write (mcb->x + 7 * 8, mcb->y + 8, s);
-    Fgl_hline (mcb->x + 2, mcb->y + 20, mcb->x + mcb->w - 2, 
+    Fgl_write_s (DL_UI, mcb->x + 7 * 8, mcb->y + 8, s);
+    Fgl_hline_s (DL_UI, mcb->x + 2, mcb->y + 20, mcb->x + mcb->w - 2, 
 	       TEXT_FG_COLOUR);
 
-    Fgl_write (mcb->x +  1 * 8, mcb->y + 3 * 8, _("Buy"));
-    Fgl_write (mcb->x + 12 * 8 + 4, mcb->y + 3 * 8 + 1, _("Sell"));
+    Fgl_write_s (DL_UI, mcb->x +  1 * 8, mcb->y + 3 * 8, _("Buy"));
+    Fgl_write_s (DL_UI, mcb->x + 12 * 8 + 4, mcb->y + 3 * 8 + 1, _("Sell"));
     if (is_market_cb) {
-	Fgl_write (mcb->x + 6 * 8 + 4, mcb->y + 40 +(CB_SPACE * 0), _("JOBS"));
+	Fgl_write_s (DL_UI, mcb->x + 6 * 8 + 4, mcb->y + 40 +(CB_SPACE * 0), _("JOBS"));
     }
-    Fgl_write (mcb->x + 6 * 8 + 4, mcb->y + 40 + (CB_SPACE * 1), _("FOOD"));
-    Fgl_write (mcb->x + 6 * 8 + 4, mcb->y + 40 + (CB_SPACE * 2), _("COAL"));
-    Fgl_write (mcb->x + 7 * 8, mcb->y + 40 + (CB_SPACE * 3), _("ORE"));
-    Fgl_write (mcb->x + 6 * 8, mcb->y + 40 + (CB_SPACE * 4), _("GOODS"));
-    Fgl_write (mcb->x + 6 * 8, mcb->y + 40 + (CB_SPACE * 5), _("STEEL"));
+    Fgl_write_s (DL_UI, mcb->x + 6 * 8 + 4, mcb->y + 40 + (CB_SPACE * 1), _("FOOD"));
+    Fgl_write_s (DL_UI, mcb->x + 6 * 8 + 4, mcb->y + 40 + (CB_SPACE * 2), _("COAL"));
+    Fgl_write_s (DL_UI, mcb->x + 7 * 8, mcb->y + 40 + (CB_SPACE * 3), _("ORE"));
+    Fgl_write_s (DL_UI, mcb->x + 6 * 8, mcb->y + 40 + (CB_SPACE * 4), _("GOODS"));
+    Fgl_write_s (DL_UI, mcb->x + 6 * 8, mcb->y + 40 + (CB_SPACE * 5), _("STEEL"));
 
 #ifdef USE_EXPANDED_FONT
     gl_setwritemode (WRITEMODE_OVERWRITE | FONT_EXPANDED);
@@ -1941,6 +1940,7 @@ void draw_cb_template (int is_market_cb)
     draw_cb_box (4, 1, MP_INFO(mcbx,mcby).flags & FLAG_MS_GOODS);
     draw_cb_box (5, 0, MP_INFO(mcbx,mcby).flags & FLAG_MB_STEEL);
     draw_cb_box (5, 1, MP_INFO(mcbx,mcby).flags & FLAG_MS_STEEL);
+    refresh_screen(mcb->x,mcb->y, mcb->x + mcb->w, mcb->y + mcb->h);
 }
 
 void draw_market_cb (void)

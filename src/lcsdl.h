@@ -126,6 +126,7 @@ extern lcicon checked_box_graphic, unchecked_box_graphic;
 
 //extern SDL_Color t_bgcolor, t_fgcolor;
 
+void Fgl_write_s (enum disp_layers l, int x, int y, char *s);
 void Fgl_write (int, int, char *);
 void Fgl_blit (enum disp_layers l, lcicon i, int dx, int dy, int w, int h);
 void Fgl_putbox (int x, int y, int w, int h, lcicon i);

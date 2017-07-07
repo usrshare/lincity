@@ -315,7 +315,7 @@ dialog_refresh(void)
 		  db_entry[i].text,TA_LEFT);
     }
 
-    display.show_ui=1;
+    //display.show_ui=1;
     refresh_screen(dialog_window.x,dialog_window.y,dialog_window.x + dialog_window.w,dialog_window.y + dialog_window.h);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 
@@ -338,9 +338,11 @@ dialog_close(int return_value)
 	if (db_entry[i].type == DB_PARA) 
 	    free(db_entry[i].text);
     
-    Fgl_fillbox_s(DL_UI,db_rect[i].x,db_rect[i].y,	db_rect[i].w,db_rect[i].h,0);
+    Fgl_fillbox_s(DL_UI,db_rect[i].x,db_rect[i].y,db_rect[i].w,db_rect[i].h,0);
 
-    display.show_ui = 0;
+    refresh_rect(&db_rect[i]);
+
+    //display.show_ui = 0;
 
     db_flag = 0;
 }

@@ -110,6 +110,13 @@ static SDL_Surface* surface_by_layer(enum disp_layers l) {
 	}
 }
 
+int SDL_FillRect0 (SDL_Surface* dst, SDL_Rect *dstrect, Uint32 color) {
+	if ((dst != display_p.bg) && (!color)) SDL_SetColorKey(dst,0,0);
+	int r = SDL_FillRect(dst,dstrect,color);
+	if ((dst != display_p.bg) && (!color)) SDL_SetColorKey(dst,SDL_SRCCOLORKEY,0);
+	return r;
+}	
+
 static TTF_Font* getsdlfont(enum text_fonts f) {
 	switch(f) {
 		case TF_DEFAULT: return eight_font;
@@ -196,6 +203,9 @@ void parse_sdlargs (int argc, char **argv, char **geometry)
 	int option;
 	extern char *optarg;
 
+	display.show_ui = 1;
+	display.show_sprites = 1;
+
 	int r = SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO); 
 	if (r == -1) {
 		fprintf(stderr,"Unable to initialize SDL.\n"); exit(1);}
@@ -273,7 +283,7 @@ void lcsdl_load_fonts(void) {
 void Create_Window (char *geometry)
 {
 
-	display_p.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
+	display_p.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
 
 	if (display_p.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
 
@@ -347,7 +357,7 @@ void Fgl_hline_s (enum disp_layers l, int x1, int y1, int x2, int col) {
 	//pixmap_hline (x1, y1, x2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=x2-x1+1, .h=1};
-	SDL_FillRect(surface_by_layer(l),&dstrect,col);
+	SDL_FillRect0(surface_by_layer(l),&dstrect,col);
 }
 
 void Fgl_line_s (enum disp_layers l, int x1, int y1, int dummy, int y2, int col) {
@@ -356,7 +366,7 @@ void Fgl_line_s (enum disp_layers l, int x1, int y1, int dummy, int y2, int col)
 	//pixmap_vline (x1, y1, y2, col);
 
 	struct SDL_Rect dstrect = {.x=x1, .y=y1, .w=1, .h=y2-y1+1};
-	SDL_FillRect(surface_by_layer(l),&dstrect,col);
+	SDL_FillRect0(surface_by_layer(l),&dstrect,col);
 }
 
 void Fgl_hline (int x1, int y1, int x2, int col) {
@@ -449,6 +459,11 @@ void Fgl_write2 (int x, int y, int w, char *s, enum text_align align){
 	SDL_FreeSurface(textsurf);
 }
 
+void Fgl_write_s (enum disp_layers l, int x, int y, char *s){
+
+	return Fgl_write2_s(l,x,y,0,s,TA_LEFT);
+}
+
 void Fgl_write (int x, int y, char *s){
 
 	return Fgl_write2(x,y,0,s,TA_LEFT);
@@ -471,7 +486,7 @@ void Fgl_fillbox_s (enum disp_layers l, int x1, int y1, int w, int h, int col)
 	//pixmap_fillbox (x1, y1, w, h, col);
 
 	SDL_Rect dstrect = {.x=x1,.y=y1,.w=w,.h=h};
-	SDL_FillRect(surface_by_layer(l), &dstrect, col);
+	SDL_FillRect0(surface_by_layer(l), &dstrect, col);
 }
 
 void Fgl_fillbox (int x1, int y1, int w, int h, int col)
