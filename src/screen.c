@@ -1423,7 +1423,6 @@ void draw_mini_screen_cursor (void)
 void 
 initialize_print_stats (void)
 {
-    hide_mouse ();
     update_scoreboard.mps = 0;
     update_scoreboard.mini = 0;
     update_scoreboard.date = 0;
@@ -1458,8 +1457,6 @@ initialize_print_stats (void)
     Fgl_write (FINANCE_X + 64, FINANCE_Y + 32, "IP");
     Fgl_write (FINANCE_X, FINANCE_Y + 48, "Tot");
 #endif
-
-    redraw_mouse ();
 }
 
 void advance_monthgraph_style (void)
@@ -1493,8 +1490,6 @@ void print_stats (void)
 	initialize_print_stats ();
 	flag = 1;
     }
-
-    hide_mouse ();
 
     if (total_time % NUMOF_DAYS_IN_MONTH == (NUMOF_DAYS_IN_MONTH - 1)) {
 	update_scoreboard.monthly = 1;
@@ -1605,13 +1600,7 @@ void print_stats (void)
 
 	refresh_pbars();
 
-	/* GCS, May 11, 2003.  Quick hack for SVGALIB.  Basically,
-	 * I need to workaround the fact that a dialog box might pop 
-	 * up, causing move_mouse() to nest hide_mouse() calls,
-	 * which means that the cursor will leave a trail.		*/
-        redraw_mouse ();
 	update_avail_modules (1);
-        hide_mouse ();
     }
 
     if (update_scoreboard.yearly_1) {
@@ -1622,8 +1611,6 @@ void print_stats (void)
 	 && real_time > update_scoreboard.message_area) {
 	reset_status_message ();
     }
-
-    redraw_mouse ();
 }
 
 void print_total_money (void)
@@ -2156,7 +2143,6 @@ void prog_box (char *title, int percent)
     char s[100];
     int i;
     if (flag == 0) {
-	hide_mouse ();
 	Fgl_fillbox (PROGBOXX, PROGBOXY,
 		     PROGBOXW, PROGBOXH, PROGBOX_BG_COLOUR);
 	for (i = 1; i < 8; i++) {
@@ -2206,7 +2192,6 @@ void prog_box (char *title, int percent)
     }
 
     //Fgl_putbox (PROGBOXX - 8, PROGBOXY - 8, PROGBOXW + 16, PROGBOXH + 16, progbox);
-    redraw_mouse ();
     flag = 0;
 }
 

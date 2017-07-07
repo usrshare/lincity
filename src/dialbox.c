@@ -280,8 +280,6 @@ dialog_refresh(void)
   text_window.x = dialog_window.x + BORDER_SIZE;
   text_window.y = dialog_window.y + BORDER_SIZE;
 
-  hide_mouse();
-
   if (screen_refreshing && db_screen_fresh) {
       free(db_screen_buffer);
       db_screen_fresh = 0;
@@ -320,8 +318,6 @@ dialog_refresh(void)
     display.show_ui=1;
     refresh_screen(dialog_window.x,dialog_window.y,dialog_window.x + dialog_window.w,dialog_window.y + dialog_window.h);
     Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
-
-  redraw_mouse();
 
 }
 

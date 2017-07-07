@@ -273,7 +273,7 @@ void lcsdl_load_fonts(void) {
 void Create_Window (char *geometry)
 {
 
-	display_p.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_RESIZABLE);
+	display_p.dpy = SDL_SetVideoMode(winW, winH, 8, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE);
 
 	if (display_p.dpy == 0) { fprintf(stderr,"Unable to create screen surface.\n"); return; }
 

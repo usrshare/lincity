@@ -125,7 +125,6 @@ fast_handler(int x, int y, int button)
 void
 select_fast (void)
 {
-    hide_mouse ();
     pause_flag = 0;
     draw_pause (0);
     slow_flag = 0;
@@ -134,13 +133,11 @@ select_fast (void)
     draw_med (0);
     fast_flag = 1;
     draw_fast (1);
-    redraw_mouse ();
 }
 
 void
 select_medium (void)
 {
-    hide_mouse ();
     pause_flag = 0;
     draw_pause (0);
     slow_flag = 0;
@@ -149,13 +146,11 @@ select_medium (void)
     draw_med (1);
     fast_flag = 0;
     draw_fast (0);
-    redraw_mouse ();
 }
 
 void
 select_slow (void)
 {
-    hide_mouse ();
     pause_flag = 0;
     draw_pause (0);
     slow_flag = 1;
@@ -164,7 +159,6 @@ select_slow (void)
     draw_med (0);
     fast_flag = 0;
     draw_fast (0);
-    redraw_mouse ();
 }
 
 void
@@ -182,12 +176,10 @@ select_pause (void)
 	    select_medium ();
     } else {
 	/* pause it */
-	hide_mouse ();
 	pause_flag = 1;
 	draw_pause (1);
 	draw_slow (0);
 	draw_med (0);
 	draw_fast (0);
-	redraw_mouse ();
     }
 }
